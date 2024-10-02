@@ -81,5 +81,7 @@ public class Screen {
         jframe.add(gridPanel);      //Legger til grid cellene i GUI'en
         jframe.setVisible(true);    //Gjør at selve GUI'en vises på maskinen
 
+        //test again
+
     }
 }
