@@ -15,7 +15,7 @@ public class Weather {
     public static String getTemperature() {
         try {
             String urlString = String.format("http://api.openweathermap.org/data/2.5/weather?q=Halden,no&appid="
-                    + API.getAPI());        //laget egen fil med API-key lagt inn i gitignore
+                    + API.getApiWeather());        //laget egen fil med API-key lagt inn i gitignore
             URL url = new URL(urlString);  //henter temperatur fra halden med skjult API-key
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -50,7 +50,7 @@ public class Weather {
     public static String getWeatherCondition() {
         try {
             String urlString = String.format("http://api.openweathermap.org/data/2.5/weather?q=Halden,no" +
-                    "&units=metric&lang=no&appid=" + API.getAPI());
+                    "&units=metric&lang=no&appid=" + API.getApiWeather());
             URL url = new URL(urlString);       //henter værtilstand i halden
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
