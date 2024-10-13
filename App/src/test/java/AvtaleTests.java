@@ -1,6 +1,5 @@
 import model.Avtale;
 import model.AvtaleService;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import repository.AvtaleRepository;
-
 import java.time.LocalDateTime;
 
 
@@ -44,6 +42,26 @@ public class AvtaleTests {
         Mockito.verify(mockAvtaleRepository, Mockito.times(1)).lagreAvtale(Mockito.any(Avtale.class));
 
     }
+
+    @Test
+    @DisplayName("Oppretter avtale med gjentakelse")
+    public void opprettGjentakendeAvtale() {
+        // Arrange
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepository);
+        int avtaleId = 3;
+        LocalDateTime  datoOgTid = LocalDateTime.of(2024, 10, 20, 10, 0);
+        String beskrivelse = "Fysioterapi";
+        String gjentakelse = "ukentlig";
+        LocalDateTime sluttDato = LocalDateTime.of(2025, 4, 20, 10 , 0);
+
+        // Act
+        avtaleService.opprettAvtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato);
+
+        // Assert
+        Mockito.verify(mockAvtaleRepository, Mockito.times(2)).lagreAvtale(Mockito.any(Avtale.class));
+    }
+
+
 
     @Test
     @DisplayName("Oppdaterer eksisterende avtale")
