@@ -28,15 +28,15 @@ public class AvtaleService {
             LocalDateTime nesteDato = datoOgTid;
 
             while (datoOgTid.isBefore(sluttDato)) {
-                switch (avtale.getGjentakelse().toLowerCase()) {
+                switch (gjentakelse.toLowerCase()) {
                     case "daglig":
-                        nesteDato = datoOgTid.plusDays(1);
+                        nesteDato = nesteDato.plusDays(1);
                         break;
                     case "ukentlig":
-                        nesteDato = datoOgTid.plusWeeks(1);
+                        nesteDato = nesteDato.plusWeeks(1);
                         break;
                     case "månedlig":
-                        nesteDato = datoOgTid.plusMonths(1);
+                        nesteDato = nesteDato.plusMonths(1);
                         break;
                     default:
                         throw new IllegalArgumentException("Ugyldig gjentakelsestype: " + gjentakelse);
