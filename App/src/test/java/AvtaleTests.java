@@ -1,5 +1,6 @@
 import model.Avtale;
 import model.AvtaleService;
+import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,19 +30,19 @@ public class AvtaleTests {
     @DisplayName("Opprettelse av avtale")
     public void opprettAvtale() {
         // Arrange
-        /*
         AvtaleService avtaleService = new AvtaleService(mockAvtaleRepository);
-        LocalDateTime datoOgTid = ;
-        String avtaleType = "Legetime";
-        String beskrivelse = "Vanlig sjekk";
+        int avtaleId = 1;
+        LocalDateTime datoOgTid = LocalDateTime.of(2024, 10, 13, 14, 0);
+        String beskrivelse = "Legebesøk";
+
 
         // Act
-        avtaleService.opprettAvtale(datoOgTid, avtaleType, beskrivelse);
+        avtaleService.opprettAvtale(avtaleId, datoOgTid, beskrivelse, null, null);
 
         // Assert
         Mockito.verify(mockAvtaleRepository).lagreAvtale(Mockito.any(Avtale.class));
+        Mockito.verify(mockAvtaleRepository, Mockito.times(1)).lagreAvtale(Mockito.any(Avtale.class));
 
-         */
     }
 
     @Test
