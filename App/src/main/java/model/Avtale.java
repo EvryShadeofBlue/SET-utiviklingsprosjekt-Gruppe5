@@ -60,8 +60,8 @@ public class Avtale {
         this.pleietrengendeId = pleietrengendeId;
     }
 
-    public void SetPaarerendeId(int pårerendeId) {
-        this.paarerendeId = pårerendeId;
+    public void SetPaarerendeId(int paarerendeId) {
+        this.paarerendeId = paarerendeId;
     }
 
     public String getGjentakelse() {
