@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+actor Pårørende as pårørende
+actor Pleietrengende as pleietrengende
+participant System as system
+database Database as db
+
+
+activate pårørende
+pårørende -> system:Oppretter avtale (dato, beskjed)
+activate system
+system -> db: lagrer avtale
+activate db
+db --> system: bekrefter avtale lagret
+deactivate db
+system --> pårørende: Avtalet lagret bekreftelse
+deactivate system
+
+deactivate pårørende
+
+@enduml
