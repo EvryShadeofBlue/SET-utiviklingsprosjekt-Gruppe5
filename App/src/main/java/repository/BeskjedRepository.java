@@ -8,5 +8,8 @@ public interface BeskjedRepository {
 
     // Metode for å endre beskjed
     void endreBeskjed(int beskjedId, String Beskrivelse, int synligTidsenhet);
+
+    // Metode for å slette en beskjed
+    void slettBeskjed(int beskjedId);
 }
 
