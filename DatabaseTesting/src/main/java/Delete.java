@@ -7,7 +7,12 @@ public class Delete {
         String user = "root";
         String password = "12345";
 
-        String deleteQuery = "delete from pasient where pasient_id=4";
+        String column = "pasient_id";
+        String table = "pasient";
+        int id = 7;
+        String idDeleted = String.valueOf(id);
+
+        String deleteQuery = "delete from " + table + " where " + column + "=" + idDeleted;
 
         try {
             Connection con = DriverManager.getConnection(url, user, password);

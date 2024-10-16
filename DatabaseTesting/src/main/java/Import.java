@@ -14,7 +14,7 @@ public class Import {
 
         PreparedStatement pstmt = con.prepareStatement(insertQuery);
 
-        pstmt.setString(1, "Peter");
+        pstmt.setString(1, "Lois");
         pstmt.setString(2, "Griffin");
 
         int rowsAffected = pstmt.executeUpdate();

@@ -9,13 +9,13 @@ public class Export {
         String user = "root";
         String password = "12345";
 
-        String query = "SELECT * FROM pasient;";
+        String exportQuery = "SELECT * FROM pasient;";
 
         try {
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(exportQuery);
 
 
             while (rs.next()) {
