@@ -1,5 +1,6 @@
-package model;
+package models;
 
+import models.Beskjed;
 import repository.BeskjedRepository;
 
 public class BeskjedService {

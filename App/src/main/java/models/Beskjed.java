@@ -1,4 +1,4 @@
-package model;
+package models;
 
 public class Beskjed {
     private int beskjedId; // Brukes kun for testing
