@@ -22,7 +22,7 @@ public class BeskjedTests {
 
     @Test
     @DisplayName("Opprettelse av beskjed")
-    public void opprettBeskjed() {
+    public void testOpprettBeskjed() {
         // Arrange
         BeskjedService beskjedService = new BeskjedService(mockBeskjedRepository);
         String beskrivelse = "Beskjed";
@@ -37,7 +37,7 @@ public class BeskjedTests {
 
     @Test
     @DisplayName("Endring av beskjed")
-    public void oppdaterBeskjed() {
+    public void testOppdaterBeskjed() {
         // Arrange
         BeskjedService beskjedService = new BeskjedService(mockBeskjedRepository);
         int beskjedId = 1;
@@ -62,7 +62,26 @@ public class BeskjedTests {
 
         Assertions.assertEquals(nyBeskrivelse, oppdatertBeskjed.getBeskrivelse());
         Assertions.assertEquals(nySynligTidsenhjet, oppdatertBeskjed.getSynligTidsenhet());
+    }
 
+    @Test
+    @DisplayName("Sletting av beskjed")
+    public void testSlettBeskjed() {
+        // Arrange
+        BeskjedRepository mockBeskjedRepository = Mockito.mock(BeskjedRepository.class);
+        BeskjedService beskjedService = new BeskjedService(mockBeskjedRepository);
+        int eksisterendeBeskjedIdId = 1;
+        int ikkeEksisterendeBeskjedId = 2;
 
+        Mockito.when(mockBeskjedRepository.hentBeskjed(eksisterendeBeskjedIdId)).thenReturn(new Beskjed("Beskjed", 24));
+        Mockito.doNothing().when(mockBeskjedRepository).slettBeskjed(eksisterendeBeskjedIdId);
+
+        // Act
+        boolean slettetEksisterende = beskjedService.slettBeskjed(eksisterendeBeskjedIdId);
+        boolean slettetIkkeEksisterende = beskjedService.slettBeskjed(ikkeEksisterendeBeskjedId);
+
+        // Assert
+        Assertions.assertEquals(true, slettetEksisterende);
+        Assertions.assertEquals(false, slettetIkkeEksisterende);
     }
 }
