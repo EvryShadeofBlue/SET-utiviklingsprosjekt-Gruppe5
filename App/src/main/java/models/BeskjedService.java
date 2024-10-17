@@ -3,6 +3,8 @@ package models;
 import models.Beskjed;
 import repository.BeskjedRepository;
 
+import java.lang.foreign.StructLayout;
+
 public class BeskjedService {
     private BeskjedRepository beskjedRepository;
 
@@ -33,6 +35,15 @@ public class BeskjedService {
                 eksisterendeBeskjed.setSynligTidsenhet(nySynligTidsenhet);
             }
             beskjedRepository.oppdaterBeskjed(beskjedId, eksisterendeBeskjed.getBeskrivelse(), eksisterendeBeskjed.getSynligTidsenhet());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean slettBeskjed(int beskjedId) {
+        Beskjed beskjed = beskjedRepository.hentBeskjed(beskjedId);
+        if (beskjed != null) {
+            beskjedRepository.slettBeskjed(beskjedId);
             return true;
         }
         return false;
