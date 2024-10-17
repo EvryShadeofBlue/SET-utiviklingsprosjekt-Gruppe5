@@ -1,5 +1,5 @@
-import model.Avtale;
-import model.AvtaleService;
+import models.Avtale;
+import models.AvtaleService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

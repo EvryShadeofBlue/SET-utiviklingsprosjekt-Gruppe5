@@ -1,6 +1,6 @@
 package repository;
 
-import model.Avtale;
+import models.Avtale;
 
 
 public interface AvtaleRepository {
