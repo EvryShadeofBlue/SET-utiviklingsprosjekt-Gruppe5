@@ -1,13 +1,12 @@
 package models;
 
+import Database.Export;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static javax.swing.Box.createVerticalStrut;
 
@@ -82,7 +81,7 @@ public class LoginPage extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginUser();
+                getLogIn();
             }
         });
 
@@ -94,27 +93,30 @@ public class LoginPage extends JFrame {
         });
         setVisible(true);
     }
-    private void LoginUser() {
-        String email = emailField.getText();
-        String password = new String(passwordField.getPassword());
+    public void getLogIn() {
+        String url = "jdbc:mysql://localhost:3306/project";
+        String user = "root";
+        String password = "12345";
 
-        Connection con = DBHelper.getConnection();
-        String insertQuery = "SELECT * FROM users WHERE email = ? AND password = ?";
-        try (PreparedStatement ps = con.prepareStatement(insertQuery)) {
-            ps.setString(1, email);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+        String exportQuery = "SELECT * FROM pasient;";
 
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-                openToDoPage();
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Email or Password");
+            try {
+                Connection con = DriverManager.getConnection(url, user, password);
+                Statement stmt = con.createStatement();
+
+                ResultSet rs = stmt.executeQuery(exportQuery);
+
+
+                while (rs.next()) {
+                    String email = rs.getString("epost");
+                    String pass = rs.getString("password");
+                }
+
+                con.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "error, Try Again");
-        }
     }
     private void openToDoPage(){
         new RegistrationPage();
