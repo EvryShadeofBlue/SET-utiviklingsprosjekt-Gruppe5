@@ -1,13 +1,18 @@
 package models;
 
+import java.time.LocalDateTime;
+
 public class Beskjed {
     private int beskjedId; // Brukes kun for testing
     private String beskrivelse;
     private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv
+    private LocalDateTime datoOgTid;
+
 
     // konstruktøren under er til testingen.
-    public Beskjed(int beskjedId, String beskrivelse, int synligTidsenhet) {
+    public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
         this.beskjedId = beskjedId;
+        this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
         this.synligTidsenhet = synligTidsenhet;
     }
