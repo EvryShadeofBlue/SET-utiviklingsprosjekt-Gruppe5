@@ -27,11 +27,12 @@ public class BeskjedTests {
     public void testOpprettBeskjed() {
         // Arrange
         BeskjedService beskjedService = new BeskjedService(mockBeskjedRepository);
+        LocalDateTime datoOgTid = LocalDateTime.of(2024, 10, 20, 10, 30);
         String beskrivelse = "Beskjed";
         int synligTidsenhet = 24;
 
         // Act
-        Beskjed opprettetBeskjed = beskjedService.opprettBeskjed(beskrivelse, synligTidsenhet);
+        Beskjed opprettetBeskjed = beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet);
 
         //Assert
         Assertions.assertEquals("Beskjed", opprettetBeskjed.getBeskrivelse());
@@ -43,28 +44,32 @@ public class BeskjedTests {
         // Arrange
         BeskjedService beskjedService = new BeskjedService(mockBeskjedRepository);
         int beskjedId = 1;
+
+        // Oppretter eksisterende beskjed
         String eksisterendeBeskrivelse = "Gammel beskjed";
         int eksisterendeSynligTidsenhet = 24;
-        LocalDateTime eksisterendeDatoOgTid = LocalDateTime.now();
+        LocalDateTime eksisterendeDatoOgTid = LocalDateTime.of(2024, 10, 20, 15, 30);
 
         Beskjed eksisterendeBeskjed = new Beskjed(eksisterendeDatoOgTid, eksisterendeBeskrivelse, eksisterendeSynligTidsenhet);
         Mockito.when(mockBeskjedRepository.hentBeskjed(beskjedId)).thenReturn(eksisterendeBeskjed);
 
         // Nye verdier
         String nyBeskrivelse = "Oppdatert beskjed";
-        int nySynligTidsenhjet = 12;
+        int nySynligTidsenhet = 12;
+        LocalDateTime nyDatoOgTid = LocalDateTime.of(2024, 10, 25, 12, 20);
 
+
+        // Oppretter nytt beskjed objekt med nye verdier
+        Beskjed nyBeskjed = new Beskjed(nyDatoOgTid, nyBeskrivelse, nySynligTidsenhet);
 
         // Act
-        boolean result = beskjedService.oppdaterBeskjed(beskjedId, nyBeskrivelse, nySynligTidsenhjet);
+        Beskjed oppdatertBeskjed = beskjedService.oppdaterBeskjed(beskjedId, nyBeskjed);
 
         // Assert
-        Assertions.assertTrue(result, "Oppdatering av beskjed bør være vellykket. ");
-
-        Beskjed oppdatertBeskjed = mockBeskjedRepository.hentBeskjed(beskjedId);
-
+        Assertions.assertNotNull(oppdatertBeskjed, "Oppdatering av beskjed bør være vellykket. ");
         Assertions.assertEquals(nyBeskrivelse, oppdatertBeskjed.getBeskrivelse());
-        Assertions.assertEquals(nySynligTidsenhjet, oppdatertBeskjed.getSynligTidsenhet());
+        Assertions.assertEquals(nySynligTidsenhet, oppdatertBeskjed.getSynligTidsenhet());
+        Assertions.assertEquals(nyDatoOgTid, oppdatertBeskjed.getDatoOgTid());
     }
 
     @Test

@@ -2,12 +2,14 @@ package repository;
 
 import models.Beskjed;
 
+import java.time.LocalDateTime;
+
 public interface BeskjedRepository {
     // Metode for å opprette en beskjed
     void oppretteBeskjed(Beskjed beskjed);
 
     // Metode for å endre beskjed
-    void oppdaterBeskjed(int beskjed, String Beskrivelse, int synligTidsenhet);
+    void oppdaterBeskjed(Beskjed beskjed);
 
     // Metode for å slette en beskjed
     void slettBeskjed(int beskjedId);

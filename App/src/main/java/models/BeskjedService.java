@@ -16,30 +16,32 @@ public class BeskjedService {
 
 
     // Metode for å opprette beskjed
-    public Beskjed opprettBeskjed(String beskrivelse, int synligTidsenhet) {
-        LocalDateTime datoOgTid = LocalDateTime.now();
+    public Beskjed opprettBeskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
         Beskjed beskjed = new Beskjed(datoOgTid, beskrivelse, synligTidsenhet);
         beskjedRepository.oppretteBeskjed(beskjed);
         return beskjed;
     }
 
     // Metode for å oppdatere eksisterende beskjed
-    public boolean oppdaterBeskjed(int beskjedId, String nyBeskrivelse, int nySynligTidsenhet) {
+    public Beskjed oppdaterBeskjed(int beskjedId, Beskjed nyBeskjed) {
         // Henter beskjed
         Beskjed eksisterendeBeskjed = beskjedRepository.hentBeskjed(beskjedId);
 
         // Sjekker om beskjeden eksisterer
         if (eksisterendeBeskjed != null) {
-            if (nyBeskrivelse != null) {
-                eksisterendeBeskjed.setBeskrivelse(nyBeskrivelse);
+            if (nyBeskjed.getDatoOgTid() != null) {
+                eksisterendeBeskjed.setDatoOgTid(nyBeskjed.getDatoOgTid());
             }
-            if (nySynligTidsenhet > 0) {
-                eksisterendeBeskjed.setSynligTidsenhet(nySynligTidsenhet);
+            if (nyBeskjed.getBeskrivelse() != null) {
+                eksisterendeBeskjed.setBeskrivelse(nyBeskjed.getBeskrivelse());
             }
-            beskjedRepository.oppdaterBeskjed(beskjedId, eksisterendeBeskjed.getBeskrivelse(), eksisterendeBeskjed.getSynligTidsenhet());
-            return true;
+            if (nyBeskjed.getSynligTidsenhet() > 0) {
+                eksisterendeBeskjed.setSynligTidsenhet(nyBeskjed.getSynligTidsenhet());
+            }
+            beskjedRepository.oppdaterBeskjed(eksisterendeBeskjed);
+            return eksisterendeBeskjed;
         }
-        return false;
+        return null;
     }
 
     // Metode for å slette en beskjed
