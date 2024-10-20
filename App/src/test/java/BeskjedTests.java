@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import repository.BeskjedRepository;
 
+import java.time.LocalDateTime;
+
 @ExtendWith(MockitoExtension.class)
 public class BeskjedTests {
     @Mock
@@ -43,8 +45,9 @@ public class BeskjedTests {
         int beskjedId = 1;
         String eksisterendeBeskrivelse = "Gammel beskjed";
         int eksisterendeSynligTidsenhet = 24;
+        LocalDateTime eksisterendeDatoOgTid = LocalDateTime.now();
 
-        Beskjed eksisterendeBeskjed = new Beskjed(eksisterendeBeskrivelse, eksisterendeSynligTidsenhet);
+        Beskjed eksisterendeBeskjed = new Beskjed(eksisterendeDatoOgTid, eksisterendeBeskrivelse, eksisterendeSynligTidsenhet);
         Mockito.when(mockBeskjedRepository.hentBeskjed(beskjedId)).thenReturn(eksisterendeBeskjed);
 
         // Nye verdier
@@ -72,8 +75,9 @@ public class BeskjedTests {
         BeskjedService beskjedService = new BeskjedService(mockBeskjedRepository);
         int eksisterendeBeskjedIdId = 1;
         int ikkeEksisterendeBeskjedId = 2;
+        LocalDateTime eksisterendeDatoOgTid = LocalDateTime.now();
 
-        Mockito.when(mockBeskjedRepository.hentBeskjed(eksisterendeBeskjedIdId)).thenReturn(new Beskjed("Beskjed", 24));
+        Mockito.when(mockBeskjedRepository.hentBeskjed(eksisterendeBeskjedIdId)).thenReturn(new Beskjed(eksisterendeDatoOgTid,"Beskjed", 24));
         Mockito.doNothing().when(mockBeskjedRepository).slettBeskjed(eksisterendeBeskjedIdId);
 
         // Act

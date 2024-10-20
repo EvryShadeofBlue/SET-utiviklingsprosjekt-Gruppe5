@@ -18,7 +18,8 @@ public class Beskjed {
     }
 
     // den faktiske konstryktøren som skal benyttes
-    public Beskjed(String beskrivelse, int synligTidsenhet) {
+    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
+        this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
         this.synligTidsenhet = synligTidsenhet;
     }

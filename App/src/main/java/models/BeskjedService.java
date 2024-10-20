@@ -3,6 +3,7 @@ package models;
 import models.Beskjed;
 import repository.BeskjedRepository;
 
+import java.time.LocalDateTime;
 
 
 public class BeskjedService {
@@ -16,7 +17,8 @@ public class BeskjedService {
 
     // Metode for å opprette beskjed
     public Beskjed opprettBeskjed(String beskrivelse, int synligTidsenhet) {
-        Beskjed beskjed = new Beskjed(beskrivelse, synligTidsenhet);
+        LocalDateTime datoOgTid = LocalDateTime.now();
+        Beskjed beskjed = new Beskjed(datoOgTid, beskrivelse, synligTidsenhet);
         beskjedRepository.oppretteBeskjed(beskjed);
         return beskjed;
     }
