@@ -1,4 +1,4 @@
-package model;
+package models;
 
 import java.time.LocalDateTime;
 
@@ -13,12 +13,14 @@ public class Avtale {
     private String gjentakelse;
     private LocalDateTime sluttDato;
 
+    // Denne konstruktøren har blitt benyttet til testing
     public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse) {
         //this.avtaleId = avtaleId;
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
     }
 
+    // Denne konstruktøren er hva som skal benyttes senere
     public Avtale (LocalDateTime datoOgTid, String beskrivelse) {
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
