@@ -84,12 +84,15 @@ public class AvtaleTests {
         String nyBeskrivelse = "Ny beskrivelse";
         LocalDateTime nyDatoOgTid = LocalDateTime.of(2024, 10, 12, 14, 0);
 
+        // Oppretter nytt avtale objekt med nye verdier
+        Avtale nyAvtale = new Avtale(nyDatoOgTid, nyBeskrivelse);
+
         // Act
-        Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(1, nyBeskrivelse, nyDatoOgTid);
+        Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(1, nyAvtale);
 
         // Assert
         Assertions.assertNotNull(oppdatertAvtale);
-        Assertions.assertEquals("ny beskrivelse", oppdatertAvtale.getBeksrivelse());
+        Assertions.assertEquals(nyBeskrivelse, oppdatertAvtale.getBeksrivelse());
         Assertions.assertEquals(nyDatoOgTid, oppdatertAvtale.getDatoOgTid());
 
     }

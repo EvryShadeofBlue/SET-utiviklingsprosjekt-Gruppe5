@@ -48,11 +48,18 @@ public class AvtaleService {
     }
 
     // Metode for å oppdater avtale
-    public Avtale oppdaterAvtale(int avtaleId, String beskrivelse, LocalDateTime datoOgTid) {
+    public Avtale oppdaterAvtale(int avtaleId, Avtale nyAvtale) {
+        // Henter beskjed
         Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(avtaleId);
+
+        // sjekker om beskjeden eksisterer
         if (eksisterendeAvtale != null) {
-            if (beskrivelse != null) eksisterendeAvtale.setBeskrivelse(beskrivelse);
-            if (datoOgTid != null) eksisterendeAvtale.setDatoOgTid(datoOgTid);
+            if (nyAvtale.getDatoOgTid() != null) {
+                eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
+            }
+            if (nyAvtale.getBeksrivelse() != null) {
+                eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeksrivelse());
+            }
 
             avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
             return eksisterendeAvtale;

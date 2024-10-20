@@ -19,6 +19,11 @@ public class Avtale {
         this.beskrivelse = beskrivelse;
     }
 
+    public Avtale (LocalDateTime datoOgTid, String beskrivelse) {
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+    }
+
     public Avtale (int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato){
         //this.avtaleId = avtaleId;
         this.datoOgTid = datoOgTid;
