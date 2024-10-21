@@ -10,8 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import repository.AvtaleRepository;
 import java.time.LocalDateTime;
 
-
-
 @ExtendWith(MockitoExtension.class)
 public class AvtaleTests {
 
@@ -66,21 +64,34 @@ public class AvtaleTests {
     @Test
     @DisplayName("Oppdaterer eksisterende avtale")
     public void oppdaterAvtale() {
-        //Arrange
-        LocalDateTime gammelDato = LocalDateTime.of(2024, 10, 11, 10, 0);
-        LocalDateTime nyDato = LocalDateTime.of(2024, 10, 12, 14, 0);
-        Avtale avtale = new Avtale(1, gammelDato, "gammel beskrivelse");
         AvtaleService avtaleService = new AvtaleService(mockAvtaleRepository);
+        int avtaleId = 1;
 
-        Mockito.when(mockAvtaleRepository.hentAvtale(1)).thenReturn(avtale);
+        //Arrange
+        // Oppretter eksisterende avtale
+        String eksisterendeBeskrivelse = "Gammel beskrivelse";
+        LocalDateTime eksisterendeDato = LocalDateTime.of(2024, 10, 11, 10, 0);
+
+
+        Avtale eksisterendeAvtale = new Avtale(1, eksisterendeDato, eksisterendeBeskrivelse);
+
+
+        Mockito.when(mockAvtaleRepository.hentAvtale(1)).thenReturn(eksisterendeAvtale);
+
+        // Nye verdier
+        String nyBeskrivelse = "Ny beskrivelse";
+        LocalDateTime nyDatoOgTid = LocalDateTime.of(2024, 10, 12, 14, 0);
+
+        // Oppretter nytt avtale objekt med nye verdier
+        Avtale nyAvtale = new Avtale(nyDatoOgTid, nyBeskrivelse);
 
         // Act
-        Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(1, "ny beskrivelse", nyDato);
+        Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(1, nyAvtale);
 
         // Assert
         Assertions.assertNotNull(oppdatertAvtale);
-        Assertions.assertEquals("ny beskrivelse", oppdatertAvtale.getBeksrivelse());
-        Assertions.assertEquals(nyDato, oppdatertAvtale.getDatoOgTid());
+        Assertions.assertEquals(nyBeskrivelse, oppdatertAvtale.getBeksrivelse());
+        Assertions.assertEquals(nyDatoOgTid, oppdatertAvtale.getDatoOgTid());
 
     }
 
@@ -98,6 +109,8 @@ public class AvtaleTests {
         // Assert
         Assertions.assertFalse(slettet);
         Mockito.verify(mockAvtaleRepository, Mockito.never()).slettAvtale(1);
+
+
     }
 }
 

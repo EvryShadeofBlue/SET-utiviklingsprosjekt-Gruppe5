@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Minor refactoring" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="minor cleanup">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Beskjed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/BeskjedService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/BeskjedRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/BeskjedTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/.idea/src.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/main/main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/test/test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Avtale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/AvtaleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AvtaleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AvtaleTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestingTest.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,16 +27,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/.." value="Develop" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -34,7 +44,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
-    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
+    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -53,9 +63,11 @@
     "Application.App.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Develop",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/project/App",
+    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/Github/SET-utiviklingsprosjekt-Gruppe5/src",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -71,7 +83,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9eaeaedb-bbac-4c3b-bf1e-d3fcd7a60d6e" name="Changes" comment="" />
+      <changelist id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="" />
       <created>1729148331214</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -85,11 +97,31 @@
       <option name="project" value="LOCAL" />
       <updated>1729148883558</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="minor cleanup">
+      <option name="closed" value="true" />
+      <created>1729429702940</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729429702940</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="File refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="File refactoring" />
+    <MESSAGE value="minor cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor cleanup" />
   </component>
 </project>

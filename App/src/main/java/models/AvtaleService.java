@@ -1,5 +1,6 @@
 package models;
 
+import models.Avtale;
 import repository.AvtaleRepository;
 
 import java.time.LocalDateTime;
@@ -48,14 +49,21 @@ public class AvtaleService {
     }
 
     // Metode for å oppdater avtale
-    public Avtale oppdaterAvtale(int avtaleId, String beskrivelse, LocalDateTime datoOgTid) {
-        Avtale avtale = avtaleRepository.hentAvtale(avtaleId);
-        if (avtale != null) {
-            if (beskrivelse != null) avtale.setBeskrivelse(beskrivelse);
-            if (datoOgTid != null) avtale.setDatoOgTid(datoOgTid);
+    public Avtale oppdaterAvtale(int avtaleId, Avtale nyAvtale) {
+        // Henter beskjed
+        Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(avtaleId);
 
-            avtaleRepository.oppdaterAvtale(avtale);
-            return avtale;
+        // sjekker om beskjeden eksisterer
+        if (eksisterendeAvtale != null) {
+            if (nyAvtale.getDatoOgTid() != null) {
+                eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
+            }
+            if (nyAvtale.getBeksrivelse() != null) {
+                eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeksrivelse());
+            }
+
+            avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
+            return eksisterendeAvtale;
 
         }
         return null;
