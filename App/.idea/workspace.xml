@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eaeaedb-bbac-4c3b-bf1e-d3fcd7a60d6e" name="Changes" comment="File refactoring">
-      <change afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Database/Delete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Database/Export.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Database/Import.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lecturearchitechture/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/DBHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DatabaseTesting/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DatabaseTesting/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DatabaseTesting/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DatabaseTesting/.idea/misc.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9eaeaedb-bbac-4c3b-bf1e-d3fcd7a60d6e" name="Changes" comment="Removed unneccessary file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,45 +20,45 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Damagedjokke"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Damagedjokke&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git",
-    "accountId": "a5bec0d8-b6c0-45b0-99d9-779db0dfcc13"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
+    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2nYS5IFTdDKBzkIkHJZSKojGtxY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Feature-TG",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/project/App",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/project/App&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="models" />
@@ -91,11 +81,40 @@
       <option name="project" value="LOCAL" />
       <updated>1729148883558</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changes for database communication">
+      <option name="closed" value="true" />
+      <created>1729246713433</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729246713433</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Removed unneccessary file">
+      <option name="closed" value="true" />
+      <created>1729246771500</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729246771500</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="File refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="File refactoring" />
+    <MESSAGE value="Changes for database communication" />
+    <MESSAGE value="Removed unneccessary file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed unneccessary file" />
   </component>
 </project>
