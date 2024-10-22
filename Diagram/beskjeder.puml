@@ -1,23 +1,17 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'autonumber
 
-autonumber
-
-actor pårørende
-actor pleietrengende
+actor Pårørende as parorende
 participant System as system
 database Database as db
 
-pårørende -> system: Oppretter beskjed
-
-
-system -> db: lagrer beskjed
+parorende -> system: Oppretter beskjed
 activate system
+system -> db: Lagrer beskjed
 activate db
-db --> system: bekreftelse på lagring
-deactivate system
+db --> system: Bekreftelse på lagring
 deactivate db
-
-system --> pleietrengende: Viser beskjed (ved behov)
+system --> parorende: Beskjed lagret
+deactivate system
 
 @enduml
