@@ -1,5 +1,7 @@
 package org.app.core.models;
 
+import org.app.core.database.Import;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +23,7 @@ public class RegistrationPage extends JFrame{
     private JPasswordField passwordField;
     private JButton registerButton;
     private JButton backToLoginButton;
+    Import importer = new Import();
 
     public RegistrationPage() {
         setTitle("Registration Page");
@@ -121,24 +124,8 @@ public class RegistrationPage extends JFrame{
         String email = emailField.getText();
         String password = new String(passwordField.getPassword());
 
-        Connection con = DBHelper.getConnection();
-        String insertQuery = "INSERT INTO users(firstName, lastName, mobileNumber, email, password) VALUES (?,?,?,?,?)";
-        try (PreparedStatement ps = con.prepareStatement(insertQuery)){
-            ps.setString(1, firstName);
-            ps.setString(2, lastName);
-            ps.setString(3, mobileNumber);
-            ps.setString(4, email);
-            ps.setString(5, password);
-
-            int rowsInserted = ps.executeUpdate();
-            if(rowsInserted > 0 ) {
-                JOptionPane.showMessageDialog(this, "Registration Successful");
-                clearFields();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Registration Failed, Try again.");
-        }
+        importer.importParorende(firstName, lastName, mobileNumber, email);
+        importer.importInnlogging(email, password, 1);
     }
     private void clearFields() {
         firstNameField.setText("");

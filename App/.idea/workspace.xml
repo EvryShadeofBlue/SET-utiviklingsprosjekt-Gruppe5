@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc changes">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_40_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_40__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_41_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_41__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Removed unnecessary files">
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +33,12 @@
     &quot;assignee&quot;: &quot;Damagedjokke&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
-    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git",
+    "accountId": "34cfffde-a436-4dc7-afc3-7f8d20f6f8d0"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -70,7 +59,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "Feature-TG",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/project/App/tests",
+    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/Github/App",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -132,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729429702940</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Removed unnecessary files">
+      <option name="closed" value="true" />
+      <created>1729688054481</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729688054481</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,6 +147,7 @@
     <MESSAGE value="File refactoring" />
     <MESSAGE value="minor cleanup" />
     <MESSAGE value="misc changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="misc changes" />
+    <MESSAGE value="Removed unnecessary files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed unnecessary files" />
   </component>
 </project>
