@@ -1,9 +1,6 @@
 package org.app.core.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Export {
     String url = "jdbc:mysql://localhost:3306/project";
@@ -158,5 +155,30 @@ public class Export {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public boolean verifyLogin(String email, String pass) {
+
+        String exportQuery = "SELECT * FROM innlogging where epost = ? and passord = ?;";
+
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement pstmt = con.prepareStatement(exportQuery);
+
+            pstmt.setString(1, "email");
+            pstmt.setString(2, "password");
+
+            ResultSet rs = pstmt.executeQuery();
+
+
+            if (rs.next()) {
+                return true;
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
