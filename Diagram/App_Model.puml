@@ -5,7 +5,7 @@ hide empty description
 
 [*] --> AppLoginPage
 AppLoginPage --> AppLoginPage : Failed
-AppLoginPage -left-> [*] : Abort
+AppLoginPage --> [*] : Abort
 state AppLoginPage {
 
     state "Login" as long1
@@ -61,15 +61,25 @@ state MessagesPage {
     state "Make new Message" as long8
     state "View/Edit Messages" as long9
 }
+
 MessagesPage: The page could either show a list of saved messages
 MessagesPage: or just the two buttons to choose from + an "Abort" button
+
+MessagesPage --> NewMessage : Click "Make new Message"
+NewMessage --> MessagesPage : Abort/saved
+NewMessage: Write new message
+
+MessagesPage --> ViewEditMessages : Click "View/Edit Messages" \n(or on a message in a list)
+ViewEditMessages --> MessagesPage : Abort/Saved/Deleted
+
+
 MainAppPage --> AdministrationPage: Click "Administration"
 AdministrationPage --> MainAppPage : Abort
+AdministrationPage: This part of the app will host the administrative
+AdministrationPage: part of the app where users can view and change
+AdministrationPage: their profiles.
 
-MainAppPage --> [*] : Abort \n(close APP)
-AppointmentsPage --> [*] : Abort \n(close APP)
-MessagesPage --> [*] : Abort \n(close APP)
-AdministrationPage --> [*] : Abort \n(close APP)
+MainAppPage -left-> [*] : Abort \n(close APP)
 
 @enduml
 
