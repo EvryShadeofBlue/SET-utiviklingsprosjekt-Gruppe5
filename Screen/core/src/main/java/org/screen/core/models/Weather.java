@@ -1,4 +1,4 @@
-package models;
+package org.screen.core.models;
 
 import java.awt.*;
 import java.io.BufferedReader;

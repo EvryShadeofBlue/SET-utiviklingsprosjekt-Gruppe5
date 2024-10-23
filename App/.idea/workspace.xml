@@ -4,12 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Major changes in DB communication">
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Changes in login verification">
+      <change afterPath="$PROJECT_DIR$/../Screen/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/database/Export.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Beskjed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/tests/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/tests/src/test/java/TestTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/java/Screen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/java/models/Weather.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/java/models/WeatherYr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/cloudy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/rainy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/snowy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/sunny.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/thunder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/weather.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/windy.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +76,7 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/Screen&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -122,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729688483839</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Changes in login verification">
+      <option name="closed" value="true" />
+      <created>1729699237119</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729699237119</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +167,7 @@
     <MESSAGE value="misc changes" />
     <MESSAGE value="Removed unnecessary files" />
     <MESSAGE value="Major changes in DB communication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Major changes in DB communication" />
+    <MESSAGE value="Changes in login verification" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes in login verification" />
   </component>
 </project>

@@ -1,10 +1,13 @@
-import models.Weather;
+import org.screen.core.database.Export;
+import org.screen.core.models.Beskjed;
+import org.screen.core.models.Weather;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class Screen {
     public static void main(String[] args) {
@@ -67,6 +70,19 @@ public class Screen {
         weatherPanel.add(iconLabel);
         centeredPanel.add(weatherPanel);    //sentrerer verticalt
 
+        Export exporter = new Export();     //lager en instans av Export klassen
+        List<Beskjed> beskjederList = exporter.exportBeskjeder();    //henter beskjeder fra databasen
+
+        StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
+        for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
+            beskjeder.append("Beskrivelse: ").append(beskjed.getDescription()).append("<br>");    //legger til beskjed og linjeskift
+        }
+        beskjeder.append("<html>");     //avslutter html format
+
+        JLabel beskjedLabel = new JLabel(beskjeder.toString(), SwingConstants.CENTER);    //lager en label med beskjedene
+        beskjedLabel.setFont(new Font("Beskjeder", Font.BOLD, 20));    //redigerer fonten
+
+
         gridPanel.remove(0);        //fjerner tallene som visualiserer grid cellene for å unngå overlapping, kan fjernes når koding er ferdig
         gridPanel.add(timeLabel, 0);    //legger til komponent i grid celle
         gridPanel.remove(1);
@@ -77,6 +93,8 @@ public class Screen {
         gridPanel.add(tempLabel, 6);
         gridPanel.remove(8);
         gridPanel.add(centeredPanel, 8);
+        gridPanel.remove(3);
+        gridPanel.add(beskjedLabel, 3);
 
         jframe.add(gridPanel);      //Legger til grid cellene i GUI'en
         jframe.setVisible(true);    //Gjør at selve GUI'en vises på maskinen
