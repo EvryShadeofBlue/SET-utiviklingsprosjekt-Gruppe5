@@ -17,6 +17,7 @@ public class LoginPage extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
+    Export exporter = new Export();
 
     public LoginPage() {
         setTitle("Login Page");
@@ -92,29 +93,14 @@ public class LoginPage extends JFrame {
         setVisible(true);
     }
     public void getLogIn() {
-        String url = "jdbc:mysql://localhost:3306/project";
-        String user = "root";
-        String password = "12345";
+        String email = emailField.getText();
+        String password = passwordField.getText();
 
-        String exportQuery = "SELECT * FROM pasient;";
-
-            try {
-                Connection con = DriverManager.getConnection(url, user, password);
-                Statement stmt = con.createStatement();
-
-                ResultSet rs = stmt.executeQuery(exportQuery);
-
-
-                while (rs.next()) {
-                    String email = rs.getString("epost");
-                    String pass = rs.getString("password");
-                }
-
-                con.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (exporter.verifyLogin(email, password)) {
+            openToDoPage();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid email or password");
+        }
     }
     private void openToDoPage(){
         new RegistrationPage();
