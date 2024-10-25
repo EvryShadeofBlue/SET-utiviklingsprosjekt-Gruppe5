@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Changes in login verification">
-      <change afterPath="$PROJECT_DIR$/../Screen/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/database/Export.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Beskjed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/tests/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/tests/src/test/java/TestTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Screen/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/java/Screen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/java/models/Weather.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/java/models/WeatherYr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/cloudy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/rainy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/snowy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/sunny.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/thunder.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/weather.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/main/resources/images/windy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/src/test/java/TestTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,12 +32,12 @@
     &quot;assignee&quot;: &quot;Damagedjokke&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
-    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git",
+    "accountId": "a5bec0d8-b6c0-45b0-99d9-779db0dfcc13"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>

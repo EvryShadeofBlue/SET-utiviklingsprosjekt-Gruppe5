@@ -75,7 +75,8 @@ public class Screen {
 
         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
-            beskjeder.append("Beskrivelse: ").append(beskjed.getDescription()).append("<br>");    //legger til beskjed og linjeskift
+            beskjeder.append("Dato: ").append(beskjed.getDescription()).append("<br>");  //legger til beskjed og linjeskift
+            beskjeder.append("Beskrivelse: ").append(beskjed.getDescription()).append("<br>");
         }
         beskjeder.append("<html>");     //avslutter html format
 
