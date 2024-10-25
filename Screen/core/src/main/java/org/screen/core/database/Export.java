@@ -11,15 +11,18 @@ public class Export {
     String user = "root";
     String password = "12345";
 
-    public List<Beskjed> exportBeskjeder() {
+    public List<Beskjed> exportBeskjeder(int pleietrengende_id) {
         List<Beskjed> beskjederList = new ArrayList<>();
-        String exportQuery = "SELECT * FROM beskjeder;";
+        String exportQuery = "SELECT * FROM beskjeder WHERE pleietrengende_id = ?";
 
         try {
-            Connection con = DriverManager.getConnection(url, user, password);
-            Statement stmt = con.createStatement();
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            ResultSet rs = stmt.executeQuery(exportQuery);
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement pstmt = con.prepareStatement(exportQuery);
+            pstmt.setInt(1, pleietrengende_id);
+
+            ResultSet rs = pstmt.executeQuery(exportQuery);
 
             while (rs.next()) {
                 int id = rs.getInt("beskjed_id");
@@ -27,7 +30,6 @@ public class Export {
                 String description = rs.getString("beskrivelse");
                 String dateTime = rs.getString("dato_tid");
                 int visibleTime = rs.getInt("synlig_tid");
-                int pleietrengende_id = rs.getInt("pleietrengende_id");
                 int parorende_id = rs.getInt("parorende_id");
 
                 Beskjed beskjeder = new Beskjed(id, dateCreated, description,

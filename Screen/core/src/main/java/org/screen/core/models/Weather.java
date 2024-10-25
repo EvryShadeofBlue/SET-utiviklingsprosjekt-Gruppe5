@@ -1,6 +1,7 @@
 package org.screen.core.models;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -104,11 +105,23 @@ public class Weather {
             iconPath = "/images/thunder.png";
         }
 
-        ImageIcon icon = new ImageIcon(Weather.class.getResource(iconPath));    //henter bildet fra resources
+        try {
+            ImageIcon icon = new ImageIcon(Weather.class.getResource(iconPath));    //henter bildet fra resources
 
-        Image img = icon.getImage();
-        Image scaled = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);    //scaler bilde for å få det større
+            if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                throw new Exception("Image could not be loaded");
+            }
 
-        return new ImageIcon(scaled);   //returnerer de scalede bildene
+            // Scale the image for display
+            Image img = icon.getImage();
+            Image scaled = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);     //scaler bilde for å få det større
+            return new ImageIcon(scaled);
+        } catch (Exception e) {
+            // If the image cannot be loaded, display an error message
+            JOptionPane.showMessageDialog(null, "Kunne ikke laste opp bilder" + iconPath, "Feil", JOptionPane.ERROR_MESSAGE);
+
+            // Return a simple placeholder icon, could be a blank or default symbol icon
+            return new ImageIcon(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
+        }
     }
 }

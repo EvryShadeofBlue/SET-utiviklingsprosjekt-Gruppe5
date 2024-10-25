@@ -71,12 +71,13 @@ public class Screen {
         centeredPanel.add(weatherPanel);    //sentrerer verticalt
 
         Export exporter = new Export();     //lager en instans av Export klassen
-        List<Beskjed> beskjederList = exporter.exportBeskjeder();    //henter beskjeder fra databasen
+        int pleietrengende_id = 6;
+        List<Beskjed> beskjederList = exporter.exportBeskjeder(pleietrengende_id);    //henter beskjeder fra databasen
 
         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
             beskjeder.append("Dato: ").append(beskjed.getDescription()).append("<br>");  //legger til beskjed og linjeskift
-            beskjeder.append("Beskrivelse: ").append(beskjed.getDescription()).append("<br>");
+            beskjeder.append("Beskjed: ").append(beskjed.getDescription()).append("<br>");
         }
         beskjeder.append("<html>");     //avslutter html format
 
