@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -121,6 +122,30 @@ public class RegistrationPage extends JFrame{
         String email = emailField.getText();
         String password = new String(passwordField.getPassword());
 
+        String url = "jdbc:mysql://itstud.hiof.no:3306/tek2024_g5";
+        String user = "aramf";
+        String dbPassword = "Sommer2025";
+
+        String insertQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, dbPassword);
+        PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, mobileNumber);
+            preparedStatement.setString(4, email);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
+                clearFields();
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Registrering feilet. " + exception.getMessage());
+        }
+
+/*
         Connection con = DBHelper.getConnection();
         String insertQuery = "INSERT INTO users(firstName, lastName, mobileNumber, email, password) VALUES (?,?,?,?,?)";
         try (PreparedStatement ps = con.prepareStatement(insertQuery)){
@@ -139,6 +164,8 @@ public class RegistrationPage extends JFrame{
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Registration Failed, Try again.");
         }
+
+ */
     }
     private void clearFields() {
         firstNameField.setText("");
