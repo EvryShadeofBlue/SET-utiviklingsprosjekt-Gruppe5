@@ -1,9 +1,18 @@
 package org.app.core.models;
 
+import java.util.List;
+
 public class Pleietrengende {
     private int pleietrengendeId;
     private String fornavn;
     private String etternavn;
+    private List<Parorende> parorende;
+
+    public Pleietrengende(String fornavn, String etternavn, List<Parorende> parorende) {
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+        this.parorende = parorende;
+    }
 
     public Pleietrengende(String fornavn, String etternavn) {
         this.fornavn = fornavn;
@@ -24,4 +33,10 @@ public class Pleietrengende {
         this.etternavn = etternavn;
     }
 
+    public List<Parorende> getParorende() {
+        return parorende;
+    }
+    public void setParorende(List<Parorende> parorende) {
+        this.parorende = parorende;
+    }
 }
