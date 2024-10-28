@@ -10,15 +10,10 @@ public class Beskjed {
     private int pleietrengende_id;
     private int parorende_id;
 
-    public Beskjed(int id, String dateCreated, String description, String dateTime, int visibleTime,
-                   int pleietrengende_id, int parorende_id) {
-        this.id = id;
-        this.dateCreated = dateCreated;
+    public Beskjed(String description, String dateTime, int visibleTime) {
         this.description = description;
         this.dateTime = dateTime;
         this.visibleTime = visibleTime;
-        this.pleietrengende_id = pleietrengende_id;
-        this.parorende_id = parorende_id;
     }
 
     public int getId() {

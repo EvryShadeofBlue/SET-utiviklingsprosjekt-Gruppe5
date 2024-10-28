@@ -1,19 +1,24 @@
 package org.screen.core.database;
 
 import org.screen.core.models.Beskjed;
+import org.screen.core.models.Resources;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Export {
-    String url = "jdbc:mysql://localhost:3306/project";
-    String user = "root";
-    String password = "12345";
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
 
-    public List<Beskjed> exportBeskjeder(int pleietrengende_id) {
+    public List<Beskjed> exportBeskjederToday(int pleietrengende_id) {
         List<Beskjed> beskjederList = new ArrayList<>();
-        String exportQuery = "SELECT * FROM beskjeder WHERE pleietrengende_id = ?";
+        String exportQuery = "select beskrivelse, dato_tid, synlig_tid\n" +
+                "from Beskjeder\n" +
+                "where pleietrengende_id = ?\n" +
+                "and DATE(dato_tid) = CURDATE()\n" +
+                "order by dato_tid asc;";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,15 +30,11 @@ public class Export {
             ResultSet rs = pstmt.executeQuery(exportQuery);
 
             while (rs.next()) {
-                int id = rs.getInt("beskjed_id");
-                String dateCreated = rs.getString("dato_tid_opprettet");
                 String description = rs.getString("beskrivelse");
                 String dateTime = rs.getString("dato_tid");
                 int visibleTime = rs.getInt("synlig_tid");
-                int parorende_id = rs.getInt("parorende_id");
 
-                Beskjed beskjeder = new Beskjed(id, dateCreated, description,
-                        dateTime, visibleTime, pleietrengende_id, parorende_id);
+                Beskjed beskjeder = new Beskjed(description, dateTime, visibleTime);
                 beskjederList.add(beskjeder);
             }
 
