@@ -18,6 +18,14 @@ public class Screen {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //stopper 'RUN' om du krysser ut GUI'en
         jframe.setSize(size);       //bruker maskinens resolution
 
+        jframe.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                Weather.stopWeatherUpdater();
+                System.exit(0);
+            }
+        });
+
         JPanel gridPanel = new JPanel(new GridLayout(3, 3));    //lager en 3x3 grid for design
         JPanel weatherPanel = new JPanel();     //extra panel for å tillatte 2 componenter inn i samme grid cell
         JPanel centeredPanel = new JPanel(new GridBagLayout());     //laget for å sentrere compnenter i grid cell vertikalt
@@ -52,8 +60,8 @@ public class Screen {
         JLabel tmrLabel = new JLabel("<html>I Morgen:<br>" + tmrDay + "<html>", SwingConstants.CENTER);
         tmrLabel.setFont(new Font("Tomorrow", Font.BOLD, 40));
 
-        String temp = Weather.getTemperature();             //bruker metode fra Weather klassen for å hente informasjon med API
-        String weather = Weather.getWeatherCondition();
+        String temp = Weather.getCurrentTemperature();             //bruker metode fra Weather klassen for å hente informasjon med API
+        String weather = Weather.getCurrentWeatherCondition();
         ImageIcon weatherIcon = Weather.getWeatherIcon(weather, 200, 200);
 
         JLabel tempLabel = new JLabel("<html>Temperatur inne: " + "" + "°C" + "<br>Temperatur ute: "
@@ -71,8 +79,8 @@ public class Screen {
         centeredPanel.add(weatherPanel);    //sentrerer verticalt
 
         Export exporter = new Export();     //lager en instans av Export klassen
-        int pleietrengende_id = 6;
-        List<Beskjed> beskjederList = exporter.exportBeskjeder(pleietrengende_id);    //henter beskjeder fra databasen
+        int pleietrengende_id = 1;
+        List<Beskjed> beskjederList = exporter.exportBeskjederToday(pleietrengende_id);    //henter beskjeder fra databasen
 
         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
@@ -101,7 +109,16 @@ public class Screen {
         jframe.add(gridPanel);      //Legger til grid cellene i GUI'en
         jframe.setVisible(true);    //Gjør at selve GUI'en vises på maskinen
 
-        //test again
+        Weather.startWeatherUpdater();
 
+        Timer timer = new Timer(60000, e -> {
+            tempLabel.setText("<html>Temperatur inne: " + "" + "°C" + "<br>Temperatur ute: "
+                    + Weather.getCurrentTemperature() + "<html>");
+            weatherLabel.setText("Været i dag: " + Weather.getCurrentWeatherCondition());
+            weatherIcon.setImage(Weather.getWeatherIcon(Weather.getCurrentWeatherCondition(),
+                    200, 200).getImage());
+            iconLabel.setIcon(weatherIcon);
+        });
+        timer.start();
     }
 }

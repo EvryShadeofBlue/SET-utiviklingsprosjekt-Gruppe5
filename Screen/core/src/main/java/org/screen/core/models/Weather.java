@@ -8,15 +8,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 public class Weather {
 
+//    private static String currentTemperature = getTemperature();
+//    private static String currentWeatherCondition = getWeatherCondition();
+    private static String currentTemperature = "N/A";
+    private static String currentWeatherCondition = "N/A";
+    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+    static {
+        startWeatherUpdater();
+    }
+
     public static String getTemperature() {
         try {
             String urlString = String.format("http://api.openweathermap.org/data/2.5/weather?q=Halden,no&appid="
-                    + API.getApiWeather());        //laget egen fil med API-key lagt inn i gitignore
+                    + Resources.getApiWeather());        //laget egen fil med API-key lagt inn i gitignore
             URL url = new URL(urlString);  //henter temperatur fra halden med skjult API-key
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -51,7 +63,7 @@ public class Weather {
     public static String getWeatherCondition() {
         try {
             String urlString = String.format("http://api.openweathermap.org/data/2.5/weather?q=Halden,no" +
-                    "&units=metric&lang=no&appid=" + API.getApiWeather());
+                    "&units=metric&lang=no&appid=" + Resources.getApiWeather());
             URL url = new URL(urlString);       //henter værtilstand i halden
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -89,7 +101,8 @@ public class Weather {
         if (weatherDescription.contains("himmel") || weatherDescription.contains("klar")) {
             iconPath = "/images/sunny.png";     //viser bilde om string matcher
         }
-        else if (weatherDescription.contains("skyer") || weatherDescription.contains("overskyet")) {
+        else if (weatherDescription.contains("skyer") || weatherDescription.contains("overskyet") ||
+        weatherDescription.contains("sky")) {
             iconPath = "/images/cloudy.png";
         }
         else if (weatherDescription.contains("regn")) {
@@ -117,11 +130,36 @@ public class Weather {
             Image scaled = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);     //scaler bilde for å få det større
             return new ImageIcon(scaled);
         } catch (Exception e) {
-            // If the image cannot be loaded, display an error message
-            JOptionPane.showMessageDialog(null, "Kunne ikke laste opp bilder" + iconPath, "Feil", JOptionPane.ERROR_MESSAGE);
+            // Dersom bildet ikke kan lastes, vis feilmelding
+            JOptionPane.showMessageDialog(null, "Kunne ikke laste opp bilder",
+                    "Feil", JOptionPane.ERROR_MESSAGE);
 
-            // Return a simple placeholder icon, could be a blank or default symbol icon
+            // Returener et blankt bilde
             return new ImageIcon(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
         }
+    }
+
+    public static void startWeatherUpdater() {
+        currentTemperature = getTemperature();
+        currentWeatherCondition = getWeatherCondition();
+
+        Runnable task = () -> {
+            currentTemperature = getTemperature();
+            currentWeatherCondition = getWeatherCondition();
+        };
+
+        executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.MINUTES);
+    }
+
+    public static void stopWeatherUpdater() {
+        executor.shutdown();
+    }
+
+    public static String getCurrentTemperature() {
+        return currentTemperature;
+    }
+
+    public static String getCurrentWeatherCondition() {
+        return currentWeatherCondition;
     }
 }
