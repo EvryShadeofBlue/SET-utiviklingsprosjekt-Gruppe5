@@ -92,29 +92,39 @@ public class LoginPage extends JFrame {
         setVisible(true);
     }
     public void getLogIn() {
-        String url = "jdbc:mysql://localhost:3306/project";
-        String user = "root";
-        String password = "12345";
+        String enteredEmail = emailField.getText();
+        String enteredPassword = new String(passwordField.getPassword());
 
-        String exportQuery = "SELECT * FROM pasient;";
+        String loginQuery = "select p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, pl.fornavn as pleietrengeneFornavn," +
+                "pl.etternavn as pleietrengendeEtternavn from Parorende p" +
+                "join Pleietrengende pl on pl.parorende_id = p.parorende_id" +
+                "where p.epost = ? and p.passord = ?";
 
-            try {
-                Connection con = DriverManager.getConnection(url, user, password);
-                Statement stmt = con.createStatement();
+        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+        PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {
+            preparedStatement.setString(1, enteredEmail);
+            preparedStatement.setString(2, enteredPassword);
 
-                ResultSet rs = stmt.executeQuery(exportQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            if (resultSet.next()) {
+                String parorendeFornavn = resultSet.getString("parorendeFornavn");
+                String parorendeEtternavn = resultSet.getString("parorendeEtternavn");
+                String pleietrengendeFornavn = resultSet.getString("pleietrengendeFornavn");
+                String pleietrengendeEtternavn = resultSet.getString("pleietrengendeEtternavn");
 
-                while (rs.next()) {
-                    String email = rs.getString("epost");
-                    String pass = rs.getString("password");
-                }
-
-                con.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                new MainPage(parorendeFornavn + " " + parorendeEtternavn,
+                        pleietrengendeFornavn + " " + pleietrengendeEtternavn);
+                dispose();
             }
+            else {
+                JOptionPane.showMessageDialog(this, "Feil e-post eller passord. Vennligst prøv igjen. ");
+            }
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
     }
     private void openToDoPage(){
         new RegistrationPage();
