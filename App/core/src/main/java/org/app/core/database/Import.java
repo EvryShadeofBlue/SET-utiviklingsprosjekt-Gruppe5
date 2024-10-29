@@ -1,13 +1,15 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 
 public class Import {
-    String url = "jdbc:mysql://localhost:3306/project";
-    String user = "root";
-    String password = "12345";
+    String url = Resources.url;
+    String user = Resources.user;
+    String password = Resources.password;
     public void importParorende(String firstName, String lastName, String number, String email) {
 
         String insertQuery = "INSERT INTO parorende (fornavn, etternavn, tlf, epost) VALUES (?, ?, ?, ?)";

@@ -1,5 +1,7 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,9 +9,9 @@ import java.sql.Statement;
 
 public class Export {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/project";
-        String user = "root";
-        String password = "12345";
+        String url = Resources.url;
+        String user = Resources.user;
+        String password = Resources.password;
 
         String exportQuery = "SELECT * FROM pasient;";
 
