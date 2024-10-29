@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Changes in login verification">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/src/test/java/TestTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Changes DB coimmunication" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +30,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git",
-    "accountId": "a5bec0d8-b6c0-45b0-99d9-779db0dfcc13"
+    "accountId": "34cfffde-a436-4dc7-afc3-7f8d20f6f8d0"
   }
 }]]></component>
   <component name="ProblemsViewState">
@@ -129,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729699237119</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changes DB coimmunication">
+      <option name="closed" value="true" />
+      <created>1730142161151</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730142161151</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,6 +153,7 @@
     <MESSAGE value="Removed unnecessary files" />
     <MESSAGE value="Major changes in DB communication" />
     <MESSAGE value="Changes in login verification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes in login verification" />
+    <MESSAGE value="Changes DB coimmunication" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes DB coimmunication" />
   </component>
 </project>
