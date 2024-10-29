@@ -1,7 +1,6 @@
 package org.screen.core.database;
 
 import org.screen.core.models.Beskjed;
-import org.screen.core.models.Resources;
 
 import java.sql.*;
 import java.util.ArrayList;
