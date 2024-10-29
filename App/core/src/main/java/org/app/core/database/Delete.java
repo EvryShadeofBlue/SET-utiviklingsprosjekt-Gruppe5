@@ -1,8 +1,5 @@
 package org.app.core.database;
 
-import org.app.core.models.Resources;
-
-import javax.naming.spi.ResolveResult;
 import java.sql.*;
 
 public class Delete {

@@ -74,7 +74,7 @@ public class LoginPage extends JFrame {
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+        //setLayout(null);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -96,9 +96,9 @@ public class LoginPage extends JFrame {
         String enteredPassword = new String(passwordField.getPassword());
 
         String loginQuery = "select p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, pl.fornavn as pleietrengeneFornavn," +
-                "pl.etternavn as pleietrengendeEtternavn from Parorende p" +
-                "join Pleietrengende pl on pl.parorende_id = p.parorende_id" +
-                "where p.epost = ? and p.passord = ?";
+                "pl.etternavn as pleietrengendeEtternavn from Parorende p " +
+                "join Pleietrengende pl on pl.parorende_id = p.parorende_id " +
+                "where p.epost = ? and Innlogging.passord = ?";
 
         try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
         PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {

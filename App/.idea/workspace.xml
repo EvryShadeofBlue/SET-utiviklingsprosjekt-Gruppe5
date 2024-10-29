@@ -4,25 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc changes">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="changed the method for login in loginpage">
+      <change afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Diagram/visning av beskjeder.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_40_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_40__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_41_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_41__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Import.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/ActivityListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ActivityListPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/AvtaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Beskjed.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Beskjed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/BeskjedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/BeskjedService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/TaskDisplayPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/TaskDisplayPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/AvtaleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/AvtaleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/BeskjedRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/BeskjedRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Resources.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/TaskDisplayPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/TaskDisplayPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +54,11 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
-    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
+    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -63,23 +68,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Feature-TG",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/Github/SET-utiviklingsprosjekt-Gruppe5/App/core/src/main/java/org/app/core",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-AF-appUtvikling&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/Screen&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core" />
@@ -91,22 +97,10 @@
       <recent name="models" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="app" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="app" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\thgl0\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="" />
@@ -131,7 +125,52 @@
       <option name="project" value="LOCAL" />
       <updated>1729429702940</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Removed unnecessary files">
+      <option name="closed" value="true" />
+      <created>1729688054481</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729688054481</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Major changes in DB communication">
+      <option name="closed" value="true" />
+      <created>1729688483839</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729688483839</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Changes in login verification">
+      <option name="closed" value="true" />
+      <created>1729699237119</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729699237119</updated>
+    </task>
+    <task id="LOCAL−00006" summary="Created Resource class in models to contain static variables for the database and did some changes in the delete class">
+      <option name="closed" value="true" />
+      <created>1730221009052</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1730221009052</updated>
+    </task>
+    <task id="LOCAL−00007" summary="Did some changes in the variables for database connection">
+      <option name="closed" value="true" />
+      <created>1730221132226</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1730221132226</updated>
+    </task>
+    <task id="LOCAL−00008" summary="changed the method for login in loginpage">
+      <option name="closed" value="true" />
+      <created>1730228379078</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1730228379078</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +187,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="File refactoring" />
     <MESSAGE value="minor cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor cleanup" />
+    <MESSAGE value="misc changes" />
+    <MESSAGE value="Removed unnecessary files" />
+    <MESSAGE value="Major changes in DB communication" />
+    <MESSAGE value="Changes in login verification" />
+    <MESSAGE value="Created Resource class in models to contain static variables for the database and did some changes in the delete class" />
+    <MESSAGE value="Did some changes in the variables for database connection" />
+    <MESSAGE value="changed the method for login in loginpage" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the method for login in loginpage" />
   </component>
 </project>

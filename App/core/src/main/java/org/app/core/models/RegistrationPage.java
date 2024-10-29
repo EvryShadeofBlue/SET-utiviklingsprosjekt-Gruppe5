@@ -4,10 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class RegistrationPage extends JFrame{
     private JLabel firstNameLabel;
@@ -92,7 +89,7 @@ public class RegistrationPage extends JFrame{
         add(registerButton = new JButton("Register"), g1);
 
         g1.gridx = 0;
-        g1.gridy = 11;
+        g1.gridy = 10;
         g1.gridwidth = 1;
         g1.anchor = GridBagConstraints.WEST;
         add(backToLoginButton = new JButton("Back to login"), g1);
@@ -122,21 +119,34 @@ public class RegistrationPage extends JFrame{
         String email = emailField.getText();
         String password = new String(passwordField.getPassword());
 
-        String url = "jdbc:mysql://itstud.hiof.no:3306/tek2024_g5";
-        String user = "aramf";
-        String dbPassword = "Sommer2025";
 
-        String insertQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
+        String insertParorendeQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(url, user, dbPassword);
-        PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, mobileNumber);
-            preparedStatement.setString(4, email);
+        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+        PreparedStatement parorendeStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {
+            parorendeStatement.setString(1, firstName);
+            parorendeStatement.setString(2, lastName);
+            parorendeStatement.setString(3, mobileNumber);
+            parorendeStatement.setString(4, email);
 
-            int rowsInserted = preparedStatement.executeUpdate();
+            int rowsInserted = parorendeStatement.executeUpdate();
+
             if (rowsInserted > 0) {
+                try (ResultSet generatedKey = parorendeStatement.getGeneratedKeys()){
+                    if (generatedKey.next()) {
+                        int parorendeId = generatedKey.getInt(1);
+
+                        String insertInnloggingQuery = "Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)";
+                        try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){
+                            innloggingStatement.setString(1, email);
+                            innloggingStatement.setString(2, password);
+                            innloggingStatement.setInt(3, parorendeId);
+
+                            innloggingStatement.executeUpdate();
+                        }
+                    }
+
+                }
                 JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
                 clearFields();
             }
@@ -145,27 +155,7 @@ public class RegistrationPage extends JFrame{
             JOptionPane.showMessageDialog(this, "Registrering feilet. " + exception.getMessage());
         }
 
-/*
-        Connection con = DBHelper.getConnection();
-        String insertQuery = "INSERT INTO users(firstName, lastName, mobileNumber, email, password) VALUES (?,?,?,?,?)";
-        try (PreparedStatement ps = con.prepareStatement(insertQuery)){
-            ps.setString(1, firstName);
-            ps.setString(2, lastName);
-            ps.setString(3, mobileNumber);
-            ps.setString(4, email);
-            ps.setString(5, password);
 
-            int rowsInserted = ps.executeUpdate();
-            if(rowsInserted > 0 ) {
-                JOptionPane.showMessageDialog(this, "Registration Successful");
-                clearFields();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Registration Failed, Try again.");
-        }
-
- */
     }
     private void clearFields() {
         firstNameField.setText("");
