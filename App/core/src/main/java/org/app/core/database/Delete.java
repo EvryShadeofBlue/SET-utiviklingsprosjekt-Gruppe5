@@ -1,13 +1,16 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
+import javax.naming.spi.ResolveResult;
 import java.sql.*;
 
 public class Delete {
 
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/project";
-        String user = "root";
-        String password = "12345";
+        String url = Resources.url;
+        String user = Resources.user;
+        String password = Resources.password;
 
         String column = "pasient_id";
         String table = "pasient";
