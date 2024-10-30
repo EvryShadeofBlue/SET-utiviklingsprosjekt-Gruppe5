@@ -95,10 +95,12 @@ public class LoginPage extends JFrame {
         String enteredEmail = emailField.getText();
         String enteredPassword = new String(passwordField.getPassword());
 
-        String loginQuery = "select p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, pl.fornavn as pleietrengeneFornavn," +
-                "pl.etternavn as pleietrengendeEtternavn from Parorende p " +
-                "join Pleietrengende pl on pl.parorende_id = p.parorende_id " +
-                "where p.epost = ? and Innlogging.passord = ?";
+        String loginQuery = "select p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, " +
+                "pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn " +
+                "from Innlogging i " +
+                "join Parorende p on i.parorende_id = p.parorende_id " +
+                "join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
+                "where i.epost = ? and i.passord = ?";
 
         try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
         PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {
