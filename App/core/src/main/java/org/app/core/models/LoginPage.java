@@ -32,7 +32,7 @@ public class LoginPage extends JFrame {
         g.gridx = 0;
         g.gridy = 0;
         g.gridwidth = 1;
-        add(emailLabel = new JLabel("Email:"), g);
+        add(emailLabel = new JLabel("E-post:"), g);
 
         g.gridx = 0;
         g.gridy = 1;
@@ -42,7 +42,7 @@ public class LoginPage extends JFrame {
         g.gridx = 0;
         g.gridy = 2;
         g.gridwidth = 1;
-        add(passwordLabel = new JLabel("Password:"), g);
+        add(passwordLabel = new JLabel("Passord:"), g);
 
         g.gridx = 0;
         g.gridy = 3;
@@ -52,24 +52,24 @@ public class LoginPage extends JFrame {
         g.gridx = 0;
         g.gridy = 5;
         g.gridwidth = 1;
-        add(registerLabel = new JLabel("Register:"), g);
+        add(registerLabel = new JLabel("Registrer:"), g);
 
         g.gridx = 1;
         g.gridy = 6;
         g.gridwidth = 1;
         g.anchor = GridBagConstraints.EAST;
-        add(loginButton = new JButton("Login"), g);
+        add(loginButton = new JButton("Logg inn"), g);
 
         g.gridx = 0;
         g.gridy = 7;
         g.gridwidth = 1;
-        add(registerLabel = new JLabel("New User"), g);
+        add(registerLabel = new JLabel("Ny bruker"), g);
 
         g.gridx = 1;
         g.gridy = 8;
         g.gridwidth = 1;
         g.anchor = GridBagConstraints.EAST;
-        add(registerButton = new JButton("Register Here"), g);
+        add(registerButton = new JButton("Registrer her"), g);
 
         setVisible(true);
 
