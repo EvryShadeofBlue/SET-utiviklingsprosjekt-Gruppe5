@@ -99,7 +99,7 @@ public class LoginPage extends JFrame {
                 "pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn " +
                 "from Innlogging i " +
                 "join Parorende p on i.parorende_id = p.parorende_id " +
-                "join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
+                "left join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
                 "where i.epost = ? and i.passord = ?";
 
         try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
@@ -116,7 +116,7 @@ public class LoginPage extends JFrame {
                 String pleietrengendeEtternavn = resultSet.getString("pleietrengendeEtternavn");
 
                 new MainPage(parorendeFornavn + " " + parorendeEtternavn,
-                        pleietrengendeFornavn + " " + pleietrengendeEtternavn);
+                        (pleietrengendeFornavn != null ? pleietrengendeFornavn + " " + pleietrengendeEtternavn: ""));
                 dispose();
             }
             else {
