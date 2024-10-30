@@ -1,5 +1,7 @@
 package org.app.core.models;
 
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -149,6 +151,9 @@ public class RegistrationPage extends JFrame{
                 }
                 JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
                 clearFields();
+
+                new MainPage(firstName, "");
+                dispose();
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
