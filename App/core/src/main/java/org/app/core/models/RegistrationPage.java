@@ -37,7 +37,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 0;
         g1.gridwidth = 1;
-        add(firstNameLabel = new JLabel("First Name"), g1);
+        add(firstNameLabel = new JLabel("Fornavn "), g1);
 
         g1.gridx = 0;
         g1.gridy = 1;
@@ -47,7 +47,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 2;
         g1.gridwidth = 1;
-        add(lastNameLabel = new JLabel("Last Name"), g1);
+        add(lastNameLabel = new JLabel("Etternavn"), g1);
 
         g1.gridx = 0;
         g1.gridy = 3;
@@ -57,7 +57,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 4;
         g1.gridwidth = 1;
-        add(mobileLabel= new JLabel("Mobile Number"), g1);
+        add(mobileLabel= new JLabel("Mobil nummer"), g1);
 
         g1.gridx = 0;
         g1.gridy = 5;
@@ -67,7 +67,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 6;
         g1.gridwidth = 1;
-        add(emailLabel = new JLabel("Email"), g1);
+        add(emailLabel = new JLabel("E-post"), g1);
 
         g1.gridx = 0;
         g1.gridy = 7;
@@ -77,7 +77,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 8;
         g1.gridwidth = 1;
-        add(passwordLabel = new JLabel("Password"), g1);
+        add(passwordLabel = new JLabel("Passord"), g1);
 
         g1.gridx = 0;
         g1.gridy = 9;
@@ -88,13 +88,13 @@ public class RegistrationPage extends JFrame{
         g1.gridy = 10;
         g1.gridwidth = 1;
         g1.anchor = GridBagConstraints.EAST;
-        add(registerButton = new JButton("Register"), g1);
+        add(registerButton = new JButton("Registrer"), g1);
 
         g1.gridx = 0;
         g1.gridy = 10;
         g1.gridwidth = 1;
         g1.anchor = GridBagConstraints.WEST;
-        add(backToLoginButton = new JButton("Back to login"), g1);
+        add(backToLoginButton = new JButton("Tilbake til innlogging"), g1);
 
         setVisible(true);
 
