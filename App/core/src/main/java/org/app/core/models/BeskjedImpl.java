@@ -31,4 +31,30 @@ public class BeskjedImpl implements BeskjedRepository {
             sqlException.printStackTrace();
         }
     }
+
+    @Override
+    public void oppdaterBeskjed(Beskjed beskjed) {
+
+    }
+
+    @Override
+    public void slettBeskjed(int beskjedId) {
+
+    }
+
+    @Override
+    public Beskjed hentBeskjed(int beskjedId) {
+        return null;
+    }
+
+    public void close() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
 }

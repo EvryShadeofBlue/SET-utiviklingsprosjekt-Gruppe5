@@ -3,12 +3,15 @@ package org.app.core.models;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainPage extends JFrame {
     private JLabel relativeNameLabel;
     private JLabel careRecieverNameLabel;
     private JLabel relativeNameValue;
     private JLabel careRecieverNameValue;
+    private BeskjedService beskjedService;
 
     public MainPage(String relativeName, String careRecieverName) {
         setTitle("Hovedside ");
@@ -65,6 +68,9 @@ public class MainPage extends JFrame {
 
         setVisible(true);
 
+        beskjedService = new BeskjedService(new BeskjedImpl());
+        beskjedKnapp.addActionListener(e -> new BeskjedOptions(beskjedService));
 
+        setVisible(true);
     }
 }
