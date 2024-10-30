@@ -16,6 +16,11 @@ public class MainPage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        JMenuBar menuBar = new JMenuBar();
+        JMenu helpMenu = new JMenu("Hjelp");
+        menuBar.add(helpMenu);
+        this.setJMenuBar(menuBar);
+
         setLayout(new GridBagLayout());
         GridBagConstraints g1 = new GridBagConstraints();
         g1.insets = new Insets(10, 10, 10, 10);
@@ -27,41 +32,19 @@ public class MainPage extends JFrame {
         g1.anchor = GridBagConstraints.NORTHWEST;
         relativeNameLabel = new JLabel("Deg: " + relativeName);
         add(relativeNameLabel, g1);
-
-        /*
-        g1.gridy = 1;
-        g1.gridwidth = 2;
-        relativeNameValue = new JLabel(relativeName);
-        add(relativeNameValue, g1);
-
-         */
-
+        relativeNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
         g1.gridy = 1;
         careRecieverNameLabel = new JLabel("Pleietrengende: " + (careRecieverName.isEmpty() ? "Ingen pleietrengende registrert" : careRecieverName));
         add(careRecieverNameLabel, g1);
-
-        /*
-        String careRecieverDisplayName = (careRecieverName == null || careRecieverName.isEmpty())
-                ? "Ingen pleietrengende registrert" : careRecieverName;
-        careRecieverNameValue = new JLabel(careRecieverDisplayName);
-
-
-
-        g1.gridx = 1;
-        g1.gridy = 1;
-        g1.gridwidth = 2;
-        careRecieverNameValue = new JLabel(careRecieverName);
-        add(careRecieverNameValue, g1);
-
-         */
+        careRecieverNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
         JButton leggTilPleietrengendeKnapp = new JButton("Legg til pleietrengende");
         JButton avtalerKnapp = new JButton("Avtaler");
         JButton beskjedKnapp = new JButton("Beskjeder");
         JButton handlelisteKnapp = new JButton("Handleliste");
 
-        Dimension buttonSize = new Dimension(200, 40);
+        Dimension buttonSize = new Dimension(200, 100);
         leggTilPleietrengendeKnapp.setPreferredSize(buttonSize);
         avtalerKnapp.setPreferredSize(buttonSize);
         beskjedKnapp.setPreferredSize(buttonSize);
