@@ -1,4 +1,5 @@
 import org.screen.core.database.Export;
+import org.screen.core.models.Avtale;
 import org.screen.core.models.Beskjed;
 import org.screen.core.models.Weather;
 
@@ -79,18 +80,39 @@ public class Screen {
         centeredPanel.add(weatherPanel);    //sentrerer verticalt
 
         Export exporter = new Export();     //lager en instans av Export klassen
-        int pleietrengende_id = 1;
-        List<Beskjed> beskjederList = exporter.exportBeskjederToday(pleietrengende_id);    //henter beskjeder fra databasen
+        List<Beskjed> beskjederList = exporter.exportBeskjeder(1);    //henter beskjeder fra databasen
 
         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
-            beskjeder.append("Dato: ").append(beskjed.getDescription()).append("<br>");  //legger til beskjed og linjeskift
+            beskjeder.append("").append(beskjed.getDateTime()).append("<br>");  //legger til beskjed og linjeskift
             beskjeder.append("Beskjed: ").append(beskjed.getDescription()).append("<br>");
         }
-        beskjeder.append("<html>");     //avslutter html format
+        beskjeder.append("</html>");     //avslutter html format
 
         JLabel beskjedLabel = new JLabel(beskjeder.toString(), SwingConstants.CENTER);    //lager en label med beskjedene
-        beskjedLabel.setFont(new Font("Beskjeder", Font.BOLD, 20));    //redigerer fonten
+        beskjedLabel.setFont(new Font("Beskjeder", Font.BOLD, 40));    //redigerer fonten
+
+        List<Avtale> avtaleList = exporter.exportAvtalerToday(1);
+        StringBuilder avtaler = new StringBuilder("<html>");
+        for (Avtale avtale : avtaleList) {
+            avtaler.append("").append(avtale.getDateTime()).append("<br>");
+            avtaler.append("Avtale: ").append(avtale.getDescription()).append("<br>");
+        }
+        avtaler.append("</html>");
+
+        JLabel avtaleLabel = new JLabel(avtaler.toString(), SwingConstants.CENTER);
+        avtaleLabel.setFont(new Font("Avtaler", Font.BOLD, 40));
+
+        List<Avtale> avtaleListTmr = exporter.exportAvtalerTomorrow(1);
+        StringBuilder avtalerTmr = new StringBuilder("<html>");
+        for (Avtale avtale : avtaleListTmr) {
+            avtalerTmr.append("").append(avtale.getDateTime()).append("<br>");
+            avtalerTmr.append("Avtale: ").append(avtale.getDescription()).append("<br>");
+        }
+        avtalerTmr.append("</html>");
+
+        JLabel avtaleLabelTmr = new JLabel(avtalerTmr.toString(), SwingConstants.CENTER);
+        avtaleLabelTmr.setFont(new Font("AvtalerTmr", Font.BOLD, 40));
 
 
         gridPanel.remove(0);        //fjerner tallene som visualiserer grid cellene for å unngå overlapping, kan fjernes når koding er ferdig
@@ -103,8 +125,12 @@ public class Screen {
         gridPanel.add(tempLabel, 6);
         gridPanel.remove(8);
         gridPanel.add(centeredPanel, 8);
+        gridPanel.remove(4);
+        gridPanel.add(beskjedLabel, 4);
         gridPanel.remove(3);
-        gridPanel.add(beskjedLabel, 3);
+        gridPanel.add(avtaleLabel, 3);
+        gridPanel.remove(5);
+        gridPanel.add(avtaleLabelTmr, 5);
 
         jframe.add(gridPanel);      //Legger til grid cellene i GUI'en
         jframe.setVisible(true);    //Gjør at selve GUI'en vises på maskinen
