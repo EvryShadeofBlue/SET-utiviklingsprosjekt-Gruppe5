@@ -36,6 +36,13 @@ public class BeskjedOptions extends JFrame {
         add(lagreKnapp);
     }
 
-
+    public void lagreBeskjed() {
+        String beskrivelse = beskrivelseField.getText();
+        int synligTidsenhet = (int) synligTidsenhetDropdown.getSelectedItem();
+        LocalDateTime datoOgTid = LocalDateTime.now();
+        Beskjed nyBeskjed = beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet);
+        JOptionPane.showMessageDialog(this, "Beskjed opprettet: " + nyBeskjed.getBeskrivelse());
+        dispose();
+    }
 
 }
