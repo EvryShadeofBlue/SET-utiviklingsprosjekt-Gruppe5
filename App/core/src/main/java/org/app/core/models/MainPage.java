@@ -40,6 +40,10 @@ public class MainPage extends JFrame {
         careRecieverNameLabel = new JLabel("Pleietrengende: ");
         add(careRecieverNameLabel, g1);
 
+        String careRecieverDisplayName = (careRecieverName == null || careRecieverName.isEmpty())
+                ? "Ingen pleietrengende registrert" : careRecieverName;
+        careRecieverNameValue = new JLabel(careRecieverDisplayName);
+
         g1.gridx = 1;
         g1.gridy = 1;
         g1.gridwidth = 2;
