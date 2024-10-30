@@ -1,6 +1,7 @@
 import org.screen.core.database.Export;
 import org.screen.core.models.Avtale;
 import org.screen.core.models.Beskjed;
+import org.screen.core.models.TimerService;
 import org.screen.core.models.Weather;
 
 import javax.swing.*;
@@ -47,7 +48,7 @@ public class Screen {
         Date tmr = calendar.getTime();
 
         SimpleDateFormat day = new SimpleDateFormat("dd.MM.yyyy");   //format for visning av dato/klokkeslett
-        SimpleDateFormat time = new SimpleDateFormat("HH:mm");      //dd=dag, MM=måned, HH=24timers, mm=minutt
+        SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");      //dd=dag, MM=måned, HH=24timers, mm=minutt, ss=sekund
         SimpleDateFormat tomorrow = new SimpleDateFormat("dd.MM.yyyy");
 
         String currentDay = day.format(date);       //bruker laget format
@@ -137,14 +138,7 @@ public class Screen {
 
         Weather.startWeatherUpdater();
 
-        Timer timer = new Timer(60000, e -> {
-            tempLabel.setText("<html>Temperatur inne: " + "" + "°C" + "<br>Temperatur ute: "
-                    + Weather.getCurrentTemperature() + "<html>");
-            weatherLabel.setText("Været i dag: " + Weather.getCurrentWeatherCondition());
-            weatherIcon.setImage(Weather.getWeatherIcon(Weather.getCurrentWeatherCondition(),
-                    200, 200).getImage());
-            iconLabel.setIcon(weatherIcon);
-        });
-        timer.start();
+        TimerService.startWeatherUpdateTimer(tempLabel, weatherLabel, iconLabel, weatherIcon);
+        TimerService.startClockUpdateTimer(timeLabel, clockLabel, tmrLabel);
     }
 }
