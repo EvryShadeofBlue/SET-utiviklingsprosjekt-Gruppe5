@@ -18,10 +18,16 @@ public class BeskjedOptions extends JFrame {
     private JTextField klokkeslettFelt;
     private JButton lagreKnapp;
     private BeskjedService beskjedService;
+    private Beskjed eksisterendeBeskjed;
 
     public BeskjedOptions(BeskjedService beskjedService) {
+        this(beskjedService, null);
+    }
+
+    public BeskjedOptions(BeskjedService beskjedService, Beskjed beskjed) {
         this.beskjedService = beskjedService;
-        setTitle("Opprett ny beskjed");
+        this.eksisterendeBeskjed = beskjed;
+        setTitle("Beskjeder");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -30,19 +36,32 @@ public class BeskjedOptions extends JFrame {
 
         JLabel beskrivelseLabel = new JLabel("Beskrivelse ");
         beskrivelseFelt = new JTextField();
+        beskrivelseFelt.setText(beskjed != null ? beskjed.getBeskrivelse() : "");
 
         JLabel synligTidsenhetLabel = new JLabel("Synlig i timer: ");
         Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};
         synligTidsenhetFelt = new JComboBox<>(synligTidsenheter);
+        if (beskjed != null) {
+            synligTidsenhetFelt.setSelectedItem(beskjed.getSynligTidsenhet());
+        }
 
         JLabel datoLabel = new JLabel("Dato (YYYY-MM-DD): ");
         datoFelt = new JTextField();
+        datoFelt.setText(beskjed != null ? beskjed.getDatoOgTid().toLocalDate().toString() : "");
 
         JLabel klokkeslettLabel = new JLabel("Klokkelsett (HH:MM): ");
         klokkeslettFelt = new JTextField();
+        klokkeslettFelt.setText(beskjed != null ? beskjed.getDatoOgTid().toLocalTime().toString() : "");
 
-        lagreKnapp = new JButton("Lagre beskjed");
-        lagreKnapp.addActionListener(e -> lagreBeskjed());
+        lagreKnapp = new JButton(beskjed == null ? "Lagre beskjed" : "Oppdater beskjed");
+        lagreKnapp.addActionListener(e -> {
+            if (beskjed == null) {
+                lagreBeskjed();
+            }
+            else {
+                oppdaterBeskjed();
+            }
+        });
 
         add(beskrivelseLabel);
         add(beskrivelseFelt);
@@ -87,6 +106,21 @@ public class BeskjedOptions extends JFrame {
         dispose();
 
          */
+    }
+
+    public void oppdaterBeskjed() {
+        try {
+            eksisterendeBeskjed.setBeskrivelse(beskrivelseFelt.getText());
+            eksisterendeBeskjed.setSynligTidsenhet((int) synligTidsenhetFelt.getSelectedItem());
+            eksisterendeBeskjed.setDatoOgTid(LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM")));
+
+            beskjedService.oppdaterBeskjed(eksisterendeBeskjed);
+            JOptionPane.showMessageDialog(this, "Beskjed oppdatert");
+            dispose();
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            JOptionPane.showMessageDialog(this, "Feil format på dato eller klokkelsett. ");
+        }
     }
 
 }
