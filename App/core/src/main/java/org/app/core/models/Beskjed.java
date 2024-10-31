@@ -7,6 +7,8 @@ public class Beskjed {
     private String beskrivelse;
     private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv
     private LocalDateTime datoOgTid;
+    private int pleietrengendeId;
+    private int parorendeId;
 
 
     // konstruktøren under er til testingen.
@@ -50,5 +52,13 @@ public class Beskjed {
 
     public void setDatoOgTid(LocalDateTime datoOgTid) {
         this.datoOgTid = datoOgTid;
+    }
+
+    public int getPleietrengendeId() {
+        return pleietrengendeId;
+    }
+
+    public int getParorendeId() {
+        return parorendeId;
     }
 }
