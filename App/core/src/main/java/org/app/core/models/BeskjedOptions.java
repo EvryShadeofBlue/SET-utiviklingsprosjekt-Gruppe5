@@ -1,18 +1,13 @@
 package org.app.core.models;
 
-import org.app.core.repository.BeskjedRepository;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class BeskjedOptions extends JFrame {
-    private JTextField beskrivelseFelt;
+    private JTextArea beskrivelseFelt;
     private JComboBox<Integer> synligTidsenhetFelt;
     private JTextField datoFelt;
     private JTextField klokkeslettFelt;
@@ -30,36 +25,54 @@ public class BeskjedOptions extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        setLayout(new GridLayout(5, 2));
 
-        JLabel beskrivelseLabel = new JLabel("Beskrivelse ");
-        beskrivelseFelt = new JTextField();
+        setLayout(new GridLayout(5, 2, 10, 10));
 
-        JLabel synligTidsenhetLabel = new JLabel("Synlig i timer: ");
+        beskrivelseFelt = new JTextArea(2, 20);
+        beskrivelseFelt.setLineWrap(true);
+        beskrivelseFelt.setWrapStyleWord(true);
+        JScrollPane beskrivelsePanel = new JScrollPane(beskrivelseFelt);
+
+
         Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};
         synligTidsenhetFelt = new JComboBox<>(synligTidsenheter);
+        JPanel synligTidsenhetPanel = createInputPanel("Synlig i timer: ", synligTidsenhetFelt);
 
-        JLabel datoLabel = new JLabel("Dato (yyyy-MM-dd): ");
         datoFelt = new JTextField();
+        JPanel datoPanel = createInputPanel("Dato (yyyy-MM-dd): ", datoFelt);
 
-        JLabel klokkeslettLabel = new JLabel("Klokkelsett (HH:mm): ");
         klokkeslettFelt = new JTextField();
+        JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
         lagreKnapp = new JButton("Lagre");
+        lagreKnapp.setPreferredSize(new Dimension(100, 10));
         lagreKnapp.addActionListener(e -> lagreBeskjed());
 
-        add(beskrivelseLabel);
-        add(beskrivelseFelt);
-        add(synligTidsenhetLabel);
-        add(synligTidsenhetFelt);
-        add(datoLabel);
-        add(datoFelt);
-        add(klokkeslettLabel);
-        add(klokkeslettFelt);
+        add(beskrivelsePanel);
+        add(synligTidsenhetPanel);
+        add(datoPanel);
+        add(klokkeslettPanel);
         add(new JLabel());
         add(lagreKnapp);
 
         setVisible(true);
+    }
+
+    private JPanel createInputPanel(String labelText, JComponent inputField) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel label = new JLabel(labelText);
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        inputField.setPreferredSize(new Dimension(300, 30));
+        inputField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        inputField.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        panel.add(label);
+        panel.add(inputField);
+
+        return panel;
     }
 
     public void lagreBeskjed() {
@@ -74,13 +87,10 @@ public class BeskjedOptions extends JFrame {
             LocalDateTime datoOgTid = LocalDateTime.parse(datoStr + " " + klokkeslettStr, formatter);
 
             Beskjed nyBeskjed = beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
-            JOptionPane.showMessageDialog(this, "Beskjed opprettet ");
+            JOptionPane.showMessageDialog(this, "Beskjed opprettet");
             dispose();
-        }
-        catch (DateTimeParseException dateTimeParseException) {
+        } catch (DateTimeParseException dateTimeParseException) {
             JOptionPane.showMessageDialog(this, "Feil format på klokkeslettformat. Vennligst bruk YYYY-MM-DD for dato og HH:MM for klokkeslett");
         }
     }
-
-
 }
