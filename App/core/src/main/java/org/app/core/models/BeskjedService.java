@@ -15,8 +15,8 @@ public class BeskjedService {
     }
 
 
-    public Beskjed opprettBeskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
-        Beskjed beskjed = new Beskjed(datoOgTid, beskrivelse, synligTidsenhet);
+    public Beskjed opprettBeskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Parorende parorende, Pleietrengende pleietrengende) {
+        Beskjed beskjed = new Beskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
         beskjedRepository.oppretteBeskjed(beskjed);
         return beskjed;
     }

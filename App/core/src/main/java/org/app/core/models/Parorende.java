@@ -13,6 +13,19 @@ public class Parorende {
         this.tlf = tlf;
         this.epost = epost;
     }
+    public Parorende(int parorendeId, String fornavn, String etternavn, String tlf, String epost) {
+        this.parorendeId = parorendeId;
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+        this.tlf = tlf;
+        this.epost = epost;
+    }
+
+    public Parorende(int parorendeId, String parorendeFornavn, String parorendeEtternavn) {
+        this.parorendeId = parorendeId;
+        this.fornavn = parorendeFornavn;
+        this.etternavn = parorendeEtternavn;
+    }
 
     public int getParorendeId() {
         return parorendeId;

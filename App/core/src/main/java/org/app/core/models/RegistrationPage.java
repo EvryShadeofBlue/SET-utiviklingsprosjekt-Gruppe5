@@ -22,6 +22,8 @@ public class RegistrationPage extends JFrame{
     private JButton registerButton;
     private JButton backToLoginButton;
 
+    private Parorende parorende;
+
     public RegistrationPage() {
         setTitle("Registration Page");
         setSize(400, 800);
@@ -125,18 +127,20 @@ public class RegistrationPage extends JFrame{
         String insertParorendeQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
-        PreparedStatement parorendeStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {
-            parorendeStatement.setString(1, firstName);
-            parorendeStatement.setString(2, lastName);
-            parorendeStatement.setString(3, mobileNumber);
-            parorendeStatement.setString(4, email);
+        PreparedStatement preparedStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, mobileNumber);
+            preparedStatement.setString(4, email);
 
-            int rowsInserted = parorendeStatement.executeUpdate();
+            int rowsInserted = preparedStatement.executeUpdate();
 
             if (rowsInserted > 0) {
-                try (ResultSet generatedKey = parorendeStatement.getGeneratedKeys()){
+                try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()){
                     if (generatedKey.next()) {
                         int parorendeId = generatedKey.getInt(1);
+
+                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
 
                         String insertInnloggingQuery = "Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)";
                         try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){
@@ -152,7 +156,7 @@ public class RegistrationPage extends JFrame{
                 JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
                 clearFields();
 
-                new MainPage(firstName, "");
+                new MainPage(parorende, null);
                 dispose();
             }
         } catch (SQLException exception) {

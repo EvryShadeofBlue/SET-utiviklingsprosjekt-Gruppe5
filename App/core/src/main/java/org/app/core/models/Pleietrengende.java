@@ -19,6 +19,20 @@ public class Pleietrengende {
         this.etternavn = etternavn;
     }
 
+    public Pleietrengende(int pleietrengendeId, String fornavn, String etternavn) {
+        this.pleietrengendeId = pleietrengendeId;
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+    }
+
+    public int getPleietrengendeId() {
+        return pleietrengendeId;
+    }
+
+    public void setPleietrengendeId(int pleietrengendeId) {
+        this.pleietrengendeId = pleietrengendeId;
+    }
+
     public String getFornavn(){
         return fornavn;
     }

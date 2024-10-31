@@ -20,11 +20,14 @@ public class BeskjedImpl implements BeskjedRepository {
     }
     @Override
     public void oppretteBeskjed(Beskjed beskjed) {
-        String opprettBeskjedQuery = "Insert into Beskjeder (beskrivelse, dato_tid, synlig_tid) Values (?, ?, ?)";
+        String opprettBeskjedQuery = "Insert into Beskjeder (beskrivelse, dato_tid, synlig_tid, parorende_id, pleietrengende_id) Values (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(opprettBeskjedQuery)) {
             preparedStatement.setString(1, beskjed.getBeskrivelse());
             preparedStatement.setObject(2, beskjed.getDatoOgTid());
             preparedStatement.setInt(3, beskjed.getSynligTidsenhet());
+
+            preparedStatement.setInt(4, beskjed.getParorende().getParorendeId());
+            preparedStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
             preparedStatement.executeUpdate();
         }
         catch (SQLException sqlException) {

@@ -17,6 +17,7 @@ public class LoginPage extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
+    private Parorende parorende;
 
     public LoginPage() {
         setTitle("Login Page");
@@ -95,8 +96,8 @@ public class LoginPage extends JFrame {
         String enteredEmail = emailField.getText();
         String enteredPassword = new String(passwordField.getPassword());
 
-        String loginQuery = "select p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, " +
-                "pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn " +
+        String loginQuery = "select i.parorende_id, p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, " +
+                "pl.pleietrengende_id, pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn " +
                 "from Innlogging i " +
                 "join Parorende p on i.parorende_id = p.parorende_id " +
                 "left join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
@@ -110,13 +111,21 @@ public class LoginPage extends JFrame {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+                int parorendeId = resultSet.getInt("parorende_id");
                 String parorendeFornavn = resultSet.getString("parorendeFornavn");
                 String parorendeEtternavn = resultSet.getString("parorendeEtternavn");
-                String pleietrengendeFornavn = resultSet.getString("pleietrengendeFornavn");
-                String pleietrengendeEtternavn = resultSet.getString("pleietrengendeEtternavn");
 
-                new MainPage(parorendeFornavn + " " + parorendeEtternavn,
-                        (pleietrengendeFornavn != null ? pleietrengendeFornavn + " " + pleietrengendeEtternavn: ""));
+                Pleietrengende pleietrengende = null;
+                if (resultSet.getObject("pleietrengende_id") != null) {
+                    int pleietrengendeId = resultSet.getInt("pleietrengende_id");
+                    String pleietrengendeFornavn = resultSet.getString("pleietrengendeFornavn");
+                    String pleietrengendeEtternavn = resultSet.getString("pleietrengendeEtternavn");
+                    pleietrengende = new Pleietrengende(pleietrengendeId, pleietrengendeFornavn, pleietrengendeEtternavn);
+                }
+
+                Parorende parorende = new Parorende(parorendeId, parorendeFornavn, parorendeEtternavn);
+
+                new MainPage(parorende, pleietrengende);
                 dispose();
             }
             else {
