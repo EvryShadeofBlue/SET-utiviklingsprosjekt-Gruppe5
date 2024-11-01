@@ -3,9 +3,9 @@ package org.app.core.database;
 import java.sql.*;
 
 public class Delete {
-    String url = "jdbc:mysql://localhost:3306/project";
-    String user = "root";
-    String password = "12345";
+    String url = Resources.url;
+    String user = Resources.user;
+    String password = Resources.password;
 
     public void deleteParorende(int parorende_id) {
 

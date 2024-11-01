@@ -7,6 +7,8 @@ public class Beskjed {
     private String beskrivelse;
     private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv
     private LocalDateTime datoOgTid;
+    private Parorende parorende; //ekstra felt
+    private Pleietrengende pleietrengende; //ekstra felt
 
 
     // konstruktøren under er til testingen.
@@ -18,10 +20,12 @@ public class Beskjed {
     }
 
     // den faktiske konstryktøren som skal benyttes
-    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
+    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Parorende parorende, Pleietrengende pleietrengende) {
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
         this.synligTidsenhet = synligTidsenhet;
+        this.parorende = parorende; //ekstra
+        this.pleietrengende = pleietrengende; //ekstra
     }
 
     //get og set metoder
@@ -50,5 +54,21 @@ public class Beskjed {
 
     public void setDatoOgTid(LocalDateTime datoOgTid) {
         this.datoOgTid = datoOgTid;
+    }
+
+    public Parorende getParorende() {
+        return parorende;
+    }
+
+    public void setParorende(Parorende parorende) {
+        this.parorende = parorende;
+    }
+
+    public Pleietrengende getPleietrengende() {
+        return pleietrengende;
+    }
+
+    public void setPleietrengende(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
     }
 }

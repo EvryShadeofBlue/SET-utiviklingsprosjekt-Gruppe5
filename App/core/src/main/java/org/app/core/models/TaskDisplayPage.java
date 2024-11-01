@@ -16,4 +16,5 @@ public class TaskDisplayPage extends JFrame {
         add(new JScrollPane(taskList), BorderLayout.CENTER);
         setVisible(true);
     }
+
 }

@@ -3,9 +3,10 @@ package org.app.core.database;
 import java.sql.*;
 
 public class Export {
-    String url = "jdbc:mysql://localhost:3306/project";
-    String user = "root";
-    String password = "12345";
+    public static void main(String[] args) {
+        String url = Resources.url;
+        String user = Resources.user;
+        String password = Resources.password;
 
     public void exportParorende() {
 

@@ -1,0 +1,16 @@
+@startuml
+'autonumber
+
+participant System as system
+database Database as db
+actor Pleietrengende as pleietrengende
+
+system -> db: Henter beskjeder for idag og imorgen
+activate system
+activate db
+db --> system: Returnerer beskjeder
+deactivate db
+system --> pleietrengende: Viser dagens og morgendagens beskjeder
+deactivate system
+
+@enduml

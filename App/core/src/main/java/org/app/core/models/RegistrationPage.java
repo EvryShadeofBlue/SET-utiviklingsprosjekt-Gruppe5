@@ -1,14 +1,14 @@
 package org.app.core.models;
 
+import com.sun.tools.javac.Main;
+
 import org.app.core.database.Import;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class RegistrationPage extends JFrame{
     private JLabel firstNameLabel;
@@ -23,7 +23,8 @@ public class RegistrationPage extends JFrame{
     private JPasswordField passwordField;
     private JButton registerButton;
     private JButton backToLoginButton;
-    Import importer = new Import();
+
+    private Parorende parorende;
 
     public RegistrationPage() {
         setTitle("Registration Page");
@@ -40,7 +41,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 0;
         g1.gridwidth = 1;
-        add(firstNameLabel = new JLabel("First Name"), g1);
+        add(firstNameLabel = new JLabel("Fornavn "), g1);
 
         g1.gridx = 0;
         g1.gridy = 1;
@@ -50,7 +51,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 2;
         g1.gridwidth = 1;
-        add(lastNameLabel = new JLabel("Last Name"), g1);
+        add(lastNameLabel = new JLabel("Etternavn"), g1);
 
         g1.gridx = 0;
         g1.gridy = 3;
@@ -60,7 +61,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 4;
         g1.gridwidth = 1;
-        add(mobileLabel= new JLabel("Mobile Number"), g1);
+        add(mobileLabel= new JLabel("Mobil nummer"), g1);
 
         g1.gridx = 0;
         g1.gridy = 5;
@@ -70,7 +71,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 6;
         g1.gridwidth = 1;
-        add(emailLabel = new JLabel("Email"), g1);
+        add(emailLabel = new JLabel("E-post"), g1);
 
         g1.gridx = 0;
         g1.gridy = 7;
@@ -80,7 +81,7 @@ public class RegistrationPage extends JFrame{
         g1.gridx = 0;
         g1.gridy = 8;
         g1.gridwidth = 1;
-        add(passwordLabel = new JLabel("Password"), g1);
+        add(passwordLabel = new JLabel("Passord"), g1);
 
         g1.gridx = 0;
         g1.gridy = 9;
@@ -91,13 +92,13 @@ public class RegistrationPage extends JFrame{
         g1.gridy = 10;
         g1.gridwidth = 1;
         g1.anchor = GridBagConstraints.EAST;
-        add(registerButton = new JButton("Register"), g1);
+        add(registerButton = new JButton("Registrer"), g1);
 
         g1.gridx = 0;
-        g1.gridy = 11;
+        g1.gridy = 10;
         g1.gridwidth = 1;
         g1.anchor = GridBagConstraints.WEST;
-        add(backToLoginButton = new JButton("Back to login"), g1);
+        add(backToLoginButton = new JButton("Tilbake til innlogging"), g1);
 
         setVisible(true);
 
@@ -124,8 +125,48 @@ public class RegistrationPage extends JFrame{
         String email = emailField.getText();
         String password = new String(passwordField.getPassword());
 
-        importer.importParorende(firstName, lastName, mobileNumber, email);
-        importer.importInnlogging(email, password, 1);
+
+        String insertParorendeQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
+
+        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+        PreparedStatement preparedStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, mobileNumber);
+            preparedStatement.setString(4, email);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()){
+                    if (generatedKey.next()) {
+                        int parorendeId = generatedKey.getInt(1);
+
+                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
+
+                        String insertInnloggingQuery = "Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)";
+                        try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){
+                            innloggingStatement.setString(1, email);
+                            innloggingStatement.setString(2, password);
+                            innloggingStatement.setInt(3, parorendeId);
+
+                            innloggingStatement.executeUpdate();
+                        }
+                    }
+
+                }
+                JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
+                clearFields();
+
+                new MainPage(parorende, null);
+                dispose();
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Registrering feilet. " + exception.getMessage());
+        }
+
+
     }
     private void clearFields() {
         firstNameField.setText("");
