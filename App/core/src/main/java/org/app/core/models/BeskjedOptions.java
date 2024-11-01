@@ -105,11 +105,20 @@ public class BeskjedOptions extends JFrame {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         for (Beskjed beskjed : beskjedListe) {
+            JPanel beskjedPanel = new JPanel();
+            beskjedPanel.setLayout(new BoxLayout(beskjedPanel, BoxLayout.Y_AXIS));
+
             JLabel beskjedLabel = new JLabel(
                     "Dato: " + beskjed.getDatoOgTid().format(dateTimeFormatter) + ". Hendelse: " + beskjed.getBeskrivelse()
             );
             beskjedLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-            beskjedListePanel.add(beskjedLabel);
+            beskjedPanel.add(beskjedLabel);
+
+            JButton slettKnapp = new JButton("Slett");
+            slettKnapp.addActionListener(e -> slettBeskjed(beskjed));
+            beskjedPanel.add(slettKnapp);
+
+            beskjedListePanel.add(beskjedPanel);
         }
         beskjedListePanel.revalidate();
         beskjedListePanel.repaint();
@@ -135,5 +144,22 @@ public class BeskjedOptions extends JFrame {
             JOptionPane.showMessageDialog(this, "Det oppsto en feil: " + e.getMessage());
         }
     }
+    private void slettBeskjed(Beskjed beskjed) {
+        int bekreftelse = JOptionPane.showOptionDialog(this,
+                "Er du sikker på at du vil slette denne beskjeden: " + beskjed.getBeskrivelse() + "?",
+                "Bekreft sletting",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[] {"Ja", "Nei"},
+                "Nei");
+
+        if (bekreftelse == 0) {
+            beskjedService.slettBeskjed(beskjed.getBeskjedId());
+            JOptionPane.showMessageDialog(this, "Beskjed slettet");
+            visBeskjeder();
+        }
+    }
+
 
 }
