@@ -37,29 +37,51 @@ public class BeskjedImpl implements BeskjedRepository {
 
     @Override
     public void oppdaterBeskjed(Beskjed beskjed) {
-        String oppdaterBeskjedQuery = "update Beskjeder set beskrivelse = ?, dato_tid = ?, synlig_tid = ? " +
-                "where beskjed_id = ?";
+        String oppdaterBeskjedQuery = "UPDATE Beskjeder SET beskrivelse = ?, dato_tid = ?, synlig_tid = ?, parorende_id = ?, pleietrengende_id = ? WHERE beskjed_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterBeskjedQuery)) {
             preparedStatement.setString(1, beskjed.getBeskrivelse());
-            preparedStatement.setTimestamp(2, Timestamp.valueOf(beskjed.getDatoOgTid()));
+            preparedStatement.setObject(2, beskjed.getDatoOgTid());
             preparedStatement.setInt(3, beskjed.getSynligTidsenhet());
-            preparedStatement.setInt(4, beskjed.getBeskjedId());
+            preparedStatement.setInt(4, beskjed.getParorende().getParorendeId());
+            preparedStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
+            preparedStatement.setInt(6, beskjed.getBeskjedId());
             preparedStatement.executeUpdate();
-        }
-        catch (SQLException sqlException) {
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
 
+
     @Override
     public void slettBeskjed(int beskjedId) {
-
+        String slettBeskjedQuery = "DELETE FROM Beskjeder WHERE beskjed_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(slettBeskjedQuery)) {
+            preparedStatement.setInt(1, beskjedId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
+
 
     @Override
     public Beskjed hentBeskjed(int beskjedId) {
-        return null;
+        String hentBeskjedQuery = "SELECT * FROM Beskjeder WHERE beskjed_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(hentBeskjedQuery)) {
+            preparedStatement.setInt(1, beskjedId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String beskrivelse = resultSet.getString("beskrivelse");
+                LocalDateTime datoOgTid = resultSet.getTimestamp("dato_tid").toLocalDateTime();
+                int synligTidsenhet = resultSet.getInt("synlig_tid");
+                return new Beskjed(beskjedId, datoOgTid, beskrivelse, synligTidsenhet);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return null; // Returner null hvis ingen beskjed ble funnet
     }
+
 
     @Override
     public List<Beskjed> hentBeskjedForParorende(int parorendeId) {
