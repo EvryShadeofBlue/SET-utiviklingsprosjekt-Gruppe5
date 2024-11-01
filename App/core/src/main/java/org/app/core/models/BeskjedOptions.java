@@ -18,6 +18,7 @@ public class BeskjedOptions extends JFrame {
     private BeskjedService beskjedService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
+    private MainPage mainPage;
 
     public BeskjedOptions(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende) {
         this.beskjedService = beskjedService;
