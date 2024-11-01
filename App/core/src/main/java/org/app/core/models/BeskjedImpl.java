@@ -2,10 +2,10 @@ package org.app.core.models;
 
 import org.app.core.repository.BeskjedRepository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeskjedImpl implements BeskjedRepository {
     private Connection connection;
@@ -48,6 +48,30 @@ public class BeskjedImpl implements BeskjedRepository {
     @Override
     public Beskjed hentBeskjed(int beskjedId) {
         return null;
+    }
+
+    @Override
+    public List<Beskjed> hentBeskjedForParorende(int parorendeId) {
+        List<Beskjed> beskjeder = new ArrayList<>();
+        String beskjedForParorendeQuery = "select * from Beskjeder where parorende_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(beskjedForParorendeQuery)) {
+            preparedStatement.setInt(1, parorendeId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int beskjedId = resultSet.getInt("beskjed_id");
+                String beskrivelse = resultSet.getString("beskrivelse");
+                LocalDateTime datoOgTid = resultSet.getTimestamp("dato_tid").toLocalDateTime();
+                int synligTidsenhet = resultSet.getInt("synlig_tidsenhet");
+
+                Beskjed beskjed = new Beskjed(beskjedId, datoOgTid, beskrivelse, synligTidsenhet);
+                beskjeder.add(beskjed);
+            }
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return beskjeder;
     }
 
     public void close() {
