@@ -1,10 +1,12 @@
 package org.app.core.models;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class BeskjedOptions extends JFrame {
     private JTextArea beskrivelseFelt;
@@ -12,6 +14,7 @@ public class BeskjedOptions extends JFrame {
     private JTextField datoFelt;
     private JTextField klokkeslettFelt;
     private JButton lagreKnapp;
+    private JPanel beskjedListePanel;
     private BeskjedService beskjedService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
@@ -20,18 +23,23 @@ public class BeskjedOptions extends JFrame {
         this.beskjedService = beskjedService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
+
         setTitle("Beskjeder");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
 
-        setLayout(new GridLayout(5, 2, 10, 10));
+        setLayout(new BorderLayout());
 
-        beskrivelseFelt = new JTextArea(2, 20);
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(5, 1, 10, 10));
+
+        beskrivelseFelt = new JTextArea(2, 10);
         beskrivelseFelt.setLineWrap(true);
         beskrivelseFelt.setWrapStyleWord(true);
         JScrollPane beskrivelsePanel = new JScrollPane(beskrivelseFelt);
+        beskrivelsePanel.setBorder(BorderFactory.createTitledBorder("Beskrivelse"));
 
 
         Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};
@@ -45,15 +53,35 @@ public class BeskjedOptions extends JFrame {
         JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
         lagreKnapp = new JButton("Lagre");
-        lagreKnapp.setPreferredSize(new Dimension(100, 10));
+        /*
+        lagreKnapp.setPreferredSize(new Dimension(80, 30));
+        lagreKnapp.setAlignmentX(Component.CENTER_ALIGNMENT);
+         */
         lagreKnapp.addActionListener(e -> lagreBeskjed());
 
+        /*
         add(beskrivelsePanel);
         add(synligTidsenhetPanel);
         add(datoPanel);
         add(klokkeslettPanel);
-        add(new JLabel());
+        //add(new JLabel());
         add(lagreKnapp);
+         */
+        inputPanel.add(beskrivelsePanel);
+        inputPanel.add(synligTidsenhetPanel);
+        inputPanel.add(datoPanel);
+        inputPanel.add(klokkeslettPanel);
+        inputPanel.add(lagreKnapp);
+        add(inputPanel, BorderLayout.NORTH);
+
+        beskjedListePanel = new JPanel();
+        beskjedListePanel.setLayout(new BoxLayout(beskjedListePanel, BoxLayout.Y_AXIS));
+
+        JScrollPane beskjedScrollPane = new JScrollPane(beskjedListePanel);
+        beskjedScrollPane.setBorder(BorderFactory.createTitledBorder("Opprettede beskjeder"));
+        add(beskjedScrollPane, BorderLayout.CENTER);
+
+        visBeskjeder();
 
         setVisible(true);
     }
@@ -75,6 +103,22 @@ public class BeskjedOptions extends JFrame {
         return panel;
     }
 
+    private void visBeskjeder() {
+        beskjedListePanel.removeAll();
+        List<Beskjed> beskjedListe = beskjedService.hentBeskjedForParorende(parorende);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        for (Beskjed beskjed : beskjedListe) {
+            JLabel beskjedLabel = new JLabel(
+                    "Dato: " + beskjed.getDatoOgTid().format(dateTimeFormatter) + ". Hendelse: " + beskjed.getBeskrivelse()
+            );
+            beskjedLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            beskjedListePanel.add(beskjedLabel);
+        }
+        beskjedListePanel.revalidate();
+        beskjedListePanel.repaint();
+    }
+
     public void lagreBeskjed() {
         try {
             String beskrivelse = beskrivelseFelt.getText();
@@ -88,7 +132,8 @@ public class BeskjedOptions extends JFrame {
 
             Beskjed nyBeskjed = beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
             JOptionPane.showMessageDialog(this, "Beskjed opprettet");
-            dispose();
+
+            visBeskjeder();
         } catch (DateTimeParseException dateTimeParseException) {
             JOptionPane.showMessageDialog(this, "Feil format på klokkeslettformat. Vennligst bruk YYYY-MM-DD for dato og HH:MM for klokkeslett");
         }
