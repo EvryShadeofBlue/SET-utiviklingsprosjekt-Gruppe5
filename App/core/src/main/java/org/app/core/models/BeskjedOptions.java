@@ -20,10 +20,11 @@ public class BeskjedOptions extends JFrame {
     private Pleietrengende pleietrengende;
     private MainPage mainPage;
 
-    public BeskjedOptions(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende) {
+    public BeskjedOptions(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
         this.beskjedService = beskjedService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
+        this.mainPage = mainPage;
 
         setTitle("Beskjeder");
         setSize(400, 800);
@@ -32,6 +33,16 @@ public class BeskjedOptions extends JFrame {
 
 
         setLayout(new BorderLayout());
+
+        JButton tilbakeKnapp = new JButton("Tilbake");
+        tilbakeKnapp.addActionListener(e -> {
+            mainPage.setVisible(true);
+            dispose();
+        });
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(tilbakeKnapp, BorderLayout.WEST);
+        add(topPanel, BorderLayout.NORTH);
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(5, 1, 10, 10));
@@ -54,20 +65,8 @@ public class BeskjedOptions extends JFrame {
         JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
         lagreKnapp = new JButton("Lagre");
-        /*
-        lagreKnapp.setPreferredSize(new Dimension(80, 30));
-        lagreKnapp.setAlignmentX(Component.CENTER_ALIGNMENT);
-         */
         lagreKnapp.addActionListener(e -> lagreBeskjed());
 
-        /*
-        add(beskrivelsePanel);
-        add(synligTidsenhetPanel);
-        add(datoPanel);
-        add(klokkeslettPanel);
-        //add(new JLabel());
-        add(lagreKnapp);
-         */
         inputPanel.add(beskrivelsePanel);
         inputPanel.add(synligTidsenhetPanel);
         inputPanel.add(datoPanel);
