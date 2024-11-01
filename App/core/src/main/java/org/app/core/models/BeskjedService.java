@@ -22,8 +22,8 @@ public class BeskjedService {
         return beskjed;
     }
 
-    public Beskjed oppdaterBeskjed(int beskjedId, Beskjed nyBeskjed) {
-        Beskjed eksisterendeBeskjed = beskjedRepository.hentBeskjed(beskjedId);
+    public Beskjed oppdaterBeskjed(Beskjed nyBeskjed) {
+        Beskjed eksisterendeBeskjed = beskjedRepository.hentBeskjed(nyBeskjed.getBeskjedId());
 
         if (eksisterendeBeskjed != null) {
             if (nyBeskjed.getDatoOgTid() != null) {

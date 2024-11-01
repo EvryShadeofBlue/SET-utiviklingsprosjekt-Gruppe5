@@ -37,7 +37,18 @@ public class BeskjedImpl implements BeskjedRepository {
 
     @Override
     public void oppdaterBeskjed(Beskjed beskjed) {
-
+        String oppdaterBeskjedQuery = "update Beskjeder set beskrivelse = ?, dato_tid = ?, synlig_tid = ? " +
+                "where beskjed_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterBeskjedQuery)) {
+            preparedStatement.setString(1, beskjed.getBeskrivelse());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(beskjed.getDatoOgTid()));
+            preparedStatement.setInt(3, beskjed.getSynligTidsenhet());
+            preparedStatement.setInt(4, beskjed.getBeskjedId());
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     @Override
@@ -62,7 +73,7 @@ public class BeskjedImpl implements BeskjedRepository {
                 int beskjedId = resultSet.getInt("beskjed_id");
                 String beskrivelse = resultSet.getString("beskrivelse");
                 LocalDateTime datoOgTid = resultSet.getTimestamp("dato_tid").toLocalDateTime();
-                int synligTidsenhet = resultSet.getInt("synlig_tidsenhet");
+                int synligTidsenhet = resultSet.getInt("synlig_tid");
 
                 Beskjed beskjed = new Beskjed(beskjedId, datoOgTid, beskrivelse, synligTidsenhet);
                 beskjeder.add(beskjed);
