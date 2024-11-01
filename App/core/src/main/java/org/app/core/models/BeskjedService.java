@@ -4,6 +4,7 @@ import org.app.core.models.Beskjed;
 import org.app.core.repository.BeskjedRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class BeskjedService {
@@ -47,6 +48,9 @@ public class BeskjedService {
             return true;
         }
         return false;
+    }
+    public List<Beskjed> hentBeskjedForParorende(Parorende parorende) {
+        return beskjedRepository.hentBeskjedForParorende(parorende.getParorendeId());
     }
 
 }
