@@ -35,19 +35,30 @@ public class BeskjedService {
             if (nyBeskjed.getSynligTidsenhet() > 0) {
                 eksisterendeBeskjed.setSynligTidsenhet(nyBeskjed.getSynligTidsenhet());
             }
+            if (nyBeskjed.getParorende() != null) {
+                eksisterendeBeskjed.setParorende(nyBeskjed.getParorende());
+            }
+            if (nyBeskjed.getPleietrengende() != null) {
+                eksisterendeBeskjed.setPleietrengende(nyBeskjed.getPleietrengende());
+            }
+
             beskjedRepository.oppdaterBeskjed(eksisterendeBeskjed);
             return eksisterendeBeskjed;
         }
         return null;
     }
 
+
+
     public boolean slettBeskjed(int beskjedId) {
-        Beskjed beskjed = beskjedRepository.hentBeskjed(beskjedId);
-        if (beskjed != null) {
+        try {
             beskjedRepository.slettBeskjed(beskjedId);
             return true;
         }
-        return false;
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     public List<Beskjed> hentBeskjedForParorende(Parorende parorende) {
         return beskjedRepository.hentBeskjedForParorende(parorende.getParorendeId());

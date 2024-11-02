@@ -28,10 +28,26 @@ public class Beskjed {
         this.pleietrengende = pleietrengende; //ekstra
     }
 
+    public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Pleietrengende pleietrengende, Parorende parorende) {
+        this.beskjedId = beskjedId;
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.synligTidsenhet = synligTidsenhet;
+        this.pleietrengende = pleietrengende;
+        this.parorende = parorende;
+    }
+
+    public Beskjed() {
+
+    }
+
     //get og set metoder
 
     public int getBeskjedId() {
         return beskjedId;
+    }
+    public void setBeskjedId (int beskjedId) {
+        this.beskjedId = beskjedId;
     }
 
     public String getBeskrivelse() {

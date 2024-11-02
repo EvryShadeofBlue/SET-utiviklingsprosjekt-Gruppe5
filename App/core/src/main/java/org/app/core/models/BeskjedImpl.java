@@ -66,21 +66,37 @@ public class BeskjedImpl implements BeskjedRepository {
 
     @Override
     public Beskjed hentBeskjed(int beskjedId) {
-        String hentBeskjedQuery = "SELECT * FROM Beskjeder WHERE beskjed_id = ?";
+        String hentBeskjedQuery = "SELECT beskjed_id, beskrivelse, dato_tid, synlig_tid, parorende_id, pleietrengende_id FROM Beskjeder WHERE beskjed_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentBeskjedQuery)) {
             preparedStatement.setInt(1, beskjedId);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             if (resultSet.next()) {
+                int id = resultSet.getInt("beskjed_id");
                 String beskrivelse = resultSet.getString("beskrivelse");
-                LocalDateTime datoOgTid = resultSet.getTimestamp("dato_tid").toLocalDateTime();
-                int synligTidsenhet = resultSet.getInt("synlig_tid");
-                return new Beskjed(beskjedId, datoOgTid, beskrivelse, synligTidsenhet);
+                LocalDateTime datoOgTid = resultSet.getObject("dato_tid", LocalDateTime.class);
+                int synligTid = resultSet.getInt("synlig_tid");
+                int parorendeId = resultSet.getInt("parorende_id");
+                int pleietrengendeId = resultSet.getInt("pleietrengende_id");
+
+                // Opprett Parorende- og Pleietrengende-objekter med kun ID-er
+                Parorende parorende = new Parorende();
+                parorende.setParorendeId(parorendeId);
+
+                Pleietrengende pleietrengende = new Pleietrengende();
+                pleietrengende.setPleietrengendeId(pleietrengendeId);
+
+                // Opprett og returner Beskjed-objektet
+                Beskjed beskjed = new Beskjed(id, datoOgTid, beskrivelse, synligTid, pleietrengende, parorende);
+                return beskjed;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        return null; // Returner null hvis ingen beskjed ble funnet
+        return null;
     }
+
+
 
 
     @Override

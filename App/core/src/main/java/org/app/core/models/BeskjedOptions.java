@@ -1,7 +1,6 @@
 package org.app.core.models;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +18,7 @@ public class BeskjedOptions extends JFrame {
     private Parorende parorende;
     private Pleietrengende pleietrengende;
     private MainPage mainPage;
+    private JButton tilbakeKnapp;
 
     public BeskjedOptions(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
         this.beskjedService = beskjedService;
@@ -38,14 +38,13 @@ public class BeskjedOptions extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(5, 1, 10, 10));
+        inputPanel.setLayout(new GridLayout(6, 1, 10, 10));
 
         beskrivelseFelt = new JTextArea(2, 10);
         beskrivelseFelt.setLineWrap(true);
         beskrivelseFelt.setWrapStyleWord(true);
         JScrollPane beskrivelsePanel = new JScrollPane(beskrivelseFelt);
         beskrivelsePanel.setBorder(BorderFactory.createTitledBorder("Beskrivelse"));
-
 
         Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};
         synligTidsenhetFelt = new JComboBox<>(synligTidsenheter);
@@ -58,22 +57,35 @@ public class BeskjedOptions extends JFrame {
         JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
         lagreKnapp = new JButton("Lagre");
+        lagreKnapp.setPreferredSize(new Dimension(100, 30));
         lagreKnapp.addActionListener(e -> lagreBeskjed());
 
+        JButton tilbakeKnapp = new JButton("Tilbake");
+        tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
+        tilbakeKnapp.addActionListener(e -> {
+            this.dispose();
+            mainPage.setVisible(true);
+        });
+
+        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        tilbakePanel.add(tilbakeKnapp);
+
         setLayout(new BorderLayout());
-        //add(topPanel, BorderLayout.NORTH);
+        add(tilbakePanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         inputPanel.add(beskrivelsePanel);
         inputPanel.add(synligTidsenhetPanel);
         inputPanel.add(datoPanel);
         inputPanel.add(klokkeslettPanel);
         inputPanel.add(lagreKnapp);
+        inputPanel.add(tilbakeKnapp);
         add(inputPanel, BorderLayout.NORTH);
 
         beskjedListePanel = new JPanel();
         beskjedListePanel.setLayout(new BoxLayout(beskjedListePanel, BoxLayout.Y_AXIS));
 
         JScrollPane beskjedScrollPane = new JScrollPane(beskjedListePanel);
+        beskjedScrollPane.setPreferredSize(new Dimension(400, 300));
         beskjedScrollPane.setBorder(BorderFactory.createTitledBorder("Opprettede beskjeder"));
         add(beskjedScrollPane, BorderLayout.CENTER);
 
@@ -107,17 +119,27 @@ public class BeskjedOptions extends JFrame {
         for (Beskjed beskjed : beskjedListe) {
             JPanel beskjedPanel = new JPanel();
             beskjedPanel.setLayout(new BoxLayout(beskjedPanel, BoxLayout.Y_AXIS));
+            beskjedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             JLabel beskjedLabel = new JLabel(
                     "Dato: " + beskjed.getDatoOgTid().format(dateTimeFormatter) + ". Hendelse: " + beskjed.getBeskrivelse()
             );
             beskjedLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            beskjedLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
             beskjedPanel.add(beskjedLabel);
+
+            JPanel knapperPanel = new JPanel();
+            knapperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
             JButton slettKnapp = new JButton("Slett");
             slettKnapp.addActionListener(e -> slettBeskjed(beskjed));
-            beskjedPanel.add(slettKnapp);
+            knapperPanel.add(slettKnapp);
 
+            JButton redigerKnapp = new JButton("Rediger");
+            redigerKnapp.addActionListener(e -> redigerBeskjed(beskjed));
+            knapperPanel.add(redigerKnapp);
+
+            beskjedPanel.add(knapperPanel);
             beskjedListePanel.add(beskjedPanel);
         }
         beskjedListePanel.revalidate();
@@ -144,22 +166,62 @@ public class BeskjedOptions extends JFrame {
             JOptionPane.showMessageDialog(this, "Det oppsto en feil: " + e.getMessage());
         }
     }
-    private void slettBeskjed(Beskjed beskjed) {
-        int bekreftelse = JOptionPane.showOptionDialog(this,
-                "Er du sikker på at du vil slette denne beskjeden: " + beskjed.getBeskrivelse() + "?",
-                "Bekreft sletting",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                new Object[] {"Ja", "Nei"},
-                "Nei");
 
-        if (bekreftelse == 0) {
+    private void redigerBeskjed(Beskjed beskjed) {
+        JFrame redigeringsVindu = new JFrame("Rediger Beskjed");
+        redigeringsVindu.setSize(400, 300);
+        redigeringsVindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        redigeringsVindu.setLocationRelativeTo(this);
+
+        JTextArea beskrivelseFelt = new JTextArea(beskjed.getBeskrivelse(), 2, 10);
+        beskrivelseFelt.setLineWrap(true);
+        beskrivelseFelt.setWrapStyleWord(true);
+
+        JComboBox<Integer> synligTidsenhetFelt = new JComboBox<>(new Integer[]{12, 24, 36, 48, 60, 72});
+        synligTidsenhetFelt.setSelectedItem(beskjed.getSynligTidsenhet());
+
+        JTextField datoFelt = new JTextField(beskjed.getDatoOgTid().toLocalDate().toString());
+        JTextField klokkeslettFelt = new JTextField(beskjed.getDatoOgTid().toLocalTime().toString());
+
+        JButton lagreKnapp = new JButton("Lagre");
+        lagreKnapp.addActionListener(e -> {
+            try {
+                String beskrivelse = beskrivelseFelt.getText();
+                int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
+                LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getPleietrengende(), beskjed.getParorende());
+
+                Beskjed oppdatertBeskjed = beskjedService.oppdaterBeskjed(nyBeskjed);
+                if (oppdatertBeskjed != null) {
+                    JOptionPane.showMessageDialog(redigeringsVindu, "Beskjed oppdatert");
+                    visBeskjeder();
+                    redigeringsVindu.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdatere beskjed. Vennligst prøv på nytt.");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(redigeringsVindu, "Det oppsto en feil: " + ex.getMessage());
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(5, 1));
+        panel.add(new JScrollPane(beskrivelseFelt));
+        panel.add(createInputPanel("Synlig i timer: ", synligTidsenhetFelt));
+        panel.add(createInputPanel("Dato (yyyy-MM-dd): ", datoFelt));
+        panel.add(createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt));
+        panel.add(lagreKnapp);
+
+        redigeringsVindu.add(panel);
+        redigeringsVindu.setVisible(true);
+    }
+
+    private void slettBeskjed(Beskjed beskjed) {
+        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne beskjeden?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
+        if (svar == JOptionPane.YES_OPTION) {
             beskjedService.slettBeskjed(beskjed.getBeskjedId());
             JOptionPane.showMessageDialog(this, "Beskjed slettet");
             visBeskjeder();
         }
     }
-
-
 }
