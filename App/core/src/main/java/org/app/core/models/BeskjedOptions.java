@@ -114,19 +114,32 @@ public class BeskjedOptions extends JFrame {
     private void visBeskjeder() {
         beskjedListePanel.removeAll();
         List<Beskjed> beskjedListe = beskjedService.hentBeskjedForParorende(parorende);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter datoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         for (Beskjed beskjed : beskjedListe) {
             JPanel beskjedPanel = new JPanel();
             beskjedPanel.setLayout(new BoxLayout(beskjedPanel, BoxLayout.Y_AXIS));
             beskjedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            beskjedPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-            JLabel beskjedLabel = new JLabel(
-                    "Dato: " + beskjed.getDatoOgTid().format(dateTimeFormatter) + ". Hendelse: " + beskjed.getBeskrivelse()
-            );
-            beskjedLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-            beskjedLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-            beskjedPanel.add(beskjedLabel);
+            String dato = beskjed.getDatoOgTid().format(datoFormatter);
+            String tid = beskjed.getDatoOgTid().format(tidFormatter);
+
+            JLabel datoLabel = new JLabel("Dato: " + dato);
+            datoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5,5,5 ));
+            datoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel tidLabel = new JLabel("Klokkeslett: " + tid);
+            tidLabel.setBorder(BorderFactory.createEmptyBorder(5, 5,5 ,5));
+            tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + beskjed.getBeskrivelse());
+            beskrivelsesLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5,5 ));
+            beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            beskjedPanel.add(datoLabel);
+            beskjedPanel.add(tidLabel);
+            beskjedPanel.add(beskrivelsesLabel);
 
             JPanel knapperPanel = new JPanel();
             knapperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));

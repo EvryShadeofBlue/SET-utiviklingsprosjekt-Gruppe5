@@ -60,7 +60,9 @@ public class BeskjedService {
         }
     }
     public List<Beskjed> hentBeskjedForParorende(Parorende parorende) {
-        return beskjedRepository.hentBeskjedForParorende(parorende.getParorendeId());
+        List<Beskjed> beskjeder = beskjedRepository.hentBeskjedForParorende(parorende.getParorendeId());
+        beskjeder.sort((b1, b2) -> b2.getDatoOgTid().compareTo(b1.getDatoOgTid()));
+        return beskjeder;
 
     }
 
