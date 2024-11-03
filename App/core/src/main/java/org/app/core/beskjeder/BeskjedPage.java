@@ -1,13 +1,16 @@
-package org.app.core.models;
+package org.app.core.beskjeder;
+
+import org.app.core.models.MainPage;
+import org.app.core.models.Parorende;
+import org.app.core.models.Pleietrengende;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
-public class BeskjedOptions extends JFrame {
+public class BeskjedPage extends JFrame {
     private JTextArea beskrivelseFelt;
     private JComboBox<Integer> synligTidsenhetFelt;
     private JTextField datoFelt;
@@ -20,7 +23,7 @@ public class BeskjedOptions extends JFrame {
     private MainPage mainPage;
     private JButton tilbakeKnapp;
 
-    public BeskjedOptions(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
+    public BeskjedPage(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
         this.beskjedService = beskjedService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
@@ -127,14 +130,12 @@ public class BeskjedOptions extends JFrame {
             String tid = beskjed.getDatoOgTid().format(tidFormatter);
 
             JLabel datoLabel = new JLabel("Dato: " + dato);
-            datoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5,5,5 ));
             datoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             JLabel tidLabel = new JLabel("Klokkeslett: " + tid);
-            tidLabel.setBorder(BorderFactory.createEmptyBorder(5, 5,5 ,5));
             tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
             JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + beskjed.getBeskrivelse());
-            beskrivelsesLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5,5 ));
             beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             beskjedPanel.add(datoLabel);

@@ -1,4 +1,7 @@
-package org.app.core.models;
+package org.app.core.beskjeder;
+
+import org.app.core.models.Parorende;
+import org.app.core.models.Pleietrengende;
 
 import java.time.LocalDateTime;
 

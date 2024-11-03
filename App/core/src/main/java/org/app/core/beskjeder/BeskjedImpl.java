@@ -1,5 +1,9 @@
-package org.app.core.models;
+package org.app.core.beskjeder;
 
+import org.app.core.beskjeder.Beskjed;
+import org.app.core.models.Parorende;
+import org.app.core.models.Pleietrengende;
+import org.app.core.models.Resources;
 import org.app.core.repository.BeskjedRepository;
 
 import java.sql.*;
