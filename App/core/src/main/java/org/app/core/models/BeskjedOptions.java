@@ -159,11 +159,15 @@ public class BeskjedOptions extends JFrame {
             beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
             JOptionPane.showMessageDialog(this, "Beskjed opprettet");
 
+            beskrivelseFelt.setText("");
+            datoFelt.setText("");
+            klokkeslettFelt.setText("");
+
             visBeskjeder();
-        } catch (DateTimeParseException dateTimeParseException) {
-            JOptionPane.showMessageDialog(this, "Kunne ikke opprette beskjed. Vennligst prøv på nytt.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Det oppsto en feil: " + e.getMessage());
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Det oppsto en feil under opprettelsen av beskjedet." +
+            "Vennligst prøv på nytt. ");
         }
     }
 

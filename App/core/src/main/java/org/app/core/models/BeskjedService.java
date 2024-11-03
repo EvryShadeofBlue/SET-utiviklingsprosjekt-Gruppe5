@@ -56,12 +56,12 @@ public class BeskjedService {
             return true;
         }
         catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
     public List<Beskjed> hentBeskjedForParorende(Parorende parorende) {
         return beskjedRepository.hentBeskjedForParorende(parorende.getParorendeId());
+
     }
 
 }
