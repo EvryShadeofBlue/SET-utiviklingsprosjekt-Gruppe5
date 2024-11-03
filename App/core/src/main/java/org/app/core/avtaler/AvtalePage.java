@@ -7,11 +7,16 @@ import org.app.core.models.Pleietrengende;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class AvtalePage extends JFrame{
     private JTextArea beskrivelsesFelt;
     private JTextField datoFelt;
     private JTextField klokkeslettFelt;
+    private JTextField sluttDatoFelt;
+    private JComboBox<String> gjentakelseFelt;
     private JButton lagreKnapp;
     private JPanel avtaleListePanel;
     private AvtaleService avtaleService;
@@ -39,11 +44,12 @@ public class AvtalePage extends JFrame{
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(6, 1, 10, 10));
+        inputPanel.setLayout(new GridLayout(7, 1, 10, 10));
 
         beskrivelsesFelt = new JTextArea(2, 10);
         beskrivelsesFelt.setLineWrap(true);
         beskrivelsesFelt.setWrapStyleWord(true);
+
         JScrollPane beskrivelsesPanel = new JScrollPane(beskrivelsesFelt);
         beskrivelsesPanel.setBorder(BorderFactory.createTitledBorder("Beskrivelse"));
 
@@ -53,14 +59,25 @@ public class AvtalePage extends JFrame{
         klokkeslettFelt = new JTextField();
         JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
+        String[] gjentakelseAlternativer = {"Ingen", "Daglig", "Ukentlig", "Månedlig"};
+        gjentakelseFelt = new JComboBox<>(gjentakelseAlternativer);
+        JPanel gjentakelsesPanel = createInputPanel("Gjentakelse: ", gjentakelseFelt);
+
+        sluttDatoFelt = new JTextField();
+        JPanel sluttDatoPanel = createInputPanel("Slutt dato (yyy-MM-dd)", sluttDatoFelt);
+
         lagreKnapp = new JButton("Lagre");
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
-        lagreKnapp.addActionListener(e -> {
+        lagreKnapp.addActionListener(e -> opprettAvtale());
+
+        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton tilbakeKnapp = new JButton("Tilbake");
+        tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
+        tilbakeKnapp.addActionListener(e -> {
             this.dispose();
             mainPage.setVisible(true);
         });
 
-        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         tilbakePanel.add(tilbakeKnapp);
 
         setLayout(new BorderLayout());
@@ -69,6 +86,8 @@ public class AvtalePage extends JFrame{
         inputPanel.add(beskrivelsesPanel);
         inputPanel.add(datoPanel);
         inputPanel.add(klokkeslettPanel);
+        inputPanel.add(gjentakelsesPanel);
+        inputPanel.add(sluttDatoPanel);
         inputPanel.add(lagreKnapp);
         inputPanel.add(tilbakeKnapp);
         add(inputPanel, BorderLayout.NORTH);
@@ -100,6 +119,34 @@ public class AvtalePage extends JFrame{
         panel.add(inputField);
 
         return panel;
+    }
+
+    public void opprettAvtale() {
+        try {
+            String beskrivelse = beskrivelsesFelt.getText();
+            String datoTekst = datoFelt.getText();
+            String klokkeslettTekst = klokkeslettFelt.getText();
+            LocalDateTime sluttDato = null;
+
+            LocalDate dato = LocalDate.parse(datoTekst);
+            LocalTime klokkeslett = LocalTime.parse(klokkeslettTekst);
+            LocalDateTime datoOgTid = LocalDateTime.of(dato, klokkeslett);
+
+            String gjentakelse = (String) gjentakelseFelt.getSelectedItem();
+
+            String sluttDatoTekst = sluttDatoFelt.getText();
+            if (!sluttDatoTekst.isEmpty()) {
+                LocalDate sluttDatoLocal = LocalDate.parse(sluttDatoTekst);
+                sluttDato = sluttDatoLocal.atStartOfDay();
+            }
+
+            avtaleService.oppretteAvtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
+            JOptionPane.showMessageDialog(this, "Avtale opprettet. ");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Kunne ikke opprette avtale. Vennligst prøv på nytt. ");
+            e.printStackTrace();
+        }
     }
 
 
