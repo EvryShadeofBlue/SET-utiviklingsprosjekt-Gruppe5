@@ -2,6 +2,8 @@ package org.app.core.repository;
 
 import org.app.core.models.Avtale;
 
+import java.util.List;
+
 
 public interface AvtaleRepository {
     void lagreAvtale(Avtale avtale);
@@ -9,5 +11,6 @@ public interface AvtaleRepository {
     Avtale hentAvtale(int avtaleId);
 
     void slettAvtale(int avtaleId);
+    List<Avtale> hentAvtaleForParorende(int parorendeId);
 
 }

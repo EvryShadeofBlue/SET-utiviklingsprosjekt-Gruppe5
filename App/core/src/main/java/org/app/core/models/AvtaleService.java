@@ -3,6 +3,7 @@ package org.app.core.models;
 import org.app.core.repository.AvtaleRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AvtaleService {
     private AvtaleRepository avtaleRepository;
@@ -12,18 +13,10 @@ public class AvtaleService {
     }
 
 
-    // Metode for å opprette avtale
-
-    /* Ved bruk av dette og implementering, fjern avtale id
-    ettersom den kun er brukt for testing
-     */
-    public void opprettAvtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato) {
+    public Avtale opprettAvtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato) {
         Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse);
         avtaleRepository.lagreAvtale(avtale);
 
-        //Ny funksjonalitet
-        // Man kan sette en avtale til å gjenta seg etter behov dersom det er ønskelig
-        // Ikke nødvendig hvis man ikke ønsker å ha det med
         if (gjentakelse != null && !gjentakelse.isEmpty() && sluttDato != null) {
             LocalDateTime nesteDato = datoOgTid;
 
@@ -45,14 +38,12 @@ public class AvtaleService {
                 avtaleRepository.lagreAvtale(nyAvtale);
             }
         }
+        return avtale;
     }
 
-    // Metode for å oppdater avtale
     public Avtale oppdaterAvtale(int avtaleId, Avtale nyAvtale) {
-        // Henter beskjed
         Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(avtaleId);
 
-        // sjekker om beskjeden eksisterer
         if (eksisterendeAvtale != null) {
             if (nyAvtale.getDatoOgTid() != null) {
                 eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
@@ -68,14 +59,18 @@ public class AvtaleService {
         return null;
     }
 
-    // Metode for å slette avtale
     public boolean slettAvtale(int avtaleId) {
-        Avtale avtale = avtaleRepository.hentAvtale(avtaleId);
-        if (avtale != null) {
-            avtaleRepository.slettAvtale(avtaleId);
+        try {
+            avtaleRepository.hentAvtale(avtaleId);
             return true;
         }
-        return false;
+        catch (Exception e) {
+            return false;
+        }
+    }
+
+    public List<Avtale> hentAvtaleForParorened(Parorende parorende) {
+        return avtaleRepository.hentAvtaleForParorende(parorende.getParorendeId());
     }
 
 

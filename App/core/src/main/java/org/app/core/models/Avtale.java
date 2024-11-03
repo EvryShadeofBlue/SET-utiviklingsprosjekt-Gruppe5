@@ -3,13 +3,11 @@ package org.app.core.models;
 import java.time.LocalDateTime;
 
 public class Avtale {
-    //private int avtaleId;
+    private int avtaleId;
     private LocalDateTime datoOgTid;
     private String beskrivelse;
-    private int pleietrengendeId; //usikker på om dette er nødvendig
-    private int paarerendeId; //usikker på om dette er nødvendig
-
-    //Nye instansvariabler
+    private Parorende parorende;
+    private Pleietrengende pleietrengende;
     private String gjentakelse;
     private LocalDateTime sluttDato;
 
@@ -34,12 +32,13 @@ public class Avtale {
         this.sluttDato = sluttDato;
     }
 
-    /*
-    public int getAvtaleId(){
+    public int getAvtaleId() {
         return avtaleId;
     }
 
-     */
+    public void setAvtaleId(int avtaleId) {
+        this.avtaleId = avtaleId;
+    }
 
     public LocalDateTime getDatoOgTid() {
         return datoOgTid;
@@ -55,20 +54,20 @@ public class Avtale {
         this.beskrivelse = beskrivelse;
     }
 
-    public int getPleietrengendeId() {
-        return pleietrengendeId;
+    public Parorende getParorende() {
+        return parorende;
     }
 
-    public int getPaarerendeId() {
-        return paarerendeId;
+    public void setParorende(Parorende parorende) {
+        this.parorende = parorende;
     }
 
-    public void setPleietrengendeId(int pleietrengendeId) {
-        this.pleietrengendeId = pleietrengendeId;
+    public Pleietrengende getPleietrengende() {
+        return pleietrengende;
     }
 
-    public void SetPaarerendeId(int paarerendeId) {
-        this.paarerendeId = paarerendeId;
+    public void setPleietrengende(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
     }
 
     public String getGjentakelse() {
