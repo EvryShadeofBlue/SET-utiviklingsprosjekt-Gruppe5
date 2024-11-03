@@ -1,5 +1,7 @@
-package org.app.core.models;
+package org.app.core.avtaler;
 
+import org.app.core.models.Parorende;
+import org.app.core.models.Pleietrengende;
 import org.app.core.repository.AvtaleRepository;
 
 import java.time.LocalDateTime;
@@ -13,9 +15,9 @@ public class AvtaleService {
     }
 
 
-    public Avtale opprettAvtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato) {
-        Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse);
-        avtaleRepository.lagreAvtale(avtale);
+    public Avtale oppretteAvtale(LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato, Parorende parorende, Pleietrengende pleietrengende) {
+        Avtale avtale = new Avtale(datoOgTid, beskrivelse, parorende, pleietrengende);
+        avtaleRepository.oppretteAvtale(avtale);
 
         if (gjentakelse != null && !gjentakelse.isEmpty() && sluttDato != null) {
             LocalDateTime nesteDato = datoOgTid;
@@ -34,15 +36,15 @@ public class AvtaleService {
                     default:
                         throw new IllegalArgumentException("Ugyldig gjentakelsestype: " + gjentakelse);
                 }
-                Avtale nyAvtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato);
-                avtaleRepository.lagreAvtale(nyAvtale);
+                Avtale nyAvtale = new Avtale(nesteDato, beskrivelse);
+                avtaleRepository.oppretteAvtale(nyAvtale);
             }
         }
         return avtale;
     }
 
-    public Avtale oppdaterAvtale(int avtaleId, Avtale nyAvtale) {
-        Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(avtaleId);
+    public Avtale oppdaterAvtale(Avtale nyAvtale) {
+        Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(nyAvtale.getAvtaleId());
 
         if (eksisterendeAvtale != null) {
             if (nyAvtale.getDatoOgTid() != null) {
@@ -70,7 +72,9 @@ public class AvtaleService {
     }
 
     public List<Avtale> hentAvtaleForParorened(Parorende parorende) {
-        return avtaleRepository.hentAvtaleForParorende(parorende.getParorendeId());
+        List<Avtale> avtaler = avtaleRepository.hentAvtaleForParorende(parorende.getParorendeId());
+        avtaler.sort((a1, a2) -> a2.getDatoOgTid().compareTo(a1.getDatoOgTid()));
+        return avtaler;
     }
 
 
