@@ -1,4 +1,7 @@
-package org.app.core.models;
+package org.app.core.avtaler;
+
+import org.app.core.models.Parorende;
+import org.app.core.models.Pleietrengende;
 
 import java.time.LocalDateTime;
 
@@ -30,6 +33,22 @@ public class Avtale {
         this.beskrivelse = beskrivelse;
         this.gjentakelse = gjentakelse;
         this.sluttDato = sluttDato;
+    }
+
+    public Avtale(LocalDateTime datoOgTid, String beskrivelse, Parorende parorende, Pleietrengende pleietrengende) {
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
+    }
+
+    public Avtale(LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato, Parorende parorende, Pleietrengende pleietrengende) {
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.gjentakelse = gjentakelse;
+        this.sluttDato = sluttDato;
+        this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
     }
 
     public int getAvtaleId() {
