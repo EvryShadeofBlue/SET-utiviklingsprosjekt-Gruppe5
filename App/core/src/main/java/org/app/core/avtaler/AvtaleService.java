@@ -44,21 +44,26 @@ public class AvtaleService {
     }
 
     public Avtale oppdaterAvtale(Avtale nyAvtale) {
-        Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(nyAvtale.getAvtaleId());
+            Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(nyAvtale.getAvtaleId());
 
-        if (eksisterendeAvtale != null) {
-            if (nyAvtale.getDatoOgTid() != null) {
-                eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
+            if (eksisterendeAvtale != null) {
+                if (nyAvtale.getDatoOgTid() != null) {
+                    eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
+                }
+                if (nyAvtale.getBeksrivelse() != null) {
+                    eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeksrivelse());
+                }
+                if (nyAvtale.getGjentakelse() != null) {
+                    eksisterendeAvtale.setGjentakelse(nyAvtale.getGjentakelse());
+                }
+                if (nyAvtale.getSluttDato() != null) {
+                    eksisterendeAvtale.setSluttDato(nyAvtale.getSluttDato());
+                }
+
+                avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
+                return eksisterendeAvtale;
             }
-            if (nyAvtale.getBeksrivelse() != null) {
-                eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeksrivelse());
-            }
-
-            avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
-            return eksisterendeAvtale;
-
-        }
-        return null;
+            return null;
     }
 
     public boolean slettAvtale(int avtaleId) {
