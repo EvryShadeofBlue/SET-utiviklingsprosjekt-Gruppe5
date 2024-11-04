@@ -10,6 +10,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class AvtalePage extends JFrame{
     private JTextArea beskrivelsesFelt;
@@ -22,12 +23,14 @@ public class AvtalePage extends JFrame{
     private AvtaleService avtaleService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
+    private AvtalePageImplementation avtalePageImplementation;
     private MainPage mainPage;
     private JButton tilbakeKnapp;
 
 
     public AvtalePage(AvtaleService avtaleService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
-        this.avtaleService = avtaleService;
+        this.avtalePageImplementation = new AvtalePageImplementation(avtaleService);
+        //this.avtaleService = avtaleService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
         this.mainPage = mainPage;
@@ -68,7 +71,16 @@ public class AvtalePage extends JFrame{
 
         lagreKnapp = new JButton("Lagre");
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
-        lagreKnapp.addActionListener(e -> opprettAvtale());
+        lagreKnapp.addActionListener(e -> {
+            String beskrivelse = beskrivelsesFelt.getText();
+            String datoTekst = datoFelt.getText();
+            String klokkeslettTekst = klokkeslettFelt.getText();
+            String gjentakelse = (String) gjentakelseFelt.getSelectedItem();
+            String sluttDatoTekst = sluttDatoFelt.getText();
+
+            avtalePageImplementation.opprettAvtale(beskrivelse, datoTekst, klokkeslettTekst, gjentakelse, sluttDatoTekst, parorende, pleietrengende);
+
+        });
 
         JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton tilbakeKnapp = new JButton("Tilbake");
@@ -121,6 +133,7 @@ public class AvtalePage extends JFrame{
         return panel;
     }
 
+
     public void opprettAvtale() {
         try {
             String beskrivelse = beskrivelsesFelt.getText();
@@ -142,6 +155,9 @@ public class AvtalePage extends JFrame{
 
             avtaleService.oppretteAvtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
             JOptionPane.showMessageDialog(this, "Avtale opprettet. ");
+            beskrivelsesFelt.setText("");
+            datoFelt.setText("");
+            klokkeslettFelt.setText("");
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Kunne ikke opprette avtale. Vennligst prøv på nytt. ");
@@ -149,5 +165,37 @@ public class AvtalePage extends JFrame{
         }
     }
 
+
+
+    /*
+
+    public void redigerAvtale(Avtale avtale) {
+         JFrame redigeringsVindu = new JFrame("Rediger Avale");
+         redigeringsVindu.setSize(400, 300);
+         redigeringsVindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+         redigeringsVindu.setLocationRelativeTo(this);
+
+         JTextArea beskrivelsesFelt = new JTextArea(avtale.getBeksrivelse(), 2, 10);
+         beskrivelsesFelt.setLineWrap(true);
+         beskrivelsesFelt.setWrapStyleWord(true);
+
+         JTextField datoFelt = new JTextField(avtale.getDatoOgTid().toLocalDate().toString());
+         JTextField klokkeslettFelt = new JTextField(avtale.getDatoOgTid().toString().toString());
+         JComboBox<String> gjentakelsesFelt = new JComboBox<>(new String[] {"Ingen", "Daglig", "Ukentlig", "Månedlig"});
+         JTextField sluttDatoFelt = new JTextField(avtale.getSluttDato().toLocalDate().toString());
+
+         JButton lagreKnapp = new JButton("Lagre");
+         lagreKnapp.addActionListener(e -> {
+             try {
+                 String beskrivelse = beskrivelsesFelt.getText();
+                 LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                 String gjentakelse = (String) gjentakelsesFelt.getSelectedItem();
+                 LocalDateTime sluttDato = null;
+             }
+         });
+
+    }
+
+     */
 
 }
