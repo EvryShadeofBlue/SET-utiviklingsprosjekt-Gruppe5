@@ -16,7 +16,7 @@ public class AvtaleService {
 
 
     public Avtale oppretteAvtale(LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato, Parorende parorende, Pleietrengende pleietrengende) {
-        Avtale avtale = new Avtale(datoOgTid, beskrivelse, parorende, pleietrengende);
+        Avtale avtale = new Avtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
         avtaleRepository.oppretteAvtale(avtale);
 
         if (gjentakelse != null && !gjentakelse.isEmpty() && sluttDato != null) {
