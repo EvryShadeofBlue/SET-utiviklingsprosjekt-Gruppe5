@@ -7,6 +7,7 @@ import org.app.core.repository.AvtaleRepository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AvtaleDBImplementation implements AvtaleRepository {
@@ -115,6 +116,37 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public List<Avtale> hentAvtaleForParorende(int parorendeId) {
-        return null;
+        List<Avtale> avtaler = new ArrayList<>();
+        String avtaleForParorendeQuery = "select * from Avtaler where parorende_id";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(avtaleForParorendeQuery)) {
+            preparedStatement.setInt(1, parorendeId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int avtaleId = resultSet.getInt("avtale_id");
+                String beskrivelse = resultSet.getString("beskrivelse");
+                LocalDateTime datoOgTid = resultSet.getTimestamp("dato_og_tid").toLocalDateTime();
+                String gjentakelse = resultSet.getString("gjentakelse");
+                LocalDateTime sluttdato = resultSet.getTimestamp("slutt_dato").toLocalDateTime();
+
+                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttdato);
+                avtaler.add(avtale);
+            }
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return avtaler;
+    }
+
+    public void close() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 }
