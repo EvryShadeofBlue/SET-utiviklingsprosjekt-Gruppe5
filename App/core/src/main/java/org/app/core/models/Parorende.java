@@ -27,6 +27,10 @@ public class Parorende {
         this.etternavn = parorendeEtternavn;
     }
 
+    public Parorende() {
+
+    }
+
     public int getParorendeId() {
         return parorendeId;
     }

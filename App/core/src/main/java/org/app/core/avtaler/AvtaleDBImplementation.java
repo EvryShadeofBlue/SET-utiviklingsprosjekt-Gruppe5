@@ -20,7 +20,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public void oppretteAvtale(Avtale avtale) {
-        String opprettAvtaleQuery = "Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, parorende_id, pleietrengende_id) values (?, ?, ?, ?, ?, ?)";
+        String opprettAvtaleQuery = "Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) values (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(opprettAvtaleQuery)) {
             preparedStatement.setString(1, avtale.getBeksrivelse());
             preparedStatement.setObject(2, avtale.getDatoOgTid());

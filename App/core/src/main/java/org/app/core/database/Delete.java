@@ -1,5 +1,7 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
 import java.sql.*;
 
 public class Delete {

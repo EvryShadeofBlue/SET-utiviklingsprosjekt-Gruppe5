@@ -25,6 +25,10 @@ public class Pleietrengende {
         this.etternavn = etternavn;
     }
 
+    public Pleietrengende() {
+
+    }
+
     public int getPleietrengendeId() {
         return pleietrengendeId;
     }

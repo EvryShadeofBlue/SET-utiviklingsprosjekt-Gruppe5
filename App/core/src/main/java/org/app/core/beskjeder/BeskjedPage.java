@@ -61,7 +61,7 @@ public class BeskjedPage extends JFrame {
 
         lagreKnapp = new JButton("Lagre");
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
-        lagreKnapp.addActionListener(e -> lagreBeskjed());
+        lagreKnapp.addActionListener(e -> oppretteBeskjed());
 
         JButton tilbakeKnapp = new JButton("Tilbake");
         tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
@@ -160,7 +160,7 @@ public class BeskjedPage extends JFrame {
         beskjedListePanel.repaint();
     }
 
-    public void lagreBeskjed() {
+    public void oppretteBeskjed() {
         try {
             String beskrivelse = beskrivelseFelt.getText();
             int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();

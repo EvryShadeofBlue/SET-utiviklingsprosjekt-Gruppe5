@@ -1,6 +1,6 @@
 package org.app.core.repository;
 
-import org.app.core.models.Beskjed;
+import org.app.core.beskjeder.Beskjed;
 
 import java.util.List;
 

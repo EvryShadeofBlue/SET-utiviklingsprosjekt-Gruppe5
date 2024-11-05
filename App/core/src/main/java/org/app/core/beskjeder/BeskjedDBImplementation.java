@@ -1,6 +1,5 @@
 package org.app.core.beskjeder;
 
-import org.app.core.beskjeder.Beskjed;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.models.Resources;
@@ -11,10 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeskjedImpl implements BeskjedRepository {
+public class BeskjedDBImplementation implements BeskjedRepository {
     private Connection connection;
 
-    public BeskjedImpl() {
+    public BeskjedDBImplementation() {
         try {
             connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
         }
