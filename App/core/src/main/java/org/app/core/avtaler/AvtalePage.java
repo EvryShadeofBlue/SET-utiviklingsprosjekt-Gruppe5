@@ -146,7 +146,7 @@ public class AvtalePage extends JFrame{
             JLabel tidLabel = new JLabel("Klokkelsett: " + tid);
             tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-            JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + avtale.getBeksrivelse());
+            JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + avtale.getBeskrivelse());
             beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             avtalePanel.add(datoLabel);
@@ -212,7 +212,7 @@ public class AvtalePage extends JFrame{
         redigeringsVindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         redigeringsVindu.setLocationRelativeTo(this);
 
-        JTextArea beskrivelsesFelt = new JTextArea(avtale.getBeksrivelse(), 2, 10);
+        JTextArea beskrivelsesFelt = new JTextArea(avtale.getBeskrivelse(), 2, 10);
         beskrivelsesFelt.setLineWrap(true);
         beskrivelsesFelt.setWrapStyleWord(true);
 
@@ -231,7 +231,6 @@ public class AvtalePage extends JFrame{
         lagreKnapp.addActionListener(e -> {
             try {
                 String beskrivelse = beskrivelsesFelt.getText();
-                //LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 LocalDate nyDato = LocalDate.parse(datoFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 LocalTime nyKlokkeslett = LocalTime.parse(klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("HH:mm"));
                 LocalDateTime datoOgTid = LocalDateTime.of(nyDato, nyKlokkeslett);

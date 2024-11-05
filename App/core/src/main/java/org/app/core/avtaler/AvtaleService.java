@@ -50,8 +50,8 @@ public class AvtaleService {
                 if (nyAvtale.getDatoOgTid() != null) {
                     eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
                 }
-                if (nyAvtale.getBeksrivelse() != null) {
-                    eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeksrivelse());
+                if (nyAvtale.getBeskrivelse() != null) {
+                    eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeskrivelse());
                 }
                 if (nyAvtale.getGjentakelse() != null) {
                     eksisterendeAvtale.setGjentakelse(nyAvtale.getGjentakelse());

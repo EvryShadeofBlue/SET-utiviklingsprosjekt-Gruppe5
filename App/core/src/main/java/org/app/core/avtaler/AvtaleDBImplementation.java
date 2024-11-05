@@ -30,7 +30,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')";
         try (PreparedStatement avtaleStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS)) {
-            avtaleStatement.setString(1, avtale.getBeksrivelse());
+            avtaleStatement.setString(1, avtale.getBeskrivelse());
             avtaleStatement.setObject(2, avtale.getDatoOgTid());
             if (avtale.getGjentakelse() != null) {
                 avtaleStatement.setString(3, avtale.getGjentakelse());
@@ -69,7 +69,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         String oppdaterAvtaleQuery = "update Avtaler set beskrivelse = ?, dato_og_tid = ?, gjentakelse = ?, slutt_dato = ?, pleietrengende_id = ?, parorende_id = ? " +
                 "where avtale_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterAvtaleQuery)) {
-            preparedStatement.setString(1, avtale.getBeksrivelse());
+            preparedStatement.setString(1, avtale.getBeskrivelse());
             preparedStatement.setObject(2, avtale.getDatoOgTid());
             if (avtale.getGjentakelse() != null) {
                 preparedStatement.setString(3, avtale.getGjentakelse());

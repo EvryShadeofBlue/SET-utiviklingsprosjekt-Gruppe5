@@ -1,5 +1,6 @@
 package org.app.core.beskjeder;
 
+import org.app.core.models.LoggService;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.models.Resources;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class BeskjedDBImplementation implements BeskjedRepository {
     private Connection connection;
+    //private LoggService loggService;
+    private Parorende parorende;
 
     public BeskjedDBImplementation() {
         try {
@@ -24,14 +27,30 @@ public class BeskjedDBImplementation implements BeskjedRepository {
     @Override
     public void oppretteBeskjed(Beskjed beskjed) {
         String opprettBeskjedQuery = "Insert into Beskjeder (beskrivelse, dato_tid, synlig_tid, parorende_id, pleietrengende_id) Values (?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(opprettBeskjedQuery)) {
-            preparedStatement.setString(1, beskjed.getBeskrivelse());
-            preparedStatement.setObject(2, beskjed.getDatoOgTid());
-            preparedStatement.setInt(3, beskjed.getSynligTidsenhet());
+        String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, ?, ?, ?, ?)";
+        try (PreparedStatement opprettStatement = connection.prepareStatement(opprettBeskjedQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
 
-            preparedStatement.setInt(4, beskjed.getParorende().getParorendeId());
-            preparedStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
-            preparedStatement.executeUpdate();
+            opprettStatement.setString(1, beskjed.getBeskrivelse());
+            opprettStatement.setObject(2, beskjed.getDatoOgTid());
+            opprettStatement.setInt(3, beskjed.getSynligTidsenhet());
+
+            opprettStatement.setInt(4, beskjed.getParorende().getParorendeId());
+            opprettStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
+            opprettStatement.executeUpdate();
+
+            ResultSet generatedKeys = opprettStatement.getGeneratedKeys();
+            int beskjedId = -1;
+            if (generatedKeys.next()) {
+                beskjedId = generatedKeys.getInt(1);
+            }
+            loggStatement.setInt(1, beskjed.getParorende().getParorendeId());
+            loggStatement.setString(2, "pårørende");
+            loggStatement.setString(3, "beskjed opprettet");
+            loggStatement.setInt(4, beskjedId);
+            loggStatement.setString(5, "beskjed");
+            loggStatement.executeUpdate();
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -41,14 +60,24 @@ public class BeskjedDBImplementation implements BeskjedRepository {
     @Override
     public void oppdaterBeskjed(Beskjed beskjed) {
         String oppdaterBeskjedQuery = "UPDATE Beskjeder SET beskrivelse = ?, dato_tid = ?, synlig_tid = ?, parorende_id = ?, pleietrengende_id = ? WHERE beskjed_id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterBeskjedQuery)) {
-            preparedStatement.setString(1, beskjed.getBeskrivelse());
-            preparedStatement.setObject(2, beskjed.getDatoOgTid());
-            preparedStatement.setInt(3, beskjed.getSynligTidsenhet());
-            preparedStatement.setInt(4, beskjed.getParorende().getParorendeId());
-            preparedStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
-            preparedStatement.setInt(6, beskjed.getBeskjedId());
-            preparedStatement.executeUpdate();
+        String loggOppdateringQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, ?, ?, ?, ?)";
+        try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterBeskjedQuery);
+        PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+            oppdaterStatement.setString(1, beskjed.getBeskrivelse());
+            oppdaterStatement.setObject(2, beskjed.getDatoOgTid());
+            oppdaterStatement.setInt(3, beskjed.getSynligTidsenhet());
+            oppdaterStatement.setInt(4, beskjed.getParorende().getParorendeId());
+            oppdaterStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
+            oppdaterStatement.setInt(6, beskjed.getBeskjedId());
+            oppdaterStatement.executeUpdate();
+
+            loggStatement.setInt(1, beskjed.getParorende().getParorendeId());
+            loggStatement.setString(2, "pårørende");
+            loggStatement.setString(3, "beskjed oppdatert");
+            loggStatement.setInt(4, beskjed.getBeskjedId());
+            loggStatement.setString(5, "beskjed");
+            loggStatement.executeUpdate();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -57,10 +86,23 @@ public class BeskjedDBImplementation implements BeskjedRepository {
 
     @Override
     public void slettBeskjed(int beskjedId) {
+
         String slettBeskjedQuery = "DELETE FROM Beskjeder WHERE beskjed_id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(slettBeskjedQuery)) {
-            preparedStatement.setInt(1, beskjedId);
-            preparedStatement.executeUpdate();
+        String loggSlettQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, ?, ?, ?, ?)";
+        try (PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
+        PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery)) {
+            slettStatement.setInt(1, beskjedId);
+            slettStatement.executeUpdate();
+
+            int parorendeId = parorende.getParorendeId();
+            loggStatement.setInt(1, parorendeId);
+            loggStatement.setString(2, "pårørende");
+            loggStatement.setString(3, "beskjed slettet");
+            loggStatement.setInt(4, beskjedId);
+            loggStatement.setString(5, "beskjed");
+            loggStatement.executeUpdate();
+
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

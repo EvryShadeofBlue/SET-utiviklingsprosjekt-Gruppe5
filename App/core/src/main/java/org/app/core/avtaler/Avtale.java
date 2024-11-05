@@ -76,7 +76,7 @@ public class Avtale {
         this.datoOgTid = datoOgTid;
     }
 
-    public String getBeksrivelse() {
+    public String getBeskrivelse() {
         return beskrivelse;
     }
     public void setBeskrivelse(String beskrivelse) {

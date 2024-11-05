@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="added the method that shows avtaler">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePageImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedVisningsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoggService.java" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Done some changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/Avtale.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleDBImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/Beskjed.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/Beskjed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedDBImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,14 +91,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Major changes in DB communication">
-      <option name="closed" value="true" />
-      <created>1729688483839</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1729688483839</updated>
     </task>
     <task id="LOCAL-00005" summary="Changes in login verification">
       <option name="closed" value="true" />
@@ -439,7 +429,14 @@
       <option name="presentableId" value="LOCAL−00052" />
       <updated>1730828983656</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL−00053" summary="Done some changes">
+      <option name="closed" value="true" />
+      <created>1730837451819</created>
+      <option name="number" value="LOCAL−00053" />
+      <option name="presentableId" value="LOCAL−00053" />
+      <updated>1730837451819</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -474,11 +471,11 @@
     <MESSAGE value="created a method for changing an existing avtale" />
     <MESSAGE value="created a method for deleting an avtale" />
     <MESSAGE value="added a method to show created avtale for a spesific parorende" />
-    <MESSAGE value="Done some changes" />
     <MESSAGE value="added query for getting, deleting and editing an avtale" />
     <MESSAGE value="added sql query for getting an avtale for the relative" />
     <MESSAGE value="did some changes" />
     <MESSAGE value="added the method that shows avtaler" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the method that shows avtaler" />
+    <MESSAGE value="Done some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done some changes" />
   </component>
 </project>
