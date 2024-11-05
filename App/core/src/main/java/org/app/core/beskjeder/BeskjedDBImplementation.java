@@ -82,14 +82,12 @@ public class BeskjedDBImplementation implements BeskjedRepository {
                 int parorendeId = resultSet.getInt("parorende_id");
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
 
-                // Opprett Parorende- og Pleietrengende-objekter med kun ID-er
                 Parorende parorende = new Parorende();
                 parorende.setParorendeId(parorendeId);
 
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                // Opprett og returner Beskjed-objektet
                 Beskjed beskjed = new Beskjed(id, datoOgTid, beskrivelse, synligTid, pleietrengende, parorende);
                 return beskjed;
             }

@@ -51,6 +51,16 @@ public class Avtale {
         this.pleietrengende = pleietrengende;
     }
 
+    public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttdato, Pleietrengende pleietrengende, Parorende parorende) {
+        this.avtaleId = avtaleId;
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.gjentakelse = gjentakelse;
+        this.sluttDato = sluttdato;
+        this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
+    }
+
     public int getAvtaleId() {
         return avtaleId;
     }
