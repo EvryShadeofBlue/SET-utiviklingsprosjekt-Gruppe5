@@ -105,6 +105,7 @@ public class AvtalePage extends JFrame{
         avtaleScrollPane.setBorder(BorderFactory.createTitledBorder("Opprettede avtaler"));
         add(avtaleScrollPane, BorderLayout.CENTER);
 
+        visAvtaler();
         setVisible(true);
     }
 
