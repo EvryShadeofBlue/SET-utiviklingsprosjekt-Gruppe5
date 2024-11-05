@@ -68,10 +68,17 @@ public class AvtaleService {
 
     public boolean slettAvtale(int avtaleId) {
         try {
-            avtaleRepository.hentAvtale(avtaleId);
-            return true;
+            Avtale avtale = avtaleRepository.hentAvtale(avtaleId);
+            if (avtale != null) {
+                avtaleRepository.slettAvtale(avtaleId);
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

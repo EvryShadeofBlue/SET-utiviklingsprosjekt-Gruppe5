@@ -6,15 +6,14 @@ import org.app.core.models.Pleietrengende;
 import java.time.LocalDateTime;
 
 public class Beskjed {
-    private int beskjedId; // Brukes kun for testing
+    private int beskjedId;
     private String beskrivelse;
-    private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv
+    private int synligTidsenhet;
     private LocalDateTime datoOgTid;
-    private Parorende parorende; //ekstra felt
-    private Pleietrengende pleietrengende; //ekstra felt
+    private Parorende parorende;
+    private Pleietrengende pleietrengende;
 
 
-    // konstruktøren under er til testingen.
     public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
         this.beskjedId = beskjedId;
         this.datoOgTid = datoOgTid;
@@ -26,8 +25,8 @@ public class Beskjed {
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
         this.synligTidsenhet = synligTidsenhet;
-        this.parorende = parorende; //ekstra
-        this.pleietrengende = pleietrengende; //ekstra
+        this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
     }
 
     public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Pleietrengende pleietrengende, Parorende parorende) {
@@ -43,7 +42,6 @@ public class Beskjed {
 
     }
 
-    //get og set metoder
 
     public int getBeskjedId() {
         return beskjedId;

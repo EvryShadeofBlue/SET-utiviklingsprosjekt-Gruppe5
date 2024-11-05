@@ -1,6 +1,5 @@
 package org.app.core.avtaler;
 
-import jdk.jshell.JShellConsole;
 import org.app.core.models.MainPage;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 public class AvtalePage extends JFrame{
@@ -199,6 +197,8 @@ public class AvtalePage extends JFrame{
             klokkeslettFelt.setText("");
             gjentakelseFelt.setSelectedItem(null);
             sluttDatoFelt.setText("");
+
+            visAvtaler();
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Kunne ikke opprette avtale. Vennligst prøv på nytt. ");
@@ -216,19 +216,33 @@ public class AvtalePage extends JFrame{
         beskrivelsesFelt.setLineWrap(true);
         beskrivelsesFelt.setWrapStyleWord(true);
 
-        JTextField datoFelt = new JTextField(avtale.getDatoOgTid().toLocalDate().toString());
-        JTextField klokkeslettFelt = new JTextField(avtale.getDatoOgTid().toString().toString());
+        LocalDate dato = avtale.getDatoOgTid().toLocalDate();
+        LocalTime klokkeslett = avtale.getDatoOgTid().toLocalTime();
+
+        JTextField datoFelt = new JTextField(dato.toString());
+        JTextField klokkeslettFelt = new JTextField(klokkeslett.toString());
+
         JComboBox<String> gjentakelsesFelt = new JComboBox<>(new String[] {"Ingen", "Daglig", "Ukentlig", "Månedlig"});
-        gjentakelsesFelt.setSelectedItem(avtale.getGjentakelse());
+        gjentakelsesFelt.setSelectedItem(avtale.getGjentakelse() != null ? avtale.getGjentakelse() : "Ingen");
+
         JTextField sluttDatoFelt = new JTextField(avtale.getSluttDato() != null ? avtale.getSluttDato().toString() : "");
 
         JButton lagreKnapp = new JButton("Lagre");
         lagreKnapp.addActionListener(e -> {
             try {
                 String beskrivelse = beskrivelsesFelt.getText();
-                LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                //LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDate nyDato = LocalDate.parse(datoFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalTime nyKlokkeslett = LocalTime.parse(klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("HH:mm"));
+                LocalDateTime datoOgTid = LocalDateTime.of(nyDato, nyKlokkeslett);
                 String gjentakelse = (String) gjentakelsesFelt.getSelectedItem();
                 LocalDateTime sluttDato = null;
+
+                String sluttDatoTekst = sluttDatoFelt.getText();
+                if (!sluttDatoTekst.isEmpty()) {
+                    LocalDate sluttDatoLocal = LocalDate.parse(sluttDatoTekst, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    sluttDato = sluttDatoLocal.atStartOfDay();
+                }
 
                 Avtale nyAvtale = new Avtale(avtale.getAvtaleId(), datoOgTid, beskrivelse, gjentakelse, sluttDato);
                 Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(nyAvtale);
@@ -239,17 +253,30 @@ public class AvtalePage extends JFrame{
                     redigeringsVindu.dispose();
                 }
                 else {
-                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdaere avtale. Vennligst prøv på nytt");
+                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdatere avtale. " +
+                            "Vennligst prøv på nytt");
                 }
             }
             catch (Exception exception) {
-                JOptionPane.showMessageDialog(redigeringsVindu, "Det oppsto en feil under opprettelsen. ");
+                JOptionPane.showMessageDialog(redigeringsVindu, "Det oppsto en feil endringen." + exception.getMessage());
+                exception.printStackTrace();
             }
         });
+
+        JPanel panel = new JPanel(new GridLayout(6, 1));
+        panel.add(new JScrollPane(beskrivelsesFelt));
+        panel.add(createInputPanel("Dato (yyyy-MM-dd):", datoFelt));
+        panel.add(createInputPanel("Klokkeslett (HH:mm):", klokkeslettFelt));
+        panel.add(createInputPanel("Gjentakelse:", gjentakelsesFelt));
+        panel.add(createInputPanel("sluttdato (yyyy-MM-dd):", sluttDatoFelt));
+        panel.add(lagreKnapp);
+
+        redigeringsVindu.add(panel);
+        redigeringsVindu.setVisible(true);
     }
 
     public void slettAvtale(Avtale avtale) {
-        int svar = JOptionPane.showConfirmDialog(this, "Er du sikekr på at du vil slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
+        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
         if (svar == JOptionPane.YES_OPTION) {
             avtaleService.slettAvtale(avtale.getAvtaleId());
             JOptionPane.showMessageDialog(this, "Avtale slettet");

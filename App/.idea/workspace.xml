@@ -4,23 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="changed in the method for creating an avtale">
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="added the method that shows avtaler">
       <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePageImplementation.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedVisningsManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoggService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleDBImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Parorende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Parorende.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Pleietrengende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Pleietrengende.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/AvtaleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/AvtaleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/BeskjedRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/BeskjedRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/Beskjed.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/Beskjed.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,30 +93,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL-00001" summary="File refactoring">
-      <option name="closed" value="true" />
-      <created>1729148883558</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1729148883558</updated>
-    </task>
-    <task id="LOCAL-00002" summary="minor cleanup">
-      <option name="closed" value="true" />
-      <created>1729429702940</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1729429702940</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Removed unnecessary files">
-      <option name="closed" value="true" />
-      <created>1729688054481</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1729688054481</updated>
     </task>
     <task id="LOCAL-00004" summary="Major changes in DB communication">
       <option name="closed" value="true" />
@@ -415,7 +383,63 @@
       <option name="presentableId" value="LOCAL−00044" />
       <updated>1730746428243</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL−00045" summary="created a method for changing an existing avtale">
+      <option name="closed" value="true" />
+      <created>1730824832555</created>
+      <option name="number" value="LOCAL−00045" />
+      <option name="presentableId" value="LOCAL−00045" />
+      <updated>1730824832555</updated>
+    </task>
+    <task id="LOCAL−00046" summary="created a method for deleting an avtale">
+      <option name="closed" value="true" />
+      <created>1730824858489</created>
+      <option name="number" value="LOCAL−00046" />
+      <option name="presentableId" value="LOCAL−00046" />
+      <updated>1730824858489</updated>
+    </task>
+    <task id="LOCAL−00047" summary="added a method to show created avtale for a spesific parorende">
+      <option name="closed" value="true" />
+      <created>1730824953806</created>
+      <option name="number" value="LOCAL−00047" />
+      <option name="presentableId" value="LOCAL−00047" />
+      <updated>1730824953806</updated>
+    </task>
+    <task id="LOCAL−00048" summary="Done some changes">
+      <option name="closed" value="true" />
+      <created>1730824977520</created>
+      <option name="number" value="LOCAL−00048" />
+      <option name="presentableId" value="LOCAL−00048" />
+      <updated>1730824977520</updated>
+    </task>
+    <task id="LOCAL−00049" summary="added query for getting, deleting and editing an avtale">
+      <option name="closed" value="true" />
+      <created>1730828325411</created>
+      <option name="number" value="LOCAL−00049" />
+      <option name="presentableId" value="LOCAL−00049" />
+      <updated>1730828325411</updated>
+    </task>
+    <task id="LOCAL−00050" summary="added sql query for getting an avtale for the relative">
+      <option name="closed" value="true" />
+      <created>1730828849802</created>
+      <option name="number" value="LOCAL−00050" />
+      <option name="presentableId" value="LOCAL−00050" />
+      <updated>1730828849802</updated>
+    </task>
+    <task id="LOCAL−00051" summary="did some changes">
+      <option name="closed" value="true" />
+      <created>1730828858092</created>
+      <option name="number" value="LOCAL−00051" />
+      <option name="presentableId" value="LOCAL−00051" />
+      <updated>1730828858092</updated>
+    </task>
+    <task id="LOCAL−00052" summary="added the method that shows avtaler">
+      <option name="closed" value="true" />
+      <created>1730828983656</created>
+      <option name="number" value="LOCAL−00052" />
+      <option name="presentableId" value="LOCAL−00052" />
+      <updated>1730828983656</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -430,19 +454,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a menubar with help section in it" />
-    <MESSAGE value="created class for beskjed actions when choosing beskjed in mainpage" />
-    <MESSAGE value="added method to create a beskjed from the beskjedservice class" />
-    <MESSAGE value="created a class to implement sql queries for beskjeder" />
-    <MESSAGE value="did a minor change" />
-    <MESSAGE value="Did some changes. Made the opportunity for someone to create a beskjed without worrying about it not being added to the database" />
-    <MESSAGE value="added another method to the interface" />
     <MESSAGE value="added method for returning beskjed for relative" />
     <MESSAGE value="implemented the logic for the sql query for getting all the beskjeder a parorende has created" />
     <MESSAGE value="addded the opportunity to view created beskjeder" />
     <MESSAGE value="did some major changes in the different methods" />
     <MESSAGE value="added opportunity to update and delete a beskjed" />
-    <MESSAGE value="did some changes" />
     <MESSAGE value="added the oportunity to delete a beskjed" />
     <MESSAGE value="Adjustet the class for easier implementation towards the gui" />
     <MESSAGE value="Did some changes to make thing look more clean" />
@@ -455,6 +471,14 @@
     <MESSAGE value="changed a bit of the method for creating an avtale" />
     <MESSAGE value="created a new cosntructor for creating an avale" />
     <MESSAGE value="changed in the method for creating an avtale" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed in the method for creating an avtale" />
+    <MESSAGE value="created a method for changing an existing avtale" />
+    <MESSAGE value="created a method for deleting an avtale" />
+    <MESSAGE value="added a method to show created avtale for a spesific parorende" />
+    <MESSAGE value="Done some changes" />
+    <MESSAGE value="added query for getting, deleting and editing an avtale" />
+    <MESSAGE value="added sql query for getting an avtale for the relative" />
+    <MESSAGE value="did some changes" />
+    <MESSAGE value="added the method that shows avtaler" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the method that shows avtaler" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 package org.app.core.avtaler;
 
+import org.app.core.models.LoggService;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.models.Resources;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class AvtaleDBImplementation implements AvtaleRepository {
     private Connection connection;
+    private LoggService loggService;
 
     public AvtaleDBImplementation() {
         try {
@@ -25,25 +27,37 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     @Override
     public void oppretteAvtale(Avtale avtale) {
         String opprettAvtaleQuery = "Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) values (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(opprettAvtaleQuery)) {
-            preparedStatement.setString(1, avtale.getBeksrivelse());
-            preparedStatement.setObject(2, avtale.getDatoOgTid());
+        String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')";
+        try (PreparedStatement avtaleStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS)) {
+            avtaleStatement.setString(1, avtale.getBeksrivelse());
+            avtaleStatement.setObject(2, avtale.getDatoOgTid());
             if (avtale.getGjentakelse() != null) {
-                preparedStatement.setString(3, avtale.getGjentakelse());
+                avtaleStatement.setString(3, avtale.getGjentakelse());
             }
             else {
-                preparedStatement.setNull(3, Types.VARCHAR);
+                avtaleStatement.setNull(3, Types.VARCHAR);
             }
 
             if (avtale.getSluttDato() != null) {
-                preparedStatement.setObject(4, avtale.getSluttDato());
+                avtaleStatement.setObject(4, avtale.getSluttDato());
             }
             else {
-                preparedStatement.setNull(4, Types.TIMESTAMP);
+                avtaleStatement.setNull(4, Types.TIMESTAMP);
             }
-            preparedStatement.setInt(5, avtale.getParorende().getParorendeId());
-            preparedStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
-            preparedStatement.executeUpdate();
+            avtaleStatement.setInt(5, avtale.getParorende().getParorendeId());
+            avtaleStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
+            avtaleStatement.executeUpdate();
+
+            ResultSet generatedKeys = avtaleStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int avtaleId = generatedKeys.getInt(1);
+                try (PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
+                    loggStatement.setInt(1, avtale.getParorende().getParorendeId());
+                    loggStatement.setInt(2, avtaleId);
+                    loggStatement.executeUpdate();
+                }
+            }
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -57,14 +71,30 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterAvtaleQuery)) {
             preparedStatement.setString(1, avtale.getBeksrivelse());
             preparedStatement.setObject(2, avtale.getDatoOgTid());
-            preparedStatement.setString(3, avtale.getGjentakelse());
-            preparedStatement.setObject(4, avtale.getSluttDato());
+            if (avtale.getGjentakelse() != null) {
+                preparedStatement.setString(3, avtale.getGjentakelse());
+            }
+            else {
+                preparedStatement.setNull(3, Types.VARCHAR);
+            }
+            if (avtale.getSluttDato() != null) {
+                preparedStatement.setObject(4, avtale.getSluttDato());
+            }
+            else {
+                preparedStatement.setNull(4, Types.TIMESTAMP);
+            }
+            //preparedStatement.setString(3, avtale.getGjentakelse());
+            //preparedStatement.setObject(4, avtale.getSluttDato());
             preparedStatement.setInt(5, avtale.getParorende().getParorendeId());
             preparedStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
+            preparedStatement.setInt(7, avtale.getAvtaleId());
             preparedStatement.executeUpdate();
+
+            loggService.loggføring(avtale.getParorende().getParorendeId(), "pårørende", "avtale endret", avtale.getAvtaleId(), "avtale");
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
+            sqlException.getMessage();
         }
 
     }
@@ -117,7 +147,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     @Override
     public List<Avtale> hentAvtaleForParorende(int parorendeId) {
         List<Avtale> avtaler = new ArrayList<>();
-        String avtaleForParorendeQuery = "select * from Avtaler where parorende_id";
+        String avtaleForParorendeQuery = "select * from Avtaler where parorende_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(avtaleForParorendeQuery)) {
             preparedStatement.setInt(1, parorendeId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -125,9 +155,14 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             while (resultSet.next()) {
                 int avtaleId = resultSet.getInt("avtale_id");
                 String beskrivelse = resultSet.getString("beskrivelse");
-                LocalDateTime datoOgTid = resultSet.getTimestamp("dato_og_tid").toLocalDateTime();
+
+                Timestamp datoOgTidTimestamp = resultSet.getTimestamp("dato_og_tid");
+                LocalDateTime datoOgTid = (datoOgTidTimestamp != null) ? datoOgTidTimestamp.toLocalDateTime() : null;
+
                 String gjentakelse = resultSet.getString("gjentakelse");
-                LocalDateTime sluttdato = resultSet.getTimestamp("slutt_dato").toLocalDateTime();
+
+                Timestamp sluttDatoTimestamp = resultSet.getTimestamp("slutt_dato");
+                LocalDateTime sluttdato = (sluttDatoTimestamp != null) ? sluttDatoTimestamp.toLocalDateTime() : null;
 
                 Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttdato);
                 avtaler.add(avtale);
