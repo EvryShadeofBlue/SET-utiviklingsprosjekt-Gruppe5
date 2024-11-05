@@ -126,7 +126,51 @@ public class AvtalePage extends JFrame{
         return panel;
     }
 
+    private void visAvtaler() {
+        avtaleListePanel.removeAll();
+        List<Avtale> avtaleListe = avtaleService.hentAvtaleForParorened(parorende);
+        DateTimeFormatter datoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
+        for (Avtale avtale : avtaleListe) {
+            JPanel avtalePanel = new JPanel();
+            avtalePanel.setLayout(new BoxLayout(avtalePanel, BoxLayout.Y_AXIS));
+            avtalePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            avtalePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+            String dato = avtale.getDatoOgTid().format(datoFormatter);
+            String tid = avtale.getDatoOgTid().format(tidFormatter);
+
+            JLabel datoLabel = new JLabel("Dato: " + dato);
+            datoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel tidLabel = new JLabel("Klokkelsett: " + tid);
+            tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + avtale.getBeksrivelse());
+            beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            avtalePanel.add(datoLabel);
+            avtalePanel.add(tidLabel);
+            avtalePanel.add(beskrivelsesLabel);
+
+            JPanel knapperPanel = new JPanel();
+            knapperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            JButton slettKnapp = new JButton("Slett");
+            slettKnapp.addActionListener(e -> slettAvtale(avtale));
+            knapperPanel.add(slettKnapp);
+
+            JButton redigerKnapp = new JButton("Rediger");
+            redigerKnapp.addActionListener(e -> redigerAvtale(avtale));
+            knapperPanel.add(redigerKnapp);
+
+            avtalePanel.add(knapperPanel);
+            avtaleListePanel.add(avtalePanel);
+        }
+        avtaleListePanel.revalidate();
+        avtaleListePanel.repaint();
+    }
 
     public void opprettAvtale() {
         try {
