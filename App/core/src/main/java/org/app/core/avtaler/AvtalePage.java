@@ -203,6 +203,15 @@ public class AvtalePage extends JFrame{
         });
     }
 
+    public void slettAvtale(Avtale avtale) {
+        int svar = JOptionPane.showConfirmDialog(this, "Er du sikekr på at du vil slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
+        if (svar == JOptionPane.YES_OPTION) {
+            avtaleService.slettAvtale(avtale.getAvtaleId());
+            JOptionPane.showMessageDialog(this, "Avtale slettet");
+            visAvtaler();
+        }
+    }
+
 
 
 
