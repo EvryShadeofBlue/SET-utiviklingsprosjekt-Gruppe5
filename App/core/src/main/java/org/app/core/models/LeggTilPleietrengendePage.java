@@ -1,5 +1,8 @@
 package org.app.core.models;
 
+import org.app.core.brukere.pleietrengende.Pleietrengende;
+import org.app.core.brukere.pleietrengende.PleietrengendeService;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +12,13 @@ public class LeggTilPleietrengendePage extends JFrame {
     private JButton lagreKnapp;
     private JButton tilbakeKnapp;
     private MainPage mainPage;
-    public LeggTilPleietrengendePage() {
+    private PleietrengendeService pleietrengendeService;
+    private int parorendeId;
+    public LeggTilPleietrengendePage(PleietrengendeService pleietrengendeService, int parorendeId, MainPage mainPage) {
+        this.pleietrengendeService = pleietrengendeService;
+        this.parorendeId = parorendeId;
+        this.mainPage = mainPage;
+
         setTitle("Legg til pleietrengende");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -34,6 +43,29 @@ public class LeggTilPleietrengendePage extends JFrame {
 
         lagreKnapp = new JButton("Legg til pleietrengende");
         lagreKnapp.setPreferredSize(new Dimension(200, 40));
+        lagreKnapp.addActionListener(e -> {
+            String fornavn = fornavnTekstFelt.getText();
+            String etternavn = etternavnTekstFelt.getText();
+
+            if (fornavn.isEmpty() || etternavn.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Fornavn og etternavn kan ikke være kan ikke være tomme.");
+                return;
+            }
+
+            Pleietrengende eksisterendePleietrengende = pleietrengendeService.finnPle
+
+            Pleietrengende pleietrengende = new Pleietrengende(fornavn, etternavn);
+
+            boolean erLeggetTil = pleietrengendeService.leggTilPleietrengende(pleietrengende, parorendeId);
+
+            if (erLeggetTil) {
+                JOptionPane.showMessageDialog(this, "Pleietrengende er lagt til.");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Feil ved opprettelse av pleietrengende. Du har allerede en pleietrengende.");
+            }
+
+        });
 
         tilbakeKnapp = new JButton("Tilbake");
         tilbakeKnapp.setPreferredSize(new Dimension(200, 40));
