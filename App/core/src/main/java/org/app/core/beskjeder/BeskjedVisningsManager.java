@@ -1,7 +1,8 @@
 package org.app.core.beskjeder;
 
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
+
+import org.app.core.brukere.pleietrengende.Pleietrengende;
+import org.app.core.brukere.pårørende.Parorende;
 
 import javax.swing.*;
 import java.time.LocalDateTime;

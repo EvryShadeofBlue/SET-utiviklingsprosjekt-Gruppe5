@@ -26,6 +26,12 @@ public class Pleietrengende {
         this.parorende = parorende;
     }
 
+    public Pleietrengende(int pleietrengendeId, String fornavn, String etternavn) {
+        this.pleietrengendeId = pleietrengendeId;
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+    }
+
     public Pleietrengende() {
 
     }

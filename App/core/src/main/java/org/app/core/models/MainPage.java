@@ -107,6 +107,8 @@ public class MainPage extends JFrame {
             }
         });
 
+        leggTilPleietrengendeKnapp.addActionListener(e -> new LeggTilPleietrengendePage());
+
         setVisible(true);
     }
     public void visHovedside() {

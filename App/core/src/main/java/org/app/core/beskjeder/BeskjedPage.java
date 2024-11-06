@@ -63,7 +63,7 @@ public class BeskjedPage extends JFrame {
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
         lagreKnapp.addActionListener(e -> oppretteBeskjed());
 
-        JButton tilbakeKnapp = new JButton("Tilbake");
+        tilbakeKnapp = new JButton("Tilbake");
         tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
         tilbakeKnapp.addActionListener(e -> {
             this.dispose();

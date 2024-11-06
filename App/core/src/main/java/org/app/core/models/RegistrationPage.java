@@ -1,6 +1,7 @@
 package org.app.core.models;
 
 import com.sun.tools.javac.Main;
+import org.app.core.brukere.pårørende.Parorende;
 
 import javax.swing.*;
 import java.awt.*;
