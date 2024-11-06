@@ -1,8 +1,8 @@
 package org.app.core.beskjeder;
 
+import org.app.core.brukere.Parorende;
+import org.app.core.brukere.Pleietrengende;
 import org.app.core.models.MainPage;
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
 
 import javax.swing.*;
 import java.awt.*;

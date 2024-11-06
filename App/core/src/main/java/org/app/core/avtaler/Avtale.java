@@ -1,7 +1,8 @@
 package org.app.core.avtaler;
 
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
+import org.app.core.brukere.Parorende;
+import org.app.core.brukere.Pleietrengende;
+
 
 import java.time.LocalDateTime;
 
@@ -10,7 +11,7 @@ public class Avtale {
     private LocalDateTime datoOgTid;
     private String beskrivelse;
     private Parorende parorende;
-    private Pleietrengende pleietrengende;
+    private Pleietrengende  pleietrengende;
     private String gjentakelse;
     private LocalDateTime sluttDato;
 

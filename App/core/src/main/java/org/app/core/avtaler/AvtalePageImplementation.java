@@ -1,7 +1,5 @@
 package org.app.core.avtaler;
 
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
 
 import javax.swing.*;
 import java.time.LocalDate;

@@ -6,6 +6,8 @@ import org.app.core.avtaler.AvtaleService;
 import org.app.core.beskjeder.BeskjedDBImplementation;
 import org.app.core.beskjeder.BeskjedPage;
 import org.app.core.beskjeder.BeskjedService;
+import org.app.core.brukere.Parorende;
+import org.app.core.brukere.Pleietrengende;
 
 import javax.swing.*;
 import java.awt.*;

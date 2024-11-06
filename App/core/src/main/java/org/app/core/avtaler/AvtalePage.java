@@ -1,8 +1,8 @@
 package org.app.core.avtaler;
 
+import org.app.core.brukere.Parorende;
+import org.app.core.brukere.Pleietrengende;
 import org.app.core.models.MainPage;
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +29,6 @@ public class AvtalePage extends JFrame{
 
 
     public AvtalePage(AvtaleService avtaleService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
-        //this.avtalePageImplementation = new AvtalePageImplementation(avtaleService);
         this.avtaleService = avtaleService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
