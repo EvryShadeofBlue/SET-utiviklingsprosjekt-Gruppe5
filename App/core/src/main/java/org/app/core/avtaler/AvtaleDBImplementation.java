@@ -83,8 +83,6 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             else {
                 preparedStatement.setNull(4, Types.TIMESTAMP);
             }
-            //preparedStatement.setString(3, avtale.getGjentakelse());
-            //preparedStatement.setObject(4, avtale.getSluttDato());
             preparedStatement.setInt(5, avtale.getParorende().getParorendeId());
             preparedStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
             preparedStatement.setInt(7, avtale.getAvtaleId());
