@@ -12,11 +12,12 @@ public class PleietrengendeService {
 
     public boolean leggTilPleietrengende(Pleietrengende pleietrengende, int parorendeId) {
         Pleietrengende eksisterendePleietrengende = pleietrengendeRepository.finnPleietrengendeAvParorende(parorendeId);
-        if (eksisterendePleietrengende != null) {
-            return false;
+        if (eksisterendePleietrengende == null) {
+            pleietrengendeRepository.lagrePleietrengende(pleietrengende);
+            return true;
         }
-        pleietrengendeRepository.lagrePleietrengende(pleietrengende);
-        return true;
+        return false;
     }
+
 
 }
