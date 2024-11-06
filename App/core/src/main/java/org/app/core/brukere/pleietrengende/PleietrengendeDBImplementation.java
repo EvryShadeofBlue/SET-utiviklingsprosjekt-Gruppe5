@@ -1,17 +1,20 @@
 package org.app.core.brukere.pleietrengende;
 
 import org.app.core.brukere.pleietrengende.Pleietrengende;
+import org.app.core.models.Resources;
 import org.app.core.repository.PleietrengendeRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PleietrengendeDBImplementation implements PleietrengendeRepository {
     private Connection connection;
-    public PleietrengendeDBImplementation(Connection connection) {
-        this.connection = connection;
+    public PleietrengendeDBImplementation() {
+        try {
+            connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     @Override
