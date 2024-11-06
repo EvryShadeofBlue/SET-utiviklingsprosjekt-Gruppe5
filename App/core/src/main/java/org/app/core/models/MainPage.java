@@ -118,6 +118,13 @@ public class MainPage extends JFrame {
 
         setVisible(true);
     }
+
+    public void oppdaterInfo(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
+        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
+        pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
+        repaint();
+    }
     public void visHovedside() {
         setVisible(true);
     }

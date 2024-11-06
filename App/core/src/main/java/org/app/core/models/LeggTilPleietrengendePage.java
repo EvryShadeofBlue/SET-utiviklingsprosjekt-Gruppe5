@@ -52,8 +52,6 @@ public class LeggTilPleietrengendePage extends JFrame {
                 return;
             }
 
-            Pleietrengende eksisterendePleietrengende = pleietrengendeService.finnPle
-
             Pleietrengende pleietrengende = new Pleietrengende(fornavn, etternavn);
 
             boolean erLeggetTil = pleietrengendeService.leggTilPleietrengende(pleietrengende, parorendeId);
