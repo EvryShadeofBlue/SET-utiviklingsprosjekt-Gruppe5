@@ -1,8 +1,6 @@
-package org.app.core.brukere;
+package org.app.core.brukere.pleietrengende;
 
-import org.app.core.brukere.Parorende;
-
-import java.util.List;
+import org.app.core.brukere.pårørende.Parorende;
 
 public class Pleietrengende {
     private int pleietrengendeId;

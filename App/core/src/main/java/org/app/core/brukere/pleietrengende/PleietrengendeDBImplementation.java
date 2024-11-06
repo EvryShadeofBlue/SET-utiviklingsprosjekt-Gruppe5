@@ -1,7 +1,6 @@
-package org.app.core.brukere.leggTilBrukere;
+package org.app.core.brukere.pleietrengende;
 
-import com.mysql.cj.protocol.x.ReusableOutputStream;
-import org.app.core.brukere.Pleietrengende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 import org.app.core.repository.PleietrengendeRepository;
 
 import java.sql.Connection;

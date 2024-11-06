@@ -1,4 +1,4 @@
-package org.app.core.brukere;
+package org.app.core.brukere.pårørende;
 
 public class Parorende {
     private int parorendeId;

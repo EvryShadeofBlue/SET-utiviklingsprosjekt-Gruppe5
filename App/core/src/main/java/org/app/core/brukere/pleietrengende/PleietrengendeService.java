@@ -1,10 +1,7 @@
-package org.app.core.brukere.leggTilBrukere;
+package org.app.core.brukere.pleietrengende;
 
-import org.app.core.brukere.Parorende;
-import org.app.core.brukere.Pleietrengende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 import org.app.core.repository.PleietrengendeRepository;
-
-import java.util.List;
 
 public class PleietrengendeService {
     private PleietrengendeRepository pleietrengendeRepository;
