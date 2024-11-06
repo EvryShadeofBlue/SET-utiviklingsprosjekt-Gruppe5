@@ -36,7 +36,7 @@ public class AvtaleService {
                     default:
                         throw new IllegalArgumentException("Ugyldig gjentakelsestype: " + gjentakelse);
                 }
-                Avtale nyAvtale = new Avtale(nesteDato, beskrivelse);
+                Avtale nyAvtale = new Avtale(nesteDato, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
                 avtaleRepository.oppretteAvtale(nyAvtale);
             }
         }
