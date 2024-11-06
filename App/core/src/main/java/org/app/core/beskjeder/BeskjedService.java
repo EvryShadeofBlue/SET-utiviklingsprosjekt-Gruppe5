@@ -1,8 +1,7 @@
 package org.app.core.beskjeder;
 
-import org.app.core.beskjeder.Beskjed;
-import org.app.core.brukere.Parorende;
-import org.app.core.brukere.Pleietrengende;
+import org.app.core.brukere.pårørende.Parorende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 import org.app.core.repository.BeskjedRepository;
 
 import java.time.LocalDateTime;

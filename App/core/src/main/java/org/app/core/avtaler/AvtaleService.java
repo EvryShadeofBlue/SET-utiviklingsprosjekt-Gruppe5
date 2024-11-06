@@ -1,7 +1,7 @@
 package org.app.core.avtaler;
 
-import org.app.core.brukere.Parorende;
-import org.app.core.brukere.Pleietrengende;
+import org.app.core.brukere.pårørende.Parorende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 import org.app.core.repository.AvtaleRepository;
 
 import java.time.LocalDateTime;

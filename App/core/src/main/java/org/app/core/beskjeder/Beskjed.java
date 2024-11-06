@@ -1,7 +1,7 @@
 package org.app.core.beskjeder;
 
-import org.app.core.brukere.Parorende;
-import org.app.core.brukere.Pleietrengende;
+import org.app.core.brukere.pårørende.Parorende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 import java.time.LocalDateTime;
 
 public class Beskjed {
