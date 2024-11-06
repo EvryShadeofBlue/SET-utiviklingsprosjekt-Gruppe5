@@ -22,6 +22,10 @@ public class MainPage extends JFrame {
     private BeskjedService beskjedService;
     private AvtaleService avtaleService;
     private PleietrengendeService pleietrengendeService;
+    private JButton leggTilPleietrengendeKnapp;
+    private JButton avtalerKnapp;
+    private JButton beskjedKnapp;
+    private JButton handlelisteKnapp;
 
     public MainPage(Parorende parorende, Pleietrengende pleietrengende) {
         setTitle("Hovedside ");
@@ -60,10 +64,10 @@ public class MainPage extends JFrame {
         add(pleietrengendeNavnLabel, g1);
         pleietrengendeNavnLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
-        JButton leggTilPleietrengendeKnapp = new JButton("Legg til pleietrengende");
-        JButton avtalerKnapp = new JButton("Avtaler");
-        JButton beskjedKnapp = new JButton("Beskjeder");
-        JButton handlelisteKnapp = new JButton("Handleliste");
+        leggTilPleietrengendeKnapp = new JButton("Legg til pleietrengende");
+        avtalerKnapp = new JButton("Avtaler");
+        beskjedKnapp = new JButton("Beskjeder");
+        handlelisteKnapp = new JButton("Handleliste");
 
         Dimension buttonSize = new Dimension(200, 100);
         leggTilPleietrengendeKnapp.setPreferredSize(buttonSize);
@@ -119,10 +123,12 @@ public class MainPage extends JFrame {
         setVisible(true);
     }
 
-    public void oppdaterInfo(Pleietrengende pleietrengende) {
+    public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {
         this.pleietrengende = pleietrengende;
         String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
         pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
+        avtalerKnapp.setEnabled(true);
+        beskjedKnapp.setEnabled(true);
         repaint();
     }
     public void visHovedside() {

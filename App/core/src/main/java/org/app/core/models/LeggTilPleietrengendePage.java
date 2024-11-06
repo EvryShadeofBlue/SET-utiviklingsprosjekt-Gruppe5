@@ -58,6 +58,8 @@ public class LeggTilPleietrengendePage extends JFrame {
 
             if (erLeggetTil) {
                 JOptionPane.showMessageDialog(this, "Pleietrengende er lagt til.");
+                mainPage.oppdaterPleietrengendeInfo(pleietrengende);
+                mainPage.visHovedside();
             }
             else {
                 JOptionPane.showMessageDialog(this, "Feil ved opprettelse av pleietrengende. Du har allerede en pleietrengende.");
