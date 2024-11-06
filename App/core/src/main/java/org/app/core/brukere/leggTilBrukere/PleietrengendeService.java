@@ -13,9 +13,13 @@ public class PleietrengendeService {
         this.pleietrengendeRepository = pleietrengendeRepository;
     }
 
-    public Pleietrengende leggTilPleietrengende(String fornavn, String etternavn, List<Parorende> parorende) {
-        Pleietrengende nyPleietrengende = new Pleietrengende(0, fornavn, etternavn, parorende);
-        pleietrengendeRepository.lagrePleietrengende(nyPleietrengende);
-        return nyPleietrengende;
+    public boolean leggTilPleietrengende(Pleietrengende pleietrengende, int parorendeId) {
+        Pleietrengende eksisterendePleietrengende = pleietrengendeRepository.finnPleietrengendeAvParorende(parorendeId);
+        if (eksisterendePleietrengende != null) {
+            return false;
+        }
+        pleietrengendeRepository.lagrePleietrengende(pleietrengende);
+        return true;
     }
+
 }
