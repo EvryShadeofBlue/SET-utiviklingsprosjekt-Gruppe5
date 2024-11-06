@@ -1,4 +1,6 @@
-package org.app.core.models;
+package org.app.core.brukere;
+
+import org.app.core.brukere.Parorende;
 
 import java.util.List;
 

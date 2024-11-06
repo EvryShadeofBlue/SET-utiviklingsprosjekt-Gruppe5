@@ -1,4 +1,4 @@
-package org.app.core.models;
+package org.app.core.brukere;
 
 public class Parorende {
     private int parorendeId;
