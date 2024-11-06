@@ -6,6 +6,8 @@ import org.app.core.avtaler.AvtaleService;
 import org.app.core.beskjeder.BeskjedDBImplementation;
 import org.app.core.beskjeder.BeskjedPage;
 import org.app.core.beskjeder.BeskjedService;
+import org.app.core.brukere.pleietrengende.PleietrengendeDBImplementation;
+import org.app.core.brukere.pleietrengende.PleietrengendeService;
 import org.app.core.brukere.pårørende.Parorende;
 import org.app.core.brukere.pleietrengende.Pleietrengende;
 
@@ -19,6 +21,7 @@ public class MainPage extends JFrame {
     private Pleietrengende pleietrengende;
     private BeskjedService beskjedService;
     private AvtaleService avtaleService;
+    private PleietrengendeService pleietrengendeService;
 
     public MainPage(Parorende parorende, Pleietrengende pleietrengende) {
         setTitle("Hovedside ");
@@ -107,7 +110,11 @@ public class MainPage extends JFrame {
             }
         });
 
-        leggTilPleietrengendeKnapp.addActionListener(e -> new LeggTilPleietrengendePage());
+        pleietrengendeService = new PleietrengendeService(new PleietrengendeDBImplementation());
+        leggTilPleietrengendeKnapp.addActionListener(e -> {
+            new LeggTilPleietrengendePage(pleietrengendeService, parorende.getParorendeId(), this);
+            this.setVisible(false);
+        });
 
         setVisible(true);
     }
