@@ -1,5 +1,15 @@
 package org.app.core.models;
 
+import org.app.core.avtaler.AvtaleDBImplementation;
+import org.app.core.avtaler.AvtalePage;
+import org.app.core.avtaler.AvtaleService;
+import org.app.core.beskjeder.BeskjedDBImplementation;
+import org.app.core.beskjeder.BeskjedPage;
+import org.app.core.beskjeder.BeskjedService;
+import org.app.core.brukere.pleietrengende.PleietrengendeDBImplementation;
+import org.app.core.brukere.pleietrengende.PleietrengendeService;
+import org.app.core.brukere.pårørende.Parorende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,14 +19,21 @@ import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 
 public class MainPage extends JFrame {
-    private JLabel relativeNameLabel;
-    private JLabel careRecieverNameLabel;
-    private JLabel relativeNameValue;
-    private JLabel careRecieverNameValue;
+    private JLabel parorendeNavnLabel;
+    private JLabel pleietrengendeNavnLabel;
+    private Parorende parorende;
+    private Pleietrengende pleietrengende;
     private BeskjedService beskjedService;
+    private AvtaleService avtaleService;
+    private PleietrengendeService pleietrengendeService;
+    private JButton leggTilPleietrengendeKnapp;
+    private JButton avtalerKnapp;
+    private JButton beskjedKnapp;
+    private JButton handlelisteKnapp;
 
     private Parorende parorende;
     private Pleietrengende pleietrengende;
+
 
     public MainPage(Parorende parorende, Pleietrengende pleietrengende) {
         setTitle("Hovedside ");
@@ -38,9 +55,9 @@ public class MainPage extends JFrame {
         g1.gridx = 0;
         g1.gridy = 0;
         g1.anchor = GridBagConstraints.NORTHWEST;
-        relativeNameLabel = new JLabel("Deg: " + parorende.getFornavn() + " " + parorende.getEtternavn());
-        add(relativeNameLabel, g1);
-        relativeNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        parorendeNavnLabel = new JLabel("Deg: " + parorende.getFornavn() + " " +  parorende.getEtternavn());
+        add(parorendeNavnLabel, g1);
+        parorendeNavnLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
         String pleietrengendeNavn;
         if (pleietrengende != null) {
@@ -51,14 +68,14 @@ public class MainPage extends JFrame {
         }
 
         g1.gridy = 1;
-        careRecieverNameLabel = new JLabel("Pleietrengende: " + (pleietrengendeNavn.isEmpty() ? "Ingen pleietrengende registrert" : pleietrengendeNavn));
-        add(careRecieverNameLabel, g1);
-        careRecieverNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        pleietrengendeNavnLabel = new JLabel("Pleietrengende: " + pleietrengendeNavn);
+        add(pleietrengendeNavnLabel, g1);
+        pleietrengendeNavnLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
-        JButton leggTilPleietrengendeKnapp = new JButton("Legg til pleietrengende");
-        JButton avtalerKnapp = new JButton("Avtaler");
-        JButton beskjedKnapp = new JButton("Beskjeder");
-        JButton handlelisteKnapp = new JButton("Handleliste");
+        leggTilPleietrengendeKnapp = new JButton("Legg til pleietrengende");
+        avtalerKnapp = new JButton("Avtaler");
+        beskjedKnapp = new JButton("Beskjeder");
+        handlelisteKnapp = new JButton("Handleliste");
 
         Dimension buttonSize = new Dimension(200, 100);
         leggTilPleietrengendeKnapp.setPreferredSize(buttonSize);
@@ -81,10 +98,48 @@ public class MainPage extends JFrame {
 
         setVisible(true);
 
-        beskjedService = new BeskjedService(new BeskjedImpl());
-        beskjedKnapp.addActionListener(e -> new BeskjedOptions(beskjedService, parorende, pleietrengende));
+        beskjedService = new BeskjedService(new BeskjedDBImplementation());
+        beskjedKnapp.addActionListener(e -> {
+            if (pleietrengende != null) {
+                new BeskjedPage(beskjedService, parorende, pleietrengende, this);
+                this.setVisible(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(this,
+                        "Legg til en pleietrengende for å få tilgang til denne siden.",
+                        "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
+            }});
 
+        avtaleService = new AvtaleService(new AvtaleDBImplementation());
+        avtalerKnapp.addActionListener(e -> {
+            if (pleietrengende != null) {
+                new AvtalePage(avtaleService, parorende, pleietrengende, this);
+                this.setVisible(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende for å få tilgang til denne siden.",
+                        "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
+            }
+        });
 
+        pleietrengendeService = new PleietrengendeService(new PleietrengendeDBImplementation());
+        leggTilPleietrengendeKnapp.addActionListener(e -> {
+            new LeggTilPleietrengendePage(pleietrengendeService, parorende.getParorendeId(), this);
+            this.setVisible(false);
+        });
+
+        setVisible(true);
+    }
+
+    public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
+        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
+        pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
+        avtalerKnapp.setEnabled(true);
+        beskjedKnapp.setEnabled(true);
+        repaint();
+    }
+    public void visHovedside() {
         setVisible(true);
     }
 }

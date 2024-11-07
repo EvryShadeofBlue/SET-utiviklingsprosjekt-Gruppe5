@@ -1,5 +1,7 @@
 package org.app.core.models;
 
+import org.app.core.brukere.pleietrengende.Pleietrengende;
+import org.app.core.brukere.pårørende.Parorende;
 import org.app.core.database.Export;
 
 import javax.swing.*;

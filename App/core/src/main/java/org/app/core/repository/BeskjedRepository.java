@@ -1,6 +1,8 @@
 package org.app.core.repository;
 
-import org.app.core.models.Beskjed;
+import org.app.core.beskjeder.Beskjed;
+
+import java.util.List;
 
 
 public interface BeskjedRepository {
@@ -12,5 +14,6 @@ public interface BeskjedRepository {
     void slettBeskjed(int beskjedId);
 
     Beskjed hentBeskjed(int beskjedId);
+    List<Beskjed> hentBeskjedForParorende(int parorendeId);
 }
 

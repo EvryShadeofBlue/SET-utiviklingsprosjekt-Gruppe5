@@ -1,4 +1,4 @@
-package org.app.core.models;
+package org.app.core.brukere.pårørende;
 
 public class Parorende {
     private int parorendeId;
@@ -25,6 +25,10 @@ public class Parorende {
         this.parorendeId = parorendeId;
         this.fornavn = parorendeFornavn;
         this.etternavn = parorendeEtternavn;
+    }
+
+    public Parorende() {
+
     }
 
     public int getParorendeId() {

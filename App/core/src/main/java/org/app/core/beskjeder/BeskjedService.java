@@ -1,9 +1,11 @@
-package org.app.core.models;
+package org.app.core.beskjeder;
 
-import org.app.core.models.Beskjed;
+import org.app.core.brukere.pårørende.Parorende;
+import org.app.core.brukere.pleietrengende.Pleietrengende;
 import org.app.core.repository.BeskjedRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class BeskjedService {
@@ -21,8 +23,8 @@ public class BeskjedService {
         return beskjed;
     }
 
-    public Beskjed oppdaterBeskjed(int beskjedId, Beskjed nyBeskjed) {
-        Beskjed eksisterendeBeskjed = beskjedRepository.hentBeskjed(beskjedId);
+    public Beskjed oppdaterBeskjed(Beskjed nyBeskjed) {
+        Beskjed eksisterendeBeskjed = beskjedRepository.hentBeskjed(nyBeskjed.getBeskjedId());
 
         if (eksisterendeBeskjed != null) {
             if (nyBeskjed.getDatoOgTid() != null) {
@@ -34,19 +36,35 @@ public class BeskjedService {
             if (nyBeskjed.getSynligTidsenhet() > 0) {
                 eksisterendeBeskjed.setSynligTidsenhet(nyBeskjed.getSynligTidsenhet());
             }
+            if (nyBeskjed.getParorende() != null) {
+                eksisterendeBeskjed.setParorende(nyBeskjed.getParorende());
+            }
+            if (nyBeskjed.getPleietrengende() != null) {
+                eksisterendeBeskjed.setPleietrengende(nyBeskjed.getPleietrengende());
+            }
+
             beskjedRepository.oppdaterBeskjed(eksisterendeBeskjed);
             return eksisterendeBeskjed;
         }
         return null;
     }
 
+
+
     public boolean slettBeskjed(int beskjedId) {
-        Beskjed beskjed = beskjedRepository.hentBeskjed(beskjedId);
-        if (beskjed != null) {
+        try {
             beskjedRepository.slettBeskjed(beskjedId);
             return true;
         }
-        return false;
+        catch (Exception e) {
+            return false;
+        }
+    }
+    public List<Beskjed> hentBeskjedForParorende(Parorende parorende) {
+        List<Beskjed> beskjeder = beskjedRepository.hentBeskjedForParorende(parorende.getParorendeId());
+        beskjeder.sort((b1, b2) -> b2.getDatoOgTid().compareTo(b1.getDatoOgTid()));
+        return beskjeder;
+
     }
 
 }
