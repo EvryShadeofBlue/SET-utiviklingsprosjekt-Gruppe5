@@ -5,29 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="changed the method for login in loginpage">
-      <change afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Diagram/visning av beskjeder.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Cryption.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-20_15_06__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_40_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_40__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_41_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-10-21_21_41__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/BeskjedOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/BeskjedOptions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Resources.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/TaskDisplayPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/TaskDisplayPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +33,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="Feature-AF-appUtvikling" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -54,7 +49,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
-    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
+    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -71,12 +66,13 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Cryption.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feature-AF-appUtvikling&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/Screen&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -96,10 +92,6 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="models" />
     </key>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\thgl0\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">

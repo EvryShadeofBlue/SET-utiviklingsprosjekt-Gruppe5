@@ -123,7 +123,8 @@ public class RegistrationPage extends JFrame{
         String lastName = lastNameField.getText();
         String mobileNumber = mobileField.getText();
         String email = emailField.getText();
-        String password = new String(passwordField.getPassword());
+        String pass = new String(passwordField.getPassword());
+        String password = Cryption.hashPasswordWithSalt(pass);
 
 
         String insertParorendeQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";

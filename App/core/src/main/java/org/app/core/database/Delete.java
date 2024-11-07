@@ -1,11 +1,13 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
 import java.sql.*;
 
 public class Delete {
-    String url = Resources.url;
-    String user = Resources.user;
-    String password = Resources.password;
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
 
     public void deleteParorende(int parorende_id) {
 

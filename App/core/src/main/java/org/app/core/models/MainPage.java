@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import org.app.core.models.Parorende;
+import org.app.core.models.Pleietrengende;
 
 public class MainPage extends JFrame {
     private JLabel relativeNameLabel;
@@ -13,7 +15,10 @@ public class MainPage extends JFrame {
     private JLabel careRecieverNameValue;
     private BeskjedService beskjedService;
 
-    public MainPage(String relativeName, String careRecieverName) {
+    private Parorende parorende;
+    private Pleietrengende pleietrengende;
+
+    public MainPage(Parorende parorende, Pleietrengende pleietrengende) {
         setTitle("Hovedside ");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,12 +38,20 @@ public class MainPage extends JFrame {
         g1.gridx = 0;
         g1.gridy = 0;
         g1.anchor = GridBagConstraints.NORTHWEST;
-        relativeNameLabel = new JLabel("Deg: " + relativeName);
+        relativeNameLabel = new JLabel("Deg: " + parorende.getFornavn() + " " + parorende.getEtternavn());
         add(relativeNameLabel, g1);
         relativeNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
+        String pleietrengendeNavn;
+        if (pleietrengende != null) {
+            pleietrengendeNavn = pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn();
+        }
+        else {
+            pleietrengendeNavn = "Ingen pleietrengende";
+        }
+
         g1.gridy = 1;
-        careRecieverNameLabel = new JLabel("Pleietrengende: " + (careRecieverName.isEmpty() ? "Ingen pleietrengende registrert" : careRecieverName));
+        careRecieverNameLabel = new JLabel("Pleietrengende: " + (pleietrengendeNavn.isEmpty() ? "Ingen pleietrengende registrert" : pleietrengendeNavn));
         add(careRecieverNameLabel, g1);
         careRecieverNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
@@ -69,7 +82,8 @@ public class MainPage extends JFrame {
         setVisible(true);
 
         beskjedService = new BeskjedService(new BeskjedImpl());
-        beskjedKnapp.addActionListener(e -> new BeskjedOptions(beskjedService));
+        beskjedKnapp.addActionListener(e -> new BeskjedOptions(beskjedService, parorende, pleietrengende));
+
 
         setVisible(true);
     }

@@ -1,12 +1,14 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
 import java.sql.*;
+import org.app.core.models.Resources;
 
 public class Export {
-    public static void main(String[] args) {
-        String url = Resources.url;
-        String user = Resources.user;
-        String password = Resources.password;
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
 
     public void exportParorende() {
 
@@ -33,6 +35,7 @@ public class Export {
             e.printStackTrace();
         }
     }
+
     public void exportPleietrengende() {
 
         String exportQuery = "SELECT * FROM pleietrengende;";
@@ -57,6 +60,7 @@ public class Export {
             e.printStackTrace();
         }
     }
+
     public void exportAvtaler() {
 
         String exportQuery = "SELECT * FROM avtaler;";
@@ -83,6 +87,7 @@ public class Export {
             e.printStackTrace();
         }
     }
+
     public void exportBeskjeder() {
 
         String exportQuery = "SELECT * FROM beskjeder;";
@@ -110,6 +115,7 @@ public class Export {
             e.printStackTrace();
         }
     }
+
     public void exportHandleliste() {
 
         String exportQuery = "SELECT * FROM handleliste;";
@@ -134,6 +140,7 @@ public class Export {
             e.printStackTrace();
         }
     }
+
     public void exportHandlelisteVarer() {
 
         String exportQuery = "SELECT * FROM handlelisteVarer;";
@@ -157,6 +164,7 @@ public class Export {
             e.printStackTrace();
         }
     }
+
     public boolean verifyLogin(String email, String pass) {
 
         String exportQuery = "SELECT * FROM innlogging where epost = ? and passord = ?;";

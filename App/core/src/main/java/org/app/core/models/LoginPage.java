@@ -95,7 +95,8 @@ public class LoginPage extends JFrame {
     }
     public void getLogIn() {
         String enteredEmail = emailField.getText();
-        String enteredPassword = new String(passwordField.getPassword());
+        String enteredPass = new String(passwordField.getPassword());
+        String enteredPassword = Cryption.hashPasswordWithSalt(enteredPass);
 
         String loginQuery = "select i.parorende_id, p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, " +
                 "pl.pleietrengende_id, pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn " +

@@ -1,13 +1,15 @@
 package org.app.core.database;
 
+import org.app.core.models.Resources;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 
 public class Import {
-    String url = Resources.url;
-    String user = Resources.user;
-    String password = Resources.password;
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
     public void importParorende(String firstName, String lastName, String number, String email) {
 
         String insertQuery = "INSERT INTO parorende (fornavn, etternavn, tlf, epost) VALUES (?, ?, ?, ?)";
