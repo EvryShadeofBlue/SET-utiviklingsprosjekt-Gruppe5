@@ -2,8 +2,8 @@ package org.app.database;
 
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
-import org.app.core.services.LoggService;
 import org.app.core.models.Resources;
+import org.app.core.services.LoggService;
 import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;
 
