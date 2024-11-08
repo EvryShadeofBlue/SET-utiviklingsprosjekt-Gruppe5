@@ -4,51 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Done some changes">
-      <change afterPath="$PROJECT_DIR$/GUI/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/ActivityListPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/TaskDisplayPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc">
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/Avtale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleDBImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePageImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtalePageImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/avtaler/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/Beskjed.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/Beskjed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedDBImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/BeskjedService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedVisningsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/beskjeder/BeskjedVisningsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/brukere/pleietrengende/Pleietrengende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/brukere/Pleietrengende.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/brukere/pleietrengende/PleietrengendeDBImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/brukere/pleietrengende/PleietrengendeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/PleietrengendeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/brukere/pårørende/Parorende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/brukere/Parorende.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Delete.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Export.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/database/Import.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ActivityListPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LeggTilPleietrengendePage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoggService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/LoggService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/LoginPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/MainPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/RegistrationPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/TaskDisplayPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/PleietrengendeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repository/PleietrengendeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="Feature-AF-appUtvikling" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -81,7 +43,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
-    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
+    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -95,26 +57,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.Cryption.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Feature-TG",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database",
-    "last_opened_file_path": "C:/Users/arama/Downloads/jcalendar-1.4.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Cryption.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/project/SET-utiviklingsprosjekt-Gruppe5/App&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core" />
@@ -141,14 +103,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Changes in login verification">
-      <option name="closed" value="true" />
-      <created>1729699237119</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1729699237119</updated>
     </task>
     <task id="LOCAL−00006" summary="Created Resource class in models to contain static variables for the database and did some changes in the delete class">
       <option name="closed" value="true" />
@@ -486,7 +440,15 @@
       <option name="presentableId" value="LOCAL−00053" />
       <updated>1730837451819</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="misc">
+      <option name="closed" value="true" />
+      <created>1731052105766</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1731052105766</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +463,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added method for returning beskjed for relative" />
     <MESSAGE value="implemented the logic for the sql query for getting all the beskjeder a parorende has created" />
     <MESSAGE value="addded the opportunity to view created beskjeder" />
     <MESSAGE value="did some major changes in the different methods" />
@@ -526,6 +487,7 @@
     <MESSAGE value="did some changes" />
     <MESSAGE value="added the method that shows avtaler" />
     <MESSAGE value="Done some changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done some changes" />
+    <MESSAGE value="misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc" />
   </component>
 </project>

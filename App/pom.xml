@@ -12,7 +12,7 @@
         <module>core</module>
         <module>tests</module>
         <module>database</module>
-        <module>GUI</module>
+        <module>gui</module>
     </modules>
 
     <properties>

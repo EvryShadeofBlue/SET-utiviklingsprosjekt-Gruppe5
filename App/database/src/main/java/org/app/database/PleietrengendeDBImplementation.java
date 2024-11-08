@@ -7,10 +7,15 @@ import org.app.core.repositories.PleietrengendeRepository;
 import java.sql.*;
 
 public class PleietrengendeDBImplementation implements PleietrengendeRepository {
+
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
+
     private Connection connection;
     public PleietrengendeDBImplementation() {
         try {
-            connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+            connection = DriverManager.getConnection(url, user, password);
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();

@@ -13,12 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AvtaleDBImplementation implements AvtaleRepository {
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
+
     private Connection connection;
     private LoggService loggService;
 
     public AvtaleDBImplementation() {
         try {
-            connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+            connection = DriverManager.getConnection(url, user, password);
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -28,8 +32,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     @Override
     public void oppretteAvtale(Avtale avtale) {
         String opprettAvtaleQuery = "Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) values (?, ?, ?, ?, ?, ?)";
-        String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
-                "values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')";
+        //String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+         //       "values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')";
         try (PreparedStatement avtaleStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS)) {
             avtaleStatement.setString(1, avtale.getBeskrivelse());
             avtaleStatement.setObject(2, avtale.getDatoOgTid());
@@ -53,11 +57,11 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             ResultSet generatedKeys = avtaleStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int avtaleId = generatedKeys.getInt(1);
-                try (PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
-                    loggStatement.setInt(1, avtale.getParorende().getParorendeId());
-                    loggStatement.setInt(2, avtaleId);
-                    loggStatement.executeUpdate();
-                }
+//                try (PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
+//                    loggStatement.setInt(1, avtale.getParorende().getParorendeId());
+//                    loggStatement.setInt(2, avtaleId);
+//                    loggStatement.executeUpdate();
+//                }
             }
         }
         catch (SQLException sqlException) {

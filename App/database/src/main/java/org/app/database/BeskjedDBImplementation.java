@@ -13,13 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BeskjedDBImplementation implements BeskjedRepository {
+
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
+
     private Connection connection;
     //private LoggService loggService;
     private Parorende parorende;
 
     public BeskjedDBImplementation() {
         try {
-            connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+            connection = DriverManager.getConnection(url, user, password);
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
