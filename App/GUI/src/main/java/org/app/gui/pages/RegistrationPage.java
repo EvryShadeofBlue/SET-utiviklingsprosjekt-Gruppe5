@@ -27,6 +27,10 @@ public class RegistrationPage extends JFrame{
 
     private Parorende parorende;
 
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String dbPassword = Resources.getPassword();
+
     public RegistrationPage() {
         setTitle("Registration Page");
         setSize(400, 800);
@@ -130,7 +134,7 @@ public class RegistrationPage extends JFrame{
 
         String insertParorendeQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+        try (Connection connection = DriverManager.getConnection(url, user, dbPassword);
              PreparedStatement preparedStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
@@ -167,8 +171,6 @@ public class RegistrationPage extends JFrame{
             exception.printStackTrace();
             JOptionPane.showMessageDialog(this, "Registrering feilet. " + exception.getMessage());
         }
-
-
     }
     private void clearFields() {
         firstNameField.setText("");
