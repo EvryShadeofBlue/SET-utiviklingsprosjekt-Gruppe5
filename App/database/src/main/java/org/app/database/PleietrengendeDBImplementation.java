@@ -1,7 +1,6 @@
 package org.app.database;
 
 import org.app.core.models.Pleietrengende;
-import org.app.core.models.Resources;
 import org.app.core.repositories.PleietrengendeRepository;
 
 import java.sql.*;

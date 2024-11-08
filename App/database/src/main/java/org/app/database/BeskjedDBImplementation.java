@@ -4,7 +4,6 @@ import org.app.core.models.Beskjed;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 
-import org.app.core.models.Resources;
 import org.app.core.repositories.BeskjedRepository;
 
 import java.sql.*;
