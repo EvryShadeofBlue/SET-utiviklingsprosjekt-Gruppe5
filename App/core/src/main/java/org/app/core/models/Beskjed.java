@@ -3,13 +3,14 @@ package org.app.core.models;
 import java.time.LocalDateTime;
 
 public class Beskjed {
-    private int beskjedId; // Brukes kun for testing
+    private int beskjedId;
     private String beskrivelse;
-    private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv
+    private int synligTidsenhet;
     private LocalDateTime datoOgTid;
+    private Parorende parorende;
+    private Pleietrengende pleietrengende;
 
 
-    // konstruktøren under er til testingen.
     public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
         this.beskjedId = beskjedId;
         this.datoOgTid = datoOgTid;
@@ -17,17 +18,33 @@ public class Beskjed {
         this.synligTidsenhet = synligTidsenhet;
     }
 
-    // den faktiske konstryktøren som skal benyttes
-    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
+    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Parorende parorende, Pleietrengende pleietrengende) {
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
         this.synligTidsenhet = synligTidsenhet;
+        this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
     }
 
-    //get og set metoder
+    public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Pleietrengende pleietrengende, Parorende parorende) {
+        this.beskjedId = beskjedId;
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.synligTidsenhet = synligTidsenhet;
+        this.pleietrengende = pleietrengende;
+        this.parorende = parorende;
+    }
+
+    public Beskjed() {
+
+    }
+
 
     public int getBeskjedId() {
         return beskjedId;
+    }
+    public void setBeskjedId (int beskjedId) {
+        this.beskjedId = beskjedId;
     }
 
     public String getBeskrivelse() {
@@ -50,5 +67,21 @@ public class Beskjed {
 
     public void setDatoOgTid(LocalDateTime datoOgTid) {
         this.datoOgTid = datoOgTid;
+    }
+
+    public Parorende getParorende() {
+        return parorende;
+    }
+
+    public void setParorende(Parorende parorende) {
+        this.parorende = parorende;
+    }
+
+    public Pleietrengende getPleietrengende() {
+        return pleietrengende;
+    }
+
+    public void setPleietrengende(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
     }
 }
