@@ -101,6 +101,9 @@ public class RegistrationPage extends JFrame{
         g1.anchor = GridBagConstraints.WEST;
         add(backToLoginButton = new JButton("Tilbake til innlogging"), g1);
 
+        getRootPane().setDefaultButton(registerButton);
+
+
         setVisible(true);
 
         registerButton.addActionListener(new ActionListener() {
@@ -125,6 +128,12 @@ public class RegistrationPage extends JFrame{
         String mobileNumber = mobileField.getText();
         String email = emailField.getText();
         String pass = new String(passwordField.getPassword());
+
+        if (firstName.isEmpty() || lastName.isEmpty() || mobileNumber.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fyll ut alle feltene");
+            return;
+        }
+
         String password = Cryption.hashPasswordWithSalt(pass);
 
 

@@ -2,9 +2,13 @@ package org.app.gui.pages;
 
 import org.app.core.models.Pleietrengende;
 import org.app.core.services.PleietrengendeService;
+import org.app.database.PleietrengendeDBImplementation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class LeggTilPleietrengendePage extends JFrame {
     private JTextField fornavnTekstFelt;
@@ -14,6 +18,7 @@ public class LeggTilPleietrengendePage extends JFrame {
     private MainPage mainPage;
     private PleietrengendeService pleietrengendeService;
     private int parorendeId;
+
     public LeggTilPleietrengendePage(PleietrengendeService pleietrengendeService, int parorendeId, MainPage mainPage) {
         this.pleietrengendeService = pleietrengendeService;
         this.parorendeId = parorendeId;
@@ -48,7 +53,8 @@ public class LeggTilPleietrengendePage extends JFrame {
             String etternavn = etternavnTekstFelt.getText();
 
             if (fornavn.isEmpty() || etternavn.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Fornavn og etternavn kan ikke være kan ikke være tomme.");
+                JOptionPane.showMessageDialog(this, "Fornavn og etternavn" +
+                        " kan ikke være kan ikke være tomme.");
                 return;
             }
 
@@ -58,11 +64,18 @@ public class LeggTilPleietrengendePage extends JFrame {
 
             if (erLeggetTil) {
                 JOptionPane.showMessageDialog(this, "Pleietrengende er lagt til.");
+
+                PleietrengendeDBImplementation db = new PleietrengendeDBImplementation();
+                int id = db.hentPleietrengendeId(fornavn, etternavn);
+                writePleietrengendeIdToFile(id);
+
                 mainPage.oppdaterPleietrengendeInfo(pleietrengende);
                 mainPage.visHovedside();
+                this.dispose();
             }
             else {
-                JOptionPane.showMessageDialog(this, "Feil ved opprettelse av pleietrengende. Du har allerede en pleietrengende.");
+                JOptionPane.showMessageDialog(this, "Feil ved opprettelse av pleietrengende." +
+                        " Du har allerede en pleietrengende.");
             }
 
         });
@@ -77,11 +90,26 @@ public class LeggTilPleietrengendePage extends JFrame {
         JPanel knappPanel = new JPanel();
         knappPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
         knappPanel.add(lagreKnapp);
-        add(lagreKnapp);
-        add(tilbakeKnapp);
-
-
+        knappPanel.add(tilbakeKnapp);
+        add(knappPanel);
 
         setVisible(true);
+    }
+
+    private void writePleietrengendeIdToFile(int pleietrengende_id) {
+        try {
+            String currentDir = System.getProperty("user.dir");
+            File parentDir = new File(currentDir).getParentFile();
+            File file = new File(parentDir, "pleietrengende_id.txt");
+
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(String.valueOf(pleietrengende_id));
+            }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Kunne ikke lagre pleietrengende" +
+                        " ID til fil.", "Feil", JOptionPane.ERROR_MESSAGE);
+            }
     }
 }
