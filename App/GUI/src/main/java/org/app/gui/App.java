@@ -8,7 +8,5 @@ public class App {
         new LoginPage();
         //new LeggTilPleietrengendePage();
         //new MainPage("Aram Farhad", "Farhad");
-        //new ActivityListPage();
-        //new TaskDisplayPage();
     }
 }
