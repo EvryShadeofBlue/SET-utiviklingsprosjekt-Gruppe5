@@ -1,8 +1,5 @@
 import org.screen.core.database.Export;
-import org.screen.core.models.Avtale;
-import org.screen.core.models.Beskjed;
-import org.screen.core.models.TimerService;
-import org.screen.core.models.Weather;
+import org.screen.core.models.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +10,8 @@ import java.util.List;
 
 public class Screen {
     public static void main(String[] args) {
+
+        int pleietrengende_id = FileHandling.readPleietrengendeIdFromFile();
 
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();   //Henter maskinens resolution
 
@@ -81,7 +80,7 @@ public class Screen {
         centeredPanel.add(weatherPanel);    //sentrerer verticalt
 
         Export exporter = new Export();     //lager en instans av Export klassen
-        List<Beskjed> beskjederList = exporter.exportBeskjeder(1);    //henter beskjeder fra databasen
+        List<Beskjed> beskjederList = exporter.exportBeskjeder(pleietrengende_id);    //henter beskjeder fra databasen
 
         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
@@ -93,7 +92,7 @@ public class Screen {
         JLabel beskjedLabel = new JLabel(beskjeder.toString(), SwingConstants.CENTER);    //lager en label med beskjedene
         beskjedLabel.setFont(new Font("Beskjeder", Font.BOLD, 40));    //redigerer fonten
 
-        List<Avtale> avtaleList = exporter.exportAvtalerToday(1);
+        List<Avtale> avtaleList = exporter.exportAvtalerToday(pleietrengende_id);
         StringBuilder avtaler = new StringBuilder("<html>");
         for (Avtale avtale : avtaleList) {
             avtaler.append("").append(avtale.getDateTime()).append("<br>");
@@ -104,7 +103,7 @@ public class Screen {
         JLabel avtaleLabel = new JLabel(avtaler.toString(), SwingConstants.CENTER);
         avtaleLabel.setFont(new Font("Avtaler", Font.BOLD, 40));
 
-        List<Avtale> avtaleListTmr = exporter.exportAvtalerTomorrow(1);
+        List<Avtale> avtaleListTmr = exporter.exportAvtalerTomorrow(pleietrengende_id);
         StringBuilder avtalerTmr = new StringBuilder("<html>");
         for (Avtale avtale : avtaleListTmr) {
             avtalerTmr.append("").append(avtale.getDateTime()).append("<br>");
