@@ -42,8 +42,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             opprettStatement.setObject(2, avtale.getDatoOgTid());
             opprettStatement.setObject(3, avtale.getGjentakelse());
             opprettStatement.setObject(4, avtale.getSluttDato());
-            opprettStatement.setInt(5, avtale.getParorende().getParorendeId());
-            opprettStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
+            opprettStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
+            opprettStatement.setInt(6, avtale.getParorende().getParorendeId());
             opprettStatement.executeUpdate();
 
             ResultSet generatedKeys = opprettStatement.getGeneratedKeys();
@@ -65,20 +65,23 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public void oppdaterAvtale(Avtale avtale) {
+        System.out.println("called");
         String oppdaterAvtaleQuery = "update Avtaler set beskrivelse = ?, dato_og_tid = ?, gjentakelse = ?, slutt_dato = ?, pleietrengende_id = ?, parorende_id = ? " +
                 "where avtale_id = ?";
         String loggOppdateringQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "values (?, ?, ?, ?, ?)";
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
              PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+            System.out.println("statements");
             oppdaterStatement.setString(1, avtale.getBeskrivelse());
             oppdaterStatement.setObject(2, avtale.getDatoOgTid());
             oppdaterStatement.setString(3, avtale.getGjentakelse());
             oppdaterStatement.setObject(4, avtale.getSluttDato());
-            oppdaterStatement.setInt(5, avtale.getParorende().getParorendeId());
-            oppdaterStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
+            oppdaterStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
+            oppdaterStatement.setInt(6, avtale.getParorende().getParorendeId());
             oppdaterStatement.setInt(7, avtale.getAvtaleId());
             oppdaterStatement.executeUpdate();
+            System.out.println("executed");
 
             loggStatement.setInt(1, avtale.getParorende().getParorendeId());
             loggStatement.setString(2, "pårørende");
@@ -87,6 +90,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             loggStatement.setString(5, "avtale");
             loggStatement.executeUpdate();
         } catch (SQLException sqlException) {
+            System.err.println(sqlException.getMessage());
             sqlException.printStackTrace();
         }
     }
