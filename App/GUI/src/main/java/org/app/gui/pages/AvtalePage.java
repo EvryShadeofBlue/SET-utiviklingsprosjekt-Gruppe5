@@ -75,8 +75,8 @@ public class AvtalePage extends JFrame{
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
         lagreKnapp.addActionListener(e -> opprettAvtale());
 
+        tilbakeKnapp = new JButton("Tilbake");
         JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton tilbakeKnapp = new JButton("Tilbake");
         tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
         tilbakeKnapp.addActionListener(e -> {
             this.dispose();
@@ -129,7 +129,7 @@ public class AvtalePage extends JFrame{
 
     private void visAvtaler() {
         avtaleListePanel.removeAll();
-        List<Avtale> avtaleListe = avtaleService.hentAvtaleForParorened(parorende);
+        List<Avtale> avtaleListe = avtaleService.hentAvtalerForParorende(parorende);
         DateTimeFormatter datoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -192,7 +192,9 @@ public class AvtalePage extends JFrame{
                 sluttDato = sluttDatoLocal.atStartOfDay();
             }
 
-            avtaleService.oppretteAvtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
+            Avtale avtale = new Avtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
+
+            avtaleService.opprettAvtale(avtale);
             JOptionPane.showMessageDialog(this, "Avtale opprettet. ");
             beskrivelsesFelt.setText("");
             datoFelt.setText("");
@@ -209,7 +211,7 @@ public class AvtalePage extends JFrame{
     }
 
     public void redigerAvtale(Avtale avtale) {
-        JFrame redigeringsVindu = new JFrame("Rediger Avale");
+        JFrame redigeringsVindu = new JFrame("Rediger Avtale");
         redigeringsVindu.setSize(400, 300);
         redigeringsVindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         redigeringsVindu.setLocationRelativeTo(this);
@@ -246,20 +248,19 @@ public class AvtalePage extends JFrame{
                 }
 
                 Avtale nyAvtale = new Avtale(avtale.getAvtaleId(), datoOgTid, beskrivelse, gjentakelse, sluttDato);
-                Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(nyAvtale);
 
-                if (oppdatertAvtale != null) {
+                boolean oppdatert = avtaleService.oppdaterAvtale(avtale, nyAvtale);
+
+                if (oppdatert) {
                     JOptionPane.showMessageDialog(redigeringsVindu, "Avtale oppdatert");
                     visAvtaler();
                     redigeringsVindu.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdatere avtale. Vennligst prøv på nytt.");
+                    System.err.println("Avtale kunne ikke oppdateres.");
                 }
-                else {
-                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdatere avtale. " +
-                            "Vennligst prøv på nytt");
-                }
-            }
-            catch (Exception exception) {
-                JOptionPane.showMessageDialog(redigeringsVindu, "Det oppsto en feil endringen." + exception.getMessage());
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(redigeringsVindu, "Det oppsto en feil under endringen." + exception.getMessage());
                 exception.printStackTrace();
             }
         });
@@ -269,12 +270,13 @@ public class AvtalePage extends JFrame{
         panel.add(createInputPanel("Dato (yyyy-MM-dd):", datoFelt));
         panel.add(createInputPanel("Klokkeslett (HH:mm):", klokkeslettFelt));
         panel.add(createInputPanel("Gjentakelse:", gjentakelsesFelt));
-        panel.add(createInputPanel("sluttdato (yyyy-MM-dd):", sluttDatoFelt));
+        panel.add(createInputPanel("Sluttdato (yyyy-MM-dd):", sluttDatoFelt));
         panel.add(lagreKnapp);
 
         redigeringsVindu.add(panel);
         redigeringsVindu.setVisible(true);
     }
+
 
     public void slettAvtale(Avtale avtale) {
         int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
