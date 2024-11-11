@@ -76,4 +76,25 @@ public class PleietrengendeDBImplementation implements PleietrengendeRepository 
             sqlException.printStackTrace();
         }
     }
+    public int hentPleietrengendeId(String fornavn, String etternavn) {
+        String selectQuery = "SELECT pleietrengende_id FROM Pleietrengende WHERE fornavn = ? AND etternavn = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+
+            preparedStatement.setString(1, fornavn);
+            preparedStatement.setString(2, etternavn);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("pleietrengende_id");
+                }
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return -1;
+    }
 }

@@ -32,37 +32,31 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     @Override
     public void oppretteAvtale(Avtale avtale) {
         String opprettAvtaleQuery = "Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) values (?, ?, ?, ?, ?, ?)";
-        //String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
-         //       "values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')";
-        try (PreparedStatement avtaleStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS)) {
-            avtaleStatement.setString(1, avtale.getBeskrivelse());
-            avtaleStatement.setObject(2, avtale.getDatoOgTid());
-            if (avtale.getGjentakelse() != null) {
-                avtaleStatement.setString(3, avtale.getGjentakelse());
-            }
-            else {
-                avtaleStatement.setNull(3, Types.VARCHAR);
-            }
+        String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, ?, ?, ?, ?)";
 
-            if (avtale.getSluttDato() != null) {
-                avtaleStatement.setObject(4, avtale.getSluttDato());
-            }
-            else {
-                avtaleStatement.setNull(4, Types.TIMESTAMP);
-            }
-            avtaleStatement.setInt(5, avtale.getParorende().getParorendeId());
-            avtaleStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
-            avtaleStatement.executeUpdate();
+        try (PreparedStatement opprettStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
 
-            ResultSet generatedKeys = avtaleStatement.getGeneratedKeys();
+            opprettStatement.setString(1, avtale.getBeskrivelse());
+            opprettStatement.setObject(2, avtale.getDatoOgTid());
+            opprettStatement.setObject(3, avtale.getGjentakelse());
+            opprettStatement.setObject(4, avtale.getSluttDato());
+            opprettStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
+            opprettStatement.setInt(6, avtale.getParorende().getParorendeId());
+            opprettStatement.executeUpdate();
+
+            ResultSet generatedKeys = opprettStatement.getGeneratedKeys();
+            int beskjedId = -1;
             if (generatedKeys.next()) {
-                int avtaleId = generatedKeys.getInt(1);
-//                try (PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
-//                    loggStatement.setInt(1, avtale.getParorende().getParorendeId());
-//                    loggStatement.setInt(2, avtaleId);
-//                    loggStatement.executeUpdate();
-//                }
+                beskjedId = generatedKeys.getInt(1);
             }
+            loggStatement.setInt(1, avtale.getParorende().getParorendeId());
+            loggStatement.setString(2, "pårørende");
+            loggStatement.setString(3, "avtale opprettet");
+            loggStatement.setInt(4, beskjedId);
+            loggStatement.setString(5, "avtale");
+            loggStatement.executeUpdate();
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -71,48 +65,80 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public void oppdaterAvtale(Avtale avtale) {
+        System.out.println("called");
         String oppdaterAvtaleQuery = "update Avtaler set beskrivelse = ?, dato_og_tid = ?, gjentakelse = ?, slutt_dato = ?, pleietrengende_id = ?, parorende_id = ? " +
                 "where avtale_id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterAvtaleQuery)) {
-            preparedStatement.setString(1, avtale.getBeskrivelse());
-            preparedStatement.setObject(2, avtale.getDatoOgTid());
-            if (avtale.getGjentakelse() != null) {
-                preparedStatement.setString(3, avtale.getGjentakelse());
-            }
-            else {
-                preparedStatement.setNull(3, Types.VARCHAR);
-            }
-            if (avtale.getSluttDato() != null) {
-                preparedStatement.setObject(4, avtale.getSluttDato());
-            }
-            else {
-                preparedStatement.setNull(4, Types.TIMESTAMP);
-            }
-            preparedStatement.setInt(5, avtale.getParorende().getParorendeId());
-            preparedStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
-            preparedStatement.setInt(7, avtale.getAvtaleId());
-            preparedStatement.executeUpdate();
+        String loggOppdateringQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, ?, ?, ?, ?)";
+        try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
+             PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+            System.out.println("statements");
+            oppdaterStatement.setString(1, avtale.getBeskrivelse());
+            oppdaterStatement.setObject(2, avtale.getDatoOgTid());
+            oppdaterStatement.setString(3, avtale.getGjentakelse());
+            oppdaterStatement.setObject(4, avtale.getSluttDato());
+            oppdaterStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
+            oppdaterStatement.setInt(6, avtale.getParorende().getParorendeId());
+            oppdaterStatement.setInt(7, avtale.getAvtaleId());
+            oppdaterStatement.executeUpdate();
+            System.out.println("executed");
 
-            loggService.loggføring(avtale.getParorende().getParorendeId(), "pårørende", "avtale endret", avtale.getAvtaleId(), "avtale");
-        }
-        catch (SQLException sqlException) {
+            loggStatement.setInt(1, avtale.getParorende().getParorendeId());
+            loggStatement.setString(2, "pårørende");
+            loggStatement.setString(3, "avtale oppdatert");
+            loggStatement.setInt(4, avtale.getAvtaleId());
+            loggStatement.setString(5, "avtale");
+            loggStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.err.println(sqlException.getMessage());
             sqlException.printStackTrace();
-            sqlException.getMessage();
         }
-
     }
 
     @Override
     public void slettAvtale(int avtaleId) {
-        String sletteAvtaleQuery = "delete from Avtaler where avtale_id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sletteAvtaleQuery)) {
+        int parorende_id = 0;
+
+        String hentParorendeQuery = "SELECT parorende_id FROM Avtaler WHERE avtale_id = ?";
+        String slettBeskjedQuery = "DELETE FROM Avtaler WHERE avtale_id = ?";
+        String loggSlettQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                "values (?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(hentParorendeQuery);
             preparedStatement.setInt(1, avtaleId);
-            preparedStatement.executeUpdate();
-        }
-        catch (SQLException sqlException) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int parorendeId = resultSet.getInt("parorende_id");
+                Parorende parorende = new Parorende();
+                parorende.setParorendeId(parorendeId);
+                parorende_id = parorende.getParorendeId();
+            }
+        } catch(SQLException sqlException){
             sqlException.printStackTrace();
         }
 
+        try {
+
+            PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery);
+
+            loggStatement.setInt(1, parorende_id);
+            loggStatement.setString(2, "pårørende");
+            loggStatement.setString(3, "avtale slettet");
+            loggStatement.setInt(4, avtaleId);
+            loggStatement.setString(5, "avtale");
+            loggStatement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        try {
+            PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
+            slettStatement.setInt(1, avtaleId);
+            slettStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     @Override

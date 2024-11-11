@@ -107,7 +107,8 @@ public class MainPage extends JFrame {
                 this.setVisible(false);
             }
             else {
-                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende for å få tilgang til denne siden.",
+                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende" +
+                                " for å få tilgang til denne siden.",
                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
             }
         });
@@ -123,7 +124,8 @@ public class MainPage extends JFrame {
 
     public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {
         this.pleietrengende = pleietrengende;
-        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
+        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() +
+                " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
         pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
         avtalerKnapp.setEnabled(true);
         beskjedKnapp.setEnabled(true);

@@ -1,5 +1,11 @@
 package org.app.core.models;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Pleietrengende {
     private int pleietrengendeId;
     private String fornavn;
@@ -62,4 +68,6 @@ public class Pleietrengende {
     public void setParorende(Parorende parorende) {
         this.parorende = parorende;
     }
+
+
 }
