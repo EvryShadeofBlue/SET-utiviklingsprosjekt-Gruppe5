@@ -19,7 +19,6 @@ public class BeskjedDBImplementation implements BeskjedRepository {
     String password = Resources.getPassword();
 
     private Connection connection;
-    //private LoggService loggService;
     private Parorende parorende;
 
     public BeskjedDBImplementation() {

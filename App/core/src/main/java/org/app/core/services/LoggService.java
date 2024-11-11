@@ -18,8 +18,8 @@ public class LoggService {
             preparedStatement.setInt(1, brukerId);
             preparedStatement.setString(2, brukerType);
             preparedStatement.setString(3, handling);
-            preparedStatement.setObject(4, objektId);
-            preparedStatement.setObject(5, objektType);
+            preparedStatement.setInt(4, objektId);
+            preparedStatement.setString(5, objektType);
             preparedStatement.executeUpdate();
         }
         catch (SQLException sqlException) {
