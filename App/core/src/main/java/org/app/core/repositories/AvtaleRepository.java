@@ -14,7 +14,5 @@ public interface AvtaleRepository {
 
     Avtale hentAvtale(int avtaleId);
 
-    //List<Avtale> hentAlleAvtaler();
-
     List<Avtale> hentAvtalerForParorende(Parorende parorende);
 }

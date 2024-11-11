@@ -37,7 +37,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         try (PreparedStatement opprettStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
             opprettStatement.setString(1, avtale.getBeskrivelse());
-            opprettStatement.setTimestamp(2, java.sql.Timestamp.valueOf(avtale.getDatoOgTid()));  // Assuming Avtale's dato_og_tid is a LocalDateTime
+            opprettStatement.setTimestamp(2, java.sql.Timestamp.valueOf(avtale.getDatoOgTid()));
             opprettStatement.setInt(3, avtale.getPleietrengende().getPleietrengendeId());
             opprettStatement.setInt(4, avtale.getParorende().getParorendeId());
 
@@ -202,7 +202,6 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
                 int parorendeId = resultSet.getInt("parorende_id");
 
-                //Parorende parorende = new Parorende();
                 parorende.setParorendeId(parorendeId);
 
                 Pleietrengende pleietrengende = new Pleietrengende();
