@@ -30,16 +30,28 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public boolean opprettAvtale(Avtale avtale) {
-        String query = "INSERT INTO Avtaler (beskrivelse, dato_og_tid, pleietrengende_id, parorende_id) " +
-                "VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "values (?, ?, ?, ?, ?)";
         try (PreparedStatement opprettStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
             opprettStatement.setString(1, avtale.getBeskrivelse());
-            opprettStatement.setTimestamp(2, java.sql.Timestamp.valueOf(avtale.getDatoOgTid()));
-            opprettStatement.setInt(3, avtale.getPleietrengende().getPleietrengendeId());
-            opprettStatement.setInt(4, avtale.getParorende().getParorendeId());
+            opprettStatement.setObject(2, avtale.getDatoOgTid());
+            if (avtale.getGjentakelse() != null) {
+                opprettStatement.setString(3, avtale.getGjentakelse());
+            }
+            else {
+                opprettStatement.setNull(3, Types.VARCHAR);
+            }
+            if (avtale.getSluttDato() != null) {
+                opprettStatement.setObject(4, avtale.getSluttDato());
+            }
+            else {
+                opprettStatement.setNull(4, Types.TIMESTAMP);
+            }
+            opprettStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
+            opprettStatement.setInt(6, avtale.getParorende().getParorendeId());
 
             opprettStatement.executeUpdate();
 
@@ -68,7 +80,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             return false;
         }
 
-        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, sluttdato = ?, gjentakelse = ?, pleietrengende_id = ?, parorende_id = ? " +
+        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, slutt_dato = ?, gjentakelse = ?, pleietrengende_id = ?, parorende_id = ? " +
                 "WHERE avtale_id = ?";
         String loggOppdateringQuery = "INSERT INTO loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "VALUES (?, ?, ?, ?, ?)";
