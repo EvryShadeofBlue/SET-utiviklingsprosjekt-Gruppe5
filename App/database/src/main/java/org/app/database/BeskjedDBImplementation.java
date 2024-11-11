@@ -92,17 +92,32 @@ public class BeskjedDBImplementation implements BeskjedRepository {
 
     @Override
     public void slettBeskjed(int beskjedId) {
+        int parorende_id = 0;
 
+        String hentParorendeQuery = "SELECT parorende_id FROM Beskjeder WHERE beskjed_id = ?";
         String slettBeskjedQuery = "DELETE FROM Beskjeder WHERE beskjed_id = ?";
         String loggSlettQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "values (?, ?, ?, ?, ?)";
-        try (PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
-             PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery)) {
-            slettStatement.setInt(1, beskjedId);
-            slettStatement.executeUpdate();
 
-            int parorendeId = parorende.getParorendeId();
-            loggStatement.setInt(1, parorendeId);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(hentParorendeQuery);
+            preparedStatement.setInt(1, beskjedId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int parorendeId = resultSet.getInt("parorende_id");
+                Parorende parorende = new Parorende();
+                parorende.setParorendeId(parorendeId);
+                parorende_id = parorende.getParorendeId();
+            }
+        } catch(SQLException sqlException){
+                sqlException.printStackTrace();
+        }
+
+        try {
+
+            PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery);
+
+            loggStatement.setInt(1, parorende_id);
             loggStatement.setString(2, "pårørende");
             loggStatement.setString(3, "beskjed slettet");
             loggStatement.setInt(4, beskjedId);
@@ -112,7 +127,16 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+        try {
+            PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
+            slettStatement.setInt(1, beskjedId);
+            slettStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
     }
+
 
 
     @Override
