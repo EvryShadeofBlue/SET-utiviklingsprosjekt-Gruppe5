@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="did some changes in the create method for avtaler">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_11_2024_08_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_11_2024_08_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_11_2024_12_55__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_11_2024_12_55__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="Develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -66,14 +63,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-AF&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/project/SET-utiviklingsprosjekt-Gruppe5/App&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/SET5/School-project/App&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
 }</component>
@@ -103,34 +100,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00006" summary="Created Resource class in models to contain static variables for the database and did some changes in the delete class">
-      <option name="closed" value="true" />
-      <created>1730221009052</created>
-      <option name="number" value="LOCAL−00006" />
-      <option name="presentableId" value="LOCAL−00006" />
-      <updated>1730221009052</updated>
-    </task>
-    <task id="LOCAL−00007" summary="Did some changes in the variables for database connection">
-      <option name="closed" value="true" />
-      <created>1730221132226</created>
-      <option name="number" value="LOCAL−00007" />
-      <option name="presentableId" value="LOCAL−00007" />
-      <updated>1730221132226</updated>
-    </task>
-    <task id="LOCAL−00008" summary="changed the method for login in loginpage">
-      <option name="closed" value="true" />
-      <created>1730228379078</created>
-      <option name="number" value="LOCAL−00008" />
-      <option name="presentableId" value="LOCAL−00008" />
-      <updated>1730228379078</updated>
-    </task>
-    <task id="LOCAL−00009" summary="did some major changes in login page">
-      <option name="closed" value="true" />
-      <created>1730229557617</created>
-      <option name="number" value="LOCAL−00009" />
-      <option name="presentableId" value="LOCAL−00009" />
-      <updated>1730229557617</updated>
     </task>
     <task id="LOCAL−00010" summary="Created opportunity to sign in">
       <option name="closed" value="true" />
@@ -448,7 +417,36 @@
       <option name="project" value="LOCAL" />
       <updated>1731052105766</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="merge from feature-tg">
+      <option name="closed" value="true" />
+      <created>1731066951112</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1731066951112</updated>
+    </task>
+    <task id="LOCAL−00056" summary="restructured the class fromthe beginning so things can work again">
+      <option name="closed" value="true" />
+      <created>1731358521092</created>
+      <option name="number" value="LOCAL−00056" />
+      <option name="presentableId" value="LOCAL−00056" />
+      <updated>1731358521093</updated>
+    </task>
+    <task id="LOCAL−00057" summary="did some changes">
+      <option name="closed" value="true" />
+      <created>1731359789131</created>
+      <option name="number" value="LOCAL−00057" />
+      <option name="presentableId" value="LOCAL−00057" />
+      <updated>1731359789131</updated>
+    </task>
+    <task id="LOCAL−00058" summary="did some changes in the create method for avtaler">
+      <option name="closed" value="true" />
+      <created>1731360348423</created>
+      <option name="number" value="LOCAL−00058" />
+      <option name="presentableId" value="LOCAL−00058" />
+      <updated>1731360348423</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -463,9 +461,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implemented the logic for the sql query for getting all the beskjeder a parorende has created" />
-    <MESSAGE value="addded the opportunity to view created beskjeder" />
-    <MESSAGE value="did some major changes in the different methods" />
     <MESSAGE value="added opportunity to update and delete a beskjed" />
     <MESSAGE value="added the oportunity to delete a beskjed" />
     <MESSAGE value="Adjustet the class for easier implementation towards the gui" />
@@ -484,10 +479,13 @@
     <MESSAGE value="added a method to show created avtale for a spesific parorende" />
     <MESSAGE value="added query for getting, deleting and editing an avtale" />
     <MESSAGE value="added sql query for getting an avtale for the relative" />
-    <MESSAGE value="did some changes" />
     <MESSAGE value="added the method that shows avtaler" />
     <MESSAGE value="Done some changes" />
     <MESSAGE value="misc" />
-    <option name="LAST_COMMIT_MESSAGE" value="misc" />
+    <MESSAGE value="merge from feature-tg" />
+    <MESSAGE value="restructured the class fromthe beginning so things can work again" />
+    <MESSAGE value="did some changes" />
+    <MESSAGE value="did some changes in the create method for avtaler" />
+    <option name="LAST_COMMIT_MESSAGE" value="did some changes in the create method for avtaler" />
   </component>
 </project>
