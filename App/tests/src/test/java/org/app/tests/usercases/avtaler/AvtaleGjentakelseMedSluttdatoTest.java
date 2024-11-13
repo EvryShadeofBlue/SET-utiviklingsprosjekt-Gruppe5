@@ -27,6 +27,23 @@ public class AvtaleGjentakelseMedSluttdatoTest {
     Pleietrengende mockPleietrengende;
 
     @Test
+    @DisplayName("Feil ved sluttdato uten gjentakelse")
+    public void feilSluttdatoUtenGjentakelse() {
+        //Arrange
+        LocalDateTime startDato = LocalDateTime.of(2024, 11, 13, 10, 0);
+        LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 15, 10, 0);
+        Avtale avtale = new Avtale(startDato, "Daglig trening", "ingen", sluttDato, mockParorende, mockPleietrengende);
+
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.opprettAvtale(avtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Avtale med daglig gjentakelse og sluttdato er opprettet");
+        Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
+    }
+
+    @Test
     @DisplayName("Oppretter avtale med daglig gjentakelse og sluttdato")
     public void opprettAvtaleMedDagligGjentakelse() {
         //Arrange
