@@ -40,4 +40,6 @@ public class AvtaleOpprettTest {
         //Assert
         Assertions.assertTrue(result, "Opprettelsen av avtalen bør vellykket.");
     }
+
+
 }
