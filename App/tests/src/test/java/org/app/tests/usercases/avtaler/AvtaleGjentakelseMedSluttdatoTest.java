@@ -39,7 +39,7 @@ public class AvtaleGjentakelseMedSluttdatoTest {
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
-        Assertions.assertTrue(result, "Avtale med daglig gjentakelse og sluttdato er opprettet");
+        Assertions.assertFalse(result, "Avtale med daglig gjentakelse og sluttdato er opprettet");
         Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
     }
 

@@ -52,7 +52,7 @@ public class AvtaleOpprettTest {
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
-        Assertions.assertTrue(result, "Avtalen skal ikke kunne opprettes uten beskrivelse.");
+        Assertions.assertFalse(result, "Avtalen skal ikke kunne opprettes uten beskrivelse.");
         Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
     }
 
@@ -67,7 +67,7 @@ public class AvtaleOpprettTest {
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
-        Assertions.assertTrue(result, "Avtalen skal ikke kunne opprettes uten dato/tid.");
+        Assertions.assertFalse(result, "Avtalen skal ikke kunne opprettes uten dato/tid.");
         Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
     }
 
@@ -82,7 +82,7 @@ public class AvtaleOpprettTest {
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
-        Assertions.assertTrue(result, "Avtalen skal ikke kunne opprettes uten dato/tid og beskrivelse.");
+        Assertions.assertFalse(result, "Avtalen skal ikke kunne opprettes uten dato/tid og beskrivelse.");
         Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
     }
 }
