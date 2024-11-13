@@ -44,5 +44,48 @@ public class AvtaleGjentakelseUtenSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med daglig gjentakelse og uten sluttdato")
+    public void opprettAvtaleMedDagligGjentakelse() {
+        //Arrange
+        Avtale avtale = new Avtale(LocalDateTime.now(), "Daglig trening", "daglig", null, mockParorende, mockPleietrengende);
+        Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.opprettAvtale(avtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Avtale med daglig gjentakelse og uten sluttdato er opprettet");
+    }
+
+    @Test
+    @DisplayName("Oppretter avtale med ukentlig gjentakelse og uten sluttdato")
+    public void opprettAvtaleMedUkentligGjentakelse() {
+        //Arrange
+        Avtale avtale = new Avtale(LocalDateTime.now(), "Legetime", "ukentlig", null, mockParorende, mockPleietrengende);
+        Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
+
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.opprettAvtale(avtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Avtale med ukentlig gjentakelse og uten sluttdato er opprettet");
+
+    }
+
+    @Test
+    @DisplayName("Oppretter avtale med månedlig gjentakelse og uten sluttdato")
+    public void opprettAvtaleMedMånedligGjentakelse() {
+        //Arrange
+        Avtale avtale = new Avtale(LocalDateTime.now(), "Legetime", "månedlig", null, mockParorende, mockPleietrengende);
+        Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
+
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.opprettAvtale(avtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Avtale med månedlig gjentakelse og uten sluttdato er opprettet");
+
+    }
 }
