@@ -19,12 +19,12 @@ public class AvtaleService {
 
     public boolean opprettAvtale(Avtale avtale) {
         if (avtale.getDatoOgTid() == null || avtale.getBeskrivelse() == null || avtale.getBeskrivelse().isEmpty()) {
-            System.out.println("Feil: Beskrivelse og dato/tid er obligatoriske.");
+            System.out.println("Beskrivelse og dato/tid er obligatoriske.");
             return false;
         }
 
         if (avtale.getSluttDato() != null && (avtale.getGjentakelse() == null || avtale.getGjentakelse().isEmpty())) {
-            System.out.println("Feil: Hvis sluttdato er fylt ut, må gjentakelse velges.");
+            System.out.println("Hvis sluttdato er fylt ut, må gjentakelse velges.");
             return false;
         }
 
@@ -54,7 +54,6 @@ public class AvtaleService {
         } else {
             avtaleRepository.opprettAvtale(avtale);
         }
-
         return true;
     }
 
@@ -63,30 +62,23 @@ public class AvtaleService {
             System.out.println("Hvis sluttdato er fylt ut, må gjentakelse velges.");
             return false;
         }
-
         if (nyAvtale.getGjentakelse() == null || nyAvtale.getGjentakelse().isEmpty()) {
             nyAvtale.setSluttDato(null);
         }
-
         if (nyAvtale.getBeskrivelse() != null && !nyAvtale.getBeskrivelse().isEmpty()) {
             eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeskrivelse());
         }
-
         if (nyAvtale.getDatoOgTid() != null) {
             eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
         }
-
         if (nyAvtale.getGjentakelse() != null && !nyAvtale.getGjentakelse().isEmpty()) {
             eksisterendeAvtale.setGjentakelse(nyAvtale.getGjentakelse());
         }
-
         if (nyAvtale.getSluttDato() != null) {
             eksisterendeAvtale.setSluttDato(nyAvtale.getSluttDato());
         }
 
-
         avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
-
         return true;
     }
 
@@ -111,7 +103,6 @@ public class AvtaleService {
                 .collect(Collectors.toList());
         return sorterteAvtaler;
     }
-
 }
 
 

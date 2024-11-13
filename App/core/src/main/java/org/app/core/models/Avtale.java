@@ -66,6 +66,10 @@ public class Avtale {
         this.pleietrengende = pleietrengende;
     }
 
+    public Avtale() {
+
+    }
+
     public int getAvtaleId() {
         return avtaleId;
     }
