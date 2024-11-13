@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
-public class AvtaleOppdaterGjentakelseTest {
+public class AvtaleOppdaterGjentakelseUSluttdatoTest {
     @Mock
     AvtaleRepository mockAvtaleRepo;
 
@@ -28,7 +28,28 @@ public class AvtaleOppdaterGjentakelseTest {
 
     @Test
     @DisplayName("Oppdater avtale uten gjentakelse til daglig gjentakelse uten sluttdato")
-    public void oppdaterAvtaleGjentakelseUtenSluttdato() {
+    public void oppdaterAvtaleGjentakelseTilDaglig() {
+        //Arrange
+        LocalDateTime datoOgTid = LocalDateTime.of(2024, 11, 14, 12, 0);
+        Avtale eksisterendeAvtale = new Avtale(datoOgTid, "Besøk hos pleietrengende", mockParorende, mockPleietrengende);
+        Avtale nyAvtale = new Avtale();
+        nyAvtale.setGjentakelse("daglig");
+
+        Mockito.when(mockAvtaleRepo.oppdaterAvtale(eksisterendeAvtale)).thenReturn(true);
+
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Oppdatering av avtale til daglig gjentakelse skal være vellykket");
+        Assertions.assertEquals("daglig", eksisterendeAvtale.getGjentakelse(), "Gjentakelsen skal være oppdatert");
+        Assertions.assertNull(eksisterendeAvtale.getSluttDato(), "Sluttdato skal ikke eksistere");
+    }
+
+    @Test
+    @DisplayName("Oppdater avtale uten gjentakelse til daglig gjentakelse uten sluttdato")
+    public void oppdaterAvtaleGjentakelseTilUkentlig() {
         //Arrange
         LocalDateTime datoOgTid = LocalDateTime.of(2024, 11, 14, 12, 0);
         Avtale eksisterendeAvtale = new Avtale(datoOgTid, "Besøk hos pleietrengende", mockParorende, mockPleietrengende);
