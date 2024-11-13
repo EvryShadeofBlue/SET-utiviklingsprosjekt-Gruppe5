@@ -60,7 +60,7 @@ public class AvtaleOpprettTest {
     @DisplayName("Feil ved manglende dato/tid")
     public void feilManglendeDatoTid() {
         //Arrange
-        Avtale avtale = new Avtale(null, "", mockParorende, mockPleietrengende);
+        Avtale avtale = new Avtale(null, "legetime", mockParorende, mockPleietrengende);
 
         //Act
         AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
@@ -71,5 +71,18 @@ public class AvtaleOpprettTest {
         Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
     }
 
+    @Test
+    @DisplayName("Feil ved manglende dato/tid og beskrivelse")
+    public void feilManglendeDatoTidOgBeskrivelse() {
+        //Arrange
+        Avtale avtale = new Avtale(null, "", mockParorende, mockPleietrengende);
 
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.opprettAvtale(avtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Avtalen skal ikke kunne opprettes uten dato/tid og beskrivelse.");
+        Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
+    }
 }
