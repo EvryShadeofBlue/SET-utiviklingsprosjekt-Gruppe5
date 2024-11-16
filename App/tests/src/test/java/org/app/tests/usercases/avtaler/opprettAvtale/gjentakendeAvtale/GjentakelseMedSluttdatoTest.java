@@ -1,4 +1,4 @@
-package org.app.tests.usercases.avtaler;
+package org.app.tests.usercases.avtaler.opprettAvtale.gjentakendeAvtale;
 
 import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
-public class AvtaleGjentakelseMedSluttdatoTest {
+public class GjentakelseMedSluttdatoTest {
     @Mock
     AvtaleRepository mockAvtaleRepo;
 

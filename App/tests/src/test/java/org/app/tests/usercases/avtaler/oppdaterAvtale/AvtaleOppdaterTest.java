@@ -1,4 +1,4 @@
-package org.app.tests.usercases.avtaler;
+package org.app.tests.usercases.avtaler.oppdaterAvtale;
 
 import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
