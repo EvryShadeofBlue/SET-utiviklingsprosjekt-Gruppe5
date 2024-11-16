@@ -1,7 +1,7 @@
 package org.app.gui.pages;
 
 import org.app.core.models.Pleietrengende;
-import org.app.core.services.PleietrengendeService;
+import org.app.core.logikk.LeggTilPleietrengendeLogikk;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +12,9 @@ public class LeggTilPleietrengendePage extends JFrame {
     private JButton lagreKnapp;
     private JButton tilbakeKnapp;
     private MainPage mainPage;
-    private PleietrengendeService pleietrengendeService;
+    private LeggTilPleietrengendeLogikk pleietrengendeService;
     private int parorendeId;
-    public LeggTilPleietrengendePage(PleietrengendeService pleietrengendeService, int parorendeId, MainPage mainPage) {
+    public LeggTilPleietrengendePage(LeggTilPleietrengendeLogikk pleietrengendeService, int parorendeId, MainPage mainPage) {
         this.pleietrengendeService = pleietrengendeService;
         this.parorendeId = parorendeId;
         this.mainPage = mainPage;

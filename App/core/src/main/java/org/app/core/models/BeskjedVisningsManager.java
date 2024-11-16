@@ -1,7 +1,7 @@
 package org.app.core.models;
 
 
-import org.app.core.services.BeskjedService;
+import org.app.core.logikk.BeskjedLogikk;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
@@ -9,11 +9,11 @@ import java.time.format.DateTimeFormatter;
 
 public class BeskjedVisningsManager {
     private JPanel beskjedListePanel;
-    private BeskjedService beskjedService;
+    private BeskjedLogikk beskjedService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
 
-    public BeskjedVisningsManager(JPanel beskjedListePanel, BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende) {
+    public BeskjedVisningsManager(JPanel beskjedListePanel, BeskjedLogikk beskjedService, Parorende parorende, Pleietrengende pleietrengende) {
         this.beskjedListePanel = beskjedListePanel;
         this.beskjedService = beskjedService;
         this.parorende = parorende;

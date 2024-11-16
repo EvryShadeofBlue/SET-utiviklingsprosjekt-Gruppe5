@@ -4,7 +4,7 @@ import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
-import org.app.core.services.AvtaleService;
+import org.app.core.logikk.AvtaleLogikk;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ public class GjentakelseMedSluttdatoTest {
         Avtale avtale = new Avtale(startDato, "Daglig trening", "ingen", sluttDato, mockParorende, mockPleietrengende);
 
         //Act
-        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
@@ -53,7 +53,7 @@ public class GjentakelseMedSluttdatoTest {
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
@@ -71,7 +71,7 @@ public class GjentakelseMedSluttdatoTest {
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert
@@ -89,7 +89,7 @@ public class GjentakelseMedSluttdatoTest {
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         boolean result = avtaleService.opprettAvtale(avtale);
 
         //Assert

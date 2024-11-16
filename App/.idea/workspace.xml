@@ -4,11 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="did some changes in the create method for avtaler">
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="opprettet ny klasse som håndtere logikken for opprettelse av gjentakende avtaler">
+      <change afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/oppdaterAvtale/gjentakendeAvtale/GjentakelseMedSluttdatoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_11_2024_08_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_11_2024_08_48__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_11_2024_12_55__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_11_2024_12_55__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_11_2024_08_48_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_11_2024_08_48__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_11_2024_12_55_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_11_2024_12_55__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/AvtalePageImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/AvtalePageImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/BeskjedVisningsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/BeskjedVisningsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleGjentakendeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/GjentakendeAvtaleLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/AvtaleLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/BeskjedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/BeskjedLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/LoggService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/LoggLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/PleietrengendeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/LeggTilPleietrengendeLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/oppdaterAvtale/AvtaleOppdaterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/oppdaterAvtale/AvtaleOppdaterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/oppdaterAvtale/gjentakendeAvtale/GjentakelseUtenSluttdato.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/oppdaterAvtale/gjentakendeAvtale/GjentakelseUtenSluttdato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/opprettAvtale/AvtaleOpprettTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/opprettAvtale/AvtaleOpprettTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/opprettAvtale/gjentakendeAvtale/GjentakelseMedSluttdatoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/opprettAvtale/gjentakendeAvtale/GjentakelseMedSluttdatoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/opprettAvtale/gjentakendeAvtale/GjentakelseUtenSluttdaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/opprettAvtale/gjentakendeAvtale/GjentakelseUtenSluttdaoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,26 +75,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.App.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Cryption.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feature-AF&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/SET5/School-project/App&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.Cryption.executor": "Run",
+    "Application.Main.executor": "Run",
+    "JUnit.AvtaleGjentakelseMedSluttdatoTest.feilSluttdatoUtenGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedDagligGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedMånedligGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedUkentligGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedDagligGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedIngenGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedMånedligGjentakelse.executor": "Run",
+    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedUkentligGjentakelse.executor": "Run",
+    "JUnit.AvtaleOppdaterGjentakelseTest.oppdaterAvtaleGjentakelseUtenSluttdato.executor": "Run",
+    "JUnit.AvtaleOppdaterGjentakelseUSluttdatoTest.oppdaterAvtaleGjentakelseTilUkentlig.executor": "Run",
+    "JUnit.AvtaleOpprettTest.feilManglendeBeskrivelse.executor": "Run",
+    "JUnit.AvtaleOpprettTest.feilManglendeDatoTid.executor": "Run",
+    "JUnit.AvtaleOpprettTest.feilManglendeDatoTidOgBeskrivelse.executor": "Run",
+    "JUnit.AvtaleOpprettTest.opprettGyldigAvtale.executor": "Run",
+    "JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse.executor": "Run",
+    "JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig.executor": "Run",
+    "JUnit.RedigerAvtaleTest.oppdaterAvtaleBeskrivelseOgDatoTid.executor": "Run",
+    "JUnit.RedigerAvtaleTest.oppdaterKunBeskrivelse.executor": "Run",
+    "JUnit.RedigerAvtaleTest.oppdaterKunDatoOgTid.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Feature-AF",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database",
+    "last_opened_file_path": "C:/SET5/School-project/App",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core" />
@@ -89,6 +129,105 @@
       <recent name="models" />
     </key>
   </component>
+  <component name="RunManager" selected="JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse">
+    <configuration name="AvtaleOppdaterTest.oppdaterKunDatoOgTid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.app.tests.usercases.avtaler.opprettAvtale.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale" />
+      <option name="MAIN_CLASS_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.AvtaleOppdaterTest" />
+      <option name="METHOD_NAME" value="oppdaterKunDatoOgTid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale" />
+      <option name="MAIN_CLASS_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.GjentakelseMedSluttdatoTest" />
+      <option name="METHOD_NAME" value="oppdaterAvtaleTilDagligGjentakelse" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale" />
+      <option name="MAIN_CLASS_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.GjentakelseUtenSluttdato" />
+      <option name="METHOD_NAME" value="oppdaterAvtaleGjentakelseTilMånedlig" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilUkentlig" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.app.tests.usercases.avtaler.opprettAvtale.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale" />
+      <option name="MAIN_CLASS_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.GjentakelseUtenSluttdato" />
+      <option name="METHOD_NAME" value="oppdaterAvtaleGjentakelseTilUkentlig" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseUtenSluttdato" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.app.tests.usercases.avtaler.opprettAvtale.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale" />
+      <option name="MAIN_CLASS_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.GjentakelseUtenSluttdato" />
+      <option name="METHOD_NAME" value="oppdaterAvtaleGjentakelseUtenSluttdato" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse" />
+        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig" />
+        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilUkentlig" />
+        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseUtenSluttdato" />
+        <item itemvalue="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
+        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>C:\Users\thgl0\AppData\Roaming\Subversion</configuration>
@@ -100,160 +239,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00010" summary="Created opportunity to sign in">
-      <option name="closed" value="true" />
-      <created>1730299956679</created>
-      <option name="number" value="LOCAL−00010" />
-      <option name="presentableId" value="LOCAL−00010" />
-      <updated>1730299956679</updated>
-    </task>
-    <task id="LOCAL−00011" summary="Created a main page after login">
-      <option name="closed" value="true" />
-      <created>1730300049178</created>
-      <option name="number" value="LOCAL−00011" />
-      <option name="presentableId" value="LOCAL−00011" />
-      <updated>1730300049178</updated>
-    </task>
-    <task id="LOCAL−00012" summary="Made a change so when someone register for the first time, they will be directed to the main page">
-      <option name="closed" value="true" />
-      <created>1730301240358</created>
-      <option name="number" value="LOCAL−00012" />
-      <option name="presentableId" value="LOCAL−00012" />
-      <updated>1730301240358</updated>
-    </task>
-    <task id="LOCAL−00013" summary="Made a change so when someone register for the first time, they will be directed to the main page">
-      <option name="closed" value="true" />
-      <created>1730302350551</created>
-      <option name="number" value="LOCAL−00013" />
-      <option name="presentableId" value="LOCAL−00013" />
-      <updated>1730302350551</updated>
-    </task>
-    <task id="LOCAL−00014" summary="Did some minor changes">
-      <option name="closed" value="true" />
-      <created>1730302361233</created>
-      <option name="number" value="LOCAL−00014" />
-      <option name="presentableId" value="LOCAL−00014" />
-      <updated>1730302361233</updated>
-    </task>
-    <task id="LOCAL−00015" summary="Did some minor changes">
-      <option name="closed" value="true" />
-      <created>1730302364634</created>
-      <option name="number" value="LOCAL−00015" />
-      <option name="presentableId" value="LOCAL−00015" />
-      <updated>1730302364635</updated>
-    </task>
-    <task id="LOCAL−00016" summary="Fixed som problems that didn't allow someone without pleietrengende to sign in">
-      <option name="closed" value="true" />
-      <created>1730304871403</created>
-      <option name="number" value="LOCAL−00016" />
-      <option name="presentableId" value="LOCAL−00016" />
-      <updated>1730304871403</updated>
-    </task>
-    <task id="LOCAL−00017" summary="Did some minor changes in the logic">
-      <option name="closed" value="true" />
-      <created>1730304927978</created>
-      <option name="number" value="LOCAL−00017" />
-      <option name="presentableId" value="LOCAL−00017" />
-      <updated>1730304927978</updated>
-    </task>
-    <task id="LOCAL−00018" summary="Added a menubar with help section in it">
-      <option name="closed" value="true" />
-      <created>1730306040411</created>
-      <option name="number" value="LOCAL−00018" />
-      <option name="presentableId" value="LOCAL−00018" />
-      <updated>1730306040411</updated>
-    </task>
-    <task id="LOCAL−00019" summary="created class for beskjed actions when choosing beskjed in mainpage">
-      <option name="closed" value="true" />
-      <created>1730307941756</created>
-      <option name="number" value="LOCAL−00019" />
-      <option name="presentableId" value="LOCAL−00019" />
-      <updated>1730307941756</updated>
-    </task>
-    <task id="LOCAL−00020" summary="added method to create a beskjed from the beskjedservice class">
-      <option name="closed" value="true" />
-      <created>1730307974792</created>
-      <option name="number" value="LOCAL−00020" />
-      <option name="presentableId" value="LOCAL−00020" />
-      <updated>1730307974792</updated>
-    </task>
-    <task id="LOCAL−00021" summary="created a class to implement sql queries for beskjeder">
-      <option name="closed" value="true" />
-      <created>1730322898631</created>
-      <option name="number" value="LOCAL−00021" />
-      <option name="presentableId" value="LOCAL−00021" />
-      <updated>1730322898631</updated>
-    </task>
-    <task id="LOCAL−00022" summary="did a minor change">
-      <option name="closed" value="true" />
-      <created>1730389597222</created>
-      <option name="number" value="LOCAL−00022" />
-      <option name="presentableId" value="LOCAL−00022" />
-      <updated>1730389597222</updated>
-    </task>
-    <task id="LOCAL−00023" summary="Did some changes. Made the opportunity for someone to create a beskjed without worrying about it not being added to the database">
-      <option name="closed" value="true" />
-      <created>1730402461948</created>
-      <option name="number" value="LOCAL−00023" />
-      <option name="presentableId" value="LOCAL−00023" />
-      <updated>1730402461948</updated>
-    </task>
-    <task id="LOCAL−00024" summary="added another method to the interface">
-      <option name="closed" value="true" />
-      <created>1730468514137</created>
-      <option name="number" value="LOCAL−00024" />
-      <option name="presentableId" value="LOCAL−00024" />
-      <updated>1730468514138</updated>
-    </task>
-    <task id="LOCAL−00025" summary="added method for returning beskjed for relative">
-      <option name="closed" value="true" />
-      <created>1730469064814</created>
-      <option name="number" value="LOCAL−00025" />
-      <option name="presentableId" value="LOCAL−00025" />
-      <updated>1730469064814</updated>
-    </task>
-    <task id="LOCAL−00026" summary="implemented the logic for the sql query for getting all the beskjeder a parorende has created">
-      <option name="closed" value="true" />
-      <created>1730469147105</created>
-      <option name="number" value="LOCAL−00026" />
-      <option name="presentableId" value="LOCAL−00026" />
-      <updated>1730469147105</updated>
-    </task>
-    <task id="LOCAL−00027" summary="addded the opportunity to view created beskjeder">
-      <option name="closed" value="true" />
-      <created>1730481225319</created>
-      <option name="number" value="LOCAL−00027" />
-      <option name="presentableId" value="LOCAL−00027" />
-      <updated>1730481225319</updated>
-    </task>
-    <task id="LOCAL−00028" summary="did some changes">
-      <option name="closed" value="true" />
-      <created>1730481377652</created>
-      <option name="number" value="LOCAL−00028" />
-      <option name="presentableId" value="LOCAL−00028" />
-      <updated>1730481377652</updated>
-    </task>
-    <task id="LOCAL−00029" summary="did some changes">
-      <option name="closed" value="true" />
-      <created>1730481602206</created>
-      <option name="number" value="LOCAL−00029" />
-      <option name="presentableId" value="LOCAL−00029" />
-      <updated>1730481602206</updated>
-    </task>
-    <task id="LOCAL−00030" summary="did some major changes in the different methods">
-      <option name="closed" value="true" />
-      <created>1730492198794</created>
-      <option name="number" value="LOCAL−00030" />
-      <option name="presentableId" value="LOCAL−00030" />
-      <updated>1730492198794</updated>
-    </task>
-    <task id="LOCAL−00031" summary="added opportunity to update and delete a beskjed">
-      <option name="closed" value="true" />
-      <created>1730494033415</created>
-      <option name="number" value="LOCAL−00031" />
-      <option name="presentableId" value="LOCAL−00031" />
-      <updated>1730494033415</updated>
     </task>
     <task id="LOCAL−00032" summary="did some changes">
       <option name="closed" value="true" />
@@ -446,7 +431,161 @@
       <option name="presentableId" value="LOCAL−00058" />
       <updated>1731360348423</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL−00059" summary="did some changes">
+      <option name="closed" value="true" />
+      <created>1731439273693</created>
+      <option name="number" value="LOCAL−00059" />
+      <option name="presentableId" value="LOCAL−00059" />
+      <updated>1731439273694</updated>
+    </task>
+    <task id="LOCAL−00060" summary="deleted this file">
+      <option name="closed" value="true" />
+      <created>1731503651345</created>
+      <option name="number" value="LOCAL−00060" />
+      <option name="presentableId" value="LOCAL−00060" />
+      <updated>1731503651346</updated>
+    </task>
+    <task id="LOCAL−00061" summary="deleted this file">
+      <option name="closed" value="true" />
+      <created>1731503668078</created>
+      <option name="number" value="LOCAL−00061" />
+      <option name="presentableId" value="LOCAL−00061" />
+      <updated>1731503668078</updated>
+    </task>
+    <task id="LOCAL−00062" summary="created test for creating an appointment">
+      <option name="closed" value="true" />
+      <created>1731506156342</created>
+      <option name="number" value="LOCAL−00062" />
+      <option name="presentableId" value="LOCAL−00062" />
+      <updated>1731506156342</updated>
+    </task>
+    <task id="LOCAL−00063" summary="created test for creating an appointment">
+      <option name="closed" value="true" />
+      <created>1731512735717</created>
+      <option name="number" value="LOCAL−00063" />
+      <option name="presentableId" value="LOCAL−00063" />
+      <updated>1731512735717</updated>
+    </task>
+    <task id="LOCAL−00064" summary="laget test for gjentakende avtale uten sluttdato">
+      <option name="closed" value="true" />
+      <created>1731512773835</created>
+      <option name="number" value="LOCAL−00064" />
+      <option name="presentableId" value="LOCAL−00064" />
+      <updated>1731512773835</updated>
+    </task>
+    <task id="LOCAL−00065" summary="lagde tester for gjentakende avtaler med sluttdato">
+      <option name="closed" value="true" />
+      <created>1731515408354</created>
+      <option name="number" value="LOCAL−00065" />
+      <option name="presentableId" value="LOCAL−00065" />
+      <updated>1731515408354</updated>
+    </task>
+    <task id="LOCAL−00066" summary="lagde tester for gjentakende avtaler uten sluttdato">
+      <option name="closed" value="true" />
+      <created>1731515417908</created>
+      <option name="number" value="LOCAL−00066" />
+      <option name="presentableId" value="LOCAL−00066" />
+      <updated>1731515417909</updated>
+    </task>
+    <task id="LOCAL−00067" summary="lagde tester som skal feile uten beskrivelse eller dato">
+      <option name="closed" value="true" />
+      <created>1731516002760</created>
+      <option name="number" value="LOCAL−00067" />
+      <option name="presentableId" value="LOCAL−00067" />
+      <updated>1731516002760</updated>
+    </task>
+    <task id="LOCAL−00068" summary="lagde ekstra test som skal feile">
+      <option name="closed" value="true" />
+      <created>1731516096272</created>
+      <option name="number" value="LOCAL−00068" />
+      <option name="presentableId" value="LOCAL−00068" />
+      <updated>1731516096272</updated>
+    </task>
+    <task id="LOCAL−00069" summary="laget feilende test dersom man legger til sluttdato, men ikke gjentakelse">
+      <option name="closed" value="true" />
+      <created>1731516679771</created>
+      <option name="number" value="LOCAL−00069" />
+      <option name="presentableId" value="LOCAL−00069" />
+      <updated>1731516679771</updated>
+    </task>
+    <task id="LOCAL−00070" summary="did some changes">
+      <option name="closed" value="true" />
+      <created>1731516842965</created>
+      <option name="number" value="LOCAL−00070" />
+      <option name="presentableId" value="LOCAL−00070" />
+      <updated>1731516842965</updated>
+    </task>
+    <task id="LOCAL−00071" summary="laget test for oppdatering av beskrivelse, men med samme dato">
+      <option name="closed" value="true" />
+      <created>1731520041029</created>
+      <option name="number" value="LOCAL−00071" />
+      <option name="presentableId" value="LOCAL−00071" />
+      <updated>1731520041029</updated>
+    </task>
+    <task id="LOCAL−00072" summary="laget flere tester for oppdatering for å sjekke flere utfall av det">
+      <option name="closed" value="true" />
+      <created>1731521313650</created>
+      <option name="number" value="LOCAL−00072" />
+      <option name="presentableId" value="LOCAL−00072" />
+      <updated>1731521313650</updated>
+    </task>
+    <task id="LOCAL−00073" summary="laget metode for oppdatering av avtale med gjentakelse, men uten sluttdato for å teste at det fungerer slikt">
+      <option name="closed" value="true" />
+      <created>1731521900607</created>
+      <option name="number" value="LOCAL−00073" />
+      <option name="presentableId" value="LOCAL−00073" />
+      <updated>1731521900607</updated>
+    </task>
+    <task id="LOCAL−00074" summary="did some changes">
+      <option name="closed" value="true" />
+      <created>1731521909163</created>
+      <option name="number" value="LOCAL−00074" />
+      <option name="presentableId" value="LOCAL−00074" />
+      <updated>1731521909163</updated>
+    </task>
+    <task id="LOCAL−00075" summary="changed the name of the class for better understanding">
+      <option name="closed" value="true" />
+      <created>1731522134995</created>
+      <option name="number" value="LOCAL−00075" />
+      <option name="presentableId" value="LOCAL−00075" />
+      <updated>1731522134995</updated>
+    </task>
+    <task id="LOCAL−00076" summary="laget en metode for testing til gjentakelsen ukentlig">
+      <option name="closed" value="true" />
+      <created>1731522298615</created>
+      <option name="number" value="LOCAL−00076" />
+      <option name="presentableId" value="LOCAL−00076" />
+      <updated>1731522298616</updated>
+    </task>
+    <task id="LOCAL−00077" summary="renamed the files and changed the locations of them">
+      <option name="closed" value="true" />
+      <created>1731760342986</created>
+      <option name="number" value="LOCAL−00077" />
+      <option name="presentableId" value="LOCAL−00077" />
+      <updated>1731760342987</updated>
+    </task>
+    <task id="LOCAL−00078" summary="added cryption.java into gitignore">
+      <option name="closed" value="true" />
+      <created>1731762257229</created>
+      <option name="number" value="LOCAL−00078" />
+      <option name="presentableId" value="LOCAL−00078" />
+      <updated>1731762257229</updated>
+    </task>
+    <task id="LOCAL−00079" summary="added more tests to see the outcome of different inputs">
+      <option name="closed" value="true" />
+      <created>1731764101475</created>
+      <option name="number" value="LOCAL−00079" />
+      <option name="presentableId" value="LOCAL−00079" />
+      <updated>1731764101475</updated>
+    </task>
+    <task id="LOCAL−00080" summary="opprettet ny klasse som håndtere logikken for opprettelse av gjentakende avtaler">
+      <option name="closed" value="true" />
+      <created>1731766147587</created>
+      <option name="number" value="LOCAL−00080" />
+      <option name="presentableId" value="LOCAL−00080" />
+      <updated>1731766147587</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,31 +600,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added opportunity to update and delete a beskjed" />
-    <MESSAGE value="added the oportunity to delete a beskjed" />
-    <MESSAGE value="Adjustet the class for easier implementation towards the gui" />
-    <MESSAGE value="Did some changes to make thing look more clean" />
-    <MESSAGE value="Done some changes in the UI" />
-    <MESSAGE value="Did some changes" />
-    <MESSAGE value="Created the page for avtaler" />
-    <MESSAGE value="Did some changes in the method to create an avtale" />
-    <MESSAGE value="Did some changes in this file" />
-    <MESSAGE value="changed the method for creating an avtale" />
-    <MESSAGE value="changed a bit of the method for creating an avtale" />
-    <MESSAGE value="created a new cosntructor for creating an avale" />
-    <MESSAGE value="changed in the method for creating an avtale" />
-    <MESSAGE value="created a method for changing an existing avtale" />
-    <MESSAGE value="created a method for deleting an avtale" />
-    <MESSAGE value="added a method to show created avtale for a spesific parorende" />
-    <MESSAGE value="added query for getting, deleting and editing an avtale" />
     <MESSAGE value="added sql query for getting an avtale for the relative" />
     <MESSAGE value="added the method that shows avtaler" />
     <MESSAGE value="Done some changes" />
     <MESSAGE value="misc" />
     <MESSAGE value="merge from feature-tg" />
     <MESSAGE value="restructured the class fromthe beginning so things can work again" />
-    <MESSAGE value="did some changes" />
     <MESSAGE value="did some changes in the create method for avtaler" />
-    <option name="LAST_COMMIT_MESSAGE" value="did some changes in the create method for avtaler" />
+    <MESSAGE value="deleted this file" />
+    <MESSAGE value="created test for creating an appointment" />
+    <MESSAGE value="laget test for gjentakende avtale uten sluttdato" />
+    <MESSAGE value="lagde tester for gjentakende avtaler med sluttdato" />
+    <MESSAGE value="lagde tester for gjentakende avtaler uten sluttdato" />
+    <MESSAGE value="lagde tester som skal feile uten beskrivelse eller dato" />
+    <MESSAGE value="lagde ekstra test som skal feile" />
+    <MESSAGE value="laget feilende test dersom man legger til sluttdato, men ikke gjentakelse" />
+    <MESSAGE value="laget test for oppdatering av beskrivelse, men med samme dato" />
+    <MESSAGE value="laget flere tester for oppdatering for å sjekke flere utfall av det" />
+    <MESSAGE value="laget metode for oppdatering av avtale med gjentakelse, men uten sluttdato for å teste at det fungerer slikt" />
+    <MESSAGE value="did some changes" />
+    <MESSAGE value="changed the name of the class for better understanding" />
+    <MESSAGE value="laget en metode for testing til gjentakelsen ukentlig" />
+    <MESSAGE value="renamed the files and changed the locations of them" />
+    <MESSAGE value="added cryption.java into gitignore" />
+    <MESSAGE value="added more tests to see the outcome of different inputs" />
+    <MESSAGE value="opprettet ny klasse som håndtere logikken for opprettelse av gjentakende avtaler" />
+    <option name="LAST_COMMIT_MESSAGE" value="opprettet ny klasse som håndtere logikken for opprettelse av gjentakende avtaler" />
   </component>
 </project>

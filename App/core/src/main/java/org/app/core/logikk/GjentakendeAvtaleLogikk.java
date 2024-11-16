@@ -1,17 +1,17 @@
-package org.app.core.services;
+package org.app.core.logikk;
 
 import org.app.core.models.Avtale;
 import org.app.core.repositories.AvtaleRepository;
 
 import java.time.LocalDateTime;
 
-public class AvtaleGjentakendeService {
+public class GjentakendeAvtaleLogikk {
     private AvtaleRepository avtaleRepository;
 
-    public AvtaleGjentakendeService(AvtaleRepository avtaleRepository) {
+    public GjentakendeAvtaleLogikk(AvtaleRepository avtaleRepository) {
         this.avtaleRepository = avtaleRepository;
     }
-    private void opprettGjentakendeAvtaler(Avtale eksisterendeAvtale) {
+    public void opprettGjentakendeAvtaler(Avtale eksisterendeAvtale) {
         LocalDateTime datoTid = eksisterendeAvtale.getDatoOgTid();
         LocalDateTime sluttDato = eksisterendeAvtale.getSluttDato();
         String gjentakelse = eksisterendeAvtale.getGjentakelse();

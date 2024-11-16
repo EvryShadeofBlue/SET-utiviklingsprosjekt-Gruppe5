@@ -3,7 +3,7 @@ package org.app.gui.pages;
 import org.app.core.models.Beskjed;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
-import org.app.core.services.BeskjedService;
+import org.app.core.logikk.BeskjedLogikk;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +18,13 @@ public class BeskjedPage extends JFrame {
     private JTextField klokkeslettFelt;
     private JButton lagreKnapp;
     private JPanel beskjedListePanel;
-    private BeskjedService beskjedService;
+    private BeskjedLogikk beskjedService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
     private org.app.gui.pages.MainPage mainPage;
     private JButton tilbakeKnapp;
 
-    public BeskjedPage(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
+    public BeskjedPage(BeskjedLogikk beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
         this.beskjedService = beskjedService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;

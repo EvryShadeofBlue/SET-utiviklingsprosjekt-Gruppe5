@@ -4,7 +4,7 @@ import org.app.core.models.Avtale;
 import org.app.core.models.AvtalePageImplementation;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
-import org.app.core.services.AvtaleService;
+import org.app.core.logikk.AvtaleLogikk;
 
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class AvtalePage extends JFrame{
     private JComboBox<String> gjentakelseFelt;
     private JButton lagreKnapp;
     private JPanel avtaleListePanel;
-    private AvtaleService avtaleService;
+    private AvtaleLogikk avtaleService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
     private AvtalePageImplementation avtalePageImplementation;
@@ -31,7 +31,7 @@ public class AvtalePage extends JFrame{
     private JButton tilbakeKnapp;
 
 
-    public AvtalePage(AvtaleService avtaleService, Parorende parorende, Pleietrengende pleietrengende, org.app.gui.pages.MainPage mainPage) {
+    public AvtalePage(AvtaleLogikk avtaleService, Parorende parorende, Pleietrengende pleietrengende, org.app.gui.pages.MainPage mainPage) {
         this.avtaleService = avtaleService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;

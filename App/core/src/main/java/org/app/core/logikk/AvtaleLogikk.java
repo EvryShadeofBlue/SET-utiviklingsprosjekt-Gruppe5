@@ -1,7 +1,6 @@
-package org.app.core.services;
+package org.app.core.logikk;
 
 import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;
 
@@ -9,11 +8,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AvtaleService {
+public class AvtaleLogikk {
     private AvtaleRepository avtaleRepository;
+    private GjentakendeAvtaleLogikk gjentakendeAvtaleLogikk;
 
-    public AvtaleService(AvtaleRepository avtaleRepository) {
+    public AvtaleLogikk(AvtaleRepository avtaleRepository) {
         this.avtaleRepository = avtaleRepository;
+    }
+    public AvtaleLogikk(GjentakendeAvtaleLogikk gjentakendeAvtaleLogikk) {
+        this.gjentakendeAvtaleLogikk = gjentakendeAvtaleLogikk;
     }
 
 
@@ -76,6 +79,9 @@ public class AvtaleService {
         }
         if (nyAvtale.getSluttDato() != null) {
             eksisterendeAvtale.setSluttDato(nyAvtale.getSluttDato());
+        }
+        if (nyAvtale.getGjentakelse() != null && !nyAvtale.getGjentakelse().isEmpty()) {
+            gjentakendeAvtaleLogikk.opprettGjentakendeAvtaler(eksisterendeAvtale);
         }
 
         avtaleRepository.oppdaterAvtale(eksisterendeAvtale);

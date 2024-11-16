@@ -1,8 +1,8 @@
 package org.app.gui.pages;
 
-import org.app.core.services.AvtaleService;
-import org.app.core.services.BeskjedService;
-import org.app.core.services.PleietrengendeService;
+import org.app.core.logikk.AvtaleLogikk;
+import org.app.core.logikk.BeskjedLogikk;
+import org.app.core.logikk.LeggTilPleietrengendeLogikk;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.database.AvtaleDBImplementation;
@@ -17,9 +17,9 @@ public class MainPage extends JFrame {
     private JLabel pleietrengendeNavnLabel;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
-    private BeskjedService beskjedService;
-    private AvtaleService avtaleService;
-    private PleietrengendeService pleietrengendeService;
+    private BeskjedLogikk beskjedService;
+    private AvtaleLogikk avtaleService;
+    private LeggTilPleietrengendeLogikk pleietrengendeService;
     private JButton leggTilPleietrengendeKnapp;
     private JButton avtalerKnapp;
     private JButton beskjedKnapp;
@@ -88,7 +88,7 @@ public class MainPage extends JFrame {
 
         setVisible(true);
 
-        beskjedService = new BeskjedService(new BeskjedDBImplementation());
+        beskjedService = new BeskjedLogikk(new BeskjedDBImplementation());
         beskjedKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
                 new BeskjedPage(beskjedService, parorende, pleietrengende, this);
@@ -100,7 +100,7 @@ public class MainPage extends JFrame {
                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
             }});
 
-        avtaleService = new AvtaleService(new AvtaleDBImplementation());
+        avtaleService = new AvtaleLogikk(new AvtaleDBImplementation());
         avtalerKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
                 new AvtalePage(avtaleService, parorende, pleietrengende, this);
@@ -113,7 +113,7 @@ public class MainPage extends JFrame {
             }
         });
 
-        pleietrengendeService = new PleietrengendeService(new PleietrengendeDBImplementation());
+        pleietrengendeService = new LeggTilPleietrengendeLogikk(new PleietrengendeDBImplementation());
         leggTilPleietrengendeKnapp.addActionListener(e -> {
             new LeggTilPleietrengendePage(pleietrengendeService, parorende.getParorendeId(), this);
             this.setVisible(false);

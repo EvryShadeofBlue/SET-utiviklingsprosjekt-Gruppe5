@@ -1,13 +1,13 @@
-package org.app.core.services;
+package org.app.core.logikk;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class LoggService {
+public class LoggLogikk {
     private Connection connection;
 
-    public LoggService(Connection connection) {
+    public LoggLogikk(Connection connection) {
         this.connection = connection;
     }
 
