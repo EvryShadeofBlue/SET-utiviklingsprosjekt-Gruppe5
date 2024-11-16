@@ -114,13 +114,6 @@
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
     </task>
-    <task id="LOCAL−00009" summary="did some major changes in login page">
-      <option name="closed" value="true" />
-      <created>1730229557617</created>
-      <option name="number" value="LOCAL−00009" />
-      <option name="presentableId" value="LOCAL−00009" />
-      <updated>1730229557617</updated>
-    </task>
     <task id="LOCAL−00010" summary="Created opportunity to sign in">
       <option name="closed" value="true" />
       <created>1730299956679</created>
@@ -461,7 +454,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731315251082</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="misc">
+      <option name="closed" value="true" />
+      <created>1731755155820</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1731755155820</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -498,9 +499,9 @@
     <MESSAGE value="did some changes" />
     <MESSAGE value="added the method that shows avtaler" />
     <MESSAGE value="Done some changes" />
-    <MESSAGE value="misc" />
     <MESSAGE value="enter press for login and save id under registration" />
     <MESSAGE value="fixed beskjeder deletion, attempt to fix avtale db communication" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed beskjeder deletion, attempt to fix avtale db communication" />
+    <MESSAGE value="misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc" />
   </component>
 </project>
