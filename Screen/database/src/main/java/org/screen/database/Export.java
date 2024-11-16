@@ -1,4 +1,4 @@
-package org.screen.core.database;
+package org.screen.database;
 
 import org.screen.core.models.Avtale;
 import org.screen.core.models.Beskjed;

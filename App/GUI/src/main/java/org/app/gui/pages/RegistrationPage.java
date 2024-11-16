@@ -153,8 +153,6 @@ public class RegistrationPage extends JFrame{
                     if (generatedKey.next()) {
                         int parorendeId = generatedKey.getInt(1);
 
-                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
-
                         String insertInnloggingQuery = "Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)";
                         try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){
                             innloggingStatement.setString(1, email);
@@ -163,14 +161,18 @@ public class RegistrationPage extends JFrame{
 
                             innloggingStatement.executeUpdate();
                         }
+
+                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
+
+                        JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
+                        clearFields();
+
+                        new MainPage(parorende, null);
+                        dispose();
                     }
 
                 }
-                JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
-                clearFields();
 
-                new MainPage(parorende, null);
-                dispose();
             }
         } catch (SQLException exception) {
             exception.printStackTrace();

@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="fixed beskjeder deletion, attempt to fix avtale db communication">
+      <change afterPath="$PROJECT_DIR$/../Screen/database/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/database/src/main/java/org/screen/database/Export.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/gui/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/database/Export.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pleietrengende_id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../pleietrengende_id.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

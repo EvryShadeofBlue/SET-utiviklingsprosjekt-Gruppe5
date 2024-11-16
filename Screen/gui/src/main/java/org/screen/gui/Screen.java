@@ -1,4 +1,5 @@
-import org.screen.core.database.Export;
+package org.screen.gui;
+
 import org.screen.core.models.*;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import org.screen.database.Export;
 
 public class Screen {
     public static void main(String[] args) {

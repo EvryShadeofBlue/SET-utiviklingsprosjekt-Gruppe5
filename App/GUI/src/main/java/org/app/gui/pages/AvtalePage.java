@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class AvtalePage extends JFrame{
@@ -241,9 +242,15 @@ public class AvtalePage extends JFrame{
 
                 String sluttDatoTekst = sluttDatoFelt.getText();
                 if (!sluttDatoTekst.isEmpty()) {
-                    LocalDate sluttDatoLocal = LocalDate.parse(sluttDatoTekst, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    sluttDato = sluttDatoLocal.atStartOfDay();
+                    try {
+                        LocalDate sluttDatoLocal = LocalDate.parse(sluttDatoTekst, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        sluttDato = sluttDatoLocal.atStartOfDay();
+                        System.out.println("Parsed sluttDato: " + sluttDato);
+                    } catch (DateTimeParseException es) {
+                        System.err.println("Error parsing sluttDato: " + es.getMessage());
+                    }
                 }
+
 
                 Avtale nyAvtale = new Avtale(avtale.getAvtaleId(), datoOgTid, beskrivelse, gjentakelse, sluttDato);
                 Avtale oppdatertAvtale = avtaleService.oppdaterAvtale(nyAvtale);
