@@ -12,6 +12,7 @@ target/
 *.iml
 *.ipr
 Resources.java
+Cryption.java
 
 ### Eclipse ###
 .apt_generated
