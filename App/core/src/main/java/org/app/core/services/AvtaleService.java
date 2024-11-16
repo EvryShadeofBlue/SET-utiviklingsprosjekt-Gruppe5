@@ -7,6 +7,7 @@ import org.app.core.models.Avtale;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AvtaleService {
     private AvtaleRepository avtaleRepository;
@@ -16,73 +17,93 @@ public class AvtaleService {
     }
 
 
-    public Avtale oppretteAvtale(LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttDato, Parorende parorende, Pleietrengende pleietrengende) {
-        Avtale avtale = new Avtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
-        avtaleRepository.oppretteAvtale(avtale);
-
-        if (gjentakelse != null && !gjentakelse.isEmpty() && sluttDato != null) {
-            LocalDateTime nesteDato = datoOgTid;
-
-            while (datoOgTid.isBefore(sluttDato)) {
-                switch (gjentakelse.toLowerCase()) {
-                    case "daglig":
-                        nesteDato = nesteDato.plusDays(1);
-                        break;
-                    case "ukentlig":
-                        nesteDato = nesteDato.plusWeeks(1);
-                        break;
-                    case "månedlig":
-                        nesteDato = nesteDato.plusMonths(1);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Ugyldig gjentakelsestype: " + gjentakelse);
-                }
-                Avtale nyAvtale = new Avtale(nesteDato, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
-                avtaleRepository.oppretteAvtale(nyAvtale);
-            }
+    public boolean opprettAvtale(Avtale avtale) {
+        if (avtale.getDatoOgTid() == null || avtale.getBeskrivelse() == null || avtale.getBeskrivelse().isEmpty()) {
+            System.out.println("Beskrivelse og dato/tid er obligatoriske.");
+            return false;
         }
-        return avtale;
+
+        if (avtale.getSluttDato() != null && (avtale.getGjentakelse() == null || avtale.getGjentakelse().isEmpty())) {
+            System.out.println("Hvis sluttdato er fylt ut, må gjentakelse velges.");
+            return false;
+        }
+
+        if (avtale.getGjentakelse() != null && !avtale.getGjentakelse().isEmpty()) {
+            if (avtale.getSluttDato() != null) {
+                LocalDateTime currentDatoOgTid = avtale.getDatoOgTid();
+
+                while (currentDatoOgTid.isBefore(avtale.getSluttDato()) || currentDatoOgTid.isEqual(avtale.getSluttDato())) {
+                    Avtale nyAvtale = new Avtale(currentDatoOgTid, avtale.getBeskrivelse(), avtale.getGjentakelse(), avtale.getSluttDato(), avtale.getParorende(), avtale.getPleietrengende());
+                    avtaleRepository.opprettAvtale(nyAvtale);
+
+                    switch (avtale.getGjentakelse()) {
+                        case "daglig":
+                            currentDatoOgTid = currentDatoOgTid.plusDays(1);
+                            break;
+                        case "ukentlig":
+                            currentDatoOgTid = currentDatoOgTid.plusWeeks(1);
+                            break;
+                        case "månedlig":
+                            currentDatoOgTid = currentDatoOgTid.plusMonths(1);
+                            break;
+                    }
+                }
+            } else {
+                avtaleRepository.opprettAvtale(avtale);
+            }
+        } else {
+            avtaleRepository.opprettAvtale(avtale);
+        }
+        return true;
     }
 
-    public Avtale oppdaterAvtale(Avtale nyAvtale) {
-            Avtale eksisterendeAvtale = avtaleRepository.hentAvtale(nyAvtale.getAvtaleId());
+    public boolean oppdaterAvtale(Avtale eksisterendeAvtale, Avtale nyAvtale) {
+        if (nyAvtale.getSluttDato() != null && (nyAvtale.getGjentakelse() == null || nyAvtale.getGjentakelse().isEmpty())) {
+            System.out.println("Hvis sluttdato er fylt ut, må gjentakelse velges.");
+            return false;
+        }
+        if (nyAvtale.getGjentakelse() == null || nyAvtale.getGjentakelse().isEmpty()) {
+            nyAvtale.setSluttDato(null);
+        }
+        if (nyAvtale.getBeskrivelse() != null && !nyAvtale.getBeskrivelse().isEmpty()) {
+            eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeskrivelse());
+        }
+        if (nyAvtale.getDatoOgTid() != null) {
+            eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
+        }
+        if (nyAvtale.getGjentakelse() != null && !nyAvtale.getGjentakelse().isEmpty()) {
+            eksisterendeAvtale.setGjentakelse(nyAvtale.getGjentakelse());
+        }
+        if (nyAvtale.getSluttDato() != null) {
+            eksisterendeAvtale.setSluttDato(nyAvtale.getSluttDato());
+        }
 
-            if (eksisterendeAvtale != null) {
-                if (nyAvtale.getDatoOgTid() != null) {
-                    eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
-                }
-                if (nyAvtale.getBeskrivelse() != null) {
-                    eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeskrivelse());
-                }
-                if (nyAvtale.getGjentakelse() != null) {
-                    eksisterendeAvtale.setGjentakelse(nyAvtale.getGjentakelse());
-                }
-                if (nyAvtale.getSluttDato() != null) {
-                    eksisterendeAvtale.setSluttDato(nyAvtale.getSluttDato());
-                }
-
-                avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
-                return eksisterendeAvtale;
-            }
-            return null;
+        avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
+        return true;
     }
 
     public boolean slettAvtale(int avtaleId) {
-        try {
-            avtaleRepository.slettAvtale(avtaleId);
-            return true;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        Avtale avtale = avtaleRepository.hentAvtale(avtaleId);
+
+        if (avtale == null) {
+            System.out.println("Avtalen ble ikke funnet.");
             return false;
         }
+
+        avtaleRepository.slettAvtale(avtaleId);
+
+        return true;
     }
 
-    public List<Avtale> hentAvtaleForParorened(Parorende parorende) {
-        List<Avtale> avtaler = avtaleRepository.hentAvtaleForParorende(parorende.getParorendeId());
-        avtaler.sort((a1, a2) -> a2.getDatoOgTid().compareTo(a1.getDatoOgTid()));
-        return avtaler;
+    public List<Avtale> hentAvtalerForParorende(Parorende parorende) {
+        List<Avtale> avtaler = avtaleRepository.hentAvtalerForParorende(parorende);
+
+        List<Avtale> sorterteAvtaler = avtaler.stream()
+                .sorted((avtale1, avtale2) -> avtale2.getDatoOgTid().compareTo(avtale1.getDatoOgTid()))
+                .collect(Collectors.toList());
+        return sorterteAvtaler;
     }
-
-
 }
+
+
+

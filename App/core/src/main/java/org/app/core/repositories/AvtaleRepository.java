@@ -1,15 +1,18 @@
 package org.app.core.repositories;
 
 import org.app.core.models.Avtale;
+import org.app.core.models.Parorende;
 
 import java.util.List;
 
-
 public interface AvtaleRepository {
-    void oppretteAvtale(Avtale avtale);
-    void oppdaterAvtale(Avtale avtale);
-    Avtale hentAvtale(int avtaleId);
-    void slettAvtale(int avtaleId);
-    List<Avtale> hentAvtaleForParorende(int parorendeId);
+    boolean opprettAvtale(Avtale avtale);
 
+    boolean oppdaterAvtale(Avtale avtale);
+
+    boolean slettAvtale(int avtaleId);
+
+    Avtale hentAvtale(int avtaleId);
+
+    List<Avtale> hentAvtalerForParorende(Parorende parorende);
 }
