@@ -20,9 +20,9 @@ public class MainPage extends JFrame {
     private BeskjedService beskjedService;
     private AvtaleService avtaleService;
     private PleietrengendeService pleietrengendeService;
-    private JButton leggTilPleietrengendeKnapp;
     private JButton avtalerKnapp;
     private JButton beskjedKnapp;
+    private JButton leggTilPleietrengendeKnapp;
     private JButton handlelisteKnapp;
 
     public MainPage(Parorende parorende, Pleietrengende pleietrengende) {
@@ -122,6 +122,10 @@ public class MainPage extends JFrame {
         setVisible(true);
     }
 
+    public void setPleietrengende(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
+    }
+
     public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {
         this.pleietrengende = pleietrengende;
         String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() +
@@ -129,9 +133,13 @@ public class MainPage extends JFrame {
         pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
         avtalerKnapp.setEnabled(true);
         beskjedKnapp.setEnabled(true);
+        revalidate();
         repaint();
     }
     public void visHovedside() {
         setVisible(true);
+        revalidate();
+        repaint();
+
     }
 }

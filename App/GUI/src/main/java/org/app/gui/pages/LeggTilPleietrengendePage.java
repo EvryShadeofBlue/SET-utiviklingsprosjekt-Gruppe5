@@ -69,6 +69,7 @@ public class LeggTilPleietrengendePage extends JFrame {
                 int id = db.hentPleietrengendeId(fornavn, etternavn);
                 writePleietrengendeIdToFile(id);
 
+                mainPage.setPleietrengende(pleietrengende);
                 mainPage.oppdaterPleietrengendeInfo(pleietrengende);
                 mainPage.visHovedside();
                 this.dispose();
