@@ -67,4 +67,25 @@ public class GjentakelseUtenSluttdato {
         Assertions.assertEquals("ukentlig", eksisterendeAvtale.getGjentakelse(), "Gjentakelsen skal være oppdatert");
         Assertions.assertNull(eksisterendeAvtale.getSluttDato(), "Sluttdato skal ikke eksistere");
     }
+
+    @Test
+    @DisplayName("Oppdater avtale uten gjentakelse til månedlig gjentakelse uten sluttdao")
+    public void oppdaterAvtaleGjentakelseTilMånedlig() {
+        //Arrange
+        LocalDateTime datoOgTid = LocalDateTime.of(2024, 11, 20, 13, 0);
+        Avtale eksisterendeAvtale = new Avtale(datoOgTid, "Legetime for pleietrengende", mockParorende, mockPleietrengende);
+        Avtale nyAvtale = new Avtale();
+        nyAvtale.setGjentakelse("månedlig");
+
+        Mockito.when(mockAvtaleRepo.oppdaterAvtale(eksisterendeAvtale)).thenReturn(true);
+
+        //Act
+        AvtaleService avtaleService = new AvtaleService(mockAvtaleRepo);
+        boolean result = avtaleService.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+
+        //Assert
+        Assertions.assertTrue(result, "Oppdatering av avtale til månedlig gjentakelse skal være vellykket");
+        Assertions.assertEquals("månedlig", eksisterendeAvtale.getGjentakelse(), "Gjentakelsen skal være oppdatert");
+        Assertions.assertNull(eksisterendeAvtale.getSluttDato(), "Sluttdato skal ikke eksistere");
+    }
 }
