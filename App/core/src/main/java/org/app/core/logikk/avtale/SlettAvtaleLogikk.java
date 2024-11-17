@@ -1,4 +1,4 @@
-package org.app.core.logikk;
+package org.app.core.logikk.avtale;
 
 import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;

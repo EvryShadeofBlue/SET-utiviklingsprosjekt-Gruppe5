@@ -1,4 +1,4 @@
-package org.app.core.logikk;
+package org.app.core.logikk.avtale;
 
 import org.app.core.models.Avtale;
 import org.app.core.repositories.AvtaleRepository;
@@ -14,10 +14,13 @@ public class OppdaterAvtaleLogikk {
 
     public boolean oppdaterAvtale(Avtale eksisterendeAvtale, Avtale nyAvtale) {
         // Sjekk om avtalen har gjentakelse
-        if (eksisterendeAvtale.getGjentakelse() != null && !eksisterendeAvtale.getGjentakelse().isEmpty()) {
+        if (eksisterendeAvtale.getGjentakelse() != null &&
+                !eksisterendeAvtale.getGjentakelse().equalsIgnoreCase("ingen") &&
+                !eksisterendeAvtale.getGjentakelse().isEmpty()) {
             System.out.println("Avtaler med gjentakelse kan ikke oppdateres.");
             return false;
         }
+
 
         // Valider datoer
         if (nyAvtale.getDatoOgTid() != null && nyAvtale.getSluttDato() != null &&
