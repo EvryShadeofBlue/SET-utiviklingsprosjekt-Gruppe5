@@ -4,6 +4,7 @@ import org.screen.core.models.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +12,7 @@ import java.util.List;
 import org.screen.database.Export;
 
 public class Screen {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         int pleietrengende_id = FileHandling.readPleietrengendeIdFromFile();
 
@@ -87,7 +88,7 @@ public class Screen {
         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
             beskjeder.append("").append(beskjed.getDateTime()).append("<br>");  //legger til beskjed og linjeskift
-            beskjeder.append("Beskjed: ").append(beskjed.getDescription()).append("<br>");
+            beskjeder.append("Beskjed: ").append(Cryption.decrypt(beskjed.getDescription(), Cryption.getAESKey())).append("<br>");
         }
         beskjeder.append("</html>");     //avslutter html format
 
@@ -98,7 +99,7 @@ public class Screen {
         StringBuilder avtaler = new StringBuilder("<html>");
         for (Avtale avtale : avtaleList) {
             avtaler.append("").append(avtale.getDateTime()).append("<br>");
-            avtaler.append("Avtale: ").append(avtale.getDescription()).append("<br>");
+            avtaler.append("Avtale: ").append(Cryption.decrypt(avtale.getDescription(), Cryption.getAESKey())).append("<br>");
         }
         avtaler.append("</html>");
 
@@ -109,7 +110,7 @@ public class Screen {
         StringBuilder avtalerTmr = new StringBuilder("<html>");
         for (Avtale avtale : avtaleListTmr) {
             avtalerTmr.append("").append(avtale.getDateTime()).append("<br>");
-            avtalerTmr.append("Avtale: ").append(avtale.getDescription()).append("<br>");
+            avtalerTmr.append("Avtale: ").append(Cryption.decrypt(avtale.getDescription(), Cryption.getAESKey())).append("<br>");
         }
         avtalerTmr.append("</html>");
 

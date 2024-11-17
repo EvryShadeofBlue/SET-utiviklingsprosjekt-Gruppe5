@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="did some changes in the create method for avtaler">
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Enabled encryption and decryption for descriptions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/repositories/AvtaleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repositories/AvtaleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/AvtaleGjentakelseMedSluttdatoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/src/test/java/org/app/tests/usercases/avtaler/AvtaleGjentakelseMedSluttdatoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pleietrengende_id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../pleietrengende_id.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,13 +100,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00010" summary="Created opportunity to sign in">
-      <option name="closed" value="true" />
-      <created>1730299956679</created>
-      <option name="number" value="LOCAL−00010" />
-      <option name="presentableId" value="LOCAL−00010" />
-      <updated>1730299956679</updated>
     </task>
     <task id="LOCAL−00011" summary="Created a main page after login">
       <option name="closed" value="true" />
@@ -450,7 +439,15 @@
       <option name="presentableId" value="LOCAL−00058" />
       <updated>1731360348423</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Enabled encryption and decryption for descriptions">
+      <option name="closed" value="true" />
+      <created>1731835321205</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1731835321205</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -465,7 +462,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added opportunity to update and delete a beskjed" />
     <MESSAGE value="added the oportunity to delete a beskjed" />
     <MESSAGE value="Adjustet the class for easier implementation towards the gui" />
     <MESSAGE value="Did some changes to make thing look more clean" />
@@ -490,6 +486,7 @@
     <MESSAGE value="restructured the class fromthe beginning so things can work again" />
     <MESSAGE value="did some changes" />
     <MESSAGE value="did some changes in the create method for avtaler" />
-    <option name="LAST_COMMIT_MESSAGE" value="did some changes in the create method for avtaler" />
+    <MESSAGE value="Enabled encryption and decryption for descriptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enabled encryption and decryption for descriptions" />
   </component>
 </project>
