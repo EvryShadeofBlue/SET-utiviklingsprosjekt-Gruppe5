@@ -1,7 +1,7 @@
 package org.app.core.models;
 
 
-import org.app.core.logikk.AvtaleLogikk;
+import org.app.core.logikk.avtale.AvtaleLogikk;
 
 public class AvtalePageImplementation {
     private AvtaleLogikk avtaleService;

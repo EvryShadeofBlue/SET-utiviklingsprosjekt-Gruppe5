@@ -75,31 +75,43 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public boolean oppdaterAvtale(Avtale avtale) {
-        if (avtale.getSluttDato() != null && avtale.getGjentakelse() == null) {
+        // Tillat ikke oppdatering av gjentakende avtaler
+        if (avtale.getGjentakelse() != null &&
+                !avtale.getGjentakelse().equalsIgnoreCase("Ingen") &&
+                !avtale.getGjentakelse().isEmpty()) {
+            System.out.println("Avtaler med gjentakelse kan ikke oppdateres.");
             return false;
         }
 
-        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, slutt_dato = ?, gjentakelse = ?, pleietrengende_id = ?, parorende_id = ? " +
-                "WHERE avtale_id = ?";
+        // Legg til gjentakelse i SQL-spørringen
+        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, slutt_dato = ?, " +
+                "gjentakelse = ?, pleietrengende_id = ?, parorende_id = ? WHERE avtale_id = ?";
+
         String loggOppdateringQuery = "INSERT INTO loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "VALUES (?, ?, ?, ?, ?)";
+
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
-            PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+             PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+
+            // Sett verdiene for oppdatering
             oppdaterStatement.setString(1, avtale.getBeskrivelse());
             oppdaterStatement.setObject(2, avtale.getDatoOgTid());
             if (avtale.getSluttDato() != null) {
                 oppdaterStatement.setObject(3, avtale.getSluttDato());
-            }
-            else {
+            } else {
                 oppdaterStatement.setNull(3, Types.TIMESTAMP);
             }
-            oppdaterStatement.setString(4, avtale.getGjentakelse());
+
+            // Sett verdien for gjentakelse
+            oppdaterStatement.setString(4, avtale.getGjentakelse());  // Legg til dette
             oppdaterStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
             oppdaterStatement.setInt(6, avtale.getParorende().getParorendeId());
             oppdaterStatement.setInt(7, avtale.getAvtaleId());
+
             int rowsUpdated = oppdaterStatement.executeUpdate();
 
             if (rowsUpdated > 0) {
+                // Legg til logging
                 loggStatement.setInt(1, avtale.getParorende().getParorendeId());
                 loggStatement.setString(2, "pårørende");
                 loggStatement.setString(3, "avtale oppdatert");
@@ -108,11 +120,9 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 loggStatement.executeUpdate();
                 return true;
             }
-            else {
-                return false;
-            }
-        }
-        catch (SQLException sqlException) {
+            return false;
+
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             return false;
         }
@@ -178,6 +188,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
                 int parorendeId = resultSet.getInt("parorende_id");
+                String gjentakelsesType = resultSet.getString("gjentakelse");
+                LocalDateTime sluttDato = resultSet.getObject("slutt_dato", LocalDateTime.class);
 
                 Parorende parorende = new Parorende();
                 parorende.setParorendeId(parorendeId);
@@ -185,7 +197,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, pleietrengende, parorende);
+                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelsesType, sluttDato,pleietrengende, parorende);
                 return avtale;
             }
         } catch (SQLException sqlException) {

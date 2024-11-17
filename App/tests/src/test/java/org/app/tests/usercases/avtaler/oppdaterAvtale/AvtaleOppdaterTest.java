@@ -1,10 +1,11 @@
 package org.app.tests.usercases.avtaler.oppdaterAvtale;
 
+import org.app.core.logikk.avtale.OppdaterAvtaleLogikk;
 import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
-import org.app.core.logikk.AvtaleLogikk;
+import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,9 @@ public class AvtaleOppdaterTest {
         Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
         AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
-        boolean result = avtaleService.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
         //Assert
         Assertions.assertTrue(result, "Oppdatering av avtalen skal være vellykket");
@@ -54,7 +56,8 @@ public class AvtaleOppdaterTest {
 
         //Act
         AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
-        boolean result = avtaleService.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
         //Assert
         Assertions.assertTrue(result, "Oppdatering av avtalen skal være vellykket");
@@ -72,7 +75,8 @@ public class AvtaleOppdaterTest {
 
         //Act
         AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
-        boolean result = avtaleService.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
         //Assert
         Assertions.assertTrue(result, "Avtalen skal være oppdatert");
