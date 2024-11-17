@@ -1,7 +1,7 @@
 package org.app.gui.pages;
 
-import org.app.core.logikk.AvtaleLogikk;
-import org.app.core.logikk.BeskjedLogikk;
+import org.app.core.logikk.avtale.AvtaleLogikk;
+import org.app.core.logikk.beskjed.BeskjedLogikk;
 import org.app.core.logikk.LeggTilPleietrengendeLogikk;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
@@ -17,8 +17,8 @@ public class MainPage extends JFrame {
     private JLabel pleietrengendeNavnLabel;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
-    private BeskjedLogikk beskjedService;
-    private AvtaleLogikk avtaleService;
+    private BeskjedLogikk beskjedLogikk;
+    private AvtaleLogikk avtaleLogikk;
     private LeggTilPleietrengendeLogikk pleietrengendeService;
     private JButton leggTilPleietrengendeKnapp;
     private JButton avtalerKnapp;
@@ -88,10 +88,10 @@ public class MainPage extends JFrame {
 
         setVisible(true);
 
-        beskjedService = new BeskjedLogikk(new BeskjedDBImplementation());
+        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
         beskjedKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
-                new BeskjedPage(beskjedService, parorende, pleietrengende, this);
+                new BeskjedPage(beskjedLogikk, parorende, pleietrengende, this);
                 this.setVisible(false);
             }
             else {
@@ -100,10 +100,11 @@ public class MainPage extends JFrame {
                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
             }});
 
-        avtaleService = new AvtaleLogikk(new AvtaleDBImplementation());
+
+        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
         avtalerKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
-                new AvtalePage(avtaleService, parorende, pleietrengende, this);
+                new AvtalePage(avtaleLogikk, parorende, pleietrengende, this);
                 this.setVisible(false);
             }
             else {

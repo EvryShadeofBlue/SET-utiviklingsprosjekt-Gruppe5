@@ -46,8 +46,8 @@ public class OpprettDagligAvtaleFeilTest {
     @DisplayName("Feil ved manglende beskrivelse for daglig avtale")
     public void feilManglendeBeskrivelse() {
         // Arrange
-        LocalDateTime startDato = LocalDateTime.of(2024, 11, 1, 9, 0); // Startdato: 1. november 2024, 09:00
-        LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 10, 9, 0); // Sluttdato: 10. november 2024
+        LocalDateTime startDato = LocalDateTime.of(2024, 11, 1, 9, 0);
+        LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 10, 9, 0);
         Avtale avtale = new Avtale(startDato, "", "daglig", sluttDato, mockParorende, mockPleietrengende);
 
         // Act
@@ -61,10 +61,10 @@ public class OpprettDagligAvtaleFeilTest {
 
     @Test
     @DisplayName("Feil ved sluttdato før startdato for daglig avtale")
-    public void feilSluttdatoFørStartdato() {
+    public void feilSluttdatoFørDato() {
         // Arrange
-        LocalDateTime startDato = LocalDateTime.of(2024, 11, 1, 9, 0); // Startdato: 1. november 2024, 09:00
-        LocalDateTime sluttDato = LocalDateTime.of(2024, 10, 30, 9, 0); // Sluttdato før startdato
+        LocalDateTime startDato = LocalDateTime.of(2024, 11, 1, 9, 0);
+        LocalDateTime sluttDato = LocalDateTime.of(2024, 10, 30, 9, 0);
         Avtale avtale = new Avtale(startDato, "Daglig oppfølging", "daglig", sluttDato, mockParorende, mockPleietrengende);
 
         // Act
