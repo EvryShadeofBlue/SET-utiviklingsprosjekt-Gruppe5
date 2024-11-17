@@ -5,6 +5,7 @@ import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class AvtaleService {
     }
 
 
-    public boolean opprettAvtale(Avtale avtale) {
+    public boolean opprettAvtale(Avtale avtale) throws NoSuchAlgorithmException {
         if (avtale.getDatoOgTid() == null || avtale.getBeskrivelse() == null || avtale.getBeskrivelse().isEmpty()) {
             System.out.println("Beskrivelse og dato/tid er obligatoriske.");
             return false;

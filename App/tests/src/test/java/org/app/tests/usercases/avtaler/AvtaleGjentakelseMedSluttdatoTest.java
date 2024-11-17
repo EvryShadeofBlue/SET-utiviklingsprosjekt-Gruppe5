@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +29,7 @@ public class AvtaleGjentakelseMedSluttdatoTest {
 
     @Test
     @DisplayName("Feil ved sluttdato uten gjentakelse")
-    public void feilSluttdatoUtenGjentakelse() {
+    public void feilSluttdatoUtenGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         LocalDateTime startDato = LocalDateTime.of(2024, 11, 13, 10, 0);
         LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 15, 10, 0);
@@ -45,7 +46,7 @@ public class AvtaleGjentakelseMedSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med daglig gjentakelse og sluttdato")
-    public void opprettAvtaleMedDagligGjentakelse() {
+    public void opprettAvtaleMedDagligGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         LocalDateTime startDato = LocalDateTime.of(2024, 11, 13, 10, 0);
         LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 15, 10, 0);
@@ -63,7 +64,7 @@ public class AvtaleGjentakelseMedSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med ukentlig gjentakelse og sluttdato")
-    public void opprettAvtaleMedUkentligGjentakelse() {
+    public void opprettAvtaleMedUkentligGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         LocalDateTime startDato = LocalDateTime.of(2024, 11, 13, 10, 0);
         LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 27, 10, 0);
@@ -81,7 +82,7 @@ public class AvtaleGjentakelseMedSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med månedlig gjentakelse og sluttdato")
-    public void opprettAvtaleMedMånedligGjentakelse() {
+    public void opprettAvtaleMedMånedligGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         LocalDateTime startDato = LocalDateTime.of(2024, 11, 13, 10, 0);
         LocalDateTime sluttDato = LocalDateTime.of(2024, 12, 13, 10, 0);

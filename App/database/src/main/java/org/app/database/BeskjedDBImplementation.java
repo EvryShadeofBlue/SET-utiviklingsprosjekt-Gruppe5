@@ -1,12 +1,10 @@
 package org.app.database;
 
-import org.app.core.models.Beskjed;
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
+import org.app.core.models.*;
 
-import org.app.core.models.Resources;
 import org.app.core.repositories.BeskjedRepository;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,7 +35,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         try (PreparedStatement opprettStatement = connection.prepareStatement(opprettBeskjedQuery, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
 
-            opprettStatement.setString(1, beskjed.getBeskrivelse());
+            opprettStatement.setString(1, Cryption.encrypt(beskjed.getBeskrivelse(), Cryption.getAESKey()));
             opprettStatement.setObject(2, beskjed.getDatoOgTid());
             opprettStatement.setInt(3, beskjed.getSynligTidsenhet());
 
@@ -59,6 +57,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -69,7 +69,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
                 "values (?, ?, ?, ?, ?)";
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterBeskjedQuery);
              PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
-            oppdaterStatement.setString(1, beskjed.getBeskrivelse());
+            oppdaterStatement.setString(1, Cryption.encrypt(beskjed.getBeskrivelse(), Cryption.getAESKey()));
             oppdaterStatement.setObject(2, beskjed.getDatoOgTid());
             oppdaterStatement.setInt(3, beskjed.getSynligTidsenhet());
             oppdaterStatement.setInt(4, beskjed.getParorende().getParorendeId());
@@ -85,6 +85,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
             loggStatement.executeUpdate();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -147,7 +149,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
 
             if (resultSet.next()) {
                 int id = resultSet.getInt("beskjed_id");
-                String beskrivelse = resultSet.getString("beskrivelse");
+                String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getObject("dato_tid", LocalDateTime.class);
                 int synligTid = resultSet.getInt("synlig_tid");
                 int parorendeId = resultSet.getInt("parorende_id");
@@ -164,6 +166,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -181,7 +185,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
 
             while (resultSet.next()) {
                 int beskjedId = resultSet.getInt("beskjed_id");
-                String beskrivelse = resultSet.getString("beskrivelse");
+                String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getTimestamp("dato_tid").toLocalDateTime();
                 int synligTidsenhet = resultSet.getInt("synlig_tid");
 
@@ -191,6 +195,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return beskjeder;
     }

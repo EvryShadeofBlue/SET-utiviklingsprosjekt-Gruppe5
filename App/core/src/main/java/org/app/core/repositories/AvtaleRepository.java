@@ -3,10 +3,11 @@ package org.app.core.repositories;
 import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface AvtaleRepository {
-    boolean opprettAvtale(Avtale avtale);
+    boolean opprettAvtale(Avtale avtale) throws NoSuchAlgorithmException;
 
     boolean oppdaterAvtale(Avtale avtale);
 
