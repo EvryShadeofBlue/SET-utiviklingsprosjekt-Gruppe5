@@ -1,7 +1,7 @@
 package org.app.core.models;
 
 
-import org.app.core.logikk.BeskjedLogikk;
+import org.app.core.logikk.beskjed.BeskjedLogikk;
 
 import javax.swing.*;
 import java.time.LocalDateTime;

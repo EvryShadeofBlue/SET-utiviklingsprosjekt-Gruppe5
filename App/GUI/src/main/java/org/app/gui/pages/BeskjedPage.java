@@ -3,7 +3,7 @@ package org.app.gui.pages;
 import org.app.core.models.Beskjed;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
-import org.app.core.logikk.BeskjedLogikk;
+import org.app.core.logikk.beskjed.BeskjedLogikk;
 
 import javax.swing.*;
 import java.awt.*;
