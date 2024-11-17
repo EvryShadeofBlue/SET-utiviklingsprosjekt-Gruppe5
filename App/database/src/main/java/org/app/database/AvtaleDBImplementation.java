@@ -175,7 +175,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public Avtale hentAvtale(int avtaleId) {
-        String hentAvtaleQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, pleietrengende_id, parorende_id " +
+        String hentAvtaleQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id " +
                 "FROM Avtaler WHERE avtale_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtaleQuery)) {
@@ -211,7 +211,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     public List<Avtale> hentAvtalerForParorende(Parorende parorende) {
         List<Avtale> avtaler = new ArrayList<>();
 
-        String hentAvtalerQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, pleietrengende_id, parorende_id " +
+        String hentAvtalerQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id " +
                 "FROM Avtaler WHERE parorende_id = ? ORDER BY dato_og_tid DESC";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtalerQuery)) {
@@ -222,6 +222,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 int avtaleId = resultSet.getInt("avtale_id");
                 String beskrivelse = resultSet.getString("beskrivelse");
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
+                String gjentakelse = resultSet.getString("gjentakelse");
+                LocalDateTime sluttDato = resultSet.getObject("slutt_dato", LocalDateTime.class);
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
                 int parorendeId = resultSet.getInt("parorende_id");
 
@@ -230,7 +232,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, pleietrengende, parorende);
+                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato, pleietrengende, parorende);
                 avtaler.add(avtale);
             }
         } catch (SQLException sqlException) {
