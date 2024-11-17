@@ -1,10 +1,12 @@
 package org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale;
 
+import net.bytebuddy.asm.Advice;
+import org.app.core.logikk.avtale.OppdaterAvtaleLogikk;
 import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
-import org.app.core.logikk.AvtaleLogikk;
+import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,24 +29,68 @@ public class GjentakelseMedSluttdatoTest {
     Pleietrengende mockPleietrengende;
 
     @Test
-    @DisplayName("Oppdater avale uten gjentakelse til daglig gjentakelse med sluttdato")
-    public void oppdaterAvtaleTilDagligGjentakelse() {
+    @DisplayName("Kan ikke oppdatere avtale med ukentlig gjentakelse")
+    public void kanIkkeOppdatereAvtaleMedUkentligGjentakelse() {
         //Arrange
-        LocalDateTime startDato = LocalDateTime.of(2024, 12, 1, 14, 0);
-        LocalDateTime sluttDato = startDato.plusDays(5);
-        Avtale eksisterendeAvtale = new Avtale(startDato, "Besøk til pleietrengende", mockParorende, mockPleietrengende);
-        Avtale nyAvtale = new Avtale();
-        nyAvtale.setGjentakelse("daglig");
-        nyAvtale.setSluttDato(sluttDato);
+        LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
+        LocalDateTime sluttDato = dato.plusWeeks(2);
+        Avtale eksisterendeAvtale = new Avtale(LocalDateTime.now(), "Legetime", mockParorende, mockPleietrengende);
+        eksisterendeAvtale.setGjentakelse("ukentlig");
+        eksisterendeAvtale.setSluttDato(sluttDato);
 
-        //Act
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
-        boolean result = avtaleService.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        Avtale nyAvtale = new Avtale(dato.plusDays(1), "Endret legetime", mockParorende, mockPleietrengende);
+        nyAvtale.setSluttDato(sluttDato.plusDays(1));
 
-        //Assert
-        Assertions.assertTrue(result, "Oppdatering av avtale til daglig gjentakelse med sluttdato skal være vellykket");
-        Assertions.assertEquals("daglig", eksisterendeAvtale.getGjentakelse(), "Gjentakelsen bør være oppdatert");
-        Assertions.assertEquals(sluttDato, eksisterendeAvtale.getSluttDato(), "Sluttdato bør være oppdatert");
-        Mockito.verify(mockAvtaleRepo, Mockito.times(5)).opprettAvtale(Mockito.any(Avtale.class));
+        //Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
+
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+
+        Assertions.assertFalse(result, "Avtale med gjentakelse kan ikke oppdateres");
+        Mockito.verify(mockAvtaleRepo, Mockito.never()).oppdaterAvtale(Mockito.any(Avtale.class));
+    }
+
+    @Test
+    @DisplayName("Kan ikke oppdatere avtale med daglig gjentakelse")
+    public void kanIkkeOppdatereAvtaleMedDagligGjentakelse() {
+        //Arrange
+        LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
+        LocalDateTime sluttDato = dato.plusWeeks(2);
+        Avtale eksisterendeAvtale = new Avtale(LocalDateTime.now(), "Fysioterapaut", mockParorende, mockPleietrengende);
+        eksisterendeAvtale.setGjentakelse("daglig");
+        eksisterendeAvtale.setSluttDato(sluttDato);
+
+        Avtale nyAvtale = new Avtale(dato.plusDays(1), "Endret time", mockParorende, mockPleietrengende);
+        nyAvtale.setSluttDato(sluttDato.plusDays(1));
+
+        //Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
+
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+
+        Assertions.assertFalse(result, "Avtale med gjentakelse kan ikke oppdateres");
+        Mockito.verify(mockAvtaleRepo, Mockito.never()).oppdaterAvtale(Mockito.any(Avtale.class));
+    }
+
+    @Test
+    @DisplayName("Kan ikke oppdatere avtale med gjentakelse")
+    public void kanIkkeOppdatereAvtaleMedMånedligGjentakelse() {
+        //Arrange
+        LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
+        LocalDateTime sluttDato = dato.plusWeeks(2);
+        Avtale eksisterendeAvtale = new Avtale(LocalDateTime.now(), "Hjemmebesøk", mockParorende, mockPleietrengende);
+        eksisterendeAvtale.setGjentakelse("månedlig");
+        eksisterendeAvtale.setSluttDato(sluttDato);
+
+        Avtale nyAvtale = new Avtale(dato.plusDays(1), "Endret besøk", mockParorende, mockPleietrengende);
+        nyAvtale.setSluttDato(sluttDato.plusDays(1));
+
+        //Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
+
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+
+        Assertions.assertFalse(result, "Avtale med gjentakelse kan ikke oppdateres");
+        Mockito.verify(mockAvtaleRepo, Mockito.never()).oppdaterAvtale(Mockito.any(Avtale.class));
     }
 }
