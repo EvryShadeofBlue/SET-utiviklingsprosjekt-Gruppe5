@@ -245,5 +245,27 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             sqlException.printStackTrace();
         }
     }
+
+    public List<Avtale> hentAlleAvtaler() {
+        List<Avtale> avtaler = new ArrayList<>();
+
+        String hentAvtalerQuery = "SELECT avtale_id, dato_og_tid FROM Avtaler ORDER BY dato_og_tid DESC";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtalerQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int avtaleId = resultSet.getInt("avtale_id");
+                LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
+
+                Avtale avtale = new Avtale(avtaleId, datoOgTid);
+                avtaler.add(avtale);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return avtaler;
+    }
+
 }
 

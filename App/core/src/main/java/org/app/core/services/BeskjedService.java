@@ -68,4 +68,10 @@ public class BeskjedService {
 
     }
 
+    public List<Beskjed> hentAlleBeskjeder() {
+        List<Beskjed> beskjeder = beskjedRepository.hentAlleBeskjeder();
+        beskjeder.sort((b1, b2) -> b2.getDatoOgTid().compareTo(b1.getDatoOgTid()));
+        return beskjeder;
+    }
+
 }

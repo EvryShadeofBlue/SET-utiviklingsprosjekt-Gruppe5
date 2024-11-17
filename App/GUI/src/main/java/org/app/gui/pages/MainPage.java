@@ -1,5 +1,6 @@
 package org.app.gui.pages;
 
+import org.app.core.models.ExpiredEntriesCleaner;
 import org.app.core.services.AvtaleService;
 import org.app.core.services.BeskjedService;
 import org.app.core.services.PleietrengendeService;
@@ -87,6 +88,12 @@ public class MainPage extends JFrame {
         add(handlelisteKnapp, g1);
 
         setVisible(true);
+
+        beskjedService = new BeskjedService(new BeskjedDBImplementation());
+        avtaleService = new AvtaleService(new AvtaleDBImplementation());
+
+        ExpiredEntriesCleaner cleaner = new ExpiredEntriesCleaner(beskjedService, avtaleService);
+        cleaner.startCleaning(0, 24 * 60 * 60 * 1000);
 
         beskjedService = new BeskjedService(new BeskjedDBImplementation());
         beskjedKnapp.addActionListener(e -> {

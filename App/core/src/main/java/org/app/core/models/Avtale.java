@@ -70,6 +70,9 @@ public class Avtale {
 
     }
 
+    public Avtale(int avtaleId, LocalDateTime datoOgTid) {
+    }
+
     public int getAvtaleId() {
         return avtaleId;
     }

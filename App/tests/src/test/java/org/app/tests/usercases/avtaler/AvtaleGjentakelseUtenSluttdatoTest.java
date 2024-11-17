@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +30,7 @@ public class AvtaleGjentakelseUtenSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med ingen gjentakelse og uten sluttdato")
-    public void opprettAvtaleMedIngenGjentakelse() {
+    public void opprettAvtaleMedIngenGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         Avtale avtale = new Avtale(LocalDateTime.now(), "Legetime", "Ingen", null, mockParorende, mockPleietrengende);
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
@@ -44,7 +45,7 @@ public class AvtaleGjentakelseUtenSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med daglig gjentakelse og uten sluttdato")
-    public void opprettAvtaleMedDagligGjentakelse() {
+    public void opprettAvtaleMedDagligGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         Avtale avtale = new Avtale(LocalDateTime.now(), "Daglig trening", "daglig", null, mockParorende, mockPleietrengende);
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
@@ -59,7 +60,7 @@ public class AvtaleGjentakelseUtenSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med ukentlig gjentakelse og uten sluttdato")
-    public void opprettAvtaleMedUkentligGjentakelse() {
+    public void opprettAvtaleMedUkentligGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         Avtale avtale = new Avtale(LocalDateTime.now(), "Legetime", "ukentlig", null, mockParorende, mockPleietrengende);
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
@@ -75,7 +76,7 @@ public class AvtaleGjentakelseUtenSluttdatoTest {
 
     @Test
     @DisplayName("Oppretter avtale med månedlig gjentakelse og uten sluttdato")
-    public void opprettAvtaleMedMånedligGjentakelse() {
+    public void opprettAvtaleMedMånedligGjentakelse() throws NoSuchAlgorithmException {
         //Arrange
         Avtale avtale = new Avtale(LocalDateTime.now(), "Legetime", "månedlig", null, mockParorende, mockPleietrengende);
         Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);

@@ -6,7 +6,10 @@ import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -104,6 +107,17 @@ public class AvtaleService {
                 .collect(Collectors.toList());
         return sorterteAvtaler;
     }
+
+    public List<Avtale> hentAlleAvtaler() {
+        List<Avtale> avtaler = avtaleRepository.hentAlleAvtaler();
+
+        return avtaler.stream()
+                .filter(avtale -> avtale.getDatoOgTid() != null)
+                .sorted(Comparator.comparing(Avtale::getDatoOgTid))
+                .collect(Collectors.toList());
+
+    }
+
 }
 
 
