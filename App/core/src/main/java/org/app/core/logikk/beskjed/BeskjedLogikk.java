@@ -1,4 +1,4 @@
-package org.app.core.logikk;
+package org.app.core.logikk.beskjed;
 
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;

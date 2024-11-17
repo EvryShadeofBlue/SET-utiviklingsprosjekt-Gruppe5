@@ -1,13 +1,10 @@
-package org.app.core.logikk;
+package org.app.core.logikk.avtale;
 
 import org.app.core.models.Parorende;
 import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.PrimitiveIterator;
-import java.util.stream.Collectors;
 
 public class AvtaleLogikk {
     private AvtaleRepository avtaleRepository;
