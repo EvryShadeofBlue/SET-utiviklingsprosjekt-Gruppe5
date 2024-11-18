@@ -40,6 +40,8 @@ public class AvtaleLogikk {
 
 
 
+
+
 //    public boolean opprettAvtale(Avtale avtale) {
 //        if (avtale == null) {
 //            throw new IllegalArgumentException("Avtale kan ikke være null");
