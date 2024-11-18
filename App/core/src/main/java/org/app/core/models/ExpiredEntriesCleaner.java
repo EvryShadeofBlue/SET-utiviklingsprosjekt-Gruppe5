@@ -34,7 +34,7 @@ public class ExpiredEntriesCleaner {
         List<Beskjed> beskjeder = beskjedService.hentAlleBeskjeder();
 
         for (Beskjed beskjed : beskjeder) {
-            LocalDateTime visibleUntil = beskjed.getDatoOgTid().plusHours(beskjed.getSynligTidsenhet());
+            LocalDateTime visibleUntil = beskjed.getDatoOgTid().plusDays(beskjed.getSynligTidsenhet());
             if (visibleUntil.isBefore(currentDate)) {
                 beskjedService.slettBeskjed(beskjed.getBeskjedId());
             }
@@ -50,8 +50,9 @@ public class ExpiredEntriesCleaner {
                 continue;
             }
 
-            if (avtale.getGjentakelse().equals("Ingen")) {
-                if (avtale.getDatoOgTid().plusDays(7).isBefore(currentDate)) {
+            String gjentakelse = avtale.getGjentakelse();
+            if (gjentakelse == null || gjentakelse.equals("Ingen")) {
+                if (avtale.getDatoOgTid().plusDays(14).isBefore(currentDate)) {
                     avtaleService.slettAvtale(avtale.getAvtaleId());
                 }
             } else {

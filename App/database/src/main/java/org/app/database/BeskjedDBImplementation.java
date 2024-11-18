@@ -215,7 +215,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
     public List<Beskjed> hentAlleBeskjeder() {
         List<Beskjed> beskjeder = new ArrayList<>();
 
-        String hentBeskjederQuery = "SELECT beskjed_id, dato_tid FROM Beskjeder ORDER BY dato_tid DESC";
+        String hentBeskjederQuery = "SELECT beskjed_id, dato_tid, synlig_tid FROM Beskjeder ORDER BY dato_tid DESC";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentBeskjederQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -223,8 +223,9 @@ public class BeskjedDBImplementation implements BeskjedRepository {
             while (resultSet.next()) {
                 int beskjedId = resultSet.getInt("beskjed_id");
                 LocalDateTime datoOgTid = resultSet.getObject("dato_tid", LocalDateTime.class);
+                int synligTidsenhet = resultSet.getInt("synlig_tid");
 
-                Beskjed beskjed = new Beskjed(beskjedId, datoOgTid);
+                Beskjed beskjed = new Beskjed(beskjedId, datoOgTid, synligTidsenhet);
                 beskjeder.add(beskjed);
             }
         } catch (SQLException sqlException) {

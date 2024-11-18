@@ -249,7 +249,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     public List<Avtale> hentAlleAvtaler() {
         List<Avtale> avtaler = new ArrayList<>();
 
-        String hentAvtalerQuery = "SELECT avtale_id, dato_og_tid FROM Avtaler ORDER BY dato_og_tid DESC";
+        String hentAvtalerQuery = "SELECT avtale_id, dato_og_tid, gjentakelse, slutt_dato FROM" +
+                " Avtaler ORDER BY dato_og_tid DESC";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtalerQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -257,8 +258,10 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             while (resultSet.next()) {
                 int avtaleId = resultSet.getInt("avtale_id");
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
+                String gjentakelse = resultSet.getString("gjentakelse");
+                LocalDateTime sluttDato = resultSet.getObject("slutt_dato", LocalDateTime.class);
 
-                Avtale avtale = new Avtale(avtaleId, datoOgTid);
+                Avtale avtale = new Avtale(avtaleId, datoOgTid, gjentakelse, sluttDato);
                 avtaler.add(avtale);
             }
         } catch (SQLException sqlException) {

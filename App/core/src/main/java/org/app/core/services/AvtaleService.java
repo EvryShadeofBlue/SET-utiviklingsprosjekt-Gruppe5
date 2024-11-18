@@ -111,11 +111,10 @@ public class AvtaleService {
     public List<Avtale> hentAlleAvtaler() {
         List<Avtale> avtaler = avtaleRepository.hentAlleAvtaler();
 
-        return avtaler.stream()
-                .filter(avtale -> avtale.getDatoOgTid() != null)
-                .sorted(Comparator.comparing(Avtale::getDatoOgTid))
+        List<Avtale> sorterteAvtaler = avtaler.stream()
+                .sorted((avtale1, avtale2) -> avtale2.getDatoOgTid().compareTo(avtale1.getDatoOgTid()))
                 .collect(Collectors.toList());
-
+        return sorterteAvtaler;
     }
 
 }

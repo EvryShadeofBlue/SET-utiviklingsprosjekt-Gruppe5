@@ -70,7 +70,11 @@ public class Avtale {
 
     }
 
-    public Avtale(int avtaleId, LocalDateTime datoOgTid) {
+    public Avtale(int avtaleId, LocalDateTime datoOgTid, String gjentakelse, LocalDateTime sluttDato) {
+        this.avtaleId = avtaleId;
+        this.datoOgTid = datoOgTid;
+        this.gjentakelse = gjentakelse;
+        this.sluttDato = sluttDato;
     }
 
     public int getAvtaleId() {
