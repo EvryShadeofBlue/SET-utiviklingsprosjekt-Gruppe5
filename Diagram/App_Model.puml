@@ -1,0 +1,85 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+hide empty description
+
+[*] --> AppLoginPage
+AppLoginPage --> AppLoginPage : Failed
+AppLoginPage --> [*] : Abort
+state AppLoginPage {
+
+    state "Login" as long1
+    state "Register new user" as long2
+    [*] --> long1
+    long1 --> long1 : Invalid login
+    long1 --> [*] : Success
+    [*] --> long2
+    long2 --> long2 : Invalid registration
+    long2 --> [*] : Success
+}
+
+AppLoginPage --> MainAppPage : Success
+
+MainAppPage: Will show whos screen this app is connected to
+MainAppPage: Click one of the choices
+
+state MainAppPage {
+
+    state "Appointments" as long3
+    state "Messages" as long4
+    state "Administration" as long5
+
+}
+
+MainAppPage --> AppointmentsPage : Click "Appointments"
+
+AppointmentsPage: This page could either show a list of all saved appointments
+AppointmentsPage: or just the two buttons to choose. An alternative to "View/Edit Appointments"
+AppointmentsPage: could be to click on visible appointments directly and then have the choice
+AppointmentsPage: to Edit/Delete the chosen appointment.
+AppointmentsPage --> MainAppPage : Abort
+
+state AppointmentsPage {
+    state "Make new Appointment" as long6
+    state "View/Edit Appointments" as long7
+}
+
+AppointmentsPage --> NewAppointment : Click "Make new Appointment"
+NewAppointment --> AppointmentsPage: Abort/saved
+NewAppointment: DATE: Choose date for appointment
+NewAppointment: Description: Write a description of the appointment
+
+AppointmentsPage --> ViewEditAppointments : Click "View/Edit Appointments" \n(or on an appointment in a list)
+ViewEditAppointments --> AppointmentsPage : Abort/Saved/Deleted
+ViewEditAppointments: Edit: Edit the appointment (change date and/or description)
+ViewEditAppointments: Delete: Delete appointment
+
+MainAppPage --> MessagesPage: Click "Messages"
+MessagesPage --> MainAppPage : Abort
+
+state MessagesPage {
+    state "Make new Message" as long8
+    state "View/Edit Messages" as long9
+}
+
+MessagesPage: The page could either show a list of saved messages
+MessagesPage: or just the two buttons to choose from + an "Abort" button
+
+MessagesPage --> NewMessage : Click "Make new Message"
+NewMessage --> MessagesPage : Abort/saved
+NewMessage: Write new message
+
+MessagesPage --> ViewEditMessages : Click "View/Edit Messages" \n(or on a message in a list)
+ViewEditMessages --> MessagesPage : Abort/Saved/Deleted
+
+
+MainAppPage --> AdministrationPage: Click "Administration"
+AdministrationPage --> MainAppPage : Abort
+AdministrationPage: This part of the app will host the administrative
+AdministrationPage: part of the app where users can view and change
+AdministrationPage: their profiles.
+
+MainAppPage -left-> [*] : Abort \n(close APP)
+
+@enduml
+

@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Pårørende as pårørende
+database Database as db
+
+pårørende -> db: Skriver inn brukernavn og passord
+activate pårørende
+
+db -> db: Verifiser brukernavn og passord
+
+alt Gyldig innlogging
+
+db --> pårørende: bekreft innlogging
+
+else Ugyldig innlogging
+db --> pårørende: Feilmelding (ugyldig brukernavn eller passord)
+deactivate pårørende
+
+end
+
+@enduml

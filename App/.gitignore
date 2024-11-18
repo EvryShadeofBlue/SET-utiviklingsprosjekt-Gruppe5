@@ -11,6 +11,8 @@ target/
 *.iws
 *.iml
 *.ipr
+Resources.java
+Cryption.java
 
 ### Eclipse ###
 .apt_generated
@@ -30,9 +32,12 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+Resources.java
+Cryption.java
 
 ### VS Code ###
 .vscode/
 
 ### Mac OS ###
 .DS_Store
+
