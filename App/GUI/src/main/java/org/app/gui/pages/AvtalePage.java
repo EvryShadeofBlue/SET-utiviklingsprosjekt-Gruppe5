@@ -24,13 +24,8 @@ public class AvtalePage extends JFrame{
     private JButton lagreKnapp;
     private JPanel avtaleListePanel;
     private AvtaleLogikk avtaleLogikk;
-    private OpprettAvtaleLogikk opprettAvtaleLogikk;
-    private OppdaterAvtaleLogikk oppdaterAvtaleLogikk;
-    private SlettAvtaleLogikk slettAvtaleLogikk;
-    private VisAvtaleLogikk visAvtaleLogikk;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
-    private AvtalePageImplementation avtalePageImplementation;
     private MainPage mainPage;
     private JButton tilbakeKnapp;
 
@@ -214,13 +209,9 @@ public class AvtalePage extends JFrame{
         }
     }
 
-    public boolean erGjentakende(Avtale avtale) {
-            return true;
-    }
 
     public void redigerAvtale(Avtale avtale) {
-        // Sjekk om avtalen er gjentakende før vi åpner redigeringsvinduet
-        if (avtale.getGjentakelse() != null && !avtale.getGjentakelse().isEmpty()) {
+        if (avtale.getGjentakelse() != null && !"Ingen".equals(avtale.getGjentakelse())) {
             JOptionPane.showMessageDialog(this,
                     "En gjentakende avtale kan ikke redigeres. Den kan bare slettes.",
                     "Feil",
@@ -229,87 +220,58 @@ public class AvtalePage extends JFrame{
         }
 
         JFrame redigeringsVindu = new JFrame("Rediger Avtale");
-        redigeringsVindu.setSize(400, 300);
+        redigeringsVindu.setSize(400, 250);
         redigeringsVindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         redigeringsVindu.setLocationRelativeTo(this);
 
-        // Bruk eksisterende beskrivelse fra avtalen
         JTextArea beskrivelsesFelt = new JTextArea(avtale.getBeskrivelse(), 2, 10);
         beskrivelsesFelt.setLineWrap(true);
         beskrivelsesFelt.setWrapStyleWord(true);
 
-        // Bruk eksisterende dato og klokkeslett fra avtalen
-        LocalDate dato = avtale.getDatoOgTid().toLocalDate();
-        LocalTime klokkeslett = avtale.getDatoOgTid().toLocalTime();
-
-        JTextField datoFelt = new JTextField(dato.toString());
-        JTextField klokkeslettFelt = new JTextField(klokkeslett.toString());
-
-        JComboBox<String> gjentakelsesFelt = new JComboBox<>(new String[] {"Ingen", "Daglig", "Ukentlig", "Månedlig"});
-// Sett valgt verdi i JComboBox basert på gjentakelse fra avtalen
-        if (avtale.getGjentakelse() != null && !avtale.getGjentakelse().isEmpty()) {
-            gjentakelsesFelt.setSelectedItem(avtale.getGjentakelse());
-        } else {
-            gjentakelsesFelt.setSelectedItem("Ingen");
-        }
-
-// Håndter sluttDato-feltet
-        JTextField sluttDatoFelt = new JTextField();
-        if (avtale.getSluttDato() != null) {
-            sluttDatoFelt.setText(avtale.getSluttDato().toLocalDate().toString());
-        }
-
+        JTextField datoFelt = new JTextField(avtale.getDatoOgTid().toLocalDate().toString());
+        JTextField klokkeslettFelt = new JTextField(avtale.getDatoOgTid().toLocalTime().toString());
 
         JButton lagreKnapp = new JButton("Lagre");
         lagreKnapp.addActionListener(e -> {
             try {
-                // Hent de nye verdiene fra inputfeltene
                 String beskrivelse = beskrivelsesFelt.getText();
                 LocalDate nyDato = LocalDate.parse(datoFelt.getText());
                 LocalTime nyKlokkeslett = LocalTime.parse(klokkeslettFelt.getText());
-                LocalDateTime datoOgTid = LocalDateTime.of(nyDato, nyKlokkeslett);
-                String gjentakelse = (String) gjentakelsesFelt.getSelectedItem();
-                LocalDateTime sluttDato = null;
+                LocalDateTime nyDatoOgTid = LocalDateTime.of(nyDato, nyKlokkeslett);
 
-                String sluttDatoTekst = sluttDatoFelt.getText();
-                if (!sluttDatoTekst.isEmpty()) {
-                    LocalDate sluttDatoLocal = LocalDate.parse(sluttDatoTekst);
-                    sluttDato = sluttDatoLocal.atStartOfDay();
-                }
+                Avtale nyAvtale = new Avtale(avtale.getAvtaleId(), nyDatoOgTid, beskrivelse, "Ingen", null);
 
-                // Lag en ny Avtale med de oppdaterte verdiene
-                Avtale nyAvtale = new Avtale(avtale.getAvtaleId(), datoOgTid, beskrivelse, gjentakelse, sluttDato);
-
-                // Prøv å oppdatere avtalen
                 boolean oppdatert = avtaleLogikk.OppdaterAvtale(avtale, nyAvtale);
 
                 if (oppdatert) {
-                    JOptionPane.showMessageDialog(redigeringsVindu, "Avtale oppdatert");
-                    visAvtaler();  // Vis oppdaterte avtaler
-                    redigeringsVindu.dispose();  // Lukk vinduet
+                    JOptionPane.showMessageDialog(redigeringsVindu, "Avtalen ble oppdatert.");
+                    redigeringsVindu.dispose();
+                    visAvtaler();
                 } else {
-                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdatere avtale. Vennligst prøv på nytt.");
+                    JOptionPane.showMessageDialog(redigeringsVindu, "Kunne ikke oppdatere avtalen. Prøv igjen.");
                 }
-            } catch (Exception exception) {
-                JOptionPane.showMessageDialog(redigeringsVindu, "Det oppsto en feil under endringen." + exception.getMessage());
-                exception.printStackTrace();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(redigeringsVindu,
+                        "Det oppstod en feil: " + ex.getMessage(),
+                        "Feil",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        // Legg til komponentene i redigeringsvinduet
-        JPanel panel = new JPanel(new GridLayout(6, 1));
-        panel.add(new JScrollPane(beskrivelsesFelt));
-        panel.add(createInputPanel("Dato (yyyy-MM-dd):", datoFelt));
-        panel.add(createInputPanel("Klokkeslett (HH:mm):", klokkeslettFelt));
-        panel.add(createInputPanel("Gjentakelse:", gjentakelsesFelt));
-        panel.add(createInputPanel("Sluttdato (yyyy-MM-dd):", sluttDatoFelt));
-        panel.add(lagreKnapp);
+        JPanel redigeringsPanel = new JPanel();
+        redigeringsPanel.setLayout(new GridLayout(4, 1, 10, 10));
+        redigeringsPanel.add(new JLabel("Beskrivelse:"));
+        redigeringsPanel.add(beskrivelsesFelt);
+        redigeringsPanel.add(new JLabel("Dato (yyyy-MM-dd):"));
+        redigeringsPanel.add(datoFelt);
+        redigeringsPanel.add(new JLabel("Klokkeslett (HH:mm):"));
+        redigeringsPanel.add(klokkeslettFelt);
 
-        redigeringsVindu.add(panel);
+        redigeringsVindu.add(redigeringsPanel, BorderLayout.CENTER);
+        redigeringsVindu.add(lagreKnapp, BorderLayout.SOUTH);
+
         redigeringsVindu.setVisible(true);
     }
-
-
 
 
 
