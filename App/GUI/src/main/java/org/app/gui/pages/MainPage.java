@@ -1,9 +1,6 @@
 package org.app.gui.pages;
 
 import org.app.core.models.ExpiredEntriesCleaner;
-import org.app.core.services.AvtaleService;
-import org.app.core.services.BeskjedService;
-import org.app.core.services.PleietrengendeService;
 import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.app.core.logikk.beskjed.BeskjedLogikk;
 import org.app.core.logikk.LeggTilPleietrengendeLogikk;
@@ -92,11 +89,11 @@ public class MainPage extends JFrame {
 
         setVisible(true);
 
-        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
-        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
-
-        ExpiredEntriesCleaner cleaner = new ExpiredEntriesCleaner(beskjedService, avtaleService);
-        cleaner.startCleaning(0, 24 * 60 * 60 * 1000);
+//        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
+//        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
+//
+//        ExpiredEntriesCleaner cleaner = new ExpiredEntriesCleaner(beskjedService, avtaleService);
+//        cleaner.startCleaning(0, 24 * 60 * 60 * 1000);
 
         beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
         beskjedKnapp.addActionListener(e -> {

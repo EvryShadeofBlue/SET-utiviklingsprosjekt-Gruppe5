@@ -2,7 +2,6 @@ package org.app.gui.pages;
 
 import org.app.core.models.Pleietrengende;
 import org.app.core.logikk.LeggTilPleietrengendeLogikk;
-import org.app.core.services.PleietrengendeService;
 import org.app.database.PleietrengendeDBImplementation;
 
 import javax.swing.*;

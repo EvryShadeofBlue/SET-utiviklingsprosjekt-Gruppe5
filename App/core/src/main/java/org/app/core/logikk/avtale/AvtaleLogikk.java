@@ -4,6 +4,7 @@ import org.app.core.models.Parorende;
 import org.app.core.repositories.AvtaleRepository;
 import org.app.core.models.Avtale;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class AvtaleLogikk {
@@ -21,7 +22,7 @@ public class AvtaleLogikk {
         this.visAvtaleLogikk = new VisAvtaleLogikk(avtaleRepository);
     }
 
-    public boolean OpprettAvtale(Avtale avtale) {
+    public boolean OpprettAvtale(Avtale avtale) throws NoSuchAlgorithmException {
         return opprettAvtaleLogikk.opprettAvtale(avtale);
     }
 

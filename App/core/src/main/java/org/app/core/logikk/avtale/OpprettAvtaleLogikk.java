@@ -3,6 +3,7 @@ package org.app.core.logikk.avtale;
 import org.app.core.models.Avtale;
 import org.app.core.repositories.AvtaleRepository;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 public class OpprettAvtaleLogikk {
@@ -12,7 +13,7 @@ public class OpprettAvtaleLogikk {
         this.avtaleRepository = avtaleRepository;
     }
 
-    public boolean opprettAvtale(Avtale avtale) {
+    public boolean opprettAvtale(Avtale avtale) throws NoSuchAlgorithmException {
         if ("daglig".equalsIgnoreCase(avtale.getGjentakelse())) {
             return opprettDagligeAvtaler(avtale);
         } else if ("ukentlig".equalsIgnoreCase(avtale.getGjentakelse())) {
@@ -23,7 +24,7 @@ public class OpprettAvtaleLogikk {
         return avtaleRepository.opprettAvtale(avtale);
     }
 
-    private boolean opprettDagligeAvtaler(Avtale avtale) {
+    private boolean opprettDagligeAvtaler(Avtale avtale) throws NoSuchAlgorithmException {
         LocalDateTime datoOgTid = avtale.getDatoOgTid();
         LocalDateTime sluttdato = avtale.getSluttDato();
         boolean resultat = true;
@@ -36,7 +37,7 @@ public class OpprettAvtaleLogikk {
         return resultat;
     }
 
-    private boolean opprettUkentligeAvtaler(Avtale avtale) {
+    private boolean opprettUkentligeAvtaler(Avtale avtale) throws NoSuchAlgorithmException {
         LocalDateTime datoOgTid = avtale.getDatoOgTid();
         LocalDateTime sluttdato = avtale.getSluttDato();
         boolean resultat = true;
@@ -50,7 +51,7 @@ public class OpprettAvtaleLogikk {
         return resultat;
     }
 
-    private boolean opprettMånedligeAvtaler(Avtale avtale) {
+    private boolean opprettMånedligeAvtaler(Avtale avtale) throws NoSuchAlgorithmException {
         LocalDateTime datoOgTid = avtale.getDatoOgTid();
         LocalDateTime sluttdato = avtale.getSluttDato();
         boolean resultat = true;
