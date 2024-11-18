@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Attempt to delete beskjeder and avtaler automatically">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Changes to autodeletion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Beskjed.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Beskjed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ExpiredEntriesCleaner.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ExpiredEntriesCleaner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/services/AvtaleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/TimerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,13 +99,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00012" summary="Made a change so when someone register for the first time, they will be directed to the main page">
-      <option name="closed" value="true" />
-      <created>1730301240358</created>
-      <option name="number" value="LOCAL−00012" />
-      <option name="presentableId" value="LOCAL−00012" />
-      <updated>1730301240358</updated>
     </task>
     <task id="LOCAL−00013" summary="Made a change so when someone register for the first time, they will be directed to the main page">
       <option name="closed" value="true" />
@@ -452,7 +440,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731851324262</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Changes to autodeletion">
+      <option name="closed" value="true" />
+      <created>1731955748483</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1731955748483</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -467,7 +463,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adjustet the class for easier implementation towards the gui" />
     <MESSAGE value="Did some changes to make thing look more clean" />
     <MESSAGE value="Done some changes in the UI" />
     <MESSAGE value="Did some changes" />
@@ -492,6 +487,7 @@
     <MESSAGE value="did some changes in the create method for avtaler" />
     <MESSAGE value="Enabled encryption and decryption for descriptions" />
     <MESSAGE value="Attempt to delete beskjeder and avtaler automatically" />
-    <option name="LAST_COMMIT_MESSAGE" value="Attempt to delete beskjeder and avtaler automatically" />
+    <MESSAGE value="Changes to autodeletion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to autodeletion" />
   </component>
 </project>

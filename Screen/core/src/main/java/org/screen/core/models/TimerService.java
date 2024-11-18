@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.function.Supplier;
 
 public class TimerService {
 
@@ -26,7 +28,6 @@ public class TimerService {
         javax.swing.Timer clockTimer = new javax.swing.Timer(1000, e -> {
             Date now = new Date();
 
-            // Update labels with the current date and time
             String currentDay = dayFormat.format(now);
             String currentTime = timeFormat.format(now);
 
@@ -42,4 +43,10 @@ public class TimerService {
         clockTimer.start();
     }
 
+    public static void startDataUpdateTimer(JLabel beskjedLabel, JLabel avtaleLabel, JLabel avtaleLabelTmr, Runnable updateTask) {
+        javax.swing.Timer dataUpdateTimer = new javax.swing.Timer(10000, e -> {
+            updateTask.run();
+        });
+        dataUpdateTimer.start();
+    }
 }
