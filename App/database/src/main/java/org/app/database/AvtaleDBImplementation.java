@@ -75,7 +75,6 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public boolean oppdaterAvtale(Avtale avtale) {
-        // Tillat ikke oppdatering av gjentakende avtaler
         if (avtale.getGjentakelse() != null &&
                 !avtale.getGjentakelse().equalsIgnoreCase("Ingen") &&
                 !avtale.getGjentakelse().isEmpty()) {
@@ -83,9 +82,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             return false;
         }
 
-        // Legg til gjentakelse i SQL-spørringen
-        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, slutt_dato = ?, " +
-                "gjentakelse = ?, pleietrengende_id = ?, parorende_id = ? WHERE avtale_id = ?";
+        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, " +
+                "pleietrengende_id = ?, parorende_id = ? WHERE avtale_id = ?";
 
         String loggOppdateringQuery = "INSERT INTO loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "VALUES (?, ?, ?, ?, ?)";
@@ -93,25 +91,15 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
              PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
 
-            // Sett verdiene for oppdatering
             oppdaterStatement.setString(1, avtale.getBeskrivelse());
             oppdaterStatement.setObject(2, avtale.getDatoOgTid());
-            if (avtale.getSluttDato() != null) {
-                oppdaterStatement.setObject(3, avtale.getSluttDato());
-            } else {
-                oppdaterStatement.setNull(3, Types.TIMESTAMP);
-            }
-
-            // Sett verdien for gjentakelse
-            oppdaterStatement.setString(4, avtale.getGjentakelse());  // Legg til dette
-            oppdaterStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
-            oppdaterStatement.setInt(6, avtale.getParorende().getParorendeId());
-            oppdaterStatement.setInt(7, avtale.getAvtaleId());
+            oppdaterStatement.setInt(3, avtale.getPleietrengende().getPleietrengendeId());
+            oppdaterStatement.setInt(4, avtale.getParorende().getParorendeId());
+            oppdaterStatement.setInt(5, avtale.getAvtaleId());
 
             int rowsUpdated = oppdaterStatement.executeUpdate();
 
             if (rowsUpdated > 0) {
-                // Legg til logging
                 loggStatement.setInt(1, avtale.getParorende().getParorendeId());
                 loggStatement.setString(2, "pårørende");
                 loggStatement.setString(3, "avtale oppdatert");
@@ -127,6 +115,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             return false;
         }
     }
+
 
 
     @Override
