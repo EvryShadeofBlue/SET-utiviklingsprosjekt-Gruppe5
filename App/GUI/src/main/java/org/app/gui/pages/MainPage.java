@@ -1,8 +1,9 @@
 package org.app.gui.pages;
 
-import org.app.core.services.AvtaleService;
-import org.app.core.services.BeskjedService;
-import org.app.core.services.PleietrengendeService;
+import org.app.core.models.ExpiredEntriesCleaner;
+import org.app.core.logikk.avtale.AvtaleLogikk;
+import org.app.core.logikk.beskjed.BeskjedLogikk;
+import org.app.core.logikk.LeggTilPleietrengendeLogikk;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.database.AvtaleDBImplementation;
@@ -17,9 +18,9 @@ public class MainPage extends JFrame {
     private JLabel pleietrengendeNavnLabel;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
-    private BeskjedService beskjedService;
-    private AvtaleService avtaleService;
-    private PleietrengendeService pleietrengendeService;
+    private BeskjedLogikk beskjedLogikk;
+    private AvtaleLogikk avtaleLogikk;
+    private LeggTilPleietrengendeLogikk pleietrengendeService;
     private JButton leggTilPleietrengendeKnapp;
     private JButton avtalerKnapp;
     private JButton beskjedKnapp;
@@ -88,10 +89,16 @@ public class MainPage extends JFrame {
 
         setVisible(true);
 
-        beskjedService = new BeskjedService(new BeskjedDBImplementation());
+//        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
+//        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
+//
+//        ExpiredEntriesCleaner cleaner = new ExpiredEntriesCleaner(beskjedService, avtaleService);
+//        cleaner.startCleaning(0, 24 * 60 * 60 * 1000);
+
+        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
         beskjedKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
-                new BeskjedPage(beskjedService, parorende, pleietrengende, this);
+                new BeskjedPage(beskjedLogikk, parorende, pleietrengende, this);
                 this.setVisible(false);
             }
             else {
@@ -100,19 +107,21 @@ public class MainPage extends JFrame {
                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
             }});
 
-        avtaleService = new AvtaleService(new AvtaleDBImplementation());
+
+        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
         avtalerKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
-                new AvtalePage(avtaleService, parorende, pleietrengende, this);
+                new AvtalePage(avtaleLogikk, parorende, pleietrengende, this);
                 this.setVisible(false);
             }
             else {
-                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende for å få tilgang til denne siden.",
+                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende" +
+                                " for å få tilgang til denne siden.",
                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
             }
         });
 
-        pleietrengendeService = new PleietrengendeService(new PleietrengendeDBImplementation());
+        pleietrengendeService = new LeggTilPleietrengendeLogikk(new PleietrengendeDBImplementation());
         leggTilPleietrengendeKnapp.addActionListener(e -> {
             new LeggTilPleietrengendePage(pleietrengendeService, parorende.getParorendeId(), this);
             this.setVisible(false);
@@ -121,15 +130,24 @@ public class MainPage extends JFrame {
         setVisible(true);
     }
 
+    public void setPleietrengende(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
+    }
+
     public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {
         this.pleietrengende = pleietrengende;
-        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
+        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() +
+                " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
         pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
         avtalerKnapp.setEnabled(true);
         beskjedKnapp.setEnabled(true);
+        revalidate();
         repaint();
     }
     public void visHovedside() {
         setVisible(true);
+        revalidate();
+        repaint();
+
     }
 }

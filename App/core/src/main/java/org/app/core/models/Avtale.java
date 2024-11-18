@@ -1,6 +1,7 @@
 package org.app.core.models;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Avtale {
@@ -12,14 +13,12 @@ public class Avtale {
     private String gjentakelse;
     private LocalDateTime sluttDato;
 
-    // Denne konstruktøren har blitt benyttet til testing
     public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse) {
         //this.avtaleId = avtaleId;
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
     }
 
-    // Denne konstruktøren er hva som skal benyttes senere
     public Avtale (LocalDateTime datoOgTid, String beskrivelse) {
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
@@ -57,6 +56,25 @@ public class Avtale {
         this.sluttDato = sluttdato;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
+    }
+
+    public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, Pleietrengende pleietrengende, Parorende parorende) {
+        this.avtaleId = avtaleId;
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
+    }
+
+    public Avtale() {
+
+    }
+
+    public Avtale(int avtaleId, LocalDateTime datoOgTid, String gjentakelse, LocalDateTime sluttDato) {
+        this.avtaleId = avtaleId;
+        this.datoOgTid = datoOgTid;
+        this.gjentakelse = gjentakelse;
+        this.sluttDato = sluttDato;
     }
 
     public int getAvtaleId() {

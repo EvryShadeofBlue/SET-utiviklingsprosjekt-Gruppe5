@@ -15,5 +15,7 @@ public interface BeskjedRepository {
 
     Beskjed hentBeskjed(int beskjedId);
     List<Beskjed> hentBeskjedForParorende(int parorendeId);
+
+    List<Beskjed> hentAlleBeskjeder();
 }
 

@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 Resources.java
+Cryption.java
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

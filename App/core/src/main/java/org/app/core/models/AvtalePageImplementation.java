@@ -1,12 +1,12 @@
 package org.app.core.models;
 
 
-import org.app.core.services.AvtaleService;
+import org.app.core.logikk.avtale.AvtaleLogikk;
 
 public class AvtalePageImplementation {
-    private AvtaleService avtaleService;
+    private AvtaleLogikk avtaleService;
 
-    public AvtalePageImplementation(AvtaleService avtaleService) {
+    public AvtalePageImplementation(AvtaleLogikk avtaleService) {
         this.avtaleService = avtaleService;
     }
 

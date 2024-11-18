@@ -3,7 +3,7 @@ package org.app.gui.pages;
 import org.app.core.models.Beskjed;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
-import org.app.core.services.BeskjedService;
+import org.app.core.logikk.beskjed.BeskjedLogikk;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +18,13 @@ public class BeskjedPage extends JFrame {
     private JTextField klokkeslettFelt;
     private JButton lagreKnapp;
     private JPanel beskjedListePanel;
-    private BeskjedService beskjedService;
+    private BeskjedLogikk beskjedService;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
     private org.app.gui.pages.MainPage mainPage;
     private JButton tilbakeKnapp;
 
-    public BeskjedPage(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, org.app.gui.pages.MainPage mainPage) {
+    public BeskjedPage(BeskjedLogikk beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
         this.beskjedService = beskjedService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
@@ -236,7 +236,8 @@ public class BeskjedPage extends JFrame {
     }
 
     private void slettBeskjed(Beskjed beskjed) {
-        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne beskjeden?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
+        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil" +
+                " slette denne beskjeden?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
         if (svar == JOptionPane.YES_OPTION) {
             beskjedService.slettBeskjed(beskjed.getBeskjedId());
             JOptionPane.showMessageDialog(this, "Beskjed slettet");

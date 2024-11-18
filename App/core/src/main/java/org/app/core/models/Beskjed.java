@@ -35,6 +35,12 @@ public class Beskjed {
         this.parorende = parorende;
     }
 
+    public Beskjed(int beskjedId, LocalDateTime datoOgTid, int synligTidsenhet) {
+        this.beskjedId = beskjedId;
+        this.datoOgTid = datoOgTid;
+        this.synligTidsenhet = synligTidsenhet;
+    }
+
     public Beskjed() {
 
     }
