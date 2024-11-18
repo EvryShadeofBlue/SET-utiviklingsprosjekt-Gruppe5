@@ -1,13 +1,13 @@
-package org.app.core.services;
+package org.app.core.logikk;
 
 import org.app.core.models.Pleietrengende;
 import org.app.core.models.Parorende;
 import org.app.core.repositories.PleietrengendeRepository;
 
-public class PleietrengendeService {
+public class LeggTilPleietrengendeLogikk {
     private PleietrengendeRepository pleietrengendeRepository;
 
-    public PleietrengendeService(PleietrengendeRepository pleietrengendeRepository) {
+    public LeggTilPleietrengendeLogikk(PleietrengendeRepository pleietrengendeRepository) {
         this.pleietrengendeRepository = pleietrengendeRepository;
     }
 

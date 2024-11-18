@@ -1,4 +1,4 @@
-package org.app.core.services;
+package org.app.core.logikk.beskjed;
 
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-public class BeskjedService {
+public class BeskjedLogikk {
     private BeskjedRepository beskjedRepository;
 
-    public BeskjedService(BeskjedRepository beskjedRepository) {
+    public BeskjedLogikk(BeskjedRepository beskjedRepository) {
 
         this.beskjedRepository = beskjedRepository;
     }

@@ -1,7 +1,6 @@
 package org.app.database;
 
 import org.app.core.models.*;
-import org.app.core.services.LoggService;
 import org.app.core.repositories.AvtaleRepository;
 
 import javax.crypto.SecretKey;
@@ -75,28 +74,28 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public boolean oppdaterAvtale(Avtale avtale) {
-        if (avtale.getSluttDato() != null && avtale.getGjentakelse() == null) {
+        if (avtale.getGjentakelse() != null &&
+                !avtale.getGjentakelse().equalsIgnoreCase("Ingen") &&
+                !avtale.getGjentakelse().isEmpty()) {
+            System.out.println("Avtaler med gjentakelse kan ikke oppdateres.");
             return false;
         }
 
-        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, slutt_dato = ?, gjentakelse = ?, pleietrengende_id = ?, parorende_id = ? " +
-                "WHERE avtale_id = ?";
+        String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, " +
+                "pleietrengende_id = ?, parorende_id = ? WHERE avtale_id = ?";
+
         String loggOppdateringQuery = "INSERT INTO loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "VALUES (?, ?, ?, ?, ?)";
+
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
-            PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+             PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+
             oppdaterStatement.setString(1, Cryption.encrypt(avtale.getBeskrivelse(), Cryption.getAESKey()));
             oppdaterStatement.setObject(2, avtale.getDatoOgTid());
-            if (avtale.getSluttDato() != null) {
-                oppdaterStatement.setObject(3, avtale.getSluttDato());
-            }
-            else {
-                oppdaterStatement.setNull(3, Types.TIMESTAMP);
-            }
-            oppdaterStatement.setString(4, avtale.getGjentakelse());
-            oppdaterStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
-            oppdaterStatement.setInt(6, avtale.getParorende().getParorendeId());
-            oppdaterStatement.setInt(7, avtale.getAvtaleId());
+            oppdaterStatement.setInt(3, avtale.getPleietrengende().getPleietrengendeId());
+            oppdaterStatement.setInt(4, avtale.getParorende().getParorendeId());
+            oppdaterStatement.setInt(5, avtale.getAvtaleId());
+
             int rowsUpdated = oppdaterStatement.executeUpdate();
 
             if (rowsUpdated > 0) {
@@ -108,13 +107,13 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 loggStatement.executeUpdate();
                 return true;
             }
-            else {
-                return false;
-            }
-        }
-        catch (SQLException sqlException) {
+            return false;
+
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             return false;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -167,7 +166,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
     @Override
     public Avtale hentAvtale(int avtaleId) {
-        String hentAvtaleQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, pleietrengende_id, parorende_id " +
+        String hentAvtaleQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id " +
                 "FROM Avtaler WHERE avtale_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtaleQuery)) {
@@ -180,6 +179,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
                 int parorendeId = resultSet.getInt("parorende_id");
+                String gjentakelsesType = resultSet.getString("gjentakelse");
+                LocalDateTime sluttDato = resultSet.getObject("slutt_dato", LocalDateTime.class);
 
                 Parorende parorende = new Parorende();
                 parorende.setParorendeId(parorendeId);
@@ -187,7 +188,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, pleietrengende, parorende);
+                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelsesType, sluttDato,pleietrengende, parorende);
                 return avtale;
             }
         } catch (SQLException sqlException) {
@@ -203,7 +204,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     public List<Avtale> hentAvtalerForParorende(Parorende parorende) {
         List<Avtale> avtaler = new ArrayList<>();
 
-        String hentAvtalerQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, pleietrengende_id, parorende_id " +
+        String hentAvtalerQuery = "SELECT avtale_id, beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id " +
                 "FROM Avtaler WHERE parorende_id = ? ORDER BY dato_og_tid DESC";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtalerQuery)) {
@@ -214,6 +215,8 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 int avtaleId = resultSet.getInt("avtale_id");
                 String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
+                String gjentakelse = resultSet.getString("gjentakelse");
+                LocalDateTime sluttDato = resultSet.getObject("slutt_dato", LocalDateTime.class);
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
                 int parorendeId = resultSet.getInt("parorende_id");
 
@@ -222,7 +225,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, pleietrengende, parorende);
+                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato, pleietrengende, parorende);
                 avtaler.add(avtale);
             }
         } catch (SQLException sqlException) {
