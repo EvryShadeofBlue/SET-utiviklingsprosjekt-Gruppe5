@@ -11,34 +11,27 @@ public class OppdaterAvtaleLogikk {
     }
 
     public boolean oppdaterAvtale(Avtale eksisterendeAvtale, Avtale nyAvtale) {
-        // Sjekk om eksisterende avtale har gjentakelse
-        if (eksisterendeAvtale.getGjentakelse() != null && eksisterendeAvtale.getGjentakelse().equalsIgnoreCase("Ingen")) {
-            // Hvis den eksisterende avtalen har "Ingen" som gjentakelse, hindrer vi at den får en ny gjentakelse
-            if (nyAvtale.getGjentakelse() != null && !nyAvtale.getGjentakelse().equalsIgnoreCase("Ingen")) {
-                System.out.println("Avtale som ikke har gjentakelse kan ikke få gjentakelse.");
-                return false;
-            }
+        // Valider at avtalen er ikke-gjentakende
+        if (eksisterendeAvtale.getGjentakelse() != null &&
+                !eksisterendeAvtale.getGjentakelse().equalsIgnoreCase("Ingen")) {
+            throw new IllegalArgumentException("Kun ikke-gjentakende avtaler kan oppdateres.");
         }
 
-        // Valider datoer
-        if (nyAvtale.getDatoOgTid() != null && nyAvtale.getSluttDato() != null &&
-                nyAvtale.getDatoOgTid().isAfter(nyAvtale.getSluttDato())) {
-            System.out.println("Startdato kan ikke være etter sluttdato.");
-            return false;
+        // Valider nye datoer
+        if (nyAvtale.getDatoOgTid() == null) {
+            throw new IllegalArgumentException("Dato og tid må spesifiseres for oppdateringen.");
         }
 
-        // Oppdater feltene som er gyldige
-        oppdaterFeltene(eksisterendeAvtale, nyAvtale);
-
-        // Oppdater sluttdato hvis den er spesifisert
-        if (nyAvtale.getSluttDato() != null) {
-            eksisterendeAvtale.setSluttDato(nyAvtale.getSluttDato());
+        // Oppdater kun datoOgTid og beskrivelse
+        eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
+        if (nyAvtale.getBeskrivelse() != null && !nyAvtale.getBeskrivelse().isEmpty()) {
+            eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeskrivelse());
         }
 
         // Lagre oppdatert avtale
-        avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
-        return true;
+        return avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
     }
+
 
 
     private void oppdaterFeltene(Avtale eksisterendeAvtale, Avtale nyAvtale) {
