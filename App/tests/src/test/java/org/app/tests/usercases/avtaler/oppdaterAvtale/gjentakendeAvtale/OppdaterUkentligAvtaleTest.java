@@ -32,7 +32,7 @@ public class OppdaterUkentligAvtaleTest {
     public void kanIkkeEndreDatoPåUkentligAvtale() {
         //Arrange
         LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 9, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 9, 23, 59);
 
         Avtale eksisterendeAvtale = new Avtale(dato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
@@ -53,7 +53,7 @@ public class OppdaterUkentligAvtaleTest {
     public void kanIkkeEndreBeskrivelsePåUkentligAvtale() {
         //Arrange
         LocalDateTime dato = LocalDateTime.of(2024, 11, 10, 9, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 25, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 25, 23, 59);
         Avtale eksisterendeAvtale = new Avtale(dato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         // Act
@@ -72,7 +72,7 @@ public class OppdaterUkentligAvtaleTest {
     public void kanIkkeEndreBeskrivelseEllerDatoTidPåUkentligAvtale() {
         // Arrange
         LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 20, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 20, 23, 59);
         Avtale eksisterendeAvtale = new Avtale(dato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         // Act
@@ -91,7 +91,7 @@ public class OppdaterUkentligAvtaleTest {
     public void kanIkkeEndreGjentakelseFraUkentlig() {
         // Arrange
         LocalDateTime startDatoTid = LocalDateTime.of(2024, 11, 20, 10, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 21, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 21, 23, 5);
         Avtale eksisterendeAvtale = new Avtale(startDatoTid, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         // Act
