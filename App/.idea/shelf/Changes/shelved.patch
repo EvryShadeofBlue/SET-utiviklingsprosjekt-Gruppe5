@@ -1,0 +1,1418 @@
+Index: GUI/src/main/java/org/app/gui/pages/ActivityListPage.java
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/ActivityListPage.java b/GUI/src/main/java/org/app/gui/pages/ActivityListPage.java
+deleted file mode 100644
+--- a/GUI/src/main/java/org/app/gui/pages/ActivityListPage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ /dev/null	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
+@@ -1,149 +0,0 @@
+-package org.app.gui.pages;
+-
+-import javax.swing.*;
+-import java.awt.*;
+-import java.awt.event.ActionEvent;
+-import java.awt.event.ActionListener;
+-import java.text.SimpleDateFormat;
+-
+-public class ActivityListPage extends JFrame {
+-    private JTextField taskField;
+-    private JButton addTaskButton;
+-    private JList<String> taskList;
+-    private JButton showTaskButton;
+-    private DefaultListModel<String> taskListModel;
+-    private JFormattedTextField dueDateField;
+-    private JLabel dueTimeLabel;
+-    private JTextField dueTimeField;
+-    private JLabel dueDateLabel;
+-    private JButton backToLoginButton;
+-
+-    public ActivityListPage() {
+-        setTitle("Activity Activity List");
+-        setSize(600, 400);
+-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+-        setLocationRelativeTo(null);
+-
+-        taskField = new JTextField(10);
+-        addTaskButton = new JButton("Add a new Task");
+-        showTaskButton = new JButton("Show Task On New Page");
+-        backToLoginButton = new JButton("Back to Login");
+-
+-
+-        taskListModel = new DefaultListModel<>();
+-        taskList = new JList<>(taskListModel);
+-
+-        dueDateLabel = new JLabel("due Date (YYYY-MM-DD)");
+-        dueTimeLabel = new JLabel("Due Time (HH:MM)");
+-
+-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+-        dueDateField = new JFormattedTextField(dateFormat);
+-        dueDateField.setColumns(8);
+-
+-        dueTimeField = new JTextField(8);
+-        dueTimeField.setText("");
+-
+-        JPanel panel = new JPanel();
+-        panel.setLayout(new GridBagLayout());
+-        GridBagConstraints g2 = new GridBagConstraints();
+-        g2.insets = new Insets(5, 5, 5, 5);
+-        g2.fill = GridBagConstraints.HORIZONTAL;
+-
+-        g2.gridx = 0;
+-        g2.gridy = 0;
+-        g2.weightx = 1;
+-        panel.add(dueDateLabel, g2);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 1;
+-        g2.weightx = 2;
+-        panel.add(dueDateField, g2);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 2;
+-        g2.weightx = 1;
+-        panel.add(dueTimeLabel,g2);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 3;
+-        g2.weightx = 1;
+-        panel.add(dueTimeField, g2);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 4;
+-        g2.weightx = 1;
+-        panel.add(new JLabel("Task: "), g2);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 5;
+-        g2.weightx = 2;
+-        panel.add(taskField, g2);
+-
+-        g2.gridx = 1;
+-        g2.gridy = 6;
+-        g2.weightx = 1;
+-        panel.add(addTaskButton, g2);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 8;
+-        g2.weightx = 1;
+-        panel.add(showTaskButton,g2);
+-
+-        add(panel, BorderLayout.NORTH);
+-        add(new JScrollPane(taskList), BorderLayout.CENTER);
+-
+-        g2.gridx = 0;
+-        g2.gridy = 11;
+-        g2.gridwidth = 1;
+-        g2.anchor = GridBagConstraints.WEST;
+-        panel.add(backToLoginButton, g2);
+-
+-        add(panel, BorderLayout.NORTH);
+-        add(new JScrollPane(taskList), BorderLayout.CENTER);
+-
+-        backToLoginButton.addActionListener(new ActionListener() {
+-            @Override
+-            public void actionPerformed(ActionEvent e) {
+-                new LoginPage();
+-                dispose();
+-            }
+-        });
+-
+-        addTaskButton.addActionListener(new ActionListener() {
+-            @Override
+-            public void actionPerformed(ActionEvent e) {
+-                String dueDate = dueDateField.getText().trim();
+-                String dueTime = dueTimeField.getText().trim();
+-                String task = taskField.getText();
+-
+-                if (!task.isEmpty()) {
+-                    String taskWithDueDateTime = task;
+-
+-                    if (!dueDate.isEmpty() && !dueTime.isEmpty()) {
+-                        taskWithDueDateTime +=  "(Due:" + dueDate + " " + dueTime + ")";
+-                    } else if (!dueDate.isEmpty()) {
+-                        taskWithDueDateTime += "(Due:" + dueDate + ")";
+-                    } else if (dueTime.isEmpty()) {
+-                        taskWithDueDateTime += "(Due:" + dueTime + ")";
+-                    }
+-                    taskListModel.addElement(taskWithDueDateTime);
+-                    dueDateField.setText("");
+-                    dueTimeField.setText("");
+-                    taskField.setText("");
+-                } else {
+-                    JOptionPane.showMessageDialog(null, "Please enter a task");
+-                }
+-            }
+-        });
+-
+-        showTaskButton.addActionListener(new ActionListener() {
+-            @Override
+-            public void actionPerformed(ActionEvent e) {
+-                new TaskDisplayPage(taskListModel);
+-            }
+-        });
+-
+-        setVisible(true);
+-    }
+-
+-}
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]/shelved.patch	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ /dev/null	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
+@@ -1,312 +0,0 @@
+-Index: core/src/main/java/org/app/core/models/Beskjed.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.app.core.models;\r\n\r\nimport java.time.LocalDateTime;\r\n\r\npublic class Beskjed {\r\n    private int beskjedId; // Brukes kun for testing\r\n    private String beskrivelse;\r\n    private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv\r\n    private LocalDateTime datoOgTid;\r\n\r\n\r\n    // konstruktøren under er til testingen.\r\n    public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {\r\n        this.beskjedId = beskjedId;\r\n        this.datoOgTid = datoOgTid;\r\n        this.beskrivelse = beskrivelse;\r\n        this.synligTidsenhet = synligTidsenhet;\r\n    }\r\n\r\n    // den faktiske konstryktøren som skal benyttes\r\n    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {\r\n        this.datoOgTid = datoOgTid;\r\n        this.beskrivelse = beskrivelse;\r\n        this.synligTidsenhet = synligTidsenhet;\r\n    }\r\n\r\n    //get og set metoder\r\n\r\n    public int getBeskjedId() {\r\n        return beskjedId;\r\n    }\r\n\r\n    public String getBeskrivelse() {\r\n        return beskrivelse;\r\n    }\r\n    public void setBeskrivelse(String beskrivelse) {\r\n        this.beskrivelse = beskrivelse;\r\n    }\r\n\r\n    public int getSynligTidsenhet() {\r\n        return synligTidsenhet;\r\n    }\r\n    public void setSynligTidsenhet(int synligTidsenhet) {\r\n        this.synligTidsenhet = synligTidsenhet;\r\n    }\r\n\r\n    public LocalDateTime getDatoOgTid() {\r\n        return datoOgTid;\r\n    }\r\n\r\n    public void setDatoOgTid(LocalDateTime datoOgTid) {\r\n        this.datoOgTid = datoOgTid;\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/core/src/main/java/org/app/core/models/Beskjed.java b/core/src/main/java/org/app/core/models/Beskjed.java
+---- a/core/src/main/java/org/app/core/models/Beskjed.java	(revision bf817dc33a89c1f4bbc9ca7564ff3d7e23a26636)
+-+++ b/core/src/main/java/org/app/core/models/Beskjed.java	(date 1730463753266)
+-@@ -7,6 +7,8 @@
+-     private String beskrivelse;
+-     private int synligTidsenhet; // Tenker i utgangspunktet 12, 24, 36 timer osv
+-     private LocalDateTime datoOgTid;
+-+    private Parorende parorende; //ekstra felt
+-+    private Pleietrengende pleietrengende; //ekstra felt
+- 
+- 
+-     // konstruktøren under er til testingen.
+-@@ -18,10 +20,12 @@
+-     }
+- 
+-     // den faktiske konstryktøren som skal benyttes
+--    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
+-+    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Parorende parorende, Pleietrengende pleietrengende) {
+-         this.datoOgTid = datoOgTid;
+-         this.beskrivelse = beskrivelse;
+-         this.synligTidsenhet = synligTidsenhet;
+-+        this.parorende = parorende; //ekstra
+-+        this.pleietrengende = pleietrengende; //ekstra
+-     }
+- 
+-     //get og set metoder
+-@@ -51,4 +55,20 @@
+-     public void setDatoOgTid(LocalDateTime datoOgTid) {
+-         this.datoOgTid = datoOgTid;
+-     }
+--}
+-+
+-+    public Parorende getParorende() {
+-+        return parorende;
+-+    }
+-+
+-+    public void setParorende(Parorende parorende) {
+-+        this.parorende = parorende;
+-+    }
+-+
+-+    public Pleietrengende getPleietrengende() {
+-+        return pleietrengende;
+-+    }
+-+
+-+    public void setPleietrengende(Pleietrengende pleietrengende) {
+-+        this.pleietrengende = pleietrengende;
+-+    }
+-+}
+-\ No newline at end of file
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_22\" project-jdk-name=\"openjdk-23\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision bf817dc33a89c1f4bbc9ca7564ff3d7e23a26636)
+-+++ b/.idea/misc.xml	(date 1730463637082)
+-@@ -1,3 +1,4 @@
+-+<?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-   <component name="MavenProjectsManager">
+-@@ -7,5 +8,7 @@
+-       </list>
+-     </option>
+-   </component>
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK" />
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
+-+    <output url="file://$PROJECT_DIR$/out" />
+-+  </component>
+- </project>
+-\ No newline at end of file
+-Index: core/src/main/java/org/app/core/models/BeskjedImpl.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/core/src/main/java/org/app/core/models/BeskjedImpl.java b/core/src/main/java/org/app/core/models/BeskjedImpl.java
+-new file mode 100644
+---- /dev/null	(date 1730463729996)
+-+++ b/core/src/main/java/org/app/core/models/BeskjedImpl.java	(date 1730463729996)
+-@@ -0,0 +1,63 @@
+-+package org.app.core.models;
+-+
+-+import org.app.core.repository.BeskjedRepository;
+-+
+-+import java.sql.Connection;
+-+import java.sql.DriverManager;
+-+import java.sql.PreparedStatement;
+-+import java.sql.SQLException;
+-+
+-+public class BeskjedImpl implements BeskjedRepository {
+-+    private Connection connection;
+-+
+-+    public BeskjedImpl() {
+-+        try {
+-+            connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+-+        }
+-+        catch (SQLException sqlException) {
+-+            sqlException.printStackTrace();
+-+        }
+-+    }
+-+    @Override
+-+    public void oppretteBeskjed(Beskjed beskjed) {
+-+        String opprettBeskjedQuery = "Insert into Beskjeder (beskrivelse, dato_tid, synlig_tid, parorende_id, pleietrengende_id) Values (?, ?, ?, ?, ?)";
+-+        try (PreparedStatement preparedStatement = connection.prepareStatement(opprettBeskjedQuery)) {
+-+            preparedStatement.setString(1, beskjed.getBeskrivelse());
+-+            preparedStatement.setObject(2, beskjed.getDatoOgTid());
+-+            preparedStatement.setInt(3, beskjed.getSynligTidsenhet());
+-+
+-+            preparedStatement.setInt(4, beskjed.getParorende().getParorendeId());
+-+            preparedStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());
+-+            preparedStatement.executeUpdate();
+-+        }
+-+        catch (SQLException sqlException) {
+-+            sqlException.printStackTrace();
+-+        }
+-+    }
+-+
+-+    @Override
+-+    public void oppdaterBeskjed(Beskjed beskjed) {
+-+
+-+    }
+-+
+-+    @Override
+-+    public void slettBeskjed(int beskjedId) {
+-+
+-+    }
+-+
+-+    @Override
+-+    public Beskjed hentBeskjed(int beskjedId) {
+-+        return null;
+-+    }
+-+
+-+    public void close() {
+-+        try {
+-+            if (connection != null && !connection.isClosed()) {
+-+                connection.close();
+-+            }
+-+        }
+-+        catch (SQLException sqlException) {
+-+            sqlException.printStackTrace();
+-+        }
+-+    }
+-+}
+-\ No newline at end of file
+-Index: core/src/main/java/org/app/core/models/BeskjedOptions.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/core/src/main/java/org/app/core/models/BeskjedOptions.java b/core/src/main/java/org/app/core/models/BeskjedOptions.java
+-new file mode 100644
+---- /dev/null	(date 1730463788958)
+-+++ b/core/src/main/java/org/app/core/models/BeskjedOptions.java	(date 1730463788958)
+-@@ -0,0 +1,96 @@
+-+package org.app.core.models;
+-+
+-+import javax.swing.*;
+-+import java.awt.*;
+-+import java.time.LocalDateTime;
+-+import java.time.format.DateTimeFormatter;
+-+import java.time.format.DateTimeParseException;
+-+
+-+public class BeskjedOptions extends JFrame {
+-+    private JTextArea beskrivelseFelt;
+-+    private JComboBox<Integer> synligTidsenhetFelt;
+-+    private JTextField datoFelt;
+-+    private JTextField klokkeslettFelt;
+-+    private JButton lagreKnapp;
+-+    private BeskjedService beskjedService;
+-+    private Parorende parorende;
+-+    private Pleietrengende pleietrengende;
+-+
+-+    public BeskjedOptions(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende) {
+-+        this.beskjedService = beskjedService;
+-+        this.parorende = parorende;
+-+        this.pleietrengende = pleietrengende;
+-+        setTitle("Beskjeder");
+-+        setSize(400, 800);
+-+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+-+        setLocationRelativeTo(null);
+-+
+-+
+-+        setLayout(new GridLayout(5, 2, 10, 10));
+-+
+-+        beskrivelseFelt = new JTextArea(2, 20);
+-+        beskrivelseFelt.setLineWrap(true);
+-+        beskrivelseFelt.setWrapStyleWord(true);
+-+        JScrollPane beskrivelsePanel = new JScrollPane(beskrivelseFelt);
+-+
+-+
+-+        Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};
+-+        synligTidsenhetFelt = new JComboBox<>(synligTidsenheter);
+-+        JPanel synligTidsenhetPanel = createInputPanel("Synlig i timer: ", synligTidsenhetFelt);
+-+
+-+        datoFelt = new JTextField();
+-+        JPanel datoPanel = createInputPanel("Dato (yyyy-MM-dd): ", datoFelt);
+-+
+-+        klokkeslettFelt = new JTextField();
+-+        JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
+-+
+-+        lagreKnapp = new JButton("Lagre");
+-+        lagreKnapp.setPreferredSize(new Dimension(100, 10));
+-+        lagreKnapp.addActionListener(e -> lagreBeskjed());
+-+
+-+        add(beskrivelsePanel);
+-+        add(synligTidsenhetPanel);
+-+        add(datoPanel);
+-+        add(klokkeslettPanel);
+-+        add(new JLabel());
+-+        add(lagreKnapp);
+-+
+-+        setVisible(true);
+-+    }
+-+
+-+    private JPanel createInputPanel(String labelText, JComponent inputField) {
+-+        JPanel panel = new JPanel();
+-+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+-+
+-+        JLabel label = new JLabel(labelText);
+-+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+-+
+-+        inputField.setPreferredSize(new Dimension(300, 30));
+-+        inputField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+-+        inputField.setAlignmentX(Component.LEFT_ALIGNMENT);
+-+
+-+        panel.add(label);
+-+        panel.add(inputField);
+-+
+-+        return panel;
+-+    }
+-+
+-+    public void lagreBeskjed() {
+-+        try {
+-+            String beskrivelse = beskrivelseFelt.getText();
+-+            int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
+-+
+-+            String datoStr = datoFelt.getText();
+-+            String klokkeslettStr = klokkeslettFelt.getText();
+-+
+-+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+-+            LocalDateTime datoOgTid = LocalDateTime.parse(datoStr + " " + klokkeslettStr, formatter);
+-+
+-+            Beskjed nyBeskjed = beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
+-+            JOptionPane.showMessageDialog(this, "Beskjed opprettet");
+-+            dispose();
+-+        } catch (DateTimeParseException dateTimeParseException) {
+-+            JOptionPane.showMessageDialog(this, "Feil format på klokkeslettformat. Vennligst bruk YYYY-MM-DD for dato og HH:MM for klokkeslett");
+-+        }
+-+    }
+-+}
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"20502f01-5882-4a91-9cb0-6f37b4c7115a\" name=\"Changes\" comment=\"Changes DB coimmunication\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Damagedjokke&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git\",\r\n    \"accountId\": \"34cfffde-a436-4dc7-afc3-7f8d20f6f8d0\"\r\n  }\r\n}]]></component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"QODANA_PROBLEMS_VIEW_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2nYS5IFTdDKBzkIkHJZSKojGtxY\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.App.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/Screen&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\" />\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\\repository\" />\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\\database\" />\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\\models\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"models\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration>C:\\Users\\thgl0\\AppData\\Roaming\\Subversion</configuration>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"20502f01-5882-4a91-9cb0-6f37b4c7115a\" name=\"Changes\" comment=\"\" />\r\n      <created>1729148331214</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1729148331214</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"File refactoring\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1729148883558</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729148883558</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"minor cleanup\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1729429702940</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729429702940</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Removed unnecessary files\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1729688054481</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729688054481</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Major changes in DB communication\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1729688483839</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729688483839</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Changes in login verification\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1729699237119</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729699237119</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Changes DB coimmunication\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730142161151</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730142161151</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"File refactoring\" />\r\n    <MESSAGE value=\"minor cleanup\" />\r\n    <MESSAGE value=\"misc changes\" />\r\n    <MESSAGE value=\"Removed unnecessary files\" />\r\n    <MESSAGE value=\"Major changes in DB communication\" />\r\n    <MESSAGE value=\"Changes in login verification\" />\r\n    <MESSAGE value=\"Changes DB coimmunication\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Changes DB coimmunication\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision bf817dc33a89c1f4bbc9ca7564ff3d7e23a26636)
+-+++ b/.idea/workspace.xml	(date 1730463637079)
+-@@ -27,12 +27,12 @@
+-     &quot;assignee&quot;: &quot;Damagedjokke&quot;
+-   }
+- }</component>
+--  <component name="GithubPullRequestsUISettings"><![CDATA[{
+--  "selectedUrlAndAccountId": {
+--    "url": "https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git",
+--    "accountId": "34cfffde-a436-4dc7-afc3-7f8d20f6f8d0"
+-+  <component name="GithubPullRequestsUISettings">{
+-+  &quot;selectedUrlAndAccountId&quot;: {
+-+    &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
+-+    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
+-   }
+--}]]></component>
+-+}</component>
+-   <component name="ProblemsViewState">
+-     <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+-   </component>
+-@@ -71,6 +71,21 @@
+-     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+-       <recent name="models" />
+-     </key>
+-+  </component>
+-+  <component name="RunManager">
+-+    <configuration default="true" type="JetRunConfigurationType">
+-+      <module name="app" />
+-+      <method v="2">
+-+        <option name="Make" enabled="true" />
+-+      </method>
+-+    </configuration>
+-+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+-+      <module name="app" />
+-+      <option name="filePath" />
+-+      <method v="2">
+-+        <option name="Make" enabled="true" />
+-+      </method>
+-+    </configuration>
+-   </component>
+-   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-   <component name="SvnConfiguration">
+Index: GUI/src/main/java/org/app/gui/pages/TaskDisplayPage.java
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/TaskDisplayPage.java b/GUI/src/main/java/org/app/gui/pages/TaskDisplayPage.java
+deleted file mode 100644
+--- a/GUI/src/main/java/org/app/gui/pages/TaskDisplayPage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ /dev/null	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
+@@ -1,20 +0,0 @@
+-package org.app.gui.pages;
+-
+-import javax.swing.*;
+-import java.awt.*;
+-
+-public class TaskDisplayPage extends JFrame {
+-    private JList<String> taskList;
+-
+-    public TaskDisplayPage(DefaultListModel<String> taskListModel){
+-        setTitle("Task Display");
+-        setSize(500, 500);
+-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+-        setLocationRelativeTo(null);
+-
+-        taskList = new JList<>(taskListModel);
+-        add(new JScrollPane(taskList), BorderLayout.CENTER);
+-        setVisible(true);
+-    }
+-
+-}
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20__Changes_.xml	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ /dev/null	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_2024-11-01_13_20_[Changes]" date="1730463614939" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2024-11-01 13:20 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23__Changes_.xml	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ /dev/null	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]" date="1730464320323" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2024-11-01 13:23 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"20502f01-5882-4a91-9cb0-6f37b4c7115a\" name=\"Changes\" comment=\"misc\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/encodings.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/encodings.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/pom.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$/..\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Damagedjokke&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,\r\n    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"QODANA_PROBLEMS_VIEW_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2nYS5IFTdDKBzkIkHJZSKojGtxY\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.App.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Cryption.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/project/SET-utiviklingsprosjekt-Gruppe5/App&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\" />\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\\repository\" />\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\\database\" />\r\n      <recent name=\"C:\\Users\\thgl0\\IdeaProjects\\Github\\SET-utiviklingsprosjekt-Gruppe5\\App\\core\\src\\main\\java\\org\\app\\core\\models\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"org.app.database\" />\r\n      <recent name=\"org.app.core.brukere\" />\r\n      <recent name=\"org.app.core.pages\" />\r\n      <recent name=\"org.app.core.services\" />\r\n      <recent name=\"models\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration>C:\\Users\\thgl0\\AppData\\Roaming\\Subversion</configuration>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"20502f01-5882-4a91-9cb0-6f37b4c7115a\" name=\"Changes\" comment=\"\" />\r\n      <created>1729148331214</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1729148331214</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00006\" summary=\"Created Resource class in models to contain static variables for the database and did some changes in the delete class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730221009052</created>\r\n      <option name=\"number\" value=\"LOCAL−00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00006\" />\r\n      <updated>1730221009052</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00007\" summary=\"Did some changes in the variables for database connection\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730221132226</created>\r\n      <option name=\"number\" value=\"LOCAL−00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00007\" />\r\n      <updated>1730221132226</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00008\" summary=\"changed the method for login in loginpage\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730228379078</created>\r\n      <option name=\"number\" value=\"LOCAL−00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00008\" />\r\n      <updated>1730228379078</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00009\" summary=\"did some major changes in login page\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730229557617</created>\r\n      <option name=\"number\" value=\"LOCAL−00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00009\" />\r\n      <updated>1730229557617</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00010\" summary=\"Created opportunity to sign in\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730299956679</created>\r\n      <option name=\"number\" value=\"LOCAL−00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00010\" />\r\n      <updated>1730299956679</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00011\" summary=\"Created a main page after login\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730300049178</created>\r\n      <option name=\"number\" value=\"LOCAL−00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00011\" />\r\n      <updated>1730300049178</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00012\" summary=\"Made a change so when someone register for the first time, they will be directed to the main page\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730301240358</created>\r\n      <option name=\"number\" value=\"LOCAL−00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00012\" />\r\n      <updated>1730301240358</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00013\" summary=\"Made a change so when someone register for the first time, they will be directed to the main page\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730302350551</created>\r\n      <option name=\"number\" value=\"LOCAL−00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00013\" />\r\n      <updated>1730302350551</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00014\" summary=\"Did some minor changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730302361233</created>\r\n      <option name=\"number\" value=\"LOCAL−00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00014\" />\r\n      <updated>1730302361233</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00015\" summary=\"Did some minor changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730302364634</created>\r\n      <option name=\"number\" value=\"LOCAL−00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00015\" />\r\n      <updated>1730302364635</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00016\" summary=\"Fixed som problems that didn't allow someone without pleietrengende to sign in\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730304871403</created>\r\n      <option name=\"number\" value=\"LOCAL−00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00016\" />\r\n      <updated>1730304871403</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00017\" summary=\"Did some minor changes in the logic\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730304927978</created>\r\n      <option name=\"number\" value=\"LOCAL−00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00017\" />\r\n      <updated>1730304927978</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00018\" summary=\"Added a menubar with help section in it\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730306040411</created>\r\n      <option name=\"number\" value=\"LOCAL−00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00018\" />\r\n      <updated>1730306040411</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00019\" summary=\"created class for beskjed actions when choosing beskjed in mainpage\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730307941756</created>\r\n      <option name=\"number\" value=\"LOCAL−00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00019\" />\r\n      <updated>1730307941756</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00020\" summary=\"added method to create a beskjed from the beskjedservice class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730307974792</created>\r\n      <option name=\"number\" value=\"LOCAL−00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00020\" />\r\n      <updated>1730307974792</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00021\" summary=\"created a class to implement sql queries for beskjeder\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730322898631</created>\r\n      <option name=\"number\" value=\"LOCAL−00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00021\" />\r\n      <updated>1730322898631</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00022\" summary=\"did a minor change\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730389597222</created>\r\n      <option name=\"number\" value=\"LOCAL−00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00022\" />\r\n      <updated>1730389597222</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00023\" summary=\"Did some changes. Made the opportunity for someone to create a beskjed without worrying about it not being added to the database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730402461948</created>\r\n      <option name=\"number\" value=\"LOCAL−00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00023\" />\r\n      <updated>1730402461948</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00024\" summary=\"added another method to the interface\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730468514137</created>\r\n      <option name=\"number\" value=\"LOCAL−00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00024\" />\r\n      <updated>1730468514138</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00025\" summary=\"added method for returning beskjed for relative\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730469064814</created>\r\n      <option name=\"number\" value=\"LOCAL−00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00025\" />\r\n      <updated>1730469064814</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00026\" summary=\"implemented the logic for the sql query for getting all the beskjeder a parorende has created\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730469147105</created>\r\n      <option name=\"number\" value=\"LOCAL−00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00026\" />\r\n      <updated>1730469147105</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00027\" summary=\"addded the opportunity to view created beskjeder\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730481225319</created>\r\n      <option name=\"number\" value=\"LOCAL−00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00027\" />\r\n      <updated>1730481225319</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00028\" summary=\"did some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730481377652</created>\r\n      <option name=\"number\" value=\"LOCAL−00028\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00028\" />\r\n      <updated>1730481377652</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00029\" summary=\"did some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730481602206</created>\r\n      <option name=\"number\" value=\"LOCAL−00029\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00029\" />\r\n      <updated>1730481602206</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00030\" summary=\"did some major changes in the different methods\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730492198794</created>\r\n      <option name=\"number\" value=\"LOCAL−00030\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00030\" />\r\n      <updated>1730492198794</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00031\" summary=\"added opportunity to update and delete a beskjed\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730494033415</created>\r\n      <option name=\"number\" value=\"LOCAL−00031\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00031\" />\r\n      <updated>1730494033415</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00032\" summary=\"did some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730494381227</created>\r\n      <option name=\"number\" value=\"LOCAL−00032\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00032\" />\r\n      <updated>1730494381227</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00033\" summary=\"added the oportunity to delete a beskjed\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730496590405</created>\r\n      <option name=\"number\" value=\"LOCAL−00033\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00033\" />\r\n      <updated>1730496590405</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00034\" summary=\"Adjustet the class for easier implementation towards the gui\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730641614632</created>\r\n      <option name=\"number\" value=\"LOCAL−00034\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00034\" />\r\n      <updated>1730641614632</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00035\" summary=\"Did some changes to make thing look more clean\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730641634710</created>\r\n      <option name=\"number\" value=\"LOCAL−00035\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00035\" />\r\n      <updated>1730641634710</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00036\" summary=\"Done some changes in the UI\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730646591828</created>\r\n      <option name=\"number\" value=\"LOCAL−00036\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00036\" />\r\n      <updated>1730646591828</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00037\" summary=\"Did some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730656266387</created>\r\n      <option name=\"number\" value=\"LOCAL−00037\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00037\" />\r\n      <updated>1730656266387</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00038\" summary=\"Created the page for avtaler\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730659055041</created>\r\n      <option name=\"number\" value=\"LOCAL−00038\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00038\" />\r\n      <updated>1730659055041</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00039\" summary=\"Did some changes in the method to create an avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730663611059</created>\r\n      <option name=\"number\" value=\"LOCAL−00039\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00039\" />\r\n      <updated>1730663611059</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00040\" summary=\"Did some changes in this file\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730663622096</created>\r\n      <option name=\"number\" value=\"LOCAL−00040\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00040\" />\r\n      <updated>1730663622096</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00041\" summary=\"changed the method for creating an avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730742727034</created>\r\n      <option name=\"number\" value=\"LOCAL−00041\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00041\" />\r\n      <updated>1730742727034</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00042\" summary=\"changed a bit of the method for creating an avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730745817722</created>\r\n      <option name=\"number\" value=\"LOCAL−00042\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00042\" />\r\n      <updated>1730745817722</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00043\" summary=\"created a new cosntructor for creating an avale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730746415930</created>\r\n      <option name=\"number\" value=\"LOCAL−00043\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00043\" />\r\n      <updated>1730746415930</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00044\" summary=\"changed in the method for creating an avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730746428243</created>\r\n      <option name=\"number\" value=\"LOCAL−00044\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00044\" />\r\n      <updated>1730746428243</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00045\" summary=\"created a method for changing an existing avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730824832555</created>\r\n      <option name=\"number\" value=\"LOCAL−00045\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00045\" />\r\n      <updated>1730824832555</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00046\" summary=\"created a method for deleting an avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730824858489</created>\r\n      <option name=\"number\" value=\"LOCAL−00046\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00046\" />\r\n      <updated>1730824858489</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00047\" summary=\"added a method to show created avtale for a spesific parorende\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730824953806</created>\r\n      <option name=\"number\" value=\"LOCAL−00047\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00047\" />\r\n      <updated>1730824953806</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00048\" summary=\"Done some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730824977520</created>\r\n      <option name=\"number\" value=\"LOCAL−00048\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00048\" />\r\n      <updated>1730824977520</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00049\" summary=\"added query for getting, deleting and editing an avtale\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730828325411</created>\r\n      <option name=\"number\" value=\"LOCAL−00049\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00049\" />\r\n      <updated>1730828325411</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00050\" summary=\"added sql query for getting an avtale for the relative\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730828849802</created>\r\n      <option name=\"number\" value=\"LOCAL−00050\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00050\" />\r\n      <updated>1730828849802</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00051\" summary=\"did some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730828858092</created>\r\n      <option name=\"number\" value=\"LOCAL−00051\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00051\" />\r\n      <updated>1730828858092</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00052\" summary=\"added the method that shows avtaler\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730828983656</created>\r\n      <option name=\"number\" value=\"LOCAL−00052\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00052\" />\r\n      <updated>1730828983656</updated>\r\n    </task>\r\n    <task id=\"LOCAL−00053\" summary=\"Done some changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730837451819</created>\r\n      <option name=\"number\" value=\"LOCAL−00053\" />\r\n      <option name=\"presentableId\" value=\"LOCAL−00053\" />\r\n      <updated>1730837451819</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00054\" summary=\"misc\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1731052105766</created>\r\n      <option name=\"number\" value=\"00054\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00054\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1731052105766</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"55\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"implemented the logic for the sql query for getting all the beskjeder a parorende has created\" />\r\n    <MESSAGE value=\"addded the opportunity to view created beskjeder\" />\r\n    <MESSAGE value=\"did some major changes in the different methods\" />\r\n    <MESSAGE value=\"added opportunity to update and delete a beskjed\" />\r\n    <MESSAGE value=\"added the oportunity to delete a beskjed\" />\r\n    <MESSAGE value=\"Adjustet the class for easier implementation towards the gui\" />\r\n    <MESSAGE value=\"Did some changes to make thing look more clean\" />\r\n    <MESSAGE value=\"Done some changes in the UI\" />\r\n    <MESSAGE value=\"Did some changes\" />\r\n    <MESSAGE value=\"Created the page for avtaler\" />\r\n    <MESSAGE value=\"Did some changes in the method to create an avtale\" />\r\n    <MESSAGE value=\"Did some changes in this file\" />\r\n    <MESSAGE value=\"changed the method for creating an avtale\" />\r\n    <MESSAGE value=\"changed a bit of the method for creating an avtale\" />\r\n    <MESSAGE value=\"created a new cosntructor for creating an avale\" />\r\n    <MESSAGE value=\"changed in the method for creating an avtale\" />\r\n    <MESSAGE value=\"created a method for changing an existing avtale\" />\r\n    <MESSAGE value=\"created a method for deleting an avtale\" />\r\n    <MESSAGE value=\"added a method to show created avtale for a spesific parorende\" />\r\n    <MESSAGE value=\"added query for getting, deleting and editing an avtale\" />\r\n    <MESSAGE value=\"added sql query for getting an avtale for the relative\" />\r\n    <MESSAGE value=\"did some changes\" />\r\n    <MESSAGE value=\"added the method that shows avtaler\" />\r\n    <MESSAGE value=\"Done some changes\" />\r\n    <MESSAGE value=\"misc\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"misc\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/.idea/workspace.xml	(date 1731347223112)
+@@ -5,13 +5,28 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc">
+-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PagesDBCommunication.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../pleietrengende_id.txt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024-11-01_13_23__Changes_.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/ActivityListPage.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/TaskDisplayPage.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Pleietrengende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Pleietrengende.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/Screen.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -43,11 +58,14 @@
+   <component name="GithubPullRequestsUISettings">{
+   &quot;selectedUrlAndAccountId&quot;: {
+     &quot;url&quot;: &quot;https://github.com/EvryShadeofBlue/SET-utiviklingsprosjekt-Gruppe5.git&quot;,
+-    &quot;accountId&quot;: &quot;a5bec0d8-b6c0-45b0-99d9-779db0dfcc13&quot;
++    &quot;accountId&quot;: &quot;34cfffde-a436-4dc7-afc3-7f8d20f6f8d0&quot;
+   }
+ }</component>
++  <component name="HighlightingSettingsPerFile">
++    <setting file="file://$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" root0="SKIP_INSPECTION" />
++  </component>
+   <component name="ProblemsViewState">
+-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
++    <option name="selectedTabId" value="CurrentFile" />
+   </component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 6
+@@ -57,26 +75,26 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Cryption.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/thgl0/IdeaProjects/project/SET-utiviklingsprosjekt-Gruppe5/App&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.App.executor": "Run",
++    "Application.Cryption.executor": "Run",
++    "Application.Main.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "dart.analysis.tool.window.visible": "false",
++    "git-widget-placeholder": "Merging Feature-TG",
++    "kotlin-language-version-configured": "true",
++    "last_directory_selection": "C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database",
++    "last_opened_file_path": "C:/Users/thgl0/IdeaProjects/project/SET-utiviklingsprosjekt-Gruppe5/App",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "discord-application",
++    "show.migrate.to.gradle.popup": "false"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core" />
+@@ -104,27 +122,6 @@
+       <option name="presentableId" value="Default" />
+       <updated>1729148331214</updated>
+     </task>
+-    <task id="LOCAL−00006" summary="Created Resource class in models to contain static variables for the database and did some changes in the delete class">
+-      <option name="closed" value="true" />
+-      <created>1730221009052</created>
+-      <option name="number" value="LOCAL−00006" />
+-      <option name="presentableId" value="LOCAL−00006" />
+-      <updated>1730221009052</updated>
+-    </task>
+-    <task id="LOCAL−00007" summary="Did some changes in the variables for database connection">
+-      <option name="closed" value="true" />
+-      <created>1730221132226</created>
+-      <option name="number" value="LOCAL−00007" />
+-      <option name="presentableId" value="LOCAL−00007" />
+-      <updated>1730221132226</updated>
+-    </task>
+-    <task id="LOCAL−00008" summary="changed the method for login in loginpage">
+-      <option name="closed" value="true" />
+-      <created>1730228379078</created>
+-      <option name="number" value="LOCAL−00008" />
+-      <option name="presentableId" value="LOCAL−00008" />
+-      <updated>1730228379078</updated>
+-    </task>
+     <task id="LOCAL−00009" summary="did some major changes in login page">
+       <option name="closed" value="true" />
+       <created>1730229557617</created>
+@@ -448,7 +445,31 @@
+       <option name="project" value="LOCAL" />
+       <updated>1731052105766</updated>
+     </task>
+-    <option name="localTasksCounter" value="55" />
++    <task id="LOCAL-00055" summary="enter press for login and save id under registration">
++      <option name="closed" value="true" />
++      <created>1731187686993</created>
++      <option name="number" value="00055" />
++      <option name="presentableId" value="LOCAL-00055" />
++      <option name="project" value="LOCAL" />
++      <updated>1731187686993</updated>
++    </task>
++    <task id="LOCAL-00056" summary="enter press for login and save id under registration">
++      <option name="closed" value="true" />
++      <created>1731187693154</created>
++      <option name="number" value="00056" />
++      <option name="presentableId" value="LOCAL-00056" />
++      <option name="project" value="LOCAL" />
++      <updated>1731187693154</updated>
++    </task>
++    <task id="LOCAL-00057" summary="fixed beskjeder deletion, attempt to fix avtale db communication">
++      <option name="closed" value="true" />
++      <created>1731315251081</created>
++      <option name="number" value="00057" />
++      <option name="presentableId" value="LOCAL-00057" />
++      <option name="project" value="LOCAL" />
++      <updated>1731315251082</updated>
++    </task>
++    <option name="localTasksCounter" value="58" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -463,8 +484,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="implemented the logic for the sql query for getting all the beskjeder a parorende has created" />
+-    <MESSAGE value="addded the opportunity to view created beskjeder" />
+     <MESSAGE value="did some major changes in the different methods" />
+     <MESSAGE value="added opportunity to update and delete a beskjed" />
+     <MESSAGE value="added the oportunity to delete a beskjed" />
+@@ -488,6 +507,8 @@
+     <MESSAGE value="added the method that shows avtaler" />
+     <MESSAGE value="Done some changes" />
+     <MESSAGE value="misc" />
+-    <option name="LAST_COMMIT_MESSAGE" value="misc" />
++    <MESSAGE value="enter press for login and save id under registration" />
++    <MESSAGE value="fixed beskjeder deletion, attempt to fix avtale db communication" />
++    <option name="LAST_COMMIT_MESSAGE" value="fixed beskjeder deletion, attempt to fix avtale db communication" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: ../Screen/core/src/main/java/Screen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.screen.core.database.Export;\r\nimport org.screen.core.models.Avtale;\r\nimport org.screen.core.models.Beskjed;\r\nimport org.screen.core.models.TimerService;\r\nimport org.screen.core.models.Weather;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.Date;\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.Calendar;\r\nimport java.util.List;\r\n\r\npublic class Screen {\r\n    public static void main(String[] args) {\r\n\r\n        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();   //Henter maskinens resolution\r\n\r\n        JFrame jframe = new JFrame(\"Screen\");           //lager selve GUI'en\r\n        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //stopper 'RUN' om du krysser ut GUI'en\r\n        jframe.setSize(size);       //bruker maskinens resolution\r\n\r\n        jframe.addWindowListener(new java.awt.event.WindowAdapter() {\r\n            @Override\r\n            public void windowClosing(java.awt.event.WindowEvent windowEvent) {\r\n                Weather.stopWeatherUpdater();\r\n                System.exit(0);\r\n            }\r\n        });\r\n\r\n        JPanel gridPanel = new JPanel(new GridLayout(3, 3));    //lager en 3x3 grid for design\r\n        JPanel weatherPanel = new JPanel();     //extra panel for å tillatte 2 componenter inn i samme grid cell\r\n        JPanel centeredPanel = new JPanel(new GridBagLayout());     //laget for å sentrere compnenter i grid cell vertikalt\r\n        weatherPanel.setLayout(new BoxLayout(weatherPanel, BoxLayout.Y_AXIS)); //også sentrering men horisontalt\r\n\r\n        for (int i = 0; i < 9; i++) {                                        //kode kunn for å visualisere grid cellene\r\n            JLabel cell = new JLabel(\"\" + i, SwingConstants.CENTER);    //dette kan slettes når koding er ferdig\r\n            cell.setBorder(BorderFactory.createLineBorder(Color.BLACK));\r\n            gridPanel.add(cell);\r\n        }\r\n\r\n        Date date = new Date();     //dato for idag\r\n        Date clock = new Date();    //klokkeslett akkuratt nå\r\n\r\n        Calendar calendar = Calendar.getInstance();     //sekvens for å hente dato imorgen\r\n        calendar.setTime(date);\r\n        calendar.add(Calendar.DAY_OF_YEAR, 1);\r\n        Date tmr = calendar.getTime();\r\n\r\n        SimpleDateFormat day = new SimpleDateFormat(\"dd.MM.yyyy\");   //format for visning av dato/klokkeslett\r\n        SimpleDateFormat time = new SimpleDateFormat(\"HH:mm:ss\");      //dd=dag, MM=måned, HH=24timers, mm=minutt, ss=sekund\r\n        SimpleDateFormat tomorrow = new SimpleDateFormat(\"dd.MM.yyyy\");\r\n\r\n        String currentDay = day.format(date);       //bruker laget format\r\n        String currentTime = time.format(clock);\r\n        String tmrDay = tomorrow.format(tmr);\r\n\r\n        JLabel timeLabel = new JLabel(\"<html>I dag:<br>\" + currentDay + \"<html>\", SwingConstants.CENTER);   //for å vise componentene og sentrere den\r\n        timeLabel.setFont(new Font(\"Day\", Font.BOLD, 40));      //enkel redigering av visningen\r\n        JLabel clockLabel = new JLabel(currentTime, SwingConstants.CENTER);\r\n        clockLabel.setFont(new Font(\"Clock\", Font.BOLD, 60));\r\n        JLabel tmrLabel = new JLabel(\"<html>I Morgen:<br>\" + tmrDay + \"<html>\", SwingConstants.CENTER);\r\n        tmrLabel.setFont(new Font(\"Tomorrow\", Font.BOLD, 40));\r\n\r\n        String temp = Weather.getCurrentTemperature();             //bruker metode fra Weather klassen for å hente informasjon med API\r\n        String weather = Weather.getCurrentWeatherCondition();\r\n        ImageIcon weatherIcon = Weather.getWeatherIcon(weather, 200, 200);\r\n\r\n        JLabel tempLabel = new JLabel(\"<html>Temperatur inne: \" + \"\" + \"°C\" + \"<br>Temperatur ute: \"\r\n                + temp + \"<html>\", SwingConstants.CENTER);  //html brukes for å gi tilgang til <br> som gjør ett linjeskift i visningen\r\n        tempLabel.setFont(new Font(\"Temp\", Font.BOLD, 30));\r\n        JLabel weatherLabel = new JLabel(\"Været i dag: \" + weather, SwingConstants.CENTER);\r\n        weatherLabel.setFont(new Font(\"Weather\", Font.BOLD, 30));\r\n\r\n        JLabel iconLabel = new JLabel(weatherIcon, SwingConstants.CENTER);\r\n\r\n        weatherLabel.setAlignmentX(Component.CENTER_ALIGNMENT); //sentrerer horisontalt\r\n        iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n        weatherPanel.add(weatherLabel);     //tilatter 2 komponenter i samme grid cell\r\n        weatherPanel.add(iconLabel);\r\n        centeredPanel.add(weatherPanel);    //sentrerer verticalt\r\n\r\n        Export exporter = new Export();     //lager en instans av Export klassen\r\n        List<Beskjed> beskjederList = exporter.exportBeskjeder(1);    //henter beskjeder fra databasen\r\n\r\n        StringBuilder beskjeder = new StringBuilder(\"<html>\");    //lager en stringbuilder for å legge til beskjeder\r\n        for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen\r\n            beskjeder.append(\"\").append(beskjed.getDateTime()).append(\"<br>\");  //legger til beskjed og linjeskift\r\n            beskjeder.append(\"Beskjed: \").append(beskjed.getDescription()).append(\"<br>\");\r\n        }\r\n        beskjeder.append(\"</html>\");     //avslutter html format\r\n\r\n        JLabel beskjedLabel = new JLabel(beskjeder.toString(), SwingConstants.CENTER);    //lager en label med beskjedene\r\n        beskjedLabel.setFont(new Font(\"Beskjeder\", Font.BOLD, 40));    //redigerer fonten\r\n\r\n        List<Avtale> avtaleList = exporter.exportAvtalerToday(1);\r\n        StringBuilder avtaler = new StringBuilder(\"<html>\");\r\n        for (Avtale avtale : avtaleList) {\r\n            avtaler.append(\"\").append(avtale.getDateTime()).append(\"<br>\");\r\n            avtaler.append(\"Avtale: \").append(avtale.getDescription()).append(\"<br>\");\r\n        }\r\n        avtaler.append(\"</html>\");\r\n\r\n        JLabel avtaleLabel = new JLabel(avtaler.toString(), SwingConstants.CENTER);\r\n        avtaleLabel.setFont(new Font(\"Avtaler\", Font.BOLD, 40));\r\n\r\n        List<Avtale> avtaleListTmr = exporter.exportAvtalerTomorrow(1);\r\n        StringBuilder avtalerTmr = new StringBuilder(\"<html>\");\r\n        for (Avtale avtale : avtaleListTmr) {\r\n            avtalerTmr.append(\"\").append(avtale.getDateTime()).append(\"<br>\");\r\n            avtalerTmr.append(\"Avtale: \").append(avtale.getDescription()).append(\"<br>\");\r\n        }\r\n        avtalerTmr.append(\"</html>\");\r\n\r\n        JLabel avtaleLabelTmr = new JLabel(avtalerTmr.toString(), SwingConstants.CENTER);\r\n        avtaleLabelTmr.setFont(new Font(\"AvtalerTmr\", Font.BOLD, 40));\r\n\r\n\r\n        gridPanel.remove(0);        //fjerner tallene som visualiserer grid cellene for å unngå overlapping, kan fjernes når koding er ferdig\r\n        gridPanel.add(timeLabel, 0);    //legger til komponent i grid celle\r\n        gridPanel.remove(1);\r\n        gridPanel.add(clockLabel, 1);\r\n        gridPanel.remove(2);\r\n        gridPanel.add(tmrLabel, 2);\r\n        gridPanel.remove(6);\r\n        gridPanel.add(tempLabel, 6);\r\n        gridPanel.remove(8);\r\n        gridPanel.add(centeredPanel, 8);\r\n        gridPanel.remove(4);\r\n        gridPanel.add(beskjedLabel, 4);\r\n        gridPanel.remove(3);\r\n        gridPanel.add(avtaleLabel, 3);\r\n        gridPanel.remove(5);\r\n        gridPanel.add(avtaleLabelTmr, 5);\r\n\r\n        jframe.add(gridPanel);      //Legger til grid cellene i GUI'en\r\n        jframe.setVisible(true);    //Gjør at selve GUI'en vises på maskinen\r\n\r\n        Weather.startWeatherUpdater();\r\n\r\n        TimerService.startWeatherUpdateTimer(tempLabel, weatherLabel, iconLabel, weatherIcon);\r\n        TimerService.startClockUpdateTimer(timeLabel, clockLabel, tmrLabel);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Screen/core/src/main/java/Screen.java b/../Screen/core/src/main/java/Screen.java
+--- a/../Screen/core/src/main/java/Screen.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/../Screen/core/src/main/java/Screen.java	(date 1731347194104)
+@@ -1,8 +1,5 @@
+ import org.screen.core.database.Export;
+-import org.screen.core.models.Avtale;
+-import org.screen.core.models.Beskjed;
+-import org.screen.core.models.TimerService;
+-import org.screen.core.models.Weather;
++import org.screen.core.models.*;
+ 
+ import javax.swing.*;
+ import java.awt.*;
+@@ -14,6 +11,8 @@
+ public class Screen {
+     public static void main(String[] args) {
+ 
++        int pleietrengende_id = FileHandling.readPleietrengendeIdFromFile();
++
+         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();   //Henter maskinens resolution
+ 
+         JFrame jframe = new JFrame("Screen");           //lager selve GUI'en
+@@ -81,7 +80,7 @@
+         centeredPanel.add(weatherPanel);    //sentrerer verticalt
+ 
+         Export exporter = new Export();     //lager en instans av Export klassen
+-        List<Beskjed> beskjederList = exporter.exportBeskjeder(1);    //henter beskjeder fra databasen
++        List<Beskjed> beskjederList = exporter.exportBeskjeder(pleietrengende_id);    //henter beskjeder fra databasen
+ 
+         StringBuilder beskjeder = new StringBuilder("<html>");    //lager en stringbuilder for å legge til beskjeder
+         for (Beskjed beskjed : beskjederList) {     //for hver beskjed i listen
+@@ -93,7 +92,7 @@
+         JLabel beskjedLabel = new JLabel(beskjeder.toString(), SwingConstants.CENTER);    //lager en label med beskjedene
+         beskjedLabel.setFont(new Font("Beskjeder", Font.BOLD, 40));    //redigerer fonten
+ 
+-        List<Avtale> avtaleList = exporter.exportAvtalerToday(1);
++        List<Avtale> avtaleList = exporter.exportAvtalerToday(pleietrengende_id);
+         StringBuilder avtaler = new StringBuilder("<html>");
+         for (Avtale avtale : avtaleList) {
+             avtaler.append("").append(avtale.getDateTime()).append("<br>");
+@@ -104,7 +103,7 @@
+         JLabel avtaleLabel = new JLabel(avtaler.toString(), SwingConstants.CENTER);
+         avtaleLabel.setFont(new Font("Avtaler", Font.BOLD, 40));
+ 
+-        List<Avtale> avtaleListTmr = exporter.exportAvtalerTomorrow(1);
++        List<Avtale> avtaleListTmr = exporter.exportAvtalerTomorrow(pleietrengende_id);
+         StringBuilder avtalerTmr = new StringBuilder("<html>");
+         for (Avtale avtale : avtaleListTmr) {
+             avtalerTmr.append("").append(avtale.getDateTime()).append("<br>");
+Index: database/src/main/java/org/app/database/AvtaleDBImplementation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.database;\r\n\r\nimport org.app.core.models.Parorende;\r\nimport org.app.core.models.Pleietrengende;\r\nimport org.app.core.services.LoggService;\r\nimport org.app.core.models.Resources;\r\nimport org.app.core.repositories.AvtaleRepository;\r\nimport org.app.core.models.Avtale;\r\n\r\nimport java.sql.*;\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class AvtaleDBImplementation implements AvtaleRepository {\r\n    String url = Resources.getUrl();\r\n    String user = Resources.getUser();\r\n    String password = Resources.getPassword();\r\n\r\n    private Connection connection;\r\n    private LoggService loggService;\r\n\r\n    public AvtaleDBImplementation() {\r\n        try {\r\n            connection = DriverManager.getConnection(url, user, password);\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void oppretteAvtale(Avtale avtale) {\r\n        String opprettAvtaleQuery = \"Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) values (?, ?, ?, ?, ?, ?)\";\r\n        //String loggForOpprettelseQuery = \"insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) \" +\r\n         //       \"values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')\";\r\n        try (PreparedStatement avtaleStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS)) {\r\n            avtaleStatement.setString(1, avtale.getBeskrivelse());\r\n            avtaleStatement.setObject(2, avtale.getDatoOgTid());\r\n            if (avtale.getGjentakelse() != null) {\r\n                avtaleStatement.setString(3, avtale.getGjentakelse());\r\n            }\r\n            else {\r\n                avtaleStatement.setNull(3, Types.VARCHAR);\r\n            }\r\n\r\n            if (avtale.getSluttDato() != null) {\r\n                avtaleStatement.setObject(4, avtale.getSluttDato());\r\n            }\r\n            else {\r\n                avtaleStatement.setNull(4, Types.TIMESTAMP);\r\n            }\r\n            avtaleStatement.setInt(5, avtale.getParorende().getParorendeId());\r\n            avtaleStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());\r\n            avtaleStatement.executeUpdate();\r\n\r\n            ResultSet generatedKeys = avtaleStatement.getGeneratedKeys();\r\n            if (generatedKeys.next()) {\r\n                int avtaleId = generatedKeys.getInt(1);\r\n//                try (PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {\r\n//                    loggStatement.setInt(1, avtale.getParorende().getParorendeId());\r\n//                    loggStatement.setInt(2, avtaleId);\r\n//                    loggStatement.executeUpdate();\r\n//                }\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void oppdaterAvtale(Avtale avtale) {\r\n        String oppdaterAvtaleQuery = \"update Avtaler set beskrivelse = ?, dato_og_tid = ?, gjentakelse = ?, slutt_dato = ?, pleietrengende_id = ?, parorende_id = ? \" +\r\n                \"where avtale_id = ?\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterAvtaleQuery)) {\r\n            preparedStatement.setString(1, avtale.getBeskrivelse());\r\n            preparedStatement.setObject(2, avtale.getDatoOgTid());\r\n            if (avtale.getGjentakelse() != null) {\r\n                preparedStatement.setString(3, avtale.getGjentakelse());\r\n            }\r\n            else {\r\n                preparedStatement.setNull(3, Types.VARCHAR);\r\n            }\r\n            if (avtale.getSluttDato() != null) {\r\n                preparedStatement.setObject(4, avtale.getSluttDato());\r\n            }\r\n            else {\r\n                preparedStatement.setNull(4, Types.TIMESTAMP);\r\n            }\r\n            preparedStatement.setInt(5, avtale.getParorende().getParorendeId());\r\n            preparedStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());\r\n            preparedStatement.setInt(7, avtale.getAvtaleId());\r\n            preparedStatement.executeUpdate();\r\n\r\n            loggService.loggføring(avtale.getParorende().getParorendeId(), \"pårørende\", \"avtale endret\", avtale.getAvtaleId(), \"avtale\");\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n            sqlException.getMessage();\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public void slettAvtale(int avtaleId) {\r\n        String sletteAvtaleQuery = \"delete from Avtaler where avtale_id = ?\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(sletteAvtaleQuery)) {\r\n            preparedStatement.setInt(1, avtaleId);\r\n            preparedStatement.executeUpdate();\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public Avtale hentAvtale(int avtaleId) {\r\n        String hentAvtaleQuery = \"select avtale_id, beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id \" +\r\n                \"from Avtaler where avtale_id = ?\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(hentAvtaleQuery)) {\r\n            preparedStatement.setInt(1, avtaleId);\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n\r\n            if (resultSet.next()) {\r\n                int id = resultSet.getInt(\"avtale_id\");\r\n                String beskrivelse = resultSet.getString(\"beskrivelse\");\r\n                LocalDateTime datoOgTid = resultSet.getObject(\"dato_og_tid\", LocalDateTime.class);\r\n                String gjentakelse = resultSet.getString(\"gjentakelse\");\r\n                LocalDateTime sluttdato = resultSet.getObject(\"slutt_dato\", LocalDateTime.class);\r\n                int parorendeId = resultSet.getInt(\"parorende_id\");\r\n                int pleietrengendeId = resultSet.getInt(\"pleietrengende_id\");\r\n\r\n                Parorende parorende = new Parorende();\r\n                parorende.setParorendeId(parorendeId);\r\n                Pleietrengende pleietrengende = new Pleietrengende();\r\n                pleietrengende.setPleietrengendeId(pleietrengendeId);\r\n\r\n                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelse, sluttdato, pleietrengende, parorende);\r\n                return avtale;\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public List<Avtale> hentAvtaleForParorende(int parorendeId) {\r\n        List<Avtale> avtaler = new ArrayList<>();\r\n        String avtaleForParorendeQuery = \"select * from Avtaler where parorende_id = ?\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(avtaleForParorendeQuery)) {\r\n            preparedStatement.setInt(1, parorendeId);\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n\r\n            while (resultSet.next()) {\r\n                int avtaleId = resultSet.getInt(\"avtale_id\");\r\n                String beskrivelse = resultSet.getString(\"beskrivelse\");\r\n\r\n                Timestamp datoOgTidTimestamp = resultSet.getTimestamp(\"dato_og_tid\");\r\n                LocalDateTime datoOgTid = (datoOgTidTimestamp != null) ? datoOgTidTimestamp.toLocalDateTime() : null;\r\n\r\n                String gjentakelse = resultSet.getString(\"gjentakelse\");\r\n\r\n                Timestamp sluttDatoTimestamp = resultSet.getTimestamp(\"slutt_dato\");\r\n                LocalDateTime sluttdato = (sluttDatoTimestamp != null) ? sluttDatoTimestamp.toLocalDateTime() : null;\r\n\r\n                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttdato);\r\n                avtaler.add(avtale);\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n        return avtaler;\r\n    }\r\n\r\n    public void close() {\r\n        try {\r\n            if (connection != null && !connection.isClosed()) {\r\n                connection.close();\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database/src/main/java/org/app/database/AvtaleDBImplementation.java b/database/src/main/java/org/app/database/AvtaleDBImplementation.java
+--- a/database/src/main/java/org/app/database/AvtaleDBImplementation.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/database/src/main/java/org/app/database/AvtaleDBImplementation.java	(date 1731347194102)
+@@ -32,37 +32,31 @@
+     @Override
+     public void oppretteAvtale(Avtale avtale) {
+         String opprettAvtaleQuery = "Insert into Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) values (?, ?, ?, ?, ?, ?)";
+-        //String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+-         //       "values (?, 'pårørende', 'avtale opprettet', ?, 'avtale')";
+-        try (PreparedStatement avtaleStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS)) {
+-            avtaleStatement.setString(1, avtale.getBeskrivelse());
+-            avtaleStatement.setObject(2, avtale.getDatoOgTid());
+-            if (avtale.getGjentakelse() != null) {
+-                avtaleStatement.setString(3, avtale.getGjentakelse());
+-            }
+-            else {
+-                avtaleStatement.setNull(3, Types.VARCHAR);
+-            }
++        String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
++                "values (?, ?, ?, ?, ?)";
+ 
+-            if (avtale.getSluttDato() != null) {
+-                avtaleStatement.setObject(4, avtale.getSluttDato());
+-            }
+-            else {
+-                avtaleStatement.setNull(4, Types.TIMESTAMP);
+-            }
+-            avtaleStatement.setInt(5, avtale.getParorende().getParorendeId());
+-            avtaleStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
+-            avtaleStatement.executeUpdate();
++        try (PreparedStatement opprettStatement = connection.prepareStatement(opprettAvtaleQuery, Statement.RETURN_GENERATED_KEYS);
++             PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
+ 
+-            ResultSet generatedKeys = avtaleStatement.getGeneratedKeys();
++            opprettStatement.setString(1, avtale.getBeskrivelse());
++            opprettStatement.setObject(2, avtale.getDatoOgTid());
++            opprettStatement.setObject(3, avtale.getGjentakelse());
++            opprettStatement.setObject(4, avtale.getSluttDato());
++            opprettStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
++            opprettStatement.setInt(6, avtale.getParorende().getParorendeId());
++            opprettStatement.executeUpdate();
++
++            ResultSet generatedKeys = opprettStatement.getGeneratedKeys();
++            int beskjedId = -1;
+             if (generatedKeys.next()) {
+-                int avtaleId = generatedKeys.getInt(1);
+-//                try (PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
+-//                    loggStatement.setInt(1, avtale.getParorende().getParorendeId());
+-//                    loggStatement.setInt(2, avtaleId);
+-//                    loggStatement.executeUpdate();
+-//                }
++                beskjedId = generatedKeys.getInt(1);
+             }
++            loggStatement.setInt(1, avtale.getParorende().getParorendeId());
++            loggStatement.setString(2, "pårørende");
++            loggStatement.setString(3, "avtale opprettet");
++            loggStatement.setInt(4, beskjedId);
++            loggStatement.setString(5, "avtale");
++            loggStatement.executeUpdate();
+         }
+         catch (SQLException sqlException) {
+             sqlException.printStackTrace();
+@@ -71,48 +65,80 @@
+ 
+     @Override
+     public void oppdaterAvtale(Avtale avtale) {
++        System.out.println("called");
+         String oppdaterAvtaleQuery = "update Avtaler set beskrivelse = ?, dato_og_tid = ?, gjentakelse = ?, slutt_dato = ?, pleietrengende_id = ?, parorende_id = ? " +
+                 "where avtale_id = ?";
+-        try (PreparedStatement preparedStatement = connection.prepareStatement(oppdaterAvtaleQuery)) {
+-            preparedStatement.setString(1, avtale.getBeskrivelse());
+-            preparedStatement.setObject(2, avtale.getDatoOgTid());
+-            if (avtale.getGjentakelse() != null) {
+-                preparedStatement.setString(3, avtale.getGjentakelse());
+-            }
+-            else {
+-                preparedStatement.setNull(3, Types.VARCHAR);
+-            }
+-            if (avtale.getSluttDato() != null) {
+-                preparedStatement.setObject(4, avtale.getSluttDato());
+-            }
+-            else {
+-                preparedStatement.setNull(4, Types.TIMESTAMP);
+-            }
+-            preparedStatement.setInt(5, avtale.getParorende().getParorendeId());
+-            preparedStatement.setInt(6, avtale.getPleietrengende().getPleietrengendeId());
+-            preparedStatement.setInt(7, avtale.getAvtaleId());
+-            preparedStatement.executeUpdate();
++        String loggOppdateringQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
++                "values (?, ?, ?, ?, ?)";
++        try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
++             PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
++            System.out.println("statements");
++            oppdaterStatement.setString(1, avtale.getBeskrivelse());
++            oppdaterStatement.setObject(2, avtale.getDatoOgTid());
++            oppdaterStatement.setString(3, avtale.getGjentakelse());
++            oppdaterStatement.setObject(4, avtale.getSluttDato());
++            oppdaterStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
++            oppdaterStatement.setInt(6, avtale.getParorende().getParorendeId());
++            oppdaterStatement.setInt(7, avtale.getAvtaleId());
++            oppdaterStatement.executeUpdate();
++            System.out.println("executed");
+ 
+-            loggService.loggføring(avtale.getParorende().getParorendeId(), "pårørende", "avtale endret", avtale.getAvtaleId(), "avtale");
+-        }
+-        catch (SQLException sqlException) {
++            loggStatement.setInt(1, avtale.getParorende().getParorendeId());
++            loggStatement.setString(2, "pårørende");
++            loggStatement.setString(3, "avtale oppdatert");
++            loggStatement.setInt(4, avtale.getAvtaleId());
++            loggStatement.setString(5, "avtale");
++            loggStatement.executeUpdate();
++        } catch (SQLException sqlException) {
++            System.err.println(sqlException.getMessage());
+             sqlException.printStackTrace();
+-            sqlException.getMessage();
+         }
+-
+     }
+ 
+     @Override
+     public void slettAvtale(int avtaleId) {
+-        String sletteAvtaleQuery = "delete from Avtaler where avtale_id = ?";
+-        try (PreparedStatement preparedStatement = connection.prepareStatement(sletteAvtaleQuery)) {
++        int parorende_id = 0;
++
++        String hentParorendeQuery = "SELECT parorende_id FROM Avtaler WHERE avtale_id = ?";
++        String slettBeskjedQuery = "DELETE FROM Avtaler WHERE avtale_id = ?";
++        String loggSlettQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
++                "values (?, ?, ?, ?, ?)";
++
++        try {
++            PreparedStatement preparedStatement = connection.prepareStatement(hentParorendeQuery);
+             preparedStatement.setInt(1, avtaleId);
+-            preparedStatement.executeUpdate();
++            ResultSet resultSet = preparedStatement.executeQuery();
++            if (resultSet.next()) {
++                int parorendeId = resultSet.getInt("parorende_id");
++                Parorende parorende = new Parorende();
++                parorende.setParorendeId(parorendeId);
++                parorende_id = parorende.getParorendeId();
++            }
++        } catch(SQLException sqlException){
++            sqlException.printStackTrace();
+         }
+-        catch (SQLException sqlException) {
++
++        try {
++
++            PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery);
++
++            loggStatement.setInt(1, parorende_id);
++            loggStatement.setString(2, "pårørende");
++            loggStatement.setString(3, "avtale slettet");
++            loggStatement.setInt(4, avtaleId);
++            loggStatement.setString(5, "avtale");
++            loggStatement.executeUpdate();
++
++        } catch (SQLException sqlException) {
++            sqlException.printStackTrace();
++        }
++        try {
++            PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
++            slettStatement.setInt(1, avtaleId);
++            slettStatement.executeUpdate();
++        } catch (SQLException sqlException) {
+             sqlException.printStackTrace();
+         }
+-
+     }
+ 
+     @Override
+Index: database/src/main/java/org/app/database/BeskjedDBImplementation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.database;\r\n\r\nimport org.app.core.models.Beskjed;\r\nimport org.app.core.models.Parorende;\r\nimport org.app.core.models.Pleietrengende;\r\n\r\nimport org.app.core.models.Resources;\r\nimport org.app.core.repositories.BeskjedRepository;\r\n\r\nimport java.sql.*;\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class BeskjedDBImplementation implements BeskjedRepository {\r\n\r\n    String url = Resources.getUrl();\r\n    String user = Resources.getUser();\r\n    String password = Resources.getPassword();\r\n\r\n    private Connection connection;\r\n    //private LoggService loggService;\r\n    private Parorende parorende;\r\n\r\n    public BeskjedDBImplementation() {\r\n        try {\r\n            connection = DriverManager.getConnection(url, user, password);\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n    @Override\r\n    public void oppretteBeskjed(Beskjed beskjed) {\r\n        String opprettBeskjedQuery = \"Insert into Beskjeder (beskrivelse, dato_tid, synlig_tid, parorende_id, pleietrengende_id) Values (?, ?, ?, ?, ?)\";\r\n        String loggForOpprettelseQuery = \"insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) \" +\r\n                \"values (?, ?, ?, ?, ?)\";\r\n        try (PreparedStatement opprettStatement = connection.prepareStatement(opprettBeskjedQuery, Statement.RETURN_GENERATED_KEYS);\r\n             PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {\r\n\r\n            opprettStatement.setString(1, beskjed.getBeskrivelse());\r\n            opprettStatement.setObject(2, beskjed.getDatoOgTid());\r\n            opprettStatement.setInt(3, beskjed.getSynligTidsenhet());\r\n\r\n            opprettStatement.setInt(4, beskjed.getParorende().getParorendeId());\r\n            opprettStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());\r\n            opprettStatement.executeUpdate();\r\n\r\n            ResultSet generatedKeys = opprettStatement.getGeneratedKeys();\r\n            int beskjedId = -1;\r\n            if (generatedKeys.next()) {\r\n                beskjedId = generatedKeys.getInt(1);\r\n            }\r\n            loggStatement.setInt(1, beskjed.getParorende().getParorendeId());\r\n            loggStatement.setString(2, \"pårørende\");\r\n            loggStatement.setString(3, \"beskjed opprettet\");\r\n            loggStatement.setInt(4, beskjedId);\r\n            loggStatement.setString(5, \"beskjed\");\r\n            loggStatement.executeUpdate();\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void oppdaterBeskjed(Beskjed beskjed) {\r\n        String oppdaterBeskjedQuery = \"UPDATE Beskjeder SET beskrivelse = ?, dato_tid = ?, synlig_tid = ?, parorende_id = ?, pleietrengende_id = ? WHERE beskjed_id = ?\";\r\n        String loggOppdateringQuery = \"insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) \" +\r\n                \"values (?, ?, ?, ?, ?)\";\r\n        try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterBeskjedQuery);\r\n             PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {\r\n            oppdaterStatement.setString(1, beskjed.getBeskrivelse());\r\n            oppdaterStatement.setObject(2, beskjed.getDatoOgTid());\r\n            oppdaterStatement.setInt(3, beskjed.getSynligTidsenhet());\r\n            oppdaterStatement.setInt(4, beskjed.getParorende().getParorendeId());\r\n            oppdaterStatement.setInt(5, beskjed.getPleietrengende().getPleietrengendeId());\r\n            oppdaterStatement.setInt(6, beskjed.getBeskjedId());\r\n            oppdaterStatement.executeUpdate();\r\n\r\n            loggStatement.setInt(1, beskjed.getParorende().getParorendeId());\r\n            loggStatement.setString(2, \"pårørende\");\r\n            loggStatement.setString(3, \"beskjed oppdatert\");\r\n            loggStatement.setInt(4, beskjed.getBeskjedId());\r\n            loggStatement.setString(5, \"beskjed\");\r\n            loggStatement.executeUpdate();\r\n        } catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n\r\n\r\n    @Override\r\n    public void slettBeskjed(int beskjedId) {\r\n\r\n        String slettBeskjedQuery = \"DELETE FROM Beskjeder WHERE beskjed_id = ?\";\r\n        String loggSlettQuery = \"insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) \" +\r\n                \"values (?, ?, ?, ?, ?)\";\r\n        try (PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);\r\n             PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery)) {\r\n            slettStatement.setInt(1, beskjedId);\r\n            slettStatement.executeUpdate();\r\n\r\n            int parorendeId = parorende.getParorendeId();\r\n            loggStatement.setInt(1, parorendeId);\r\n            loggStatement.setString(2, \"pårørende\");\r\n            loggStatement.setString(3, \"beskjed slettet\");\r\n            loggStatement.setInt(4, beskjedId);\r\n            loggStatement.setString(5, \"beskjed\");\r\n            loggStatement.executeUpdate();\r\n\r\n        } catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n\r\n\r\n    @Override\r\n    public Beskjed hentBeskjed(int beskjedId) {\r\n        String hentBeskjedQuery = \"SELECT beskjed_id, beskrivelse, dato_tid, synlig_tid, parorende_id, pleietrengende_id FROM Beskjeder WHERE beskjed_id = ?\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(hentBeskjedQuery)) {\r\n            preparedStatement.setInt(1, beskjedId);\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n\r\n            if (resultSet.next()) {\r\n                int id = resultSet.getInt(\"beskjed_id\");\r\n                String beskrivelse = resultSet.getString(\"beskrivelse\");\r\n                LocalDateTime datoOgTid = resultSet.getObject(\"dato_tid\", LocalDateTime.class);\r\n                int synligTid = resultSet.getInt(\"synlig_tid\");\r\n                int parorendeId = resultSet.getInt(\"parorende_id\");\r\n                int pleietrengendeId = resultSet.getInt(\"pleietrengende_id\");\r\n\r\n                Parorende parorende = new Parorende();\r\n                parorende.setParorendeId(parorendeId);\r\n\r\n                Pleietrengende pleietrengende = new Pleietrengende();\r\n                pleietrengende.setPleietrengendeId(pleietrengendeId);\r\n\r\n                Beskjed beskjed = new Beskjed(id, datoOgTid, beskrivelse, synligTid, pleietrengende, parorende);\r\n                return beskjed;\r\n            }\r\n        } catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n        return null;\r\n    }\r\n\r\n\r\n\r\n\r\n    @Override\r\n    public List<Beskjed> hentBeskjedForParorende(int parorendeId) {\r\n        List<Beskjed> beskjeder = new ArrayList<>();\r\n        String beskjedForParorendeQuery = \"select * from Beskjeder where parorende_id = ?\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(beskjedForParorendeQuery)) {\r\n            preparedStatement.setInt(1, parorendeId);\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n\r\n            while (resultSet.next()) {\r\n                int beskjedId = resultSet.getInt(\"beskjed_id\");\r\n                String beskrivelse = resultSet.getString(\"beskrivelse\");\r\n                LocalDateTime datoOgTid = resultSet.getTimestamp(\"dato_tid\").toLocalDateTime();\r\n                int synligTidsenhet = resultSet.getInt(\"synlig_tid\");\r\n\r\n                Beskjed beskjed = new Beskjed(beskjedId, datoOgTid, beskrivelse, synligTidsenhet);\r\n                beskjeder.add(beskjed);\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n        return beskjeder;\r\n    }\r\n\r\n    public void close() {\r\n        try {\r\n            if (connection != null && !connection.isClosed()) {\r\n                connection.close();\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database/src/main/java/org/app/database/BeskjedDBImplementation.java b/database/src/main/java/org/app/database/BeskjedDBImplementation.java
+--- a/database/src/main/java/org/app/database/BeskjedDBImplementation.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/database/src/main/java/org/app/database/BeskjedDBImplementation.java	(date 1731347194102)
+@@ -92,17 +92,32 @@
+ 
+     @Override
+     public void slettBeskjed(int beskjedId) {
++        int parorende_id = 0;
+ 
++        String hentParorendeQuery = "SELECT parorende_id FROM Beskjeder WHERE beskjed_id = ?";
+         String slettBeskjedQuery = "DELETE FROM Beskjeder WHERE beskjed_id = ?";
+         String loggSlettQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
+                 "values (?, ?, ?, ?, ?)";
+-        try (PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
+-             PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery)) {
+-            slettStatement.setInt(1, beskjedId);
+-            slettStatement.executeUpdate();
++
++        try {
++            PreparedStatement preparedStatement = connection.prepareStatement(hentParorendeQuery);
++            preparedStatement.setInt(1, beskjedId);
++            ResultSet resultSet = preparedStatement.executeQuery();
++            if (resultSet.next()) {
++                int parorendeId = resultSet.getInt("parorende_id");
++                Parorende parorende = new Parorende();
++                parorende.setParorendeId(parorendeId);
++                parorende_id = parorende.getParorendeId();
++            }
++        } catch(SQLException sqlException){
++                sqlException.printStackTrace();
++        }
+ 
+-            int parorendeId = parorende.getParorendeId();
+-            loggStatement.setInt(1, parorendeId);
++        try {
++
++            PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery);
++
++            loggStatement.setInt(1, parorende_id);
+             loggStatement.setString(2, "pårørende");
+             loggStatement.setString(3, "beskjed slettet");
+             loggStatement.setInt(4, beskjedId);
+@@ -112,7 +127,16 @@
+         } catch (SQLException sqlException) {
+             sqlException.printStackTrace();
+         }
++        try {
++            PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
++            slettStatement.setInt(1, beskjedId);
++            slettStatement.executeUpdate();
++        } catch (SQLException sqlException) {
++            sqlException.printStackTrace();
++        }
++
+     }
++
+ 
+ 
+     @Override
+Index: GUI/src/main/java/org/app/gui/App.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.gui;\r\n\r\nimport org.app.gui.pages.LoginPage;\r\n\r\npublic class App {\r\n    public static void main(String[] args) {\r\n        //new RegistrationPage();\r\n        new LoginPage();\r\n        //new LeggTilPleietrengendePage();\r\n        //new MainPage(\"Aram Farhad\", \"Farhad\");\r\n        //new ActivityListPage();\r\n        //new TaskDisplayPage();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/App.java b/GUI/src/main/java/org/app/gui/App.java
+--- a/GUI/src/main/java/org/app/gui/App.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/GUI/src/main/java/org/app/gui/App.java	(date 1731347194097)
+@@ -1,6 +1,7 @@
+ package org.app.gui;
+ 
+ import org.app.gui.pages.LoginPage;
++import org.app.gui.pages.MainPage;
+ 
+ public class App {
+     public static void main(String[] args) {
+@@ -8,7 +9,5 @@
+         new LoginPage();
+         //new LeggTilPleietrengendePage();
+         //new MainPage("Aram Farhad", "Farhad");
+-        //new ActivityListPage();
+-        //new TaskDisplayPage();
+     }
+ }
+\ No newline at end of file
+Index: database/src/main/java/org/app/database/PleietrengendeDBImplementation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.database;\r\n\r\nimport org.app.core.models.Pleietrengende;\r\nimport org.app.core.models.Resources;\r\nimport org.app.core.repositories.PleietrengendeRepository;\r\n\r\nimport java.sql.*;\r\n\r\npublic class PleietrengendeDBImplementation implements PleietrengendeRepository {\r\n\r\n    String url = Resources.getUrl();\r\n    String user = Resources.getUser();\r\n    String password = Resources.getPassword();\r\n\r\n    private Connection connection;\r\n    public PleietrengendeDBImplementation() {\r\n        try {\r\n            connection = DriverManager.getConnection(url, user, password);\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public Pleietrengende finnPleietrengendeAvParorende(int parorendeId) {\r\n        String finnParorendeQuery = \"select pleietrengende_id, fornavn, etternavn from Pleietrengende where parorende_id = ? \";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(finnParorendeQuery)) {\r\n            preparedStatement.setInt(1, parorendeId);\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n\r\n            if (resultSet.next()) {\r\n                int pleietrengendeId = resultSet.getInt(\"pleietrengende_id\");\r\n                String fornavn = resultSet.getString(\"fornavn\");\r\n                String etternavn = resultSet.getString(\"etternavn\");\r\n\r\n                Pleietrengende pleietrengende = new Pleietrengende();\r\n                pleietrengende.setPleietrengendeId(pleietrengendeId);\r\n                pleietrengende.setFornavn(fornavn);\r\n                pleietrengende.setEtternavn(etternavn);\r\n\r\n                return pleietrengende;\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public void lagrePleietrengende(Pleietrengende pleietrengende) {\r\n        String leggTilPleietrengendeQuery = \"insert into Pleietrengende (fornavn, etternavn, parorende_id) \" +\r\n                \"values (?, ?, ?)\";\r\n        try (PreparedStatement preparedStatement = connection.prepareStatement(leggTilPleietrengendeQuery)) {\r\n            preparedStatement.setString(1, pleietrengende.getFornavn());\r\n            preparedStatement.setString(2, pleietrengende.getEtternavn());\r\n            if (pleietrengende.getParorende() != null) {\r\n                preparedStatement.setInt(3, pleietrengende.getParorende().getParorendeId());\r\n            }\r\n            else {\r\n                throw new IllegalArgumentException(\"Pårørende må være tilknyttet en pleietrengende. \");\r\n            }\r\n\r\n            int affectedRows = preparedStatement.executeUpdate();\r\n\r\n            if (affectedRows > 0) {\r\n                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();\r\n                if (generatedKeys.next()) {\r\n                    int pleietrengendeId = generatedKeys.getInt(1);\r\n                    pleietrengende.setPleietrengendeId(pleietrengendeId);\r\n                }\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java b/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java
+--- a/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/database/src/main/java/org/app/database/PleietrengendeDBImplementation.java	(date 1731347194103)
+@@ -76,4 +76,25 @@
+             sqlException.printStackTrace();
+         }
+     }
++    public int hentPleietrengendeId(String fornavn, String etternavn) {
++        String selectQuery = "SELECT pleietrengende_id FROM Pleietrengende WHERE fornavn = ? AND etternavn = ?";
++
++        try (Connection connection = DriverManager.getConnection(url, user, password);
++             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
++
++            preparedStatement.setString(1, fornavn);
++            preparedStatement.setString(2, etternavn);
++
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return resultSet.getInt("pleietrengende_id");
++                }
++            }
++
++        } catch (SQLException exception) {
++            exception.printStackTrace();
++        }
++
++        return -1;
++    }
+ }
+\ No newline at end of file
+Index: GUI/src/main/java/org/app/gui/pages/BeskjedPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.gui.pages;\r\n\r\nimport org.app.core.models.Beskjed;\r\nimport org.app.core.models.Parorende;\r\nimport org.app.core.models.Pleietrengende;\r\nimport org.app.core.services.BeskjedService;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.time.LocalDateTime;\r\nimport java.time.format.DateTimeFormatter;\r\nimport java.util.List;\r\n\r\npublic class BeskjedPage extends JFrame {\r\n    private JTextArea beskrivelseFelt;\r\n    private JComboBox<Integer> synligTidsenhetFelt;\r\n    private JTextField datoFelt;\r\n    private JTextField klokkeslettFelt;\r\n    private JButton lagreKnapp;\r\n    private JPanel beskjedListePanel;\r\n    private BeskjedService beskjedService;\r\n    private Parorende parorende;\r\n    private Pleietrengende pleietrengende;\r\n    private org.app.gui.pages.MainPage mainPage;\r\n    private JButton tilbakeKnapp;\r\n\r\n    public BeskjedPage(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, org.app.gui.pages.MainPage mainPage) {\r\n        this.beskjedService = beskjedService;\r\n        this.parorende = parorende;\r\n        this.pleietrengende = pleietrengende;\r\n        this.mainPage = mainPage;\r\n\r\n        setTitle(\"Beskjeder\");\r\n        setSize(400, 800);\r\n        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\r\n        setLocationRelativeTo(null);\r\n\r\n        JPanel hovedInnholdPanel = new JPanel();\r\n        hovedInnholdPanel.setLayout(new BoxLayout(hovedInnholdPanel, BoxLayout.Y_AXIS));\r\n\r\n        JScrollPane scrollPane = new JScrollPane(hovedInnholdPanel);\r\n        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);\r\n\r\n        JPanel inputPanel = new JPanel();\r\n        inputPanel.setLayout(new GridLayout(6, 1, 10, 10));\r\n\r\n        beskrivelseFelt = new JTextArea(2, 10);\r\n        beskrivelseFelt.setLineWrap(true);\r\n        beskrivelseFelt.setWrapStyleWord(true);\r\n        JScrollPane beskrivelsePanel = new JScrollPane(beskrivelseFelt);\r\n        beskrivelsePanel.setBorder(BorderFactory.createTitledBorder(\"Beskrivelse\"));\r\n\r\n        Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};\r\n        synligTidsenhetFelt = new JComboBox<>(synligTidsenheter);\r\n        JPanel synligTidsenhetPanel = createInputPanel(\"Synlig i timer: \", synligTidsenhetFelt);\r\n\r\n        datoFelt = new JTextField();\r\n        JPanel datoPanel = createInputPanel(\"Dato (yyyy-MM-dd): \", datoFelt);\r\n\r\n        klokkeslettFelt = new JTextField();\r\n        JPanel klokkeslettPanel = createInputPanel(\"Klokkeslett (HH:mm): \", klokkeslettFelt);\r\n\r\n        lagreKnapp = new JButton(\"Lagre\");\r\n        lagreKnapp.setPreferredSize(new Dimension(100, 30));\r\n        lagreKnapp.addActionListener(e -> oppretteBeskjed());\r\n\r\n        tilbakeKnapp = new JButton(\"Tilbake\");\r\n        tilbakeKnapp.setPreferredSize(new Dimension(100, 30));\r\n        tilbakeKnapp.addActionListener(e -> {\r\n            this.dispose();\r\n            mainPage.setVisible(true);\r\n        });\r\n\r\n        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));\r\n        tilbakePanel.add(tilbakeKnapp);\r\n\r\n        setLayout(new BorderLayout());\r\n        add(tilbakePanel, BorderLayout.NORTH);\r\n        add(scrollPane, BorderLayout.CENTER);\r\n        inputPanel.add(beskrivelsePanel);\r\n        inputPanel.add(synligTidsenhetPanel);\r\n        inputPanel.add(datoPanel);\r\n        inputPanel.add(klokkeslettPanel);\r\n        inputPanel.add(lagreKnapp);\r\n        inputPanel.add(tilbakeKnapp);\r\n        add(inputPanel, BorderLayout.NORTH);\r\n\r\n        beskjedListePanel = new JPanel();\r\n        beskjedListePanel.setLayout(new BoxLayout(beskjedListePanel, BoxLayout.Y_AXIS));\r\n\r\n        JScrollPane beskjedScrollPane = new JScrollPane(beskjedListePanel);\r\n        beskjedScrollPane.setPreferredSize(new Dimension(400, 300));\r\n        beskjedScrollPane.setBorder(BorderFactory.createTitledBorder(\"Opprettede beskjeder\"));\r\n        add(beskjedScrollPane, BorderLayout.CENTER);\r\n\r\n        visBeskjeder();\r\n\r\n        setVisible(true);\r\n    }\r\n\r\n    private JPanel createInputPanel(String labelText, JComponent inputField) {\r\n        JPanel panel = new JPanel();\r\n        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));\r\n\r\n        JLabel label = new JLabel(labelText);\r\n        label.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n\r\n        inputField.setPreferredSize(new Dimension(300, 30));\r\n        inputField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));\r\n        inputField.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n\r\n        panel.add(label);\r\n        panel.add(inputField);\r\n\r\n        return panel;\r\n    }\r\n\r\n    private void visBeskjeder() {\r\n        beskjedListePanel.removeAll();\r\n        List<Beskjed> beskjedListe = beskjedService.hentBeskjedForParorende(parorende);\r\n        DateTimeFormatter datoFormatter = DateTimeFormatter.ofPattern(\"yyyy-MM-dd\");\r\n        DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern(\"HH:mm\");\r\n\r\n        for (Beskjed beskjed : beskjedListe) {\r\n            JPanel beskjedPanel = new JPanel();\r\n            beskjedPanel.setLayout(new BoxLayout(beskjedPanel, BoxLayout.Y_AXIS));\r\n            beskjedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n            beskjedPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));\r\n\r\n            String dato = beskjed.getDatoOgTid().format(datoFormatter);\r\n            String tid = beskjed.getDatoOgTid().format(tidFormatter);\r\n\r\n            JLabel datoLabel = new JLabel(\"Dato: \" + dato);\r\n            datoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n\r\n            JLabel tidLabel = new JLabel(\"Klokkeslett: \" + tid);\r\n            tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n\r\n            JLabel beskrivelsesLabel = new JLabel(\"Beskrivelse: \" + beskjed.getBeskrivelse());\r\n            beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n\r\n            beskjedPanel.add(datoLabel);\r\n            beskjedPanel.add(tidLabel);\r\n            beskjedPanel.add(beskrivelsesLabel);\r\n\r\n            JPanel knapperPanel = new JPanel();\r\n            knapperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));\r\n\r\n            JButton slettKnapp = new JButton(\"Slett\");\r\n            slettKnapp.addActionListener(e -> slettBeskjed(beskjed));\r\n            knapperPanel.add(slettKnapp);\r\n\r\n            JButton redigerKnapp = new JButton(\"Rediger\");\r\n            redigerKnapp.addActionListener(e -> redigerBeskjed(beskjed));\r\n            knapperPanel.add(redigerKnapp);\r\n\r\n            beskjedPanel.add(knapperPanel);\r\n            beskjedListePanel.add(beskjedPanel);\r\n        }\r\n        beskjedListePanel.revalidate();\r\n        beskjedListePanel.repaint();\r\n    }\r\n\r\n    public void oppretteBeskjed() {\r\n        try {\r\n            String beskrivelse = beskrivelseFelt.getText();\r\n            int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();\r\n            String datoStr = datoFelt.getText();\r\n            String klokkeslettStr = klokkeslettFelt.getText();\r\n\r\n            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\");\r\n            LocalDateTime datoOgTid = LocalDateTime.parse(datoStr + \" \" + klokkeslettStr, formatter);\r\n\r\n            beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);\r\n            JOptionPane.showMessageDialog(this, \"Beskjed opprettet\");\r\n\r\n            beskrivelseFelt.setText(\"\");\r\n            datoFelt.setText(\"\");\r\n            klokkeslettFelt.setText(\"\");\r\n\r\n            visBeskjeder();\r\n        }\r\n        catch (Exception e) {\r\n            JOptionPane.showMessageDialog(this, \"Det oppsto en feil under opprettelsen av beskjedet.\" +\r\n                    \"Vennligst prøv på nytt. \");\r\n        }\r\n    }\r\n\r\n    private void redigerBeskjed(Beskjed beskjed) {\r\n        JFrame redigeringsVindu = new JFrame(\"Rediger Beskjed\");\r\n        redigeringsVindu.setSize(400, 300);\r\n        redigeringsVindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\r\n        redigeringsVindu.setLocationRelativeTo(this);\r\n\r\n        JTextArea beskrivelseFelt = new JTextArea(beskjed.getBeskrivelse(), 2, 10);\r\n        beskrivelseFelt.setLineWrap(true);\r\n        beskrivelseFelt.setWrapStyleWord(true);\r\n\r\n        JComboBox<Integer> synligTidsenhetFelt = new JComboBox<>(new Integer[]{12, 24, 36, 48, 60, 72});\r\n        synligTidsenhetFelt.setSelectedItem(beskjed.getSynligTidsenhet());\r\n\r\n        JTextField datoFelt = new JTextField(beskjed.getDatoOgTid().toLocalDate().toString());\r\n        JTextField klokkeslettFelt = new JTextField(beskjed.getDatoOgTid().toLocalTime().toString());\r\n\r\n        JButton lagreKnapp = new JButton(\"Lagre\");\r\n        lagreKnapp.addActionListener(e -> {\r\n            try {\r\n                String beskrivelse = beskrivelseFelt.getText();\r\n                int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();\r\n                LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + \" \" + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\"));\r\n\r\n                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getPleietrengende(), beskjed.getParorende());\r\n\r\n                Beskjed oppdatertBeskjed = beskjedService.oppdaterBeskjed(nyBeskjed);\r\n                if (oppdatertBeskjed != null) {\r\n                    JOptionPane.showMessageDialog(redigeringsVindu, \"Beskjed oppdatert\");\r\n                    visBeskjeder();\r\n                    redigeringsVindu.dispose();\r\n                } else {\r\n                    JOptionPane.showMessageDialog(redigeringsVindu, \"Kunne ikke oppdatere beskjed. Vennligst prøv på nytt.\");\r\n                }\r\n            } catch (Exception ex) {\r\n                JOptionPane.showMessageDialog(redigeringsVindu, \"Det oppsto en feil: \" + ex.getMessage());\r\n            }\r\n        });\r\n\r\n        JPanel panel = new JPanel(new GridLayout(5, 1));\r\n        panel.add(new JScrollPane(beskrivelseFelt));\r\n        panel.add(createInputPanel(\"Synlig i timer: \", synligTidsenhetFelt));\r\n        panel.add(createInputPanel(\"Dato (yyyy-MM-dd): \", datoFelt));\r\n        panel.add(createInputPanel(\"Klokkeslett (HH:mm): \", klokkeslettFelt));\r\n        panel.add(lagreKnapp);\r\n\r\n        redigeringsVindu.add(panel);\r\n        redigeringsVindu.setVisible(true);\r\n    }\r\n\r\n    private void slettBeskjed(Beskjed beskjed) {\r\n        int svar = JOptionPane.showConfirmDialog(this, \"Er du sikker på at du vil slette denne beskjeden?\", \"Bekreft sletting\", JOptionPane.YES_NO_OPTION);\r\n        if (svar == JOptionPane.YES_OPTION) {\r\n            beskjedService.slettBeskjed(beskjed.getBeskjedId());\r\n            JOptionPane.showMessageDialog(this, \"Beskjed slettet\");\r\n            visBeskjeder();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java b/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java
+--- a/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java	(date 1731347194098)
+@@ -24,7 +24,7 @@
+     private org.app.gui.pages.MainPage mainPage;
+     private JButton tilbakeKnapp;
+ 
+-    public BeskjedPage(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, org.app.gui.pages.MainPage mainPage) {
++    public BeskjedPage(BeskjedService beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
+         this.beskjedService = beskjedService;
+         this.parorende = parorende;
+         this.pleietrengende = pleietrengende;
+@@ -236,7 +236,8 @@
+     }
+ 
+     private void slettBeskjed(Beskjed beskjed) {
+-        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne beskjeden?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
++        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil" +
++                " slette denne beskjeden?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
+         if (svar == JOptionPane.YES_OPTION) {
+             beskjedService.slettBeskjed(beskjed.getBeskjedId());
+             JOptionPane.showMessageDialog(this, "Beskjed slettet");
+Index: GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.gui.pages;\r\n\r\nimport org.app.core.models.Pleietrengende;\r\nimport org.app.core.services.PleietrengendeService;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class LeggTilPleietrengendePage extends JFrame {\r\n    private JTextField fornavnTekstFelt;\r\n    private JTextField etternavnTekstFelt;\r\n    private JButton lagreKnapp;\r\n    private JButton tilbakeKnapp;\r\n    private MainPage mainPage;\r\n    private PleietrengendeService pleietrengendeService;\r\n    private int parorendeId;\r\n    public LeggTilPleietrengendePage(PleietrengendeService pleietrengendeService, int parorendeId, MainPage mainPage) {\r\n        this.pleietrengendeService = pleietrengendeService;\r\n        this.parorendeId = parorendeId;\r\n        this.mainPage = mainPage;\r\n\r\n        setTitle(\"Legg til pleietrengende\");\r\n        setSize(400, 800);\r\n        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\r\n\r\n        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));\r\n\r\n        JLabel fornavnLabel = new JLabel(\"Fornavn:\");\r\n        fornavnTekstFelt = new JTextField(20);\r\n        fornavnTekstFelt.setMaximumSize(fornavnTekstFelt.getPreferredSize());\r\n        add(fornavnLabel);\r\n        add(fornavnTekstFelt);\r\n\r\n        add(Box.createVerticalStrut(10));\r\n\r\n        JLabel etternavnLabel = new JLabel(\"Etternavn\");\r\n        etternavnTekstFelt = new JTextField(20);\r\n        etternavnTekstFelt.setMaximumSize(etternavnTekstFelt.getPreferredSize());\r\n        add(etternavnLabel);\r\n        add(etternavnTekstFelt);\r\n\r\n        add(Box.createVerticalStrut(20));\r\n\r\n        lagreKnapp = new JButton(\"Legg til pleietrengende\");\r\n        lagreKnapp.setPreferredSize(new Dimension(200, 40));\r\n        lagreKnapp.addActionListener(e -> {\r\n            String fornavn = fornavnTekstFelt.getText();\r\n            String etternavn = etternavnTekstFelt.getText();\r\n\r\n            if (fornavn.isEmpty() || etternavn.isEmpty()) {\r\n                JOptionPane.showMessageDialog(this, \"Fornavn og etternavn kan ikke være kan ikke være tomme.\");\r\n                return;\r\n            }\r\n\r\n            Pleietrengende pleietrengende = new Pleietrengende(fornavn, etternavn);\r\n\r\n            boolean erLeggetTil = pleietrengendeService.leggTilPleietrengende(pleietrengende, parorendeId);\r\n\r\n            if (erLeggetTil) {\r\n                JOptionPane.showMessageDialog(this, \"Pleietrengende er lagt til.\");\r\n                mainPage.oppdaterPleietrengendeInfo(pleietrengende);\r\n            }\r\n            else {\r\n                JOptionPane.showMessageDialog(this, \"Feil ved opprettelse av pleietrengende. Du har allerede en pleietrengende.\");\r\n            }\r\n\r\n        });\r\n\r\n        tilbakeKnapp = new JButton(\"Tilbake\");\r\n        tilbakeKnapp.setPreferredSize(new Dimension(200, 40));\r\n        tilbakeKnapp.addActionListener(e -> {\r\n            this.dispose();\r\n            mainPage.setVisible(true);\r\n            mainPage.visHovedside();\r\n        });\r\n\r\n        JPanel knappPanel = new JPanel();\r\n        knappPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));\r\n        knappPanel.add(lagreKnapp);\r\n        add(lagreKnapp);\r\n        add(tilbakeKnapp);\r\n\r\n\r\n\r\n        setVisible(true);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java b/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java
+--- a/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java	(date 1731347194098)
+@@ -2,9 +2,13 @@
+ 
+ import org.app.core.models.Pleietrengende;
+ import org.app.core.services.PleietrengendeService;
++import org.app.database.PleietrengendeDBImplementation;
+ 
+ import javax.swing.*;
+ import java.awt.*;
++import java.io.File;
++import java.io.FileWriter;
++import java.io.IOException;
+ 
+ public class LeggTilPleietrengendePage extends JFrame {
+     private JTextField fornavnTekstFelt;
+@@ -14,6 +18,7 @@
+     private MainPage mainPage;
+     private PleietrengendeService pleietrengendeService;
+     private int parorendeId;
++
+     public LeggTilPleietrengendePage(PleietrengendeService pleietrengendeService, int parorendeId, MainPage mainPage) {
+         this.pleietrengendeService = pleietrengendeService;
+         this.parorendeId = parorendeId;
+@@ -48,7 +53,8 @@
+             String etternavn = etternavnTekstFelt.getText();
+ 
+             if (fornavn.isEmpty() || etternavn.isEmpty()) {
+-                JOptionPane.showMessageDialog(this, "Fornavn og etternavn kan ikke være kan ikke være tomme.");
++                JOptionPane.showMessageDialog(this, "Fornavn og etternavn" +
++                        " kan ikke være kan ikke være tomme.");
+                 return;
+             }
+ 
+@@ -58,10 +64,21 @@
+ 
+             if (erLeggetTil) {
+                 JOptionPane.showMessageDialog(this, "Pleietrengende er lagt til.");
++
++                PleietrengendeDBImplementation db = new PleietrengendeDBImplementation();
++                int id = db.hentPleietrengendeId(fornavn, etternavn);
++                writePleietrengendeIdToFile(id);
++
+                 mainPage.oppdaterPleietrengendeInfo(pleietrengende);
++<<<<<<< HEAD
++=======
++                mainPage.visHovedside();
++                this.dispose();
++>>>>>>> origin/Feature-TG
+             }
+             else {
+-                JOptionPane.showMessageDialog(this, "Feil ved opprettelse av pleietrengende. Du har allerede en pleietrengende.");
++                JOptionPane.showMessageDialog(this, "Feil ved opprettelse av pleietrengende." +
++                        " Du har allerede en pleietrengende.");
+             }
+ 
+         });
+@@ -77,11 +94,26 @@
+         JPanel knappPanel = new JPanel();
+         knappPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
+         knappPanel.add(lagreKnapp);
+-        add(lagreKnapp);
+-        add(tilbakeKnapp);
+-
+-
++        knappPanel.add(tilbakeKnapp);
++        add(knappPanel);
+ 
+         setVisible(true);
+     }
++
++    private void writePleietrengendeIdToFile(int pleietrengende_id) {
++        try {
++            String currentDir = System.getProperty("user.dir");
++            File parentDir = new File(currentDir).getParentFile();
++            File file = new File(parentDir, "pleietrengende_id.txt");
++
++            try (FileWriter writer = new FileWriter(file)) {
++                writer.write(String.valueOf(pleietrengende_id));
++            }
++
++            } catch (IOException e) {
++                e.printStackTrace();
++                JOptionPane.showMessageDialog(this, "Kunne ikke lagre pleietrengende" +
++                        " ID til fil.", "Feil", JOptionPane.ERROR_MESSAGE);
++            }
++    }
+ }
+\ No newline at end of file
+Index: GUI/src/main/java/org/app/gui/pages/LoginPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.gui.pages;\r\n\r\nimport org.app.core.models.Pleietrengende;\r\nimport org.app.core.models.Parorende;\r\nimport org.app.core.models.Cryption;\r\nimport org.app.core.models.Resources;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.sql.*;\r\n\r\npublic class LoginPage extends JFrame {\r\n\r\n    private JLabel emailLabel;\r\n    private JLabel passwordLabel;\r\n    private JLabel registerLabel;\r\n    private JTextField emailField;\r\n    private JPasswordField passwordField;\r\n    private JButton loginButton;\r\n    private JButton registerButton;\r\n    private Parorende parorende;\r\n\r\n    public LoginPage() {\r\n        setTitle(\"Login Page\");\r\n        setSize(400, 800);\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\r\n        setLayout(new GridBagLayout());\r\n        GridBagConstraints g = new GridBagConstraints();\r\n        g.insets = new Insets(10, 10, 10, 10);\r\n        g.fill = GridBagConstraints.HORIZONTAL;\r\n        g.weightx = 1;\r\n\r\n        g.gridx = 0;\r\n        g.gridy = 0;\r\n        g.gridwidth = 1;\r\n        add(emailLabel = new JLabel(\"E-post:\"), g);\r\n\r\n        g.gridx = 0;\r\n        g.gridy = 1;\r\n        g.gridwidth = 2;\r\n        add(emailField = new JTextField(60), g);\r\n\r\n        g.gridx = 0;\r\n        g.gridy = 2;\r\n        g.gridwidth = 1;\r\n        add(passwordLabel = new JLabel(\"Passord:\"), g);\r\n\r\n        g.gridx = 0;\r\n        g.gridy = 3;\r\n        g.gridwidth = 2;\r\n        add(passwordField = new JPasswordField(20), g);\r\n\r\n        g.gridx = 0;\r\n        g.gridy = 5;\r\n        g.gridwidth = 1;\r\n        add(registerLabel = new JLabel(\"Registrer:\"), g);\r\n\r\n        g.gridx = 1;\r\n        g.gridy = 6;\r\n        g.gridwidth = 1;\r\n        g.anchor = GridBagConstraints.EAST;\r\n        add(loginButton = new JButton(\"Logg inn\"), g);\r\n\r\n        g.gridx = 0;\r\n        g.gridy = 7;\r\n        g.gridwidth = 1;\r\n        add(registerLabel = new JLabel(\"Ny bruker\"), g);\r\n\r\n        g.gridx = 1;\r\n        g.gridy = 8;\r\n        g.gridwidth = 1;\r\n        g.anchor = GridBagConstraints.EAST;\r\n        add(registerButton = new JButton(\"Registrer her\"), g);\r\n\r\n        setVisible(true);\r\n\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        //setLayout(null);\r\n\r\n        loginButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                getLogIn();\r\n            }\r\n        });\r\n\r\n        registerButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                openRegistrationPage();\r\n            }\r\n        });\r\n        setVisible(true);\r\n    }\r\n    public void getLogIn() {\r\n        String enteredEmail = emailField.getText();\r\n        String enteredPass = new String(passwordField.getPassword());\r\n        String enteredPassword = Cryption.hashPasswordWithSalt(enteredPass);\r\n\r\n        String loginQuery = \"select i.parorende_id, p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, \" +\r\n                \"pl.pleietrengende_id, pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn \" +\r\n                \"from Innlogging i \" +\r\n                \"join Parorende p on i.parorende_id = p.parorende_id \" +\r\n                \"left join Pleietrengende pl on p.parorende_id = pl.parorende_id \" +\r\n                \"where i.epost = ? and i.passord = ?\";\r\n\r\n        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);\r\n             PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {\r\n            preparedStatement.setString(1, enteredEmail);\r\n            preparedStatement.setString(2, enteredPassword);\r\n\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n\r\n            if (resultSet.next()) {\r\n                int parorendeId = resultSet.getInt(\"parorende_id\");\r\n                String parorendeFornavn = resultSet.getString(\"parorendeFornavn\");\r\n                String parorendeEtternavn = resultSet.getString(\"parorendeEtternavn\");\r\n\r\n                Pleietrengende pleietrengende = null;\r\n                if (resultSet.getObject(\"pleietrengende_id\") != null) {\r\n                    int pleietrengendeId = resultSet.getInt(\"pleietrengende_id\");\r\n                    String pleietrengendeFornavn = resultSet.getString(\"pleietrengendeFornavn\");\r\n                    String pleietrengendeEtternavn = resultSet.getString(\"pleietrengendeEtternavn\");\r\n                    pleietrengende = new Pleietrengende(pleietrengendeId, pleietrengendeFornavn, pleietrengendeEtternavn);\r\n                }\r\n\r\n                Parorende parorende = new Parorende(parorendeId, parorendeFornavn, parorendeEtternavn);\r\n\r\n                new MainPage(parorende, pleietrengende);\r\n                dispose();\r\n            }\r\n            else {\r\n                JOptionPane.showMessageDialog(this, \"Feil e-post eller passord. Vennligst prøv igjen. \");\r\n            }\r\n        }\r\n        catch (SQLException sqlException) {\r\n            sqlException.printStackTrace();\r\n        }\r\n\r\n    }\r\n    private void openToDoPage(){\r\n        new RegistrationPage();\r\n        dispose();\r\n    }\r\n    public void openRegistrationPage() {\r\n        new RegistrationPage();\r\n        dispose();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/LoginPage.java b/GUI/src/main/java/org/app/gui/pages/LoginPage.java
+--- a/GUI/src/main/java/org/app/gui/pages/LoginPage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/GUI/src/main/java/org/app/gui/pages/LoginPage.java	(date 1731347194099)
+@@ -22,6 +22,10 @@
+     private JButton registerButton;
+     private Parorende parorende;
+ 
++    String url = Resources.getUrl();
++    String user = Resources.getUser();
++    String password = Resources.getPassword();
++
+     public LoginPage() {
+         setTitle("Login Page");
+         setSize(400, 800);
+@@ -75,10 +79,11 @@
+         g.anchor = GridBagConstraints.EAST;
+         add(registerButton = new JButton("Registrer her"), g);
+ 
++        getRootPane().setDefaultButton(loginButton);
++
+         setVisible(true);
+ 
+         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+-        //setLayout(null);
+ 
+         loginButton.addActionListener(new ActionListener() {
+             @Override
+@@ -107,7 +112,7 @@
+                 "left join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
+                 "where i.epost = ? and i.passord = ?";
+ 
+-        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
++        try (Connection connection = DriverManager.getConnection(url, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {
+             preparedStatement.setString(1, enteredEmail);
+             preparedStatement.setString(2, enteredPassword);
+@@ -145,7 +150,7 @@
+         new RegistrationPage();
+         dispose();
+     }
+-    public void openRegistrationPage() {
++    private void openRegistrationPage() {
+         new RegistrationPage();
+         dispose();
+     }
+Index: GUI/src/main/java/org/app/gui/pages/MainPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.gui.pages;\r\n\r\nimport org.app.core.services.AvtaleService;\r\nimport org.app.core.services.BeskjedService;\r\nimport org.app.core.services.PleietrengendeService;\r\nimport org.app.core.models.Parorende;\r\nimport org.app.core.models.Pleietrengende;\r\nimport org.app.database.AvtaleDBImplementation;\r\nimport org.app.database.BeskjedDBImplementation;\r\nimport org.app.database.PleietrengendeDBImplementation;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class MainPage extends JFrame {\r\n    private JLabel parorendeNavnLabel;\r\n    private JLabel pleietrengendeNavnLabel;\r\n    private Parorende parorende;\r\n    private Pleietrengende pleietrengende;\r\n    private BeskjedService beskjedService;\r\n    private AvtaleService avtaleService;\r\n    private PleietrengendeService pleietrengendeService;\r\n    private JButton leggTilPleietrengendeKnapp;\r\n    private JButton avtalerKnapp;\r\n    private JButton beskjedKnapp;\r\n    private JButton handlelisteKnapp;\r\n\r\n    public MainPage(Parorende parorende, Pleietrengende pleietrengende) {\r\n        setTitle(\"Hovedside \");\r\n        setSize(400, 800);\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        setLocationRelativeTo(null);\r\n\r\n        JMenuBar menuBar = new JMenuBar();\r\n        JMenu helpMenu = new JMenu(\"Hjelp\");\r\n        menuBar.add(helpMenu);\r\n        this.setJMenuBar(menuBar);\r\n\r\n        setLayout(new GridBagLayout());\r\n        GridBagConstraints g1 = new GridBagConstraints();\r\n        g1.insets = new Insets(10, 10, 10, 10);\r\n        g1.fill = GridBagConstraints.HORIZONTAL;\r\n        g1.weightx = 1;\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 0;\r\n        g1.anchor = GridBagConstraints.NORTHWEST;\r\n        parorendeNavnLabel = new JLabel(\"Deg: \" + parorende.getFornavn() + \" \" +  parorende.getEtternavn());\r\n        add(parorendeNavnLabel, g1);\r\n        parorendeNavnLabel.setFont(new Font(\"Serif\", Font.PLAIN, 20));\r\n\r\n        String pleietrengendeNavn;\r\n        if (pleietrengende != null) {\r\n            pleietrengendeNavn = pleietrengende.getFornavn() + \" \" + pleietrengende.getEtternavn();\r\n        }\r\n        else {\r\n            pleietrengendeNavn = \"Ingen pleietrengende\";\r\n        }\r\n\r\n        g1.gridy = 1;\r\n        pleietrengendeNavnLabel = new JLabel(\"Pleietrengende: \" + pleietrengendeNavn);\r\n        add(pleietrengendeNavnLabel, g1);\r\n        pleietrengendeNavnLabel.setFont(new Font(\"Serif\", Font.PLAIN, 20));\r\n\r\n        leggTilPleietrengendeKnapp = new JButton(\"Legg til pleietrengende\");\r\n        avtalerKnapp = new JButton(\"Avtaler\");\r\n        beskjedKnapp = new JButton(\"Beskjeder\");\r\n        handlelisteKnapp = new JButton(\"Handleliste\");\r\n\r\n        Dimension buttonSize = new Dimension(200, 100);\r\n        leggTilPleietrengendeKnapp.setPreferredSize(buttonSize);\r\n        avtalerKnapp.setPreferredSize(buttonSize);\r\n        beskjedKnapp.setPreferredSize(buttonSize);\r\n        handlelisteKnapp.setPreferredSize(buttonSize);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 2;\r\n        add(leggTilPleietrengendeKnapp, g1);\r\n\r\n        g1.gridy = 3;\r\n        add(avtalerKnapp, g1);\r\n\r\n        g1.gridy = 4;\r\n        add(beskjedKnapp, g1);\r\n\r\n        g1.gridy = 5;\r\n        add(handlelisteKnapp, g1);\r\n\r\n        setVisible(true);\r\n\r\n        beskjedService = new BeskjedService(new BeskjedDBImplementation());\r\n        beskjedKnapp.addActionListener(e -> {\r\n            if (pleietrengende != null) {\r\n                new BeskjedPage(beskjedService, parorende, pleietrengende, this);\r\n                this.setVisible(false);\r\n            }\r\n            else {\r\n                JOptionPane.showMessageDialog(this,\r\n                        \"Legg til en pleietrengende for å få tilgang til denne siden.\",\r\n                        \"Ingen pleietrengende\", JOptionPane.WARNING_MESSAGE);\r\n            }});\r\n\r\n        avtaleService = new AvtaleService(new AvtaleDBImplementation());\r\n        avtalerKnapp.addActionListener(e -> {\r\n            if (pleietrengende != null) {\r\n                new AvtalePage(avtaleService, parorende, pleietrengende, this);\r\n                this.setVisible(false);\r\n            }\r\n            else {\r\n                JOptionPane.showMessageDialog(this, \"Legg til en pleietrengende for å få tilgang til denne siden.\",\r\n                        \"Ingen pleietrengende\", JOptionPane.WARNING_MESSAGE);\r\n            }\r\n        });\r\n\r\n        pleietrengendeService = new PleietrengendeService(new PleietrengendeDBImplementation());\r\n        leggTilPleietrengendeKnapp.addActionListener(e -> {\r\n            new LeggTilPleietrengendePage(pleietrengendeService, parorende.getParorendeId(), this);\r\n            this.setVisible(false);\r\n        });\r\n\r\n        setVisible(true);\r\n    }\r\n\r\n    public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {\r\n        this.pleietrengende = pleietrengende;\r\n        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + \" \" + pleietrengende.getEtternavn() : \"Ingen pleietrengende\";\r\n        pleietrengendeNavnLabel.setText(\"Pleietrengende: \" + pleietrengendeNavn);\r\n        avtalerKnapp.setEnabled(true);\r\n        beskjedKnapp.setEnabled(true);\r\n        repaint();\r\n    }\r\n    public void visHovedside() {\r\n        setVisible(true);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/MainPage.java b/GUI/src/main/java/org/app/gui/pages/MainPage.java
+--- a/GUI/src/main/java/org/app/gui/pages/MainPage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/GUI/src/main/java/org/app/gui/pages/MainPage.java	(date 1731347194099)
+@@ -107,7 +107,8 @@
+                 this.setVisible(false);
+             }
+             else {
+-                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende for å få tilgang til denne siden.",
++                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende" +
++                                " for å få tilgang til denne siden.",
+                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
+             }
+         });
+@@ -123,7 +124,8 @@
+ 
+     public void oppdaterPleietrengendeInfo(Pleietrengende pleietrengende) {
+         this.pleietrengende = pleietrengende;
+-        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
++        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() +
++                " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
+         pleietrengendeNavnLabel.setText("Pleietrengende: " + pleietrengendeNavn);
+         avtalerKnapp.setEnabled(true);
+         beskjedKnapp.setEnabled(true);
+Index: GUI/src/main/java/org/app/gui/pages/RegistrationPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.gui.pages;\r\n\r\nimport org.app.core.models.Parorende;\r\n\r\nimport org.app.core.models.Cryption;\r\nimport org.app.core.models.Resources;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.sql.*;\r\n\r\npublic class RegistrationPage extends JFrame{\r\n    private JLabel firstNameLabel;\r\n    private JLabel lastNameLabel;\r\n    private JLabel mobileLabel;\r\n    private JLabel emailLabel;\r\n    private JLabel passwordLabel;\r\n    private JTextField firstNameField;\r\n    private JTextField lastNameField;\r\n    private JTextField mobileField;\r\n    private JTextField emailField;\r\n    private JPasswordField passwordField;\r\n    private JButton registerButton;\r\n    private JButton backToLoginButton;\r\n\r\n    private Parorende parorende;\r\n\r\n    String url = Resources.getUrl();\r\n    String user = Resources.getUser();\r\n    String dbPassword = Resources.getPassword();\r\n\r\n    public RegistrationPage() {\r\n        setTitle(\"Registration Page\");\r\n        setSize(400, 800);\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        setLocationRelativeTo(null);\r\n\r\n        setLayout(new GridBagLayout());\r\n        GridBagConstraints g1 = new GridBagConstraints();\r\n        g1.insets = new Insets(10, 10, 10, 10);\r\n        g1.fill = GridBagConstraints.HORIZONTAL;\r\n        g1.weightx = 1;\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 0;\r\n        g1.gridwidth = 1;\r\n        add(firstNameLabel = new JLabel(\"Fornavn \"), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 1;\r\n        g1.gridwidth = 2;\r\n        add(firstNameField = new JTextField(20), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 2;\r\n        g1.gridwidth = 1;\r\n        add(lastNameLabel = new JLabel(\"Etternavn\"), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 3;\r\n        g1.gridwidth = 2;\r\n        add(lastNameField = new JTextField(20), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 4;\r\n        g1.gridwidth = 1;\r\n        add(mobileLabel= new JLabel(\"Mobil nummer\"), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 5;\r\n        g1.gridwidth = 2;\r\n        add(mobileField = new JTextField(20), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 6;\r\n        g1.gridwidth = 1;\r\n        add(emailLabel = new JLabel(\"E-post\"), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 7;\r\n        g1.gridwidth = 2;\r\n        add(emailField = new JTextField(20), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 8;\r\n        g1.gridwidth = 1;\r\n        add(passwordLabel = new JLabel(\"Passord\"), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 9;\r\n        g1.gridwidth = 2;\r\n        add(passwordField = new JPasswordField(20), g1);\r\n\r\n        g1.gridx = 1;\r\n        g1.gridy = 10;\r\n        g1.gridwidth = 1;\r\n        g1.anchor = GridBagConstraints.EAST;\r\n        add(registerButton = new JButton(\"Registrer\"), g1);\r\n\r\n        g1.gridx = 0;\r\n        g1.gridy = 10;\r\n        g1.gridwidth = 1;\r\n        g1.anchor = GridBagConstraints.WEST;\r\n        add(backToLoginButton = new JButton(\"Tilbake til innlogging\"), g1);\r\n\r\n        setVisible(true);\r\n\r\n        registerButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                registerUser();\r\n            }\r\n        });\r\n\r\n        backToLoginButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                new LoginPage();\r\n                dispose();\r\n\r\n            }\r\n        });\r\n    }\r\n    private void registerUser() {\r\n        String firstName = firstNameField.getText();\r\n        String lastName = lastNameField.getText();\r\n        String mobileNumber = mobileField.getText();\r\n        String email = emailField.getText();\r\n        String pass = new String(passwordField.getPassword());\r\n        String password = Cryption.hashPasswordWithSalt(pass);\r\n\r\n\r\n        String insertParorendeQuery = \"Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)\";\r\n\r\n        try (Connection connection = DriverManager.getConnection(url, user, dbPassword);\r\n             PreparedStatement preparedStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {\r\n            preparedStatement.setString(1, firstName);\r\n            preparedStatement.setString(2, lastName);\r\n            preparedStatement.setString(3, mobileNumber);\r\n            preparedStatement.setString(4, email);\r\n\r\n            int rowsInserted = preparedStatement.executeUpdate();\r\n\r\n            if (rowsInserted > 0) {\r\n                try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()){\r\n                    if (generatedKey.next()) {\r\n                        int parorendeId = generatedKey.getInt(1);\r\n\r\n                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);\r\n\r\n                        String insertInnloggingQuery = \"Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)\";\r\n                        try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){\r\n                            innloggingStatement.setString(1, email);\r\n                            innloggingStatement.setString(2, password);\r\n                            innloggingStatement.setInt(3, parorendeId);\r\n\r\n                            innloggingStatement.executeUpdate();\r\n                        }\r\n                    }\r\n\r\n                }\r\n                JOptionPane.showMessageDialog(this, \"Registrering vellykket. \");\r\n                clearFields();\r\n\r\n                new MainPage(parorende, null);\r\n                dispose();\r\n            }\r\n        } catch (SQLException exception) {\r\n            exception.printStackTrace();\r\n            JOptionPane.showMessageDialog(this, \"Registrering feilet. \" + exception.getMessage());\r\n        }\r\n    }\r\n    private void clearFields() {\r\n        firstNameField.setText(\"\");\r\n        lastNameField.setText(\"\");\r\n        mobileField.setText(\"\");\r\n        emailField.setText(\"\");\r\n        passwordField.setText(\"\");\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java b/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java
+--- a/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java	(date 1731347194100)
+@@ -105,6 +105,9 @@
+         g1.anchor = GridBagConstraints.WEST;
+         add(backToLoginButton = new JButton("Tilbake til innlogging"), g1);
+ 
++        getRootPane().setDefaultButton(registerButton);
++
++
+         setVisible(true);
+ 
+         registerButton.addActionListener(new ActionListener() {
+@@ -129,6 +132,12 @@
+         String mobileNumber = mobileField.getText();
+         String email = emailField.getText();
+         String pass = new String(passwordField.getPassword());
++
++        if (firstName.isEmpty() || lastName.isEmpty() || mobileNumber.isEmpty() || email.isEmpty() || pass.isEmpty()) {
++            JOptionPane.showMessageDialog(this, "Fyll ut alle feltene");
++            return;
++        }
++
+         String password = Cryption.hashPasswordWithSalt(pass);
+ 
+ 
+Index: core/src/main/java/org/app/core/models/Pleietrengende.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.app.core.models;\r\n\r\npublic class Pleietrengende {\r\n    private int pleietrengendeId;\r\n    private String fornavn;\r\n    private String etternavn;\r\n    private Parorende parorende;\r\n\r\n    public Pleietrengende(String fornavn, String etternavn, Parorende parorende) {\r\n        this.fornavn = fornavn;\r\n        this.etternavn = etternavn;\r\n        this.parorende = parorende;\r\n    }\r\n\r\n    public Pleietrengende(String fornavn, String etternavn) {\r\n        this.fornavn = fornavn;\r\n        this.etternavn = etternavn;\r\n    }\r\n\r\n    public Pleietrengende(int pleietrengendeId, String fornavn, String etternavn, Parorende parorende) {\r\n        this.pleietrengendeId = pleietrengendeId;\r\n        this.fornavn = fornavn;\r\n        this.etternavn = etternavn;\r\n        this.parorende = parorende;\r\n    }\r\n\r\n    public Pleietrengende(int pleietrengendeId, String fornavn, String etternavn) {\r\n        this.pleietrengendeId = pleietrengendeId;\r\n        this.fornavn = fornavn;\r\n        this.etternavn = etternavn;\r\n    }\r\n\r\n    public Pleietrengende() {\r\n\r\n    }\r\n\r\n    public int getPleietrengendeId() {\r\n        return pleietrengendeId;\r\n    }\r\n\r\n    public void setPleietrengendeId(int pleietrengendeId) {\r\n        this.pleietrengendeId = pleietrengendeId;\r\n    }\r\n\r\n    public String getFornavn(){\r\n        return fornavn;\r\n    }\r\n    public void setFornavn(String fornavn) {\r\n        this.fornavn = fornavn;\r\n    }\r\n\r\n    public String getEtternavn() {\r\n        return etternavn;\r\n    }\r\n    public void setEtternavn(String etternavn) {\r\n        this.etternavn = etternavn;\r\n    }\r\n\r\n    public Parorende getParorende() {\r\n        return parorende;\r\n    }\r\n    public void setParorende(Parorende parorende) {\r\n        this.parorende = parorende;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/src/main/java/org/app/core/models/Pleietrengende.java b/core/src/main/java/org/app/core/models/Pleietrengende.java
+--- a/core/src/main/java/org/app/core/models/Pleietrengende.java	(revision fa3baf695ef37e1b9d9cd1f984378b69ae970928)
++++ b/core/src/main/java/org/app/core/models/Pleietrengende.java	(date 1731347194101)
+@@ -1,5 +1,11 @@
+ package org.app.core.models;
+ 
++import javax.swing.*;
++import java.awt.*;
++import java.io.File;
++import java.io.FileWriter;
++import java.io.IOException;
++
+ public class Pleietrengende {
+     private int pleietrengendeId;
+     private String fornavn;
+@@ -62,4 +68,6 @@
+     public void setParorende(Parorende parorende) {
+         this.parorende = parorende;
+     }
++
++
+ }
+Index: database/src/main/java/org/app/database/PagesDBCommunication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database/src/main/java/org/app/database/PagesDBCommunication.java b/database/src/main/java/org/app/database/PagesDBCommunication.java
+new file mode 100644
+--- /dev/null	(date 1731347194102)
++++ b/database/src/main/java/org/app/database/PagesDBCommunication.java	(date 1731347194102)
+@@ -0,0 +1,7 @@
++package org.app.database;
++
++public class PagesDBCommunication {
++
++
++
++}
+Index: ../Screen/core/src/main/java/org/screen/core/models/FileHandling.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java b/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java
+new file mode 100644
+--- /dev/null	(date 1731347194104)
++++ b/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java	(date 1731347194104)
+@@ -0,0 +1,29 @@
++package org.screen.core.models;
++
++import java.io.BufferedReader;
++import java.io.File;
++import java.io.FileReader;
++import java.io.IOException;
++
++public class FileHandling {
++
++    public static int readPleietrengendeIdFromFile() {
++        String currentDir = System.getProperty("user.dir");
++        File parentDir = new File(currentDir).getParentFile();
++        File file = new File(parentDir, "pleietrengende_id.txt");
++
++        if (!file.exists()) {
++            System.err.println("File not found: " + file.getAbsolutePath());
++            return -1;
++        }
++
++        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
++            String line = reader.readLine();
++            return Integer.parseInt(line);
++        } catch (IOException | NumberFormatException e) {
++            e.printStackTrace();
++            return -1;
++        }
++    }
++
++}
+Index: ../pleietrengende_id.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../pleietrengende_id.txt b/../pleietrengende_id.txt
+new file mode 100644
+--- /dev/null	(date 1731347194104)
++++ b/../pleietrengende_id.txt	(date 1731347194104)
+@@ -0,0 +1,1 @@
++6
+\ No newline at end of file
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-11-01_13_20_[Changes]/shelved.patch
+deleted file mode 100644
