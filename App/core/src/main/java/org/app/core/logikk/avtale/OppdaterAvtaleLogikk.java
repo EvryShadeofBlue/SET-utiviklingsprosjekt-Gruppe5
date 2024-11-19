@@ -21,8 +21,16 @@ public class OppdaterAvtaleLogikk {
             throw new IllegalArgumentException("Gjentakelse kan ikke legges til i en eksisterende avtale.");
         }
 
+        if (nyAvtale.getSluttDato() != null) {
+            throw new IllegalArgumentException("Sluttdato kan ikke settes for en ikke-gjentakende avtale.");
+        }
+
         if (nyAvtale.getDatoOgTid() == null) {
             throw new IllegalArgumentException("Dato og tid må spesifiseres for oppdateringen.");
+        }
+
+        if (nyAvtale.getBeskrivelse() == null || nyAvtale.getBeskrivelse().isBlank()) {
+            throw new IllegalArgumentException("Beskrivelsen kan ikke være tom.");
         }
 
         eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
