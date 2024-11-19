@@ -27,17 +27,18 @@ public class OppdaterDagligAvtaleTest {
     Pleietrengende mockPleietrengende;
 
     String gjentakelse = "daglig";
+    String beskrivelse = "Legetime";
 
     @Test
     @DisplayName("Kan ikke endre dato på en daglig gjentakende avtale")
     public void kanIkkeEndreDatoPåDagligAvtale() {
         //Arrange
         LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 25, 10, 0);
-        Avtale eksisterendeAvtale = new Avtale(dato, "Legetime", gjentakelse, sluttdato, mockParorende, mockPleietrengende);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 25, 23, 59);
+        Avtale eksisterendeAvtale = new Avtale(dato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         LocalDateTime nyDato = LocalDateTime.of(2024, 11, 21, 10, 0);
-        Avtale nyAvtale = new Avtale(nyDato, "Legetime", gjentakelse, sluttdato, mockParorende, mockPleietrengende);
+        Avtale nyAvtale = new Avtale(nyDato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         //Act
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
@@ -53,8 +54,8 @@ public class OppdaterDagligAvtaleTest {
     public void kanIkkeEndreBeskrivelsePåDagligAvtale() {
         //Arrange
         LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 25, 10, 0);
-        Avtale eksisterendeAvtale = new Avtale(dato, "Legetime", gjentakelse, sluttdato, mockParorende, mockPleietrengende);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 25, 23, 59);
+        Avtale eksisterendeAvtale = new Avtale(dato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         // Act
         Avtale nyAvtale = new Avtale(dato, "Endret beskrivelse", gjentakelse, sluttdato, mockParorende, mockPleietrengende);
@@ -72,8 +73,8 @@ public class OppdaterDagligAvtaleTest {
     public void kanIkkeEndreBeskrivelseEllerDatoTidPåDagligAvtale() {
         // Arrange
         LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 10, 0);
-        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 20, 10, 0);
-        Avtale eksisterendeAvtale = new Avtale(dato, "Legetime", gjentakelse, sluttdato, mockParorende, mockPleietrengende);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 20, 23, 59);
+        Avtale eksisterendeAvtale = new Avtale(dato, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
         // Act
         Avtale nyAvtale = new Avtale(dato.plusDays(1), "Endret beskrivelse", gjentakelse, sluttdato, mockParorende, mockPleietrengende);
@@ -86,5 +87,29 @@ public class OppdaterDagligAvtaleTest {
         }, "Verken beskrivelse eller dato/tid på en daglig gjentakende avtale kan oppdateres.");
     }
 
+    @Test
+    @DisplayName("Kan ikke endre gjentakelsesformen på en daglig gjentakende avtale")
+    public void kanIkkeEndreGjentakelseFraDaglig() {
+        // Arrange
+        LocalDateTime startDatoTid = LocalDateTime.of(2024, 11, 20, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 21, 23, 59);
+        Avtale eksisterendeAvtale = new Avtale(startDatoTid, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
 
+        // Act
+        Avtale nyAvtaleDagligTilUkentlig = new Avtale(startDatoTid, "Legetime", "ukentlig", sluttdato, mockParorende, mockPleietrengende);
+
+        // Assert
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtaleDagligTilUkentlig);
+        }, "Gjentakelsesformen kan ikke endres fra daglig til ukentlig.");
+
+        // Act
+        Avtale nyAvtaleDagligTilMaanedlig = new Avtale(startDatoTid, beskrivelse, "månedlig", sluttdato, mockParorende, mockPleietrengende);
+
+        // Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtaleDagligTilMaanedlig);
+        }, "Gjentakelsesformen kan ikke endres fra daglig til månedlig.");
+    }
 }

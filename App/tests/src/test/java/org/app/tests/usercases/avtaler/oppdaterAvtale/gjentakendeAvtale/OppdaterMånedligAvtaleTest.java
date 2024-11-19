@@ -85,4 +85,32 @@ public class OppdaterMånedligAvtaleTest {
             oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
         }, "Verken beskrivelse eller dato/tid på en daglig gjentakende avtale kan oppdateres.");
     }
+
+    @Test
+    @DisplayName("Kan ikke endre gjentakelsesformen på en månedlig gjentakende avtale")
+    public void kanIkkeEndreGjentakelseFraMånedlig() {
+        // Arrange
+        LocalDateTime startDatoTid = LocalDateTime.of(2024, 11, 20, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 21, 10, 0);
+        Avtale eksisterendeAvtale = new Avtale(startDatoTid, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
+
+        // Act
+        Avtale nyAvtaleMånedligTilDaglig = new Avtale(startDatoTid, beskrivelse, "daglig", sluttdato, mockParorende, mockPleietrengende);
+
+        // Assert
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtaleMånedligTilDaglig);
+        }, "Gjentakelsesformen kan ikke endres fra månedlig til daglig.");
+
+        // Act
+        Avtale nyAvtaleMånedligTilUkentlig = new Avtale(startDatoTid, beskrivelse, "ukentlig", sluttdato, mockParorende, mockPleietrengende);
+
+        // Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtaleMånedligTilUkentlig);
+        }, "Gjentakelsesformen kan ikke endres fra månedlig til ukentlig.");
+    }
+
+
 }

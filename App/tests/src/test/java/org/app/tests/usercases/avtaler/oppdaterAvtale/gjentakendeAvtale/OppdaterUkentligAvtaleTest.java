@@ -24,7 +24,7 @@ public class OppdaterUkentligAvtaleTest {
 
     @Mock
     Pleietrengende mockPleietrengende;
-String gjentakelse = "ukentlig";
+    String gjentakelse = "ukentlig";
     String beskrivelse = "Legetime";
 
     @Test
@@ -84,5 +84,31 @@ String gjentakelse = "ukentlig";
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
         }, "Verken beskrivelse eller dato/tid på en daglig gjentakende avtale kan oppdateres.");
+    }
+
+    @Test
+    @DisplayName("Kan ikke endre gjentakelsesformen på en ukentlig gjentakende avtale")
+    public void kanIkkeEndreGjentakelseFraUkentlig() {
+        // Arrange
+        LocalDateTime startDatoTid = LocalDateTime.of(2024, 11, 20, 10, 0);
+        LocalDateTime sluttdato = LocalDateTime.of(2024, 12, 21, 10, 0);
+        Avtale eksisterendeAvtale = new Avtale(startDatoTid, beskrivelse, gjentakelse, sluttdato, mockParorende, mockPleietrengende);
+
+        // Act
+        Avtale nyAvtaleUkentligTilDaglig = new Avtale(startDatoTid, beskrivelse, "daglig", sluttdato, mockParorende, mockPleietrengende);
+
+        // Assert
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtaleUkentligTilDaglig);
+        }, "Gjentakelsesformen kan ikke endres fra ukentlig til daglig.");
+
+        // Act
+        Avtale nyAvtaleUkentligTilMånedlig = new Avtale(startDatoTid, "Legetime", "månedlig", sluttdato, mockParorende, mockPleietrengende);
+
+        // Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtaleUkentligTilMånedlig);
+        }, "Gjentakelsesformen kan ikke endres fra ukentlig til månedlig.");
     }
 }
