@@ -13,6 +13,14 @@ public class OpprettAvtaleLogikk {
     }
 
     public boolean opprettAvtale(Avtale avtale) {
+        if (avtale.getBeskrivelse() == null || avtale.getBeskrivelse().trim().isEmpty()) {
+            throw new IllegalArgumentException("Beskrivelse kan ikke være tom.");
+        }
+
+        if (avtale.getDatoOgTid() == null) {
+            throw new IllegalArgumentException("Dato og klokkeslett kan ikke være tom.");
+        }
+
         if ("daglig".equalsIgnoreCase(avtale.getGjentakelse())) {
             return opprettDagligeAvtaler(avtale);
         } else if ("ukentlig".equalsIgnoreCase(avtale.getGjentakelse())) {
@@ -20,6 +28,7 @@ public class OpprettAvtaleLogikk {
         } else if ("månedlig".equalsIgnoreCase(avtale.getGjentakelse())) {
             return opprettMånedligeAvtaler(avtale);
         }
+
         return avtaleRepository.opprettAvtale(avtale);
     }
 
