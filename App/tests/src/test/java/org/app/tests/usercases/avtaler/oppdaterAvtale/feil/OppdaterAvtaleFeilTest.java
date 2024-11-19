@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
@@ -64,4 +65,62 @@ public class OppdaterAvtaleFeilTest {
         }, "Det skal ikke være mulig å oppdatere gjentakelsen fra ingen til månedlig.");
     }
 
+    @Test
+    void kanIkkeSetteSluttdatoForIkkeGjentakendeAvtale() {
+        // Arrange
+        Avtale eksisterendeAvtale = new Avtale();
+        eksisterendeAvtale.setGjentakelse("Ingen");
+        eksisterendeAvtale.setDatoOgTid(LocalDateTime.of(2024, 11, 20, 14, 0));
+        eksisterendeAvtale.setBeskrivelse("Opprinnelig beskrivelse");
+
+        Avtale nyAvtale = new Avtale();
+        nyAvtale.setSluttDato(LocalDateTime.of(2024, 12, 20, 23, 59));
+        nyAvtale.setDatoOgTid(LocalDateTime.of(2024, 11, 21, 14, 0));
+
+        // Act & Assert
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        }, "Det skal ikke være mulig å legge til sluttdato i en ikke-gjentakende avtale.");
+    }
+
+    @Test
+    @DisplayName("Kan ikke oppdatere en avtale uten beskrivelse")
+    void kanIkkeOppdatereMedTomBeskrivelse() {
+        // Arrange
+        Avtale eksisterendeAvtale = new Avtale();
+        eksisterendeAvtale.setGjentakelse("Ingen");
+        eksisterendeAvtale.setDatoOgTid(LocalDateTime.of(2024, 11, 20, 14, 0));
+        eksisterendeAvtale.setBeskrivelse("Opprinnelig beskrivelse");
+
+        Avtale nyAvtale = new Avtale();
+        nyAvtale.setDatoOgTid(LocalDateTime.of(2024, 11, 21, 14, 0));
+        nyAvtale.setBeskrivelse(null);
+
+        // Act & Assert
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        }, "Beskrivelsen kan ikke være tom.");
+    }
+
+    @Test
+    @DisplayName("Kan ikke oppdater en avtale uten dato og tid")
+    void kanIkkeOppdatereUtenDatoOgTid() {
+        // Arrange
+        Avtale eksisterendeAvtale = new Avtale();
+        eksisterendeAvtale.setGjentakelse("Ingen");
+        eksisterendeAvtale.setDatoOgTid(LocalDateTime.of(2024, 11, 20, 14, 0));
+        eksisterendeAvtale.setBeskrivelse("Opprinnelig beskrivelse");
+
+        Avtale nyAvtale = new Avtale();
+        nyAvtale.setDatoOgTid(null);
+        nyAvtale.setBeskrivelse("Oppdatert beskrivelse");
+
+        // Act & Assert
+        OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
+        }, "Dato og tid må spesifiseres for oppdateringen.");
+    }
 }
