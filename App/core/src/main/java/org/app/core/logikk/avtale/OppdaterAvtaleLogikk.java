@@ -16,6 +16,11 @@ public class OppdaterAvtaleLogikk {
             throw new IllegalArgumentException("Kun ikke-gjentakende avtaler kan oppdateres.");
         }
 
+        if (nyAvtale.getGjentakelse() != null &&
+                !nyAvtale.getGjentakelse().equalsIgnoreCase("Ingen")) {
+            throw new IllegalArgumentException("Gjentakelse kan ikke legges til i en eksisterende avtale.");
+        }
+
         if (nyAvtale.getDatoOgTid() == null) {
             throw new IllegalArgumentException("Dato og tid må spesifiseres for oppdateringen.");
         }
@@ -27,18 +32,4 @@ public class OppdaterAvtaleLogikk {
 
         return avtaleRepository.oppdaterAvtale(eksisterendeAvtale);
     }
-
-
-
-//    private void oppdaterFeltene(Avtale eksisterendeAvtale, Avtale nyAvtale) {
-//        if (nyAvtale.getBeskrivelse() != null && !nyAvtale.getBeskrivelse().isEmpty()) {
-//            eksisterendeAvtale.setBeskrivelse(nyAvtale.getBeskrivelse());
-//        }
-//
-//        if (nyAvtale.getDatoOgTid() != null) {
-//            eksisterendeAvtale.setDatoOgTid(nyAvtale.getDatoOgTid());
-//        }
-//    }
-
-
 }
