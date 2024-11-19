@@ -22,9 +22,6 @@ public class OpprettAvtaleLogikk {
         if (avtale.getDatoOgTid().isAfter(avtale.getSluttDato())) {
             throw new IllegalArgumentException("Startdato kan ikke være etter sluttdato eller i fremtiden");
         }
-        if (avtale.getSluttDato() != null && avtale.getGjentakelse() == null) {
-            throw new IllegalArgumentException("Gjentakelse må være spesifisert hvis sluttdato er valgt");
-        }
 
         if ("daglig".equalsIgnoreCase(avtale.getGjentakelse())) {
             return opprettDagligeAvtaler(avtale);
