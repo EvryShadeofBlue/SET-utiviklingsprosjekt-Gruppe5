@@ -33,46 +33,56 @@ public class OpprettDagligAvtaleFeilTest {
         LocalDateTime sluttdato = LocalDateTime.of(2024, 11, 30, 23, 59);
         Avtale avtale = new Avtale(null, "Daglig oppfølging", "daglig", sluttdato, mockParorende, mockPleietrengende);
 
-        //Act
-        OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
-        boolean result = opprettAvtaleLogikk.opprettAvtale(avtale);
-
-        //Assert
-        Assertions.assertFalse(result, "Avtalen skal ikke kunne opprettes uten startdato");
-        Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
+        //Act og Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
+            opprettAvtaleLogikk.opprettAvtale(avtale);
+        }, "Dato og klokkeslett kan ikke være tom.");
     }
 
     @Test
     @DisplayName("Feil ved manglende beskrivelse for daglig avtale")
     public void feilManglendeBeskrivelse() {
         // Arrange
-        LocalDateTime startDato = LocalDateTime.of(2024, 11, 1, 9, 0);
+        LocalDateTime dato = LocalDateTime.of(2024, 11, 1, 9, 0);
         LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 10, 9, 0);
-        Avtale avtale = new Avtale(startDato, "", "daglig", sluttDato, mockParorende, mockPleietrengende);
+        Avtale avtale = new Avtale(dato, null, "daglig", sluttDato, mockParorende, mockPleietrengende);
 
-        // Act
-        OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
-        boolean result = opprettAvtaleLogikk.opprettAvtale(avtale);
-
-        // Assert
-        Assertions.assertFalse(result, "Avtalen skal ikke kunne opprettes uten beskrivelse.");
-        Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
+        // Act og Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
+            opprettAvtaleLogikk.opprettAvtale(avtale);
+        }, "Beskrivelse kan ikke være tom.");
     }
 
     @Test
-    @DisplayName("Feil ved sluttdato før startdato for daglig avtale")
+    @DisplayName("Feil ved sluttdato før startdato")
     public void feilSluttdatoFørDato() {
         // Arrange
-        LocalDateTime startDato = LocalDateTime.of(2024, 11, 1, 9, 0);
-        LocalDateTime sluttDato = LocalDateTime.of(2024, 10, 30, 9, 0);
-        Avtale avtale = new Avtale(startDato, "Daglig oppfølging", "daglig", sluttDato, mockParorende, mockPleietrengende);
+        LocalDateTime dato = LocalDateTime.of(2024, 11, 2, 9, 0);
+        LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 1, 9, 0);
+        Avtale avtale = new Avtale(dato, "Daglig oppfølging", "daglig", sluttDato, mockParorende, mockPleietrengende);
 
-        // Act
-        OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
-        boolean result = opprettAvtaleLogikk.opprettAvtale(avtale);
-
-        // Assert
-        Assertions.assertFalse(result, "Avtalen skal ikke kunne opprettes med sluttdato før startdato.");
-        Mockito.verify(mockAvtaleRepo, Mockito.never()).opprettAvtale(Mockito.any(Avtale.class));
+        // Act og Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
+            opprettAvtaleLogikk.opprettAvtale(avtale);
+        }, "Startdato kan ikke være etter sluttdato eller i fremtiden");
     }
+
+    @Test
+    @DisplayName("Feil ved manglende gjentakelse uten sluttdato")
+    public void feilManglendeGjentakelse() {
+        //Arrange
+        LocalDateTime dato = LocalDateTime.of(2024, 11, 20, 15, 0);
+        LocalDateTime sluttDato = LocalDateTime.of(2024, 11, 25, 23, 59);
+        Avtale avtale = new Avtale(dato, "Besøk fra pårørende", null, sluttDato, mockParorende, mockPleietrengende);
+
+        //Act og Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
+            opprettAvtaleLogikk.opprettAvtale(avtale);
+        }, "Gjentakelse må være spesifisert hvis sluttdato er valgt");
+    }
+
 }
