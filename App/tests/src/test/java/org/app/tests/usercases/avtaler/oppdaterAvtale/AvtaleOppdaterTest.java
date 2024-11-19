@@ -38,7 +38,6 @@ public class AvtaleOppdaterTest {
 
         //Act
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
         //Assert
@@ -55,7 +54,6 @@ public class AvtaleOppdaterTest {
         Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
         boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
@@ -74,7 +72,6 @@ public class AvtaleOppdaterTest {
         Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
         boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
