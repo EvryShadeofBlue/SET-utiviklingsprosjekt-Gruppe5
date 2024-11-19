@@ -22,6 +22,10 @@ public class LoginPage extends JFrame {
     private JButton registerButton;
     private Parorende parorende;
 
+    String url = Resources.getUrl();
+    String user = Resources.getUser();
+    String password = Resources.getPassword();
+
     public LoginPage() {
         setTitle("Login Page");
         setSize(400, 800);
@@ -75,10 +79,11 @@ public class LoginPage extends JFrame {
         g.anchor = GridBagConstraints.EAST;
         add(registerButton = new JButton("Registrer her"), g);
 
+        getRootPane().setDefaultButton(loginButton);
+
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setLayout(null);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -107,7 +112,7 @@ public class LoginPage extends JFrame {
                 "left join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
                 "where i.epost = ? and i.passord = ?";
 
-        try (Connection connection = DriverManager.getConnection(Resources.url, Resources.user, Resources.password);
+        try (Connection connection = DriverManager.getConnection(url, user, password);
              PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {
             preparedStatement.setString(1, enteredEmail);
             preparedStatement.setString(2, enteredPassword);
@@ -145,7 +150,7 @@ public class LoginPage extends JFrame {
         new RegistrationPage();
         dispose();
     }
-    public void openRegistrationPage() {
+    private void openRegistrationPage() {
         new RegistrationPage();
         dispose();
     }

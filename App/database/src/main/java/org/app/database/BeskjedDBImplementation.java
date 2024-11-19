@@ -1,12 +1,10 @@
 package org.app.database;
 
-import org.app.core.models.Beskjed;
-import org.app.core.models.Parorende;
-import org.app.core.models.Pleietrengende;
+import org.app.core.models.*;
 
-import org.app.core.models.Resources;
 import org.app.core.repositories.BeskjedRepository;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ public class BeskjedDBImplementation implements BeskjedRepository {
     String password = Resources.getPassword();
 
     private Connection connection;
-    //private LoggService loggService;
     private Parorende parorende;
 
     public BeskjedDBImplementation() {
@@ -38,7 +35,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         try (PreparedStatement opprettStatement = connection.prepareStatement(opprettBeskjedQuery, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
 
-            opprettStatement.setString(1, beskjed.getBeskrivelse());
+            opprettStatement.setString(1, Cryption.encrypt(beskjed.getBeskrivelse(), Cryption.getAESKey()));
             opprettStatement.setObject(2, beskjed.getDatoOgTid());
             opprettStatement.setInt(3, beskjed.getSynligTidsenhet());
 
@@ -60,6 +57,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -70,7 +69,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
                 "values (?, ?, ?, ?, ?)";
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterBeskjedQuery);
              PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
-            oppdaterStatement.setString(1, beskjed.getBeskrivelse());
+            oppdaterStatement.setString(1, Cryption.encrypt(beskjed.getBeskrivelse(), Cryption.getAESKey()));
             oppdaterStatement.setObject(2, beskjed.getDatoOgTid());
             oppdaterStatement.setInt(3, beskjed.getSynligTidsenhet());
             oppdaterStatement.setInt(4, beskjed.getParorende().getParorendeId());
@@ -86,23 +85,40 @@ public class BeskjedDBImplementation implements BeskjedRepository {
             loggStatement.executeUpdate();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
 
     @Override
     public void slettBeskjed(int beskjedId) {
+        int parorende_id = 0;
 
+        String hentParorendeQuery = "SELECT parorende_id FROM Beskjeder WHERE beskjed_id = ?";
         String slettBeskjedQuery = "DELETE FROM Beskjeder WHERE beskjed_id = ?";
         String loggSlettQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
                 "values (?, ?, ?, ?, ?)";
-        try (PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
-             PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery)) {
-            slettStatement.setInt(1, beskjedId);
-            slettStatement.executeUpdate();
 
-            int parorendeId = parorende.getParorendeId();
-            loggStatement.setInt(1, parorendeId);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(hentParorendeQuery);
+            preparedStatement.setInt(1, beskjedId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int parorendeId = resultSet.getInt("parorende_id");
+                Parorende parorende = new Parorende();
+                parorende.setParorendeId(parorendeId);
+                parorende_id = parorende.getParorendeId();
+            }
+        } catch(SQLException sqlException){
+                sqlException.printStackTrace();
+        }
+
+        try {
+
+            PreparedStatement loggStatement = connection.prepareStatement(loggSlettQuery);
+
+            loggStatement.setInt(1, parorende_id);
             loggStatement.setString(2, "pårørende");
             loggStatement.setString(3, "beskjed slettet");
             loggStatement.setInt(4, beskjedId);
@@ -112,7 +128,16 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+        try {
+            PreparedStatement slettStatement = connection.prepareStatement(slettBeskjedQuery);
+            slettStatement.setInt(1, beskjedId);
+            slettStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
     }
+
 
 
     @Override
@@ -124,7 +149,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
 
             if (resultSet.next()) {
                 int id = resultSet.getInt("beskjed_id");
-                String beskrivelse = resultSet.getString("beskrivelse");
+                String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getObject("dato_tid", LocalDateTime.class);
                 int synligTid = resultSet.getInt("synlig_tid");
                 int parorendeId = resultSet.getInt("parorende_id");
@@ -141,6 +166,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -158,7 +185,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
 
             while (resultSet.next()) {
                 int beskjedId = resultSet.getInt("beskjed_id");
-                String beskrivelse = resultSet.getString("beskrivelse");
+                String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getTimestamp("dato_tid").toLocalDateTime();
                 int synligTidsenhet = resultSet.getInt("synlig_tid");
 
@@ -168,6 +195,8 @@ public class BeskjedDBImplementation implements BeskjedRepository {
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return beskjeder;
     }
@@ -182,4 +211,27 @@ public class BeskjedDBImplementation implements BeskjedRepository {
             sqlException.printStackTrace();
         }
     }
+
+    public List<Beskjed> hentAlleBeskjeder() {
+        List<Beskjed> beskjeder = new ArrayList<>();
+
+        String hentBeskjederQuery = "SELECT beskjed_id, dato_tid, synlig_tid FROM Beskjeder ORDER BY dato_tid DESC";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(hentBeskjederQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int beskjedId = resultSet.getInt("beskjed_id");
+                LocalDateTime datoOgTid = resultSet.getObject("dato_tid", LocalDateTime.class);
+                int synligTidsenhet = resultSet.getInt("synlig_tid");
+
+                Beskjed beskjed = new Beskjed(beskjedId, datoOgTid, synligTidsenhet);
+                beskjeder.add(beskjed);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return beskjeder;
+    }
+
 }

@@ -105,6 +105,9 @@ public class RegistrationPage extends JFrame{
         g1.anchor = GridBagConstraints.WEST;
         add(backToLoginButton = new JButton("Tilbake til innlogging"), g1);
 
+        getRootPane().setDefaultButton(registerButton);
+
+
         setVisible(true);
 
         registerButton.addActionListener(new ActionListener() {
@@ -129,6 +132,12 @@ public class RegistrationPage extends JFrame{
         String mobileNumber = mobileField.getText();
         String email = emailField.getText();
         String pass = new String(passwordField.getPassword());
+
+        if (firstName.isEmpty() || lastName.isEmpty() || mobileNumber.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fyll ut alle feltene");
+            return;
+        }
+
         String password = Cryption.hashPasswordWithSalt(pass);
 
 
@@ -148,8 +157,6 @@ public class RegistrationPage extends JFrame{
                     if (generatedKey.next()) {
                         int parorendeId = generatedKey.getInt(1);
 
-                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
-
                         String insertInnloggingQuery = "Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)";
                         try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){
                             innloggingStatement.setString(1, email);
@@ -158,14 +165,18 @@ public class RegistrationPage extends JFrame{
 
                             innloggingStatement.executeUpdate();
                         }
+
+                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
+
+                        JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
+                        clearFields();
+
+                        new MainPage(parorende, null);
+                        dispose();
                     }
 
                 }
-                JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
-                clearFields();
 
-                new MainPage(parorende, null);
-                dispose();
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
