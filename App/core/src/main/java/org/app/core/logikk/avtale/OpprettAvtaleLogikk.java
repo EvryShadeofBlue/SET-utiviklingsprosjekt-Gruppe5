@@ -16,9 +16,14 @@ public class OpprettAvtaleLogikk {
         if (avtale.getBeskrivelse() == null || avtale.getBeskrivelse().trim().isEmpty()) {
             throw new IllegalArgumentException("Beskrivelse kan ikke være tom.");
         }
-
         if (avtale.getDatoOgTid() == null) {
             throw new IllegalArgumentException("Dato og klokkeslett kan ikke være tom.");
+        }
+        if (avtale.getDatoOgTid().isAfter(avtale.getSluttDato())) {
+            throw new IllegalArgumentException("Startdato kan ikke være etter sluttdato eller i fremtiden");
+        }
+        if (avtale.getSluttDato() != null && avtale.getGjentakelse() == null) {
+            throw new IllegalArgumentException("Gjentakelse må være spesifisert hvis sluttdato er valgt");
         }
 
         if ("daglig".equalsIgnoreCase(avtale.getGjentakelse())) {
