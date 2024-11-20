@@ -1,6 +1,5 @@
 package org.app.gui.pages;
 
-import org.app.core.models.ExpiredEntriesCleaner;
 import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.app.core.logikk.beskjed.BeskjedLogikk;
 import org.app.core.logikk.LeggTilPleietrengendeLogikk;

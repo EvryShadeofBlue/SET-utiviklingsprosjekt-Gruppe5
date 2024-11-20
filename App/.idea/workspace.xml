@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="testing">
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="refactoring">
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/DataLogikk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/WeatherLogikk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/utils/UIUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/AvtaleLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/AvtaleLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ExpiredEntriesCleaner.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ExpiredEntriesCleaner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pleietrengende_id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../pleietrengende_id.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/files/FileHandling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/TimerLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="Develop" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -47,7 +48,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -57,45 +58,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.Cryption.executor": "Run",
-    "Application.Main.executor": "Run",
-    "JUnit.AvtaleGjentakelseMedSluttdatoTest.feilSluttdatoUtenGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedDagligGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedMånedligGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedUkentligGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedDagligGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedIngenGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedMånedligGjentakelse.executor": "Run",
-    "JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedUkentligGjentakelse.executor": "Run",
-    "JUnit.AvtaleOppdaterGjentakelseTest.oppdaterAvtaleGjentakelseUtenSluttdato.executor": "Run",
-    "JUnit.AvtaleOppdaterGjentakelseUSluttdatoTest.oppdaterAvtaleGjentakelseTilUkentlig.executor": "Run",
-    "JUnit.AvtaleOpprettTest.feilManglendeBeskrivelse.executor": "Run",
-    "JUnit.AvtaleOpprettTest.feilManglendeDatoTid.executor": "Run",
-    "JUnit.AvtaleOpprettTest.feilManglendeDatoTidOgBeskrivelse.executor": "Run",
-    "JUnit.AvtaleOpprettTest.opprettGyldigAvtale.executor": "Run",
-    "JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse.executor": "Run",
-    "JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig.executor": "Run",
-    "JUnit.RedigerAvtaleTest.oppdaterAvtaleBeskrivelseOgDatoTid.executor": "Run",
-    "JUnit.RedigerAvtaleTest.oppdaterKunBeskrivelse.executor": "Run",
-    "JUnit.RedigerAvtaleTest.oppdaterKunDatoOgTid.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Feature-TG",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database",
-    "last_opened_file_path": "C:/SET5/School-project/App",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Cryption.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseMedSluttdatoTest.feilSluttdatoUtenGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedDagligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedMånedligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseMedSluttdatoTest.opprettAvtaleMedUkentligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedDagligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedIngenGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedMånedligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleGjentakelseUtenSluttdatoTest.opprettAvtaleMedUkentligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleOppdaterGjentakelseTest.oppdaterAvtaleGjentakelseUtenSluttdato.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleOppdaterGjentakelseUSluttdatoTest.oppdaterAvtaleGjentakelseTilUkentlig.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleOpprettTest.feilManglendeBeskrivelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleOpprettTest.feilManglendeDatoTid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleOpprettTest.feilManglendeDatoTidOgBeskrivelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AvtaleOpprettTest.opprettGyldigAvtale.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RedigerAvtaleTest.oppdaterAvtaleBeskrivelseOgDatoTid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RedigerAvtaleTest.oppdaterKunBeskrivelse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RedigerAvtaleTest.oppdaterKunDatoOgTid.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/SET5/School-project/App&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core" />
@@ -104,14 +105,14 @@
       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core\models" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.app.core.logikk" />
       <recent name="org.app.database" />
       <recent name="org.app.core.brukere" />
       <recent name="org.app.core.pages" />
       <recent name="org.app.core.services" />
-      <recent name="models" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid">
     <configuration name="AvtaleOppdaterTest.oppdaterKunDatoOgTid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tests" />
       <extension name="coverage">
@@ -194,21 +195,13 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse" />
-        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig" />
-        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilUkentlig" />
         <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseUtenSluttdato" />
+        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilUkentlig" />
+        <item itemvalue="JUnit.GjentakelseUtenSluttdato.oppdaterAvtaleGjentakelseTilMånedlig" />
+        <item itemvalue="JUnit.GjentakelseMedSluttdatoTest.oppdaterAvtaleTilDagligGjentakelse" />
         <item itemvalue="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
-        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -221,27 +214,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00035" summary="Did some changes to make thing look more clean">
-      <option name="closed" value="true" />
-      <created>1730641634710</created>
-      <option name="number" value="LOCAL−00035" />
-      <option name="presentableId" value="LOCAL−00035" />
-      <updated>1730641634710</updated>
-    </task>
-    <task id="LOCAL−00036" summary="Done some changes in the UI">
-      <option name="closed" value="true" />
-      <created>1730646591828</created>
-      <option name="number" value="LOCAL−00036" />
-      <option name="presentableId" value="LOCAL−00036" />
-      <updated>1730646591828</updated>
-    </task>
-    <task id="LOCAL−00037" summary="Did some changes">
-      <option name="closed" value="true" />
-      <created>1730656266387</created>
-      <option name="number" value="LOCAL−00037" />
-      <option name="presentableId" value="LOCAL−00037" />
-      <updated>1730656266387</updated>
     </task>
     <task id="LOCAL−00038" summary="Created the page for avtaler">
       <option name="closed" value="true" />
@@ -570,7 +542,31 @@
       <option name="project" value="LOCAL" />
       <updated>1731955748483</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="misc">
+      <option name="closed" value="true" />
+      <created>1732118890744</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1732118890745</updated>
+    </task>
+    <task id="LOCAL-00082" summary="misc">
+      <option name="closed" value="true" />
+      <created>1732118942042</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1732118942042</updated>
+    </task>
+    <task id="LOCAL-00083" summary="refactoring">
+      <option name="closed" value="true" />
+      <created>1732126731362</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1732126731363</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -585,10 +581,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Done some changes in the UI" />
-    <MESSAGE value="Did some changes" />
-    <MESSAGE value="Created the page for avtaler" />
-    <MESSAGE value="Did some changes in the method to create an avtale" />
     <MESSAGE value="Did some changes in this file" />
     <MESSAGE value="changed the method for creating an avtale" />
     <MESSAGE value="changed a bit of the method for creating an avtale" />
@@ -601,7 +593,6 @@
     <MESSAGE value="added sql query for getting an avtale for the relative" />
     <MESSAGE value="added the method that shows avtaler" />
     <MESSAGE value="Done some changes" />
-    <MESSAGE value="misc" />
     <MESSAGE value="merge from feature-tg" />
     <MESSAGE value="restructured the class fromthe beginning so things can work again" />
     <MESSAGE value="did some changes in the create method for avtaler" />
@@ -627,6 +618,9 @@
     <MESSAGE value="Attempt to delete beskjeder and avtaler automatically" />
     <MESSAGE value="Changes to autodeletion" />
     <MESSAGE value="testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing" />
+    <MESSAGE value="preparement for exam trials" />
+    <MESSAGE value="misc" />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
 </project>

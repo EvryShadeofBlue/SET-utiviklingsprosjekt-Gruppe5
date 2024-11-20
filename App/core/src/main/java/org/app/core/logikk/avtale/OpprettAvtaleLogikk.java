@@ -14,6 +14,16 @@ public class OpprettAvtaleLogikk {
     }
 
     public boolean opprettAvtale(Avtale avtale) throws NoSuchAlgorithmException {
+        if (avtale.getBeskrivelse() == null || avtale.getBeskrivelse().trim().isEmpty()) {
+            throw new IllegalArgumentException("Beskrivelse kan ikke være tom.");
+        }
+        if (avtale.getDatoOgTid() == null) {
+            throw new IllegalArgumentException("Dato og klokkeslett kan ikke være tom.");
+        }
+        if (avtale.getDatoOgTid().isAfter(avtale.getSluttDato())) {
+            throw new IllegalArgumentException("Startdato kan ikke være etter sluttdato eller i fremtiden");
+        }
+
         if ("daglig".equalsIgnoreCase(avtale.getGjentakelse())) {
             return opprettDagligeAvtaler(avtale);
         } else if ("ukentlig".equalsIgnoreCase(avtale.getGjentakelse())) {

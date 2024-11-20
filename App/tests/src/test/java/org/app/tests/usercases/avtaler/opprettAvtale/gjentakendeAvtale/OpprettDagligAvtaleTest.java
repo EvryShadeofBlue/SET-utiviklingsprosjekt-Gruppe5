@@ -41,9 +41,7 @@ public class OpprettDagligAvtaleTest {
         boolean result = opprettAvtaleLogikk.opprettAvtale(avtale);
 
         //Assert
-        Assertions.assertTrue(result, "Avtalen bør være opprettet");
+        Assertions.assertTrue(result, "Avtalen med daglig gjentakelse bør være opprettet");
         Mockito.verify(mockAvtaleRepo, Mockito.times(5)).opprettAvtale(Mockito.any(Avtale.class));
     }
-
-
 }

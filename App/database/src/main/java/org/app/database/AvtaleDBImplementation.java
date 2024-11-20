@@ -34,7 +34,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 "values (?, ?, ?, ?, ?)";
         try (PreparedStatement opprettStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
-            opprettStatement.setString(1, Cryption.encrypt(avtale.getBeskrivelse(), Cryption.getAESKey()));
+            opprettStatement.setString(1, Resources.encrypt(avtale.getBeskrivelse(), Resources.getAESKey()));
             opprettStatement.setObject(2, avtale.getDatoOgTid());
             if (avtale.getGjentakelse() != null) {
                 opprettStatement.setString(3, avtale.getGjentakelse());
@@ -90,7 +90,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
              PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
 
-            oppdaterStatement.setString(1, Cryption.encrypt(avtale.getBeskrivelse(), Cryption.getAESKey()));
+            oppdaterStatement.setString(1, Resources.encrypt(avtale.getBeskrivelse(), Resources.getAESKey()));
             oppdaterStatement.setObject(2, avtale.getDatoOgTid());
             oppdaterStatement.setInt(3, avtale.getPleietrengende().getPleietrengendeId());
             oppdaterStatement.setInt(4, avtale.getParorende().getParorendeId());
@@ -175,7 +175,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
             if (resultSet.next()) {
                 int id = resultSet.getInt("avtale_id");
-                String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
+                String beskrivelse = Resources.decrypt(resultSet.getString("beskrivelse"), Resources.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
                 int pleietrengendeId = resultSet.getInt("pleietrengende_id");
                 int parorendeId = resultSet.getInt("parorende_id");
@@ -188,7 +188,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelsesType, sluttDato,pleietrengende, parorende);
+                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelsesType, sluttDato, parorende, pleietrengende);
                 return avtale;
             }
         } catch (SQLException sqlException) {
@@ -213,7 +213,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
 
             while (resultSet.next()) {
                 int avtaleId = resultSet.getInt("avtale_id");
-                String beskrivelse = Cryption.decrypt(resultSet.getString("beskrivelse"), Cryption.getAESKey());
+                String beskrivelse = Resources.decrypt(resultSet.getString("beskrivelse"), Resources.getAESKey());
                 LocalDateTime datoOgTid = resultSet.getObject("dato_og_tid", LocalDateTime.class);
                 String gjentakelse = resultSet.getString("gjentakelse");
                 LocalDateTime sluttDato = resultSet.getObject("slutt_dato", LocalDateTime.class);
@@ -225,7 +225,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato, pleietrengende, parorende);
+                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
                 avtaler.add(avtale);
             }
         } catch (SQLException sqlException) {

@@ -2,8 +2,8 @@ package org.app.gui.pages;
 
 import org.app.core.models.Parorende;
 
-import org.app.core.models.Cryption;
 import org.app.core.models.Resources;
+import org.app.database.PagesDBImplementation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +26,6 @@ public class RegistrationPage extends JFrame{
     private JButton backToLoginButton;
 
     private Parorende parorende;
-
-    String url = Resources.getUrl();
-    String user = Resources.getUser();
-    String dbPassword = Resources.getPassword();
 
     public RegistrationPage() {
         setTitle("Registration Page");
@@ -113,7 +109,11 @@ public class RegistrationPage extends JFrame{
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registerUser();
+                try {
+                    registerUser();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -126,7 +126,8 @@ public class RegistrationPage extends JFrame{
             }
         });
     }
-    private void registerUser() {
+
+    private void registerUser() throws SQLException {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String mobileNumber = mobileField.getText();
@@ -138,51 +139,26 @@ public class RegistrationPage extends JFrame{
             return;
         }
 
-        String password = Cryption.hashPasswordWithSalt(pass);
+        String password = Resources.hashPasswordWithSalt(pass);
 
+        try {
+            int parorendeId = PagesDBImplementation.insertParorende(firstName, lastName, mobileNumber, email);
+            PagesDBImplementation.insertInnlogging(email, password, parorendeId);
 
-        String insertParorendeQuery = "Insert into Parorende (fornavn, etternavn, tlf, epost) Values (?, ?, ?, ?)";
+            Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
 
-        try (Connection connection = DriverManager.getConnection(url, user, dbPassword);
-             PreparedStatement preparedStatement = connection.prepareStatement(insertParorendeQuery, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, mobileNumber);
-            preparedStatement.setString(4, email);
+            JOptionPane.showMessageDialog(this, "Registrering vellykket.");
+            clearFields();
 
-            int rowsInserted = preparedStatement.executeUpdate();
+            new MainPage(parorende, null);
+            dispose();
 
-            if (rowsInserted > 0) {
-                try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()){
-                    if (generatedKey.next()) {
-                        int parorendeId = generatedKey.getInt(1);
-
-                        String insertInnloggingQuery = "Insert into Innlogging (epost, passord, parorende_id) Values (?, ?, ?)";
-                        try (PreparedStatement innloggingStatement = connection.prepareStatement(insertInnloggingQuery)){
-                            innloggingStatement.setString(1, email);
-                            innloggingStatement.setString(2, password);
-                            innloggingStatement.setInt(3, parorendeId);
-
-                            innloggingStatement.executeUpdate();
-                        }
-
-                        Parorende parorende = new Parorende(parorendeId, firstName, lastName, mobileNumber, email);
-
-                        JOptionPane.showMessageDialog(this, "Registrering vellykket. ");
-                        clearFields();
-
-                        new MainPage(parorende, null);
-                        dispose();
-                    }
-
-                }
-
-            }
-        } catch (SQLException exception) {
+            } catch (SQLException exception) {
             exception.printStackTrace();
             JOptionPane.showMessageDialog(this, "Registrering feilet. " + exception.getMessage());
         }
     }
+
     private void clearFields() {
         firstNameField.setText("");
         lastNameField.setText("");
