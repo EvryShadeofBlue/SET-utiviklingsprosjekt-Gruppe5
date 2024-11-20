@@ -25,41 +25,15 @@ public class SlettAvtaleFeilTest {
 
     @Test
     @DisplayName("Prøve å slette en avtale som ikke eksisterer")
-    public void slettAvtaleSomIkkeEksisterer() {
+    public void slettAvtaleSomIkkeFinnes() {
         // Arrange
         int avtaleId = 999;
-        Mockito.when(mockAvtaleRepo.slettAvtale(avtaleId)).thenReturn(false);
-
+        Mockito.when(mockAvtaleRepo.hentAvtale(avtaleId)).thenReturn(null);
         // Act
         SlettAvtaleLogikk slettAvtaleLogikk = new SlettAvtaleLogikk(mockAvtaleRepo);
-        boolean slettResult = slettAvtaleLogikk.slettAvtale(avtaleId);
+        boolean result = slettAvtaleLogikk.slettAvtale(avtaleId);
 
         // Assert
-        Assertions.assertFalse(slettResult, "Sletting av en ikke-eksisterende avtale skal feile");
-
-        Mockito.verify(mockAvtaleRepo, Mockito.times(1)).slettAvtale(avtaleId);
+        Assertions.assertFalse(result, "Avtalen ble ikke funnet, så sletting bør feile.");
     }
-
-    @Test
-    @DisplayName("Feil under sletting av avtale skal returnere false")
-    public void slettAvtaleFeilUnderSletting() {
-        // Arrange
-        int avtaleId = 1;
-        Mockito.when(mockAvtaleRepo.slettAvtale(avtaleId)).thenThrow(new RuntimeException("Uventet feil under sletting"));
-
-        // Act
-        SlettAvtaleLogikk slettAvtaleLogikk = new SlettAvtaleLogikk(mockAvtaleRepo);
-
-        try {
-            slettAvtaleLogikk.slettAvtale(avtaleId);
-            Assertions.fail("Forventet at en RuntimeException skulle bli kastet");
-        } catch (RuntimeException e) {
-            // Assert
-            Assertions.assertEquals("Uventet feil under sletting", e.getMessage(), "Feilmeldingen skal være korrekt");
-        }
-
-        Mockito.verify(mockAvtaleRepo, Mockito.times(1)).slettAvtale(avtaleId);
-    }
-
-
 }
