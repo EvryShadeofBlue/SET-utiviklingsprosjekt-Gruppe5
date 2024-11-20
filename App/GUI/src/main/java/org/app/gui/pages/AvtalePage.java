@@ -172,7 +172,7 @@ public class AvtalePage extends JFrame{
         avtaleListePanel.repaint();
     }
 
-    public void opprettAvtale() {
+    private void opprettAvtale() {
         try {
             String beskrivelse = beskrivelsesFelt.getText();
             String datoTekst = datoFelt.getText();
@@ -209,7 +209,7 @@ public class AvtalePage extends JFrame{
         }
     }
 
-    public void redigerAvtale(Avtale avtale) {
+    private void redigerAvtale(Avtale avtale) {
         if (avtale.getGjentakelse() != null && !"Ingen".equals(avtale.getGjentakelse())) {
             JOptionPane.showMessageDialog(this,
                     "En gjentakende avtale kan ikke redigeres. Den kan bare slettes.",
@@ -273,8 +273,9 @@ public class AvtalePage extends JFrame{
     }
 
 
-    public void slettAvtale(Avtale avtale) {
-        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
+    private void slettAvtale(Avtale avtale) {
+        int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil" +
+                " slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
         if (svar == JOptionPane.YES_OPTION) {
             avtaleLogikk.slettAvtale(avtale.getAvtaleId());
             JOptionPane.showMessageDialog(this, "Avtale slettet");

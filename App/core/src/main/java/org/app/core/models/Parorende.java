@@ -6,6 +6,7 @@ public class Parorende {
     private String etternavn;
     private String tlf;
     private String epost;
+    private Pleietrengende pleietrengende;
 
     public Parorende(String fornavn, String etternavn, String tlf, String epost) {
         this.fornavn = fornavn;
@@ -64,5 +65,13 @@ public class Parorende {
     }
     public void setEpost(String epost) {
         this.epost = epost;
+    }
+
+    public void setPleietrengende(Pleietrengende pleietrengende) {
+        this.pleietrengende = pleietrengende;
+    }
+
+    public Pleietrengende getPleietrengende() {
+        return pleietrengende;
     }
 }

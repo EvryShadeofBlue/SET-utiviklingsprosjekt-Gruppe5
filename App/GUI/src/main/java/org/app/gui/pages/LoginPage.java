@@ -2,8 +2,8 @@ package org.app.gui.pages;
 
 import org.app.core.models.Pleietrengende;
 import org.app.core.models.Parorende;
-import org.app.core.models.Cryption;
 import org.app.core.models.Resources;
+import org.app.database.PagesDBImplementation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,56 +100,28 @@ public class LoginPage extends JFrame {
         });
         setVisible(true);
     }
+
     public void getLogIn() {
         String enteredEmail = emailField.getText();
         String enteredPass = new String(passwordField.getPassword());
-        String enteredPassword = Cryption.hashPasswordWithSalt(enteredPass);
+        String enteredPassword = Resources.hashPasswordWithSalt(enteredPass);
 
-        String loginQuery = "select i.parorende_id, p.fornavn as parorendeFornavn, p.etternavn as parorendeEtternavn, " +
-                "pl.pleietrengende_id, pl.fornavn as pleietrengendeFornavn, pl.etternavn as pleietrengendeEtternavn " +
-                "from Innlogging i " +
-                "join Parorende p on i.parorende_id = p.parorende_id " +
-                "left join Pleietrengende pl on p.parorende_id = pl.parorende_id " +
-                "where i.epost = ? and i.passord = ?";
+        try {
+            Parorende parorende = PagesDBImplementation.getParorendeWithLogin(enteredEmail, enteredPassword);
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
-             PreparedStatement preparedStatement = connection.prepareStatement(loginQuery)) {
-            preparedStatement.setString(1, enteredEmail);
-            preparedStatement.setString(2, enteredPassword);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                int parorendeId = resultSet.getInt("parorende_id");
-                String parorendeFornavn = resultSet.getString("parorendeFornavn");
-                String parorendeEtternavn = resultSet.getString("parorendeEtternavn");
-
-                Pleietrengende pleietrengende = null;
-                if (resultSet.getObject("pleietrengende_id") != null) {
-                    int pleietrengendeId = resultSet.getInt("pleietrengende_id");
-                    String pleietrengendeFornavn = resultSet.getString("pleietrengendeFornavn");
-                    String pleietrengendeEtternavn = resultSet.getString("pleietrengendeEtternavn");
-                    pleietrengende = new Pleietrengende(pleietrengendeId, pleietrengendeFornavn, pleietrengendeEtternavn);
-                }
-
-                Parorende parorende = new Parorende(parorendeId, parorendeFornavn, parorendeEtternavn);
-
-                new MainPage(parorende, pleietrengende);
+            if (parorende != null) {
+                JOptionPane.showMessageDialog(this, "Innlogging vellykket!");
+                new MainPage(parorende, parorende.getPleietrengende());
                 dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Feil e-post eller passord. Vennligst prøv igjen.");
             }
-            else {
-                JOptionPane.showMessageDialog(this, "Feil e-post eller passord. Vennligst prøv igjen. ");
-            }
-        }
-        catch (SQLException sqlException) {
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Innlogging feilet. " + sqlException.getMessage());
         }
+    }
 
-    }
-    private void openToDoPage(){
-        new RegistrationPage();
-        dispose();
-    }
     private void openRegistrationPage() {
         new RegistrationPage();
         dispose();

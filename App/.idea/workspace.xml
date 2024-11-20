@@ -4,8 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="testing">
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc">
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PagesDBImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ExpiredEntriesCleaner.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/ExpiredEntriesCleaner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Parorende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Parorende.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/PagesDBCommunication.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +54,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -98,14 +111,14 @@
       <recent name="C:\Users\thgl0\IdeaProjects\Github\SET-utiviklingsprosjekt-Gruppe5\App\core\src\main\java\org\app\core\models" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.app.core.logikk" />
       <recent name="org.app.database" />
       <recent name="org.app.core.brukere" />
       <recent name="org.app.core.pages" />
       <recent name="org.app.core.services" />
-      <recent name="models" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid">
+  <component name="RunManager">
     <configuration name="AvtaleOppdaterTest.oppdaterKunDatoOgTid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tests" />
       <extension name="coverage">
@@ -196,14 +209,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
-        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>C:\Users\thgl0\AppData\Roaming\Subversion</configuration>
@@ -215,20 +220,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00035" summary="Did some changes to make thing look more clean">
-      <option name="closed" value="true" />
-      <created>1730641634710</created>
-      <option name="number" value="LOCAL−00035" />
-      <option name="presentableId" value="LOCAL−00035" />
-      <updated>1730641634710</updated>
-    </task>
-    <task id="LOCAL−00036" summary="Done some changes in the UI">
-      <option name="closed" value="true" />
-      <created>1730646591828</created>
-      <option name="number" value="LOCAL−00036" />
-      <option name="presentableId" value="LOCAL−00036" />
-      <updated>1730646591828</updated>
     </task>
     <task id="LOCAL−00037" summary="Did some changes">
       <option name="closed" value="true" />
@@ -564,7 +555,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731955748483</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="misc">
+      <option name="closed" value="true" />
+      <created>1732118890744</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1732118890745</updated>
+    </task>
+    <task id="LOCAL-00082" summary="misc">
+      <option name="closed" value="true" />
+      <created>1732118942042</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1732118942042</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -579,8 +586,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Did some changes" />
-    <MESSAGE value="Created the page for avtaler" />
     <MESSAGE value="Did some changes in the method to create an avtale" />
     <MESSAGE value="Did some changes in this file" />
     <MESSAGE value="changed the method for creating an avtale" />
@@ -594,7 +599,6 @@
     <MESSAGE value="added sql query for getting an avtale for the relative" />
     <MESSAGE value="added the method that shows avtaler" />
     <MESSAGE value="Done some changes" />
-    <MESSAGE value="misc" />
     <MESSAGE value="merge from feature-tg" />
     <MESSAGE value="restructured the class fromthe beginning so things can work again" />
     <MESSAGE value="did some changes in the create method for avtaler" />
@@ -621,6 +625,7 @@
     <MESSAGE value="Changes to autodeletion" />
     <MESSAGE value="testing" />
     <MESSAGE value="preparement for exam trials" />
-    <option name="LAST_COMMIT_MESSAGE" value="preparement for exam trials" />
+    <MESSAGE value="misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc" />
   </component>
 </project>

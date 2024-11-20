@@ -161,7 +161,7 @@ public class BeskjedPage extends JFrame {
         beskjedListePanel.repaint();
     }
 
-    public void oppretteBeskjed() {
+    private void oppretteBeskjed() {
         try {
             String beskrivelse = beskrivelseFelt.getText();
             int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
