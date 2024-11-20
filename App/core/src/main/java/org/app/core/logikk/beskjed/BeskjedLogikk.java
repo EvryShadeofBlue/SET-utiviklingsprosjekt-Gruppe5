@@ -21,7 +21,7 @@ public class BeskjedLogikk {
         this.opprettBeskjedLogikk = new OpprettBeskjedLogikk(beskjedRepository);
         this.oppdaterBeskjedLogikk = new OppdaterBeskjedLogikk(beskjedRepository);
         this.slettBeskjedLogikk = new SlettBeskjedLogikk(beskjedRepository);
-
+        this.visBeskjedLogikk = new VisBeskjedLogikk(beskjedRepository);
     }
 
     public Beskjed opprettBeskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Parorende parorende, Pleietrengende pleietrengende) {
