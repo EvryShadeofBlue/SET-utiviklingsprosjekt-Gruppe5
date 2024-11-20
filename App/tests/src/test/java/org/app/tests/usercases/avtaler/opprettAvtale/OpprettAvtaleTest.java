@@ -5,7 +5,6 @@ import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
-import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
-public class AvtaleOpprettTest {
+public class OpprettAvtaleTest {
     @Mock
     AvtaleRepository mockAvtaleRepo;
 
