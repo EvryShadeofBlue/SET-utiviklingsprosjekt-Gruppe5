@@ -21,19 +21,19 @@ public class AvtaleLogikk {
         this.visAvtaleLogikk = new VisAvtaleLogikk(avtaleRepository);
     }
 
-    public boolean OpprettAvtale(Avtale avtale) {
+    public boolean opprettAvtale(Avtale avtale) {
         return opprettAvtaleLogikk.opprettAvtale(avtale);
     }
 
-    public boolean OppdaterAvtale(Avtale eksisterendeAvtale, Avtale nyAvtale) {
+    public boolean oppdaterAvtale(Avtale eksisterendeAvtale, Avtale nyAvtale) {
         return oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
     }
 
-    public boolean SlettAvtale(int avtaleId) {
+    public boolean slettAvtale(int avtaleId) {
         return slettAvtaleLogikk.slettAvtale(avtaleId);
     }
 
-    public List<Avtale> VisAvtaleForParorende(Parorende parorende) {
+    public List<Avtale> visAvtaleForParorende(Parorende parorende) {
         return visAvtaleLogikk.hentAvtalerForParorende(parorende);
     }
 
