@@ -48,7 +48,7 @@ public class Avtale {
         this.pleietrengende = pleietrengende;
     }
 
-    public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttdato, Pleietrengende pleietrengende, Parorende parorende) {
+    public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, String gjentakelse, LocalDateTime sluttdato, Parorende parorende, Pleietrengende pleietrengende) {
         this.avtaleId = avtaleId;
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
@@ -58,7 +58,7 @@ public class Avtale {
         this.pleietrengende = pleietrengende;
     }
 
-    public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, Pleietrengende pleietrengende, Parorende parorende) {
+    public Avtale(int avtaleId, LocalDateTime datoOgTid, String beskrivelse, Parorende parorende, Pleietrengende pleietrengende) {
         this.avtaleId = avtaleId;
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;

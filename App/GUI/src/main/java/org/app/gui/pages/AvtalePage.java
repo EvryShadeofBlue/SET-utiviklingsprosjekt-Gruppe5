@@ -2,7 +2,6 @@ package org.app.gui.pages;
 
 import org.app.core.logikk.avtale.*;
 import org.app.core.models.Avtale;
-import org.app.core.models.AvtalePageImplementation;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 
@@ -129,7 +128,7 @@ public class AvtalePage extends JFrame{
 
     private void visAvtaler() {
         avtaleListePanel.removeAll();
-        List<Avtale> avtaleListe = avtaleLogikk.VisAvtaleForParorende(parorende);
+        List<Avtale> avtaleListe = avtaleLogikk.visAvtaleForParorende(parorende);
         DateTimeFormatter datoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -194,7 +193,7 @@ public class AvtalePage extends JFrame{
 
             Avtale avtale = new Avtale(datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
 
-            avtaleLogikk.OpprettAvtale(avtale);
+            avtaleLogikk.opprettAvtale(avtale);
             JOptionPane.showMessageDialog(this, "Avtale opprettet. ");
             beskrivelsesFelt.setText("");
             datoFelt.setText("");
@@ -241,7 +240,7 @@ public class AvtalePage extends JFrame{
 
                 Avtale nyAvtale = new Avtale(avtale.getAvtaleId(), nyDatoOgTid, beskrivelse, "Ingen", null);
 
-                boolean oppdatert = avtaleLogikk.OppdaterAvtale(avtale, nyAvtale);
+                boolean oppdatert = avtaleLogikk.oppdaterAvtale(avtale, nyAvtale);
 
                 if (oppdatert) {
                     JOptionPane.showMessageDialog(redigeringsVindu, "Avtalen ble oppdatert.");
@@ -277,7 +276,7 @@ public class AvtalePage extends JFrame{
     public void slettAvtale(Avtale avtale) {
         int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil slette denne avtalen?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
         if (svar == JOptionPane.YES_OPTION) {
-            avtaleLogikk.SlettAvtale(avtale.getAvtaleId());
+            avtaleLogikk.slettAvtale(avtale.getAvtaleId());
             JOptionPane.showMessageDialog(this, "Avtale slettet");
             visAvtaler();
         }

@@ -5,7 +5,6 @@ import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.repositories.AvtaleRepository;
-import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
-public class AvtaleOppdaterTest {
+public class OppdaterAvtaleTest {
     @Mock
     AvtaleRepository mockAvtaleRepo;
 
@@ -38,7 +37,6 @@ public class AvtaleOppdaterTest {
 
         //Act
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
         //Assert
@@ -55,7 +53,6 @@ public class AvtaleOppdaterTest {
         Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
         boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 
@@ -74,7 +71,6 @@ public class AvtaleOppdaterTest {
         Mockito.when(mockAvtaleRepo.oppdaterAvtale(Mockito.any(Avtale.class))).thenReturn(true);
 
         //Act
-        AvtaleLogikk avtaleService = new AvtaleLogikk(mockAvtaleRepo);
         OppdaterAvtaleLogikk oppdaterAvtaleLogikk = new OppdaterAvtaleLogikk(mockAvtaleRepo);
         boolean result = oppdaterAvtaleLogikk.oppdaterAvtale(eksisterendeAvtale, nyAvtale);
 

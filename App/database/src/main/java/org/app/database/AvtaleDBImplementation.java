@@ -188,7 +188,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelsesType, sluttDato,pleietrengende, parorende);
+                Avtale avtale = new Avtale(id, datoOgTid, beskrivelse, gjentakelsesType, sluttDato, parorende, pleietrengende);
                 return avtale;
             }
         } catch (SQLException sqlException) {
@@ -225,7 +225,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato, pleietrengende, parorende);
+                Avtale avtale = new Avtale(avtaleId, datoOgTid, beskrivelse, gjentakelse, sluttDato, parorende, pleietrengende);
                 avtaler.add(avtale);
             }
         } catch (SQLException sqlException) {
