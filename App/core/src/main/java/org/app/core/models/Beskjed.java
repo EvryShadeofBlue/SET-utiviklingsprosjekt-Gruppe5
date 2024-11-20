@@ -26,13 +26,19 @@ public class Beskjed {
         this.pleietrengende = pleietrengende;
     }
 
-    public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Pleietrengende pleietrengende, Parorende parorende) {
+    public Beskjed(int beskjedId, LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet, Parorende parorende, Pleietrengende pleietrengende) {
         this.beskjedId = beskjedId;
         this.datoOgTid = datoOgTid;
         this.beskrivelse = beskrivelse;
         this.synligTidsenhet = synligTidsenhet;
-        this.pleietrengende = pleietrengende;
         this.parorende = parorende;
+        this.pleietrengende = pleietrengende;
+    }
+
+    public Beskjed(LocalDateTime datoOgTid, String beskrivelse, int synligTidsenhet) {
+        this.datoOgTid = datoOgTid;
+        this.beskrivelse = beskrivelse;
+        this.synligTidsenhet = synligTidsenhet;
     }
 
     public Beskjed() {
