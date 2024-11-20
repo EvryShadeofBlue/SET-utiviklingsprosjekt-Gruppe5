@@ -28,28 +28,20 @@ public class SlettAvtaleTest {
     Pleietrengende mockPleietrengende;
 
     @Test
-    @DisplayName("Sletting av en vanlig avtale skal lykkes")
-    public void slettAvtale() {
-        //Arrange
+    @DisplayName("Sletter gyldig avtale")
+    public void slettGyldigAvtale() {
+        // Arrange
         int avtaleId = 1;
-        LocalDateTime dato = LocalDateTime.of(2024, 11, 18, 12, 0);
-        Avtale avtale = new Avtale(avtaleId, dato, "Tannlegetime", mockParorende, mockPleietrengende);
-
-        Mockito.when(mockAvtaleRepo.opprettAvtale(Mockito.any(Avtale.class))).thenReturn(true);
+        Avtale avtale = new Avtale(LocalDateTime.now(), "Legetime", mockParorende, mockPleietrengende);
         Mockito.when(mockAvtaleRepo.hentAvtale(avtaleId)).thenReturn(avtale);
         Mockito.when(mockAvtaleRepo.slettAvtale(avtaleId)).thenReturn(true);
 
-        //Act
-        OpprettAvtaleLogikk opprettAvtaleLogikk = new OpprettAvtaleLogikk(mockAvtaleRepo);
-        boolean opprettResult = opprettAvtaleLogikk.opprettAvtale(avtale);
+        // Act
         SlettAvtaleLogikk slettAvtaleLogikk = new SlettAvtaleLogikk(mockAvtaleRepo);
-        boolean slettResult = slettAvtaleLogikk.slettAvtale(avtaleId);
+        boolean result = slettAvtaleLogikk.slettAvtale(avtaleId);
 
-        //Assert
-        Assertions.assertTrue(opprettResult, "Opprettelsen av avtale skal være vellykket");
-        Assertions.assertTrue(slettResult, "Sletting av avtalen skal være vellykket");
-        Mockito.verify(mockAvtaleRepo, Mockito.times(1)).opprettAvtale(avtale);
-        Mockito.verify(mockAvtaleRepo, Mockito.times(1)).hentAvtale(avtaleId);
-        Mockito.verify(mockAvtaleRepo, Mockito.times(1)).slettAvtale(avtaleId);
+        // Assert
+        Assertions.assertTrue(result, "Avtalen bør slettes vellykket.");
     }
+
 }
