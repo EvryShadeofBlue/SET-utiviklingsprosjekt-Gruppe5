@@ -3,16 +3,18 @@ package org.screen.database;
 import org.screen.core.models.Avtale;
 import org.screen.core.models.Beskjed;
 import org.screen.core.models.Resources;
+import org.screen.core.repositories.DataExportInterface;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Export {
+public class Export implements DataExportInterface {
     String url = Resources.getUrl();
     String user = Resources.getUser();
     String password = Resources.getPassword();
 
+    @Override
     public List<Beskjed> exportBeskjeder(int pleietrengende_id) {
         List<Beskjed> beskjederList = new ArrayList<>();
         String exportQuery = "SELECT beskrivelse, dato_tid, synlig_tid " +
@@ -22,19 +24,14 @@ public class Export {
                 "ORDER BY dato_tid ASC;";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection con = DriverManager.getConnection(url, user, password);
-
             PreparedStatement pstmt = con.prepareStatement(exportQuery);
-
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String description = rs.getString("beskrivelse");
                 String dateTime = rs.getString("dato_tid");
                 int visibleTime = rs.getInt("synlig_tid");
-
 
                 Beskjed beskjeder = new Beskjed(description, dateTime, visibleTime);
                 beskjederList.add(beskjeder);
@@ -44,9 +41,6 @@ public class Export {
             pstmt.close();
             con.close();
 
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            e.printStackTrace();
         } catch (SQLException e) {
             System.err.println("SQL error occurred.");
             e.printStackTrace();
@@ -55,6 +49,7 @@ public class Export {
         return beskjederList;
     }
 
+    @Override
     public List<Avtale> exportAvtalerToday(int pleietrengende_id) {
         List<Avtale> avtaleList = new ArrayList<>();
         String exportQuery = "SELECT beskrivelse, dato_og_tid " +
@@ -64,18 +59,13 @@ public class Export {
                 "ORDER BY dato_og_tid ASC;";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection con = DriverManager.getConnection(url, user, password);
-
             PreparedStatement pstmt = con.prepareStatement(exportQuery);
-
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String description = rs.getString("beskrivelse");
                 String dateTime = rs.getString("dato_og_tid");
-
 
                 Avtale avtaler = new Avtale(description, dateTime);
                 avtaleList.add(avtaler);
@@ -85,9 +75,6 @@ public class Export {
             pstmt.close();
             con.close();
 
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            e.printStackTrace();
         } catch (SQLException e) {
             System.err.println("SQL error occurred.");
             e.printStackTrace();
@@ -96,6 +83,7 @@ public class Export {
         return avtaleList;
     }
 
+    @Override
     public List<Avtale> exportAvtalerTomorrow(int pleietrengende_id) {
         List<Avtale> avtaleList = new ArrayList<>();
         String exportQuery = "SELECT beskrivelse, dato_og_tid " +
@@ -105,18 +93,13 @@ public class Export {
                 "ORDER BY dato_og_tid ASC;";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection con = DriverManager.getConnection(url, user, password);
-
             PreparedStatement pstmt = con.prepareStatement(exportQuery);
-
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String description = rs.getString("beskrivelse");
                 String dateTime = rs.getString("dato_og_tid");
-
 
                 Avtale avtaler = new Avtale(description, dateTime);
                 avtaleList.add(avtaler);
@@ -126,9 +109,6 @@ public class Export {
             pstmt.close();
             con.close();
 
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            e.printStackTrace();
         } catch (SQLException e) {
             System.err.println("SQL error occurred.");
             e.printStackTrace();

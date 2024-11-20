@@ -1,13 +1,13 @@
-package org.screen.core.models;
+package org.screen.core.logikk;
+
+import org.screen.core.models.Weather;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.function.Supplier;
 
-public class TimerService {
+public class TimerLogikk {
 
     public static void startWeatherUpdateTimer(JLabel tempLabel, JLabel weatherLabel, JLabel iconLabel, ImageIcon weatherIcon) {
         Timer timer = new Timer(60000, e -> {
@@ -25,7 +25,7 @@ public class TimerService {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat tomorrowFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-        javax.swing.Timer clockTimer = new javax.swing.Timer(1000, e -> {
+        Timer clockTimer = new Timer(1000, e -> {
             Date now = new Date();
 
             String currentDay = dayFormat.format(now);
@@ -44,7 +44,7 @@ public class TimerService {
     }
 
     public static void startDataUpdateTimer(JLabel beskjedLabel, JLabel avtaleLabel, JLabel avtaleLabelTmr, Runnable updateTask) {
-        javax.swing.Timer dataUpdateTimer = new javax.swing.Timer(10000, e -> {
+        Timer dataUpdateTimer = new Timer(10000, e -> {
             updateTask.run();
         });
         dataUpdateTimer.start();

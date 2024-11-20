@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="misc">
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/PagesDBImplementation.java" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="refactoring">
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/DataLogikk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/WeatherLogikk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/utils/UIUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/RegistrationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Avtale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/ExpiredEntriesCleaner.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/ExpiredEntriesCleaner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Parorende.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/models/Parorende.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/PagesDBCommunication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/files/FileHandling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/TimerLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +112,7 @@
       <recent name="org.app.core.services" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid">
     <configuration name="AvtaleOppdaterTest.oppdaterKunDatoOgTid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tests" />
       <extension name="coverage">
@@ -220,13 +214,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00037" summary="Did some changes">
-      <option name="closed" value="true" />
-      <created>1730656266387</created>
-      <option name="number" value="LOCAL−00037" />
-      <option name="presentableId" value="LOCAL−00037" />
-      <updated>1730656266387</updated>
     </task>
     <task id="LOCAL−00038" summary="Created the page for avtaler">
       <option name="closed" value="true" />
@@ -571,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732118942042</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="refactoring">
+      <option name="closed" value="true" />
+      <created>1732126731362</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1732126731363</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -586,7 +581,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Did some changes in the method to create an avtale" />
     <MESSAGE value="Did some changes in this file" />
     <MESSAGE value="changed the method for creating an avtale" />
     <MESSAGE value="changed a bit of the method for creating an avtale" />
@@ -626,6 +620,7 @@
     <MESSAGE value="testing" />
     <MESSAGE value="preparement for exam trials" />
     <MESSAGE value="misc" />
-    <option name="LAST_COMMIT_MESSAGE" value="misc" />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
 </project>
