@@ -2,6 +2,7 @@ package org.app.gui.utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GUIUtils {
 
@@ -51,4 +52,25 @@ public class GUIUtils {
 
         return itemPanel;
     }
+
+    public static JButton createButton(String text, Dimension dimension, ActionListener actionListener) {
+        JButton button = new JButton(text);
+        if (dimension != null) {
+            button.setPreferredSize(dimension);
+        }
+        if (actionListener != null) {
+            button.addActionListener(actionListener);
+        }
+        return button;
+    }
+
+    public static JLabel createLabel(String text) {
+        return new JLabel(text);
+    }
+
+    public static JTextField createTextField(int columns) {
+        return new JTextField(columns);
+    }
+
+
 }

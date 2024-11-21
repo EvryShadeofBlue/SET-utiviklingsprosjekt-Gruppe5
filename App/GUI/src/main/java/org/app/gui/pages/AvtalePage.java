@@ -37,17 +37,27 @@ public class AvtalePage extends JFrame{
         this.pleietrengende = pleietrengende;
         this.mainPage = mainPage;
 
+        setupFrame();
+        setupContent();
+
+        visAvtaler();
+        setVisible(true);
+    }
+
+    private void setupFrame() {
         setTitle("Avtaler");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+    }
 
-        JPanel hovedInnholdPanel = new JPanel();
-        hovedInnholdPanel.setLayout(new BoxLayout(hovedInnholdPanel, BoxLayout.Y_AXIS));
+    private void setupContent() {
+        add(createTilbakePanel(), BorderLayout.NORTH);
+        add(createInputPanel(), BorderLayout.CENTER);
+        add(createAvtaleListePanel(), BorderLayout.NORTH);
+    }
 
-        JScrollPane scrollPane = new JScrollPane(hovedInnholdPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+    private JPanel createInputPanel() {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(7, 1, 10, 10));
 
@@ -69,42 +79,36 @@ public class AvtalePage extends JFrame{
         JPanel gjentakelsesPanel = GUIUtils.createInputPanel("Gjentakelse: ", gjentakelseFelt);
 
         sluttDatoFelt = new JTextField();
-        JPanel sluttDatoPanel = GUIUtils.createInputPanel("Slutt dato (yyy-MM-dd)", sluttDatoFelt);
+        JPanel sluttDatoPanel = GUIUtils.createInputPanel("Slutt dato (yyyy-MM-dd)", sluttDatoFelt);
 
-        lagreKnapp = new JButton("Lagre");
-        lagreKnapp.setPreferredSize(new Dimension(100, 30));
-        lagreKnapp.addActionListener(e -> opprettAvtale());
+        lagreKnapp = GUIUtils.createButton("Lagre", new Dimension(100, 30), e -> opprettAvtale());
 
-        tilbakeKnapp = new JButton("Tilbake");
-        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
-        tilbakeKnapp.addActionListener(e -> {
-            this.dispose();
-            mainPage.setVisible(true);
-        });
-
-        tilbakePanel.add(tilbakeKnapp);
-
-        setLayout(new BorderLayout());
-        add(tilbakePanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
         inputPanel.add(beskrivelsesPanel);
         inputPanel.add(datoPanel);
         inputPanel.add(klokkeslettPanel);
         inputPanel.add(gjentakelsesPanel);
         inputPanel.add(sluttDatoPanel);
         inputPanel.add(lagreKnapp);
-        inputPanel.add(tilbakeKnapp);
-        add(inputPanel, BorderLayout.NORTH);
 
+        return inputPanel;
+    }
+
+    private JPanel createTilbakePanel() {
+        tilbakeKnapp = GUIUtils.createButton("Tilbake", new Dimension(100, 30), e -> {
+            this.dispose();
+            mainPage.setVisible(true);
+        });
+
+        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        tilbakePanel.add(tilbakeKnapp);
+        return tilbakePanel;
+    }
+
+    private JScrollPane createAvtaleListePanel() {
         avtaleListePanel = new JPanel();
         avtaleListePanel.setLayout(new BoxLayout(avtaleListePanel, BoxLayout.Y_AXIS));
 
-        add(GUIUtils.createScrollPane(avtaleListePanel, new Dimension(400, 300),
-                "Opprettede avtaler"), BorderLayout.CENTER);
-
-        visAvtaler();
-        setVisible(true);
+        return GUIUtils.createScrollPane(avtaleListePanel, new Dimension(400, 300), "Opprettede avtaler");
     }
 
     private void visAvtaler() {

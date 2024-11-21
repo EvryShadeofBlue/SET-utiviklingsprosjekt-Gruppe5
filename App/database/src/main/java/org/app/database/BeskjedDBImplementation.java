@@ -13,16 +13,16 @@ import java.util.List;
 
 public class BeskjedDBImplementation implements BeskjedRepository {
 
-    String url = Resources.getUrl();
-    String user = Resources.getUser();
-    String password = Resources.getPassword();
-
     private Connection connection;
-    private final LoggInterface loggInterface;
+    private LoggInterface loggInterface;
 
     public BeskjedDBImplementation(Connection connection, LoggInterface loggInterface) {
         this.connection = connection;
         this.loggInterface = loggInterface;
+    }
+
+    public BeskjedDBImplementation() {
+
     }
 
 

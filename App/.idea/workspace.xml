@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/utils/GUIUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repositories/LoggInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/LoggDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="more refactoring">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/files/FileHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LeggTilPleietrengendePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/LoginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/LoggLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/LoggLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/utils/GUIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/utils/GUIUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -219,13 +215,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729148331214</updated>
-    </task>
-    <task id="LOCAL−00038" summary="Created the page for avtaler">
-      <option name="closed" value="true" />
-      <created>1730659055041</created>
-      <option name="number" value="LOCAL−00038" />
-      <option name="presentableId" value="LOCAL−00038" />
-      <updated>1730659055041</updated>
     </task>
     <task id="LOCAL−00039" summary="Did some changes in the method to create an avtale">
       <option name="closed" value="true" />
@@ -571,7 +560,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732126731363</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="more refactoring">
+      <option name="closed" value="true" />
+      <created>1732198372245</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1732198372246</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -586,8 +583,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Did some changes in this file" />
-    <MESSAGE value="changed the method for creating an avtale" />
     <MESSAGE value="changed a bit of the method for creating an avtale" />
     <MESSAGE value="created a new cosntructor for creating an avale" />
     <MESSAGE value="changed in the method for creating an avtale" />
@@ -626,6 +621,7 @@
     <MESSAGE value="preparement for exam trials" />
     <MESSAGE value="misc" />
     <MESSAGE value="refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
+    <MESSAGE value="more refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="more refactoring" />
   </component>
 </project>

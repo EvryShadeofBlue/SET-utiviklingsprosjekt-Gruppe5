@@ -31,17 +31,39 @@ public class BeskjedPage extends JFrame {
         this.pleietrengende = pleietrengende;
         this.mainPage = mainPage;
 
+        setupFrame();
+        setupContent();
+
+        visBeskjeder();
+        setVisible(true);
+    }
+
+    private void setupFrame() {
         setTitle("Beskjeder");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+    }
 
-        JPanel hovedInnholdPanel = new JPanel();
-        hovedInnholdPanel.setLayout(new BoxLayout(hovedInnholdPanel, BoxLayout.Y_AXIS));
+    private void setupContent() {
+        add(createTilbakePanel(), BorderLayout.NORTH);
+        add(createInputPanel(), BorderLayout.NORTH);
+        add(createBeskjedListePanel(), BorderLayout.CENTER);
+    }
 
-        JScrollPane scrollPane = new JScrollPane(hovedInnholdPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    private JPanel createTilbakePanel() {
+        tilbakeKnapp = GUIUtils.createButton("Tilbake", new Dimension(100, 30), e -> {
+            this.dispose();
+            mainPage.setVisible(true);
+        });
 
+        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        tilbakePanel.add(tilbakeKnapp);
+        return tilbakePanel;
+    }
+
+    private JPanel createInputPanel() {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(6, 1, 10, 10));
 
@@ -61,39 +83,22 @@ public class BeskjedPage extends JFrame {
         klokkeslettFelt = new JTextField();
         JPanel klokkeslettPanel = GUIUtils.createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
-        lagreKnapp = new JButton("Lagre");
-        lagreKnapp.setPreferredSize(new Dimension(100, 30));
-        lagreKnapp.addActionListener(e -> oppretteBeskjed());
+        lagreKnapp = GUIUtils.createButton("Lagre", new Dimension(100, 30), e -> oppretteBeskjed());
 
-        tilbakeKnapp = new JButton("Tilbake");
-        tilbakeKnapp.setPreferredSize(new Dimension(100, 30));
-        tilbakeKnapp.addActionListener(e -> {
-            this.dispose();
-            mainPage.setVisible(true);
-        });
-
-        JPanel tilbakePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        tilbakePanel.add(tilbakeKnapp);
-
-        setLayout(new BorderLayout());
-        add(tilbakePanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
         inputPanel.add(beskrivelsePanel);
         inputPanel.add(synligTidsenhetPanel);
         inputPanel.add(datoPanel);
         inputPanel.add(klokkeslettPanel);
         inputPanel.add(lagreKnapp);
-        inputPanel.add(tilbakeKnapp);
-        add(inputPanel, BorderLayout.NORTH);
 
+        return inputPanel;
+    }
+
+    private JScrollPane createBeskjedListePanel() {
         beskjedListePanel = new JPanel();
         beskjedListePanel.setLayout(new BoxLayout(beskjedListePanel, BoxLayout.Y_AXIS));
 
-        add(GUIUtils.createScrollPane(beskjedListePanel, new Dimension(400, 300),
-                "Opprettede beskjeder"), BorderLayout.CENTER);
-
-        visBeskjeder();
-        setVisible(true);
+        return GUIUtils.createScrollPane(beskjedListePanel, new Dimension(400, 300), "Opprettede beskjeder");
     }
 
     private void visBeskjeder() {

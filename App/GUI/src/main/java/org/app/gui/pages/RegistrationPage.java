@@ -1,130 +1,100 @@
 package org.app.gui.pages;
 
 import org.app.core.models.Parorende;
-
 import org.app.core.models.Resources;
 import org.app.database.PagesDBImplementation;
+import org.app.gui.utils.GUIUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class RegistrationPage extends JFrame{
-    private JLabel firstNameLabel;
-    private JLabel lastNameLabel;
-    private JLabel mobileLabel;
-    private JLabel emailLabel;
-    private JLabel passwordLabel;
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField mobileField;
     private JTextField emailField;
     private JPasswordField passwordField;
-    private JButton registerButton;
-    private JButton backToLoginButton;
-
-    private Parorende parorende;
 
     public RegistrationPage() {
+        setupFrame();
+        setupContent();
+        setVisible(true);
+    }
+
+    private void setupFrame() {
         setTitle("Registration Page");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
         setLayout(new GridBagLayout());
-        GridBagConstraints g1 = new GridBagConstraints();
-        g1.insets = new Insets(10, 10, 10, 10);
-        g1.fill = GridBagConstraints.HORIZONTAL;
-        g1.weightx = 1;
+    }
 
-        g1.gridx = 0;
-        g1.gridy = 0;
-        g1.gridwidth = 1;
-        add(firstNameLabel = new JLabel("Fornavn "), g1);
+    private void setupContent() {
+        GridBagConstraints g = new GridBagConstraints();
+        g.insets = new Insets(10, 10, 10, 10);
+        g.fill = GridBagConstraints.HORIZONTAL;
+        g.weightx = 1;
 
-        g1.gridx = 0;
-        g1.gridy = 1;
-        g1.gridwidth = 2;
-        add(firstNameField = new JTextField(20), g1);
+        addFields(g);
+        addButtons(g);
+    }
 
-        g1.gridx = 0;
-        g1.gridy = 2;
-        g1.gridwidth = 1;
-        add(lastNameLabel = new JLabel("Etternavn"), g1);
+    private void addFields(GridBagConstraints g) {
+        g.gridx = 0;
+        g.gridy = 0;
+        add(GUIUtils.createLabel("Fornavn"), g);
 
-        g1.gridx = 0;
-        g1.gridy = 3;
-        g1.gridwidth = 2;
-        add(lastNameField = new JTextField(20), g1);
+        g.gridy++;
+        firstNameField = GUIUtils.createTextField(20);
+        add(firstNameField, g);
 
-        g1.gridx = 0;
-        g1.gridy = 4;
-        g1.gridwidth = 1;
-        add(mobileLabel= new JLabel("Mobil nummer"), g1);
+        g.gridy++;
+        add(GUIUtils.createLabel("Etternavn"), g);
 
-        g1.gridx = 0;
-        g1.gridy = 5;
-        g1.gridwidth = 2;
-        add(mobileField = new JTextField(20), g1);
+        g.gridy++;
+        lastNameField = GUIUtils.createTextField(20);
+        add(lastNameField, g);
 
-        g1.gridx = 0;
-        g1.gridy = 6;
-        g1.gridwidth = 1;
-        add(emailLabel = new JLabel("E-post"), g1);
+        g.gridy++;
+        add(GUIUtils.createLabel("Mobil nummer"), g);
 
-        g1.gridx = 0;
-        g1.gridy = 7;
-        g1.gridwidth = 2;
-        add(emailField = new JTextField(20), g1);
+        g.gridy++;
+        mobileField = GUIUtils.createTextField(20);
+        add(mobileField, g);
 
-        g1.gridx = 0;
-        g1.gridy = 8;
-        g1.gridwidth = 1;
-        add(passwordLabel = new JLabel("Passord"), g1);
+        g.gridy++;
+        add(GUIUtils.createLabel("E-post"), g);
 
-        g1.gridx = 0;
-        g1.gridy = 9;
-        g1.gridwidth = 2;
-        add(passwordField = new JPasswordField(20), g1);
+        g.gridy++;
+        emailField = GUIUtils.createTextField(20);
+        add(emailField, g);
 
-        g1.gridx = 1;
-        g1.gridy = 10;
-        g1.gridwidth = 1;
-        g1.anchor = GridBagConstraints.EAST;
-        add(registerButton = new JButton("Registrer"), g1);
+        g.gridy++;
+        add(GUIUtils.createLabel("Passord"), g);
 
-        g1.gridx = 0;
-        g1.gridy = 10;
-        g1.gridwidth = 1;
-        g1.anchor = GridBagConstraints.WEST;
-        add(backToLoginButton = new JButton("Tilbake til innlogging"), g1);
+        g.gridy++;
+        passwordField = new JPasswordField(20);
+        add(passwordField, g);
+    }
 
-        getRootPane().setDefaultButton(registerButton);
-
-
-        setVisible(true);
-
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    registerUser();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+    private void addButtons(GridBagConstraints g) {
+        g.gridy++;
+        JButton registerButton = GUIUtils.createButton("Registrer", null, e -> {
+            try {
+                registerUser();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
         });
+        add(registerButton, g);
 
-        backToLoginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new LoginPage();
-                dispose();
-
-            }
+        g.gridy++;
+        JButton backToLoginButton = GUIUtils.createButton("Tilbake til innlogging", null, e -> {
+            new LoginPage();
+            dispose();
         });
+        add(backToLoginButton, g);
     }
 
     private void registerUser() throws SQLException {

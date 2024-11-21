@@ -11,6 +11,7 @@ import org.app.database.AvtaleDBImplementation;
 import org.app.database.BeskjedDBImplementation;
 import org.app.database.PleietrengendeDBImplementation;
 import org.app.database.LoggDBImplementation;
+import org.app.gui.utils.GUIUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,113 +33,85 @@ public class MainPage extends JFrame {
     private JButton handlelisteKnapp;
 
     public MainPage(Parorende parorende, Pleietrengende pleietrengende) throws SQLException {
-        setTitle("Hovedside ");
-        setSize(400, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setupFrame();
+        setupContent();
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu helpMenu = new JMenu("Hjelp");
-        menuBar.add(helpMenu);
-        this.setJMenuBar(menuBar);
-
-        setLayout(new GridBagLayout());
-        GridBagConstraints g1 = new GridBagConstraints();
-        g1.insets = new Insets(10, 10, 10, 10);
-        g1.fill = GridBagConstraints.HORIZONTAL;
-        g1.weightx = 1;
-
-        g1.gridx = 0;
-        g1.gridy = 0;
-        g1.anchor = GridBagConstraints.NORTHWEST;
-        parorendeNavnLabel = new JLabel("Deg: " + parorende.getFornavn() + " " +  parorende.getEtternavn());
-        add(parorendeNavnLabel, g1);
-        parorendeNavnLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-
-        String pleietrengendeNavn;
-        if (pleietrengende != null) {
-            pleietrengendeNavn = pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn();
-        }
-        else {
-            pleietrengendeNavn = "Ingen pleietrengende";
-        }
-
-        g1.gridy = 1;
-        pleietrengendeNavnLabel = new JLabel("Pleietrengende: " + pleietrengendeNavn);
-        add(pleietrengendeNavnLabel, g1);
-        pleietrengendeNavnLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-
-        leggTilPleietrengendeKnapp = new JButton("Legg til pleietrengende");
-        avtalerKnapp = new JButton("Avtaler");
-        beskjedKnapp = new JButton("Beskjeder");
-        handlelisteKnapp = new JButton("Handleliste");
-
-        Dimension buttonSize = new Dimension(200, 100);
-        leggTilPleietrengendeKnapp.setPreferredSize(buttonSize);
-        avtalerKnapp.setPreferredSize(buttonSize);
-        beskjedKnapp.setPreferredSize(buttonSize);
-        handlelisteKnapp.setPreferredSize(buttonSize);
-
-        g1.gridx = 0;
-        g1.gridy = 2;
-        add(leggTilPleietrengendeKnapp, g1);
-
-        g1.gridy = 3;
-        add(avtalerKnapp, g1);
-
-        g1.gridy = 4;
-        add(beskjedKnapp, g1);
-
-        g1.gridy = 5;
-        add(handlelisteKnapp, g1);
-
-        setVisible(true);
-
-//        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
+//        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());         //Unfinished code supposed to be implemented for TEK
 //        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
 //
 //        ExpiredEntriesCleaner cleaner = new ExpiredEntriesCleaner(beskjedService, avtaleService);
 //        cleaner.startCleaning(0, 24 * 60 * 60 * 1000);
 
-        Connection connection = DriverManager.getConnection(Resources.getUrl(), Resources.getUser(), Resources.getPassword());
-        LoggInterface loggInterfaceBeskjed = new LoggDBImplementation(connection);
-        BeskjedDBImplementation beskjedDBImplementation = new BeskjedDBImplementation(connection, loggInterfaceBeskjed);
-
-        beskjedLogikk = new BeskjedLogikk(beskjedDBImplementation);
-        beskjedKnapp.addActionListener(e -> {
-            if (pleietrengende != null) {
-                new BeskjedPage(beskjedLogikk, parorende, pleietrengende, this);
-                this.setVisible(false);
-            }
-            else {
-                JOptionPane.showMessageDialog(this,
-                        "Legg til en pleietrengende for å få tilgang til denne siden.",
-                        "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
-            }});
-
-        LoggInterface loggInterfaceAvtale = new LoggDBImplementation(connection);
-        AvtaleDBImplementation avtaleDBImplementation = new AvtaleDBImplementation(connection, loggInterfaceAvtale);
-        avtaleLogikk = new AvtaleLogikk(avtaleDBImplementation);
-
-        avtalerKnapp.addActionListener(e -> {
-            if (pleietrengende != null) {
-                new AvtalePage(avtaleLogikk, parorende, pleietrengende, this);
-                this.setVisible(false);
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Legg til en pleietrengende" +
-                                " for å få tilgang til denne siden.",
-                        "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
-            }
-        });
-
-        pleietrengendeService = new LeggTilPleietrengendeLogikk(new PleietrengendeDBImplementation());
-        leggTilPleietrengendeKnapp.addActionListener(e -> {
-            new LeggTilPleietrengendePage(pleietrengendeService, parorende.getParorendeId(), this);
-            this.setVisible(false);
-        });
-
         setVisible(true);
+    }
+
+    private void setupFrame() {
+        setTitle("Hovedside ");
+        setSize(400, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
+    }
+
+    private void setupContent() {
+        GridBagConstraints g = new GridBagConstraints();
+        g.insets = new Insets(10, 10, 10, 10);
+        g.fill = GridBagConstraints.HORIZONTAL;
+        g.weightx = 1;
+
+        addParorendeLabel(g);
+        addPleietrengendeLabel(g);
+        addActionButtons(g);
+    }
+
+    private void addParorendeLabel(GridBagConstraints g) {
+        g.gridx = 0;
+        g.gridy = 0;
+
+        parorendeNavnLabel = new JLabel("Deg: " + parorende.getFornavn() + " " +  parorende.getEtternavn());
+        add(parorendeNavnLabel, g);
+    }
+
+    private void addPleietrengendeLabel(GridBagConstraints g) {
+        g.gridy++;
+        String pleietrengendeNavn = (pleietrengende != null) ? pleietrengende.getFornavn() + " " + pleietrengende.getEtternavn() : "Ingen pleietrengende";
+        pleietrengendeNavnLabel = new JLabel("Pleietrengende: " + pleietrengendeNavn);
+        add(pleietrengendeNavnLabel, g);
+    }
+
+    private void addActionButtons(GridBagConstraints g) {
+        g.gridy++;
+        JButton leggTilPleietrengendeKnapp = GUIUtils.createButton("Legg til pleietrengende", new Dimension(200, 100), e -> {
+            new LeggTilPleietrengendePage(new LeggTilPleietrengendeLogikk(new PleietrengendeDBImplementation()), parorende.getParorendeId(), this);
+            setVisible(false);
+        });
+        add(leggTilPleietrengendeKnapp, g);
+
+        g.gridy++;
+        JButton avtalerKnapp = GUIUtils.createButton("Avtaler", new Dimension(200, 100), e -> openAvtalePage());
+        add(avtalerKnapp, g);
+
+        g.gridy++;
+        JButton beskjedKnapp = GUIUtils.createButton("Beskjeder", new Dimension(200, 100), e -> openBeskjedPage());
+        add(beskjedKnapp, g);
+    }
+
+    private void openAvtalePage() {
+        if (pleietrengende != null) {
+            new AvtalePage(new AvtaleLogikk(new AvtaleDBImplementation()), parorende, pleietrengende, this);
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Legg til en pleietrengende for å få tilgang til denne siden.", "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void openBeskjedPage() {
+        if (pleietrengende != null) {
+            new BeskjedPage(new BeskjedLogikk(new BeskjedDBImplementation()), parorende, pleietrengende, this);
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Legg til en pleietrengende for å få tilgang til denne siden.", "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public void setPleietrengende(Pleietrengende pleietrengende) {
