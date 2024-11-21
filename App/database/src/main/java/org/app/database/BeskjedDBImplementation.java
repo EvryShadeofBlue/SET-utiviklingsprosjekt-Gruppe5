@@ -161,7 +161,7 @@ public class BeskjedDBImplementation implements BeskjedRepository {
                 Pleietrengende pleietrengende = new Pleietrengende();
                 pleietrengende.setPleietrengendeId(pleietrengendeId);
 
-                Beskjed beskjed = new Beskjed(id, datoOgTid, beskrivelse, synligTid, pleietrengende, parorende);
+                Beskjed beskjed = new Beskjed(id, datoOgTid, beskrivelse, synligTid, parorende, pleietrengende);
                 return beskjed;
             }
         } catch (SQLException sqlException) {

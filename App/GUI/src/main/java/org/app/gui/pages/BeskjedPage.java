@@ -209,7 +209,7 @@ public class BeskjedPage extends JFrame {
                 int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
                 LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getPleietrengende(), beskjed.getParorende());
+                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getParorende(), beskjed.getPleietrengende());
 
                 Beskjed oppdatertBeskjed = beskjedLogikk.oppdaterBeskjed(nyBeskjed);
                 if (oppdatertBeskjed != null) {

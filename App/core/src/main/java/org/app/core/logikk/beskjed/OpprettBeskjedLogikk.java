@@ -35,7 +35,6 @@ public class OpprettBeskjedLogikk {
 
         try {
             beskjedRepository.oppretteBeskjed(beskjed);
-            System.out.println("Beskjed opprettet: " + beskjed.getBeskrivelse());
         } catch (Exception e) {
             throw new RuntimeException("Feil ved opprettelse av beskjed: " + e.getMessage(), e);
         }

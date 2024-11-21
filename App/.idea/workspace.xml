@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/DataLogikk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/WeatherLogikk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/utils/UIUtils.java" afterDir="false" />
+    <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Method creation and refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/files/FileHandling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/TimerLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/beskjed/OpprettBeskjedLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/beskjed/OpprettBeskjedLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pleietrengende_id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../pleietrengende_id.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="Feature-TG" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -86,7 +84,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feature-TG&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Develop&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/thgl0/IdeaProjects/Github/App/GUI/src/main/java/org/app/database&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/SET5/School-project/App&quot;,
@@ -112,7 +110,7 @@
       <recent name="org.app.core.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid">
+  <component name="RunManager">
     <configuration name="AvtaleOppdaterTest.oppdaterKunDatoOgTid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tests" />
       <extension name="coverage">
