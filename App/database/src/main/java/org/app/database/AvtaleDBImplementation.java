@@ -2,8 +2,8 @@ package org.app.database;
 
 import org.app.core.models.*;
 import org.app.core.repositories.AvtaleRepository;
+import org.app.core.repositories.LoggInterface;
 
-import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -16,6 +16,12 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     String password = Resources.getPassword();
 
     private Connection connection;
+    LoggInterface loggInterface = new LoggDBImplementation(connection);
+
+    public AvtaleDBImplementation(Connection connection, LoggInterface loggInterface) {
+        this.connection = connection;
+        this.loggInterface = loggInterface;
+    }
 
     public AvtaleDBImplementation() {
         try {
@@ -30,41 +36,31 @@ public class AvtaleDBImplementation implements AvtaleRepository {
     public boolean opprettAvtale(Avtale avtale) throws NoSuchAlgorithmException {
         String query = "INSERT INTO Avtaler (beskrivelse, dato_og_tid, gjentakelse, slutt_dato, pleietrengende_id, parorende_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
-        String loggForOpprettelseQuery = "insert into loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
-                "values (?, ?, ?, ?, ?)";
-        try (PreparedStatement opprettStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement loggStatement = connection.prepareStatement(loggForOpprettelseQuery)) {
+
+        try (PreparedStatement opprettStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             opprettStatement.setString(1, Resources.encrypt(avtale.getBeskrivelse(), Resources.getAESKey()));
             opprettStatement.setObject(2, avtale.getDatoOgTid());
-            if (avtale.getGjentakelse() != null) {
-                opprettStatement.setString(3, avtale.getGjentakelse());
-            }
-            else {
-                opprettStatement.setNull(3, Types.VARCHAR);
-            }
-            if (avtale.getSluttDato() != null) {
-                opprettStatement.setObject(4, avtale.getSluttDato());
-            }
-            else {
-                opprettStatement.setNull(4, Types.TIMESTAMP);
-            }
+            opprettStatement.setString(3, avtale.getGjentakelse() != null ? avtale.getGjentakelse() : null);
+            opprettStatement.setObject(4, avtale.getSluttDato() != null ? avtale.getSluttDato() : null);
             opprettStatement.setInt(5, avtale.getPleietrengende().getPleietrengendeId());
             opprettStatement.setInt(6, avtale.getParorende().getParorendeId());
 
-            opprettStatement.executeUpdate();
+            int affectedRows = opprettStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating avtale failed, no rows affected");
+            }
 
             ResultSet generatedKeys = opprettStatement.getGeneratedKeys();
 
-            int avtaleId = -1;
+            int avtaleId;
             if (generatedKeys.next()) {
                 avtaleId = generatedKeys.getInt(1);
+
+                loggInterface.loggføring(avtale.getParorende().getParorendeId(), "pårørende",
+                        "avtale opprettet", avtaleId, "avtale");
             }
-            loggStatement.setInt(1, avtale.getParorende().getParorendeId());
-            loggStatement.setString(2, "pårørende");
-            loggStatement.setString(3, "avtale opprettet");
-            loggStatement.setInt(4, avtaleId);
-            loggStatement.setString(5, "avtale");
-            loggStatement.executeUpdate();
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,11 +80,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         String oppdaterAvtaleQuery = "UPDATE Avtaler SET beskrivelse = ?, dato_og_tid = ?, " +
                 "pleietrengende_id = ?, parorende_id = ? WHERE avtale_id = ?";
 
-        String loggOppdateringQuery = "INSERT INTO loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
-                "VALUES (?, ?, ?, ?, ?)";
-
-        try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery);
-             PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
+        try (PreparedStatement oppdaterStatement = connection.prepareStatement(oppdaterAvtaleQuery)) {
 
             oppdaterStatement.setString(1, Resources.encrypt(avtale.getBeskrivelse(), Resources.getAESKey()));
             oppdaterStatement.setObject(2, avtale.getDatoOgTid());
@@ -99,63 +91,45 @@ public class AvtaleDBImplementation implements AvtaleRepository {
             int rowsUpdated = oppdaterStatement.executeUpdate();
 
             if (rowsUpdated > 0) {
-                loggStatement.setInt(1, avtale.getParorende().getParorendeId());
-                loggStatement.setString(2, "pårørende");
-                loggStatement.setString(3, "avtale oppdatert");
-                loggStatement.setInt(4, avtale.getAvtaleId());
-                loggStatement.setString(5, "avtale");
-                loggStatement.executeUpdate();
+                loggInterface.loggføring(avtale.getParorende().getParorendeId(), "pårørende",
+                        "avtale oppdatert", avtale.getAvtaleId(), "avtale");
                 return true;
             }
             return false;
 
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-            return false;
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
     }
 
 
     @Override
     public boolean slettAvtale(int avtaleId) {
-        int parorendeId = 0;
-
-        String hentParorendeQuery = "SELECT parorende_id FROM Avtaler WHERE avtale_id = ?";
         String slettAvtaleQuery = "DELETE FROM Avtaler WHERE avtale_id = ?";
-        String loggOppdateringQuery = "INSERT INTO loggføring (bruker_id, bruker_type, handling, objekt_id, objekt_type) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String hentParorendeQuery = "SELECT parorende_id FROM Avtaler WHERE avtale_id = ?";
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(hentParorendeQuery);
-            preparedStatement.setInt(1, avtaleId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement hentParorendeStatement = connection.prepareStatement(hentParorendeQuery)) {
+            hentParorendeStatement.setInt(1, avtaleId);
+            ResultSet resultSet = hentParorendeStatement.executeQuery();
+
             if (resultSet.next()) {
-                parorendeId = resultSet.getInt("parorende_id");
+                int parorendeId = resultSet.getInt("parorende_id");
+
+                try (PreparedStatement slettStatement = connection.prepareStatement(slettAvtaleQuery)) {
+                    slettStatement.setInt(1, avtaleId);
+                    int rowsAffected = slettStatement.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        loggInterface.loggføring(parorendeId, "pårørende", "avtale slettet",
+                                avtaleId, "avtale");
+                        return true;
+                    }
+                }
+            } else {
+                System.out.println("Avtale with ID " + avtaleId + " not found.");
             }
-        } catch(SQLException sqlException) {
-            sqlException.printStackTrace();
-            return false;
-        }
 
-        try (PreparedStatement loggStatement = connection.prepareStatement(loggOppdateringQuery)) {
-            loggStatement.setInt(1, parorendeId);
-            loggStatement.setString(2, "pårørende");
-            loggStatement.setString(3, "avtale slettet");
-            loggStatement.setInt(4, avtaleId);
-            loggStatement.setString(5, "avtale");
-            loggStatement.executeUpdate();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
-        try (PreparedStatement slettStatement = connection.prepareStatement(slettAvtaleQuery)) {
-            slettStatement.setInt(1, avtaleId);
-            int rowsAffected = slettStatement.executeUpdate();
-            return rowsAffected > 0;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -249,6 +223,7 @@ public class AvtaleDBImplementation implements AvtaleRepository {
         }
     }
 
+    @Override
     public List<Avtale> hentAlleAvtaler() {
         List<Avtale> avtaler = new ArrayList<>();
 

@@ -20,7 +20,7 @@ public class OpprettAvtaleLogikk {
         if (avtale.getDatoOgTid() == null) {
             throw new IllegalArgumentException("Dato og klokkeslett kan ikke være tom.");
         }
-        if (avtale.getDatoOgTid().isAfter(avtale.getSluttDato())) {
+        if (avtale.getSluttDato() != null && avtale.getDatoOgTid().isAfter(avtale.getSluttDato())) {
             throw new IllegalArgumentException("Startdato kan ikke være etter sluttdato eller i fremtiden");
         }
 

@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/DataLogikk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/WeatherLogikk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/utils/UIUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/utils/GUIUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/repositories/LoggInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/LoggDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/FileHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/files/FileHandling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/logikk/TimerLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/core/src/main/java/org/screen/core/models/Weather.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/gui/src/main/java/org/screen/gui/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/AvtalePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/LoggLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/LoggLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/AvtaleDBImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +117,7 @@
       <recent name="org.app.core.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AvtaleOppdaterTest.oppdaterKunDatoOgTid">
+  <component name="RunManager">
     <configuration name="AvtaleOppdaterTest.oppdaterKunDatoOgTid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tests" />
       <extension name="coverage">

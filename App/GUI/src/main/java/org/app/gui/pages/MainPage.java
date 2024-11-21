@@ -5,12 +5,18 @@ import org.app.core.logikk.beskjed.BeskjedLogikk;
 import org.app.core.logikk.LeggTilPleietrengendeLogikk;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
+import org.app.core.models.Resources;
+import org.app.core.repositories.LoggInterface;
 import org.app.database.AvtaleDBImplementation;
 import org.app.database.BeskjedDBImplementation;
 import org.app.database.PleietrengendeDBImplementation;
+import org.app.database.LoggDBImplementation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class MainPage extends JFrame {
     private JLabel parorendeNavnLabel;
@@ -25,7 +31,7 @@ public class MainPage extends JFrame {
     private JButton beskjedKnapp;
     private JButton handlelisteKnapp;
 
-    public MainPage(Parorende parorende, Pleietrengende pleietrengende) {
+    public MainPage(Parorende parorende, Pleietrengende pleietrengende) throws SQLException {
         setTitle("Hovedside ");
         setSize(400, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,7 +100,11 @@ public class MainPage extends JFrame {
 //        ExpiredEntriesCleaner cleaner = new ExpiredEntriesCleaner(beskjedService, avtaleService);
 //        cleaner.startCleaning(0, 24 * 60 * 60 * 1000);
 
-        beskjedLogikk = new BeskjedLogikk(new BeskjedDBImplementation());
+        Connection connection = DriverManager.getConnection(Resources.getUrl(), Resources.getUser(), Resources.getPassword());
+        LoggInterface loggInterfaceBeskjed = new LoggDBImplementation(connection);
+        BeskjedDBImplementation beskjedDBImplementation = new BeskjedDBImplementation(connection, loggInterfaceBeskjed);
+
+        beskjedLogikk = new BeskjedLogikk(beskjedDBImplementation);
         beskjedKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
                 new BeskjedPage(beskjedLogikk, parorende, pleietrengende, this);
@@ -106,8 +116,10 @@ public class MainPage extends JFrame {
                         "Ingen pleietrengende", JOptionPane.WARNING_MESSAGE);
             }});
 
+        LoggInterface loggInterfaceAvtale = new LoggDBImplementation(connection);
+        AvtaleDBImplementation avtaleDBImplementation = new AvtaleDBImplementation(connection, loggInterfaceAvtale);
+        avtaleLogikk = new AvtaleLogikk(avtaleDBImplementation);
 
-        avtaleLogikk = new AvtaleLogikk(new AvtaleDBImplementation());
         avtalerKnapp.addActionListener(e -> {
             if (pleietrengende != null) {
                 new AvtalePage(avtaleLogikk, parorende, pleietrengende, this);

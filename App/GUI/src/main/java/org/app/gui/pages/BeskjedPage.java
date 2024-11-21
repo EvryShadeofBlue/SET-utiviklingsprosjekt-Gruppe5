@@ -4,6 +4,7 @@ import org.app.core.models.Beskjed;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
 import org.app.core.logikk.beskjed.BeskjedLogikk;
+import org.app.gui.utils.GUIUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,13 +53,13 @@ public class BeskjedPage extends JFrame {
 
         Integer[] synligTidsenheter = {12, 24, 36, 48, 60, 72};
         synligTidsenhetFelt = new JComboBox<>(synligTidsenheter);
-        JPanel synligTidsenhetPanel = createInputPanel("Synlig i timer: ", synligTidsenhetFelt);
+        JPanel synligTidsenhetPanel = GUIUtils.createInputPanel("Synlig i timer: ", synligTidsenhetFelt);
 
         datoFelt = new JTextField();
-        JPanel datoPanel = createInputPanel("Dato (yyyy-MM-dd): ", datoFelt);
+        JPanel datoPanel = GUIUtils.createInputPanel("Dato (yyyy-MM-dd): ", datoFelt);
 
         klokkeslettFelt = new JTextField();
-        JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
+        JPanel klokkeslettPanel = GUIUtils.createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
         lagreKnapp = new JButton("Lagre");
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
@@ -88,31 +89,11 @@ public class BeskjedPage extends JFrame {
         beskjedListePanel = new JPanel();
         beskjedListePanel.setLayout(new BoxLayout(beskjedListePanel, BoxLayout.Y_AXIS));
 
-        JScrollPane beskjedScrollPane = new JScrollPane(beskjedListePanel);
-        beskjedScrollPane.setPreferredSize(new Dimension(400, 300));
-        beskjedScrollPane.setBorder(BorderFactory.createTitledBorder("Opprettede beskjeder"));
-        add(beskjedScrollPane, BorderLayout.CENTER);
+        add(GUIUtils.createScrollPane(beskjedListePanel, new Dimension(400, 300),
+                "Opprettede beskjeder"), BorderLayout.CENTER);
 
         visBeskjeder();
-
         setVisible(true);
-    }
-
-    private JPanel createInputPanel(String labelText, JComponent inputField) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        JLabel label = new JLabel(labelText);
-        label.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        inputField.setPreferredSize(new Dimension(300, 30));
-        inputField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        inputField.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        panel.add(label);
-        panel.add(inputField);
-
-        return panel;
     }
 
     private void visBeskjeder() {
@@ -122,41 +103,23 @@ public class BeskjedPage extends JFrame {
         DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         for (Beskjed beskjed : beskjedListe) {
-            JPanel beskjedPanel = new JPanel();
-            beskjedPanel.setLayout(new BoxLayout(beskjedPanel, BoxLayout.Y_AXIS));
-            beskjedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-            beskjedPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
             String dato = beskjed.getDatoOgTid().format(datoFormatter);
             String tid = beskjed.getDatoOgTid().format(tidFormatter);
-
-            JLabel datoLabel = new JLabel("Dato: " + dato);
-            datoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            JLabel tidLabel = new JLabel("Klokkeslett: " + tid);
-            tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + beskjed.getBeskrivelse());
-            beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            beskjedPanel.add(datoLabel);
-            beskjedPanel.add(tidLabel);
-            beskjedPanel.add(beskrivelsesLabel);
-
-            JPanel knapperPanel = new JPanel();
-            knapperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            String[] labels = {
+                    "Dato: " + dato,
+                    "Klokkeslett: " + tid,
+                    "Beskrivelse: " + beskjed.getBeskrivelse()
+            };
 
             JButton slettKnapp = new JButton("Slett");
             slettKnapp.addActionListener(e -> slettBeskjed(beskjed));
-            knapperPanel.add(slettKnapp);
 
             JButton redigerKnapp = new JButton("Rediger");
             redigerKnapp.addActionListener(e -> redigerBeskjed(beskjed));
-            knapperPanel.add(redigerKnapp);
 
-            beskjedPanel.add(knapperPanel);
-            beskjedListePanel.add(beskjedPanel);
+            beskjedListePanel.add(GUIUtils.createItemPanel(labels, new JButton[]{slettKnapp, redigerKnapp}));
         }
+
         beskjedListePanel.revalidate();
         beskjedListePanel.repaint();
     }
@@ -209,7 +172,7 @@ public class BeskjedPage extends JFrame {
                 int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
                 LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getPleietrengende(), beskjed.getParorende());
+                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getParorende(), beskjed.getPleietrengende());
 
                 Beskjed oppdatertBeskjed = beskjedLogikk.oppdaterBeskjed(nyBeskjed);
                 if (oppdatertBeskjed != null) {
@@ -226,9 +189,9 @@ public class BeskjedPage extends JFrame {
 
         JPanel panel = new JPanel(new GridLayout(5, 1));
         panel.add(new JScrollPane(beskrivelseFelt));
-        panel.add(createInputPanel("Synlig i timer: ", synligTidsenhetFelt));
-        panel.add(createInputPanel("Dato (yyyy-MM-dd): ", datoFelt));
-        panel.add(createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt));
+        panel.add(GUIUtils.createInputPanel("Synlig i timer: ", synligTidsenhetFelt));
+        panel.add(GUIUtils.createInputPanel("Dato (yyyy-MM-dd): ", datoFelt));
+        panel.add(GUIUtils.createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt));
         panel.add(lagreKnapp);
 
         redigeringsVindu.add(panel);

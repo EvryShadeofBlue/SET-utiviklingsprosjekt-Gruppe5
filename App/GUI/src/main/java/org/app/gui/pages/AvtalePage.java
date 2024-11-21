@@ -4,6 +4,7 @@ import org.app.core.logikk.avtale.*;
 import org.app.core.models.Avtale;
 import org.app.core.models.Parorende;
 import org.app.core.models.Pleietrengende;
+import org.app.gui.utils.GUIUtils;
 
 
 import javax.swing.*;
@@ -58,17 +59,17 @@ public class AvtalePage extends JFrame{
         beskrivelsesPanel.setBorder(BorderFactory.createTitledBorder("Beskrivelse"));
 
         datoFelt = new JTextField();
-        JPanel datoPanel = createInputPanel("Dato (yyyy-MM-dd): ", datoFelt);
+        JPanel datoPanel = GUIUtils.createInputPanel("Dato (yyyy-MM-dd): ", datoFelt);
 
         klokkeslettFelt = new JTextField();
-        JPanel klokkeslettPanel = createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
+        JPanel klokkeslettPanel = GUIUtils.createInputPanel("Klokkeslett (HH:mm): ", klokkeslettFelt);
 
         String[] gjentakelseAlternativer = {"Ingen", "Daglig", "Ukentlig", "Månedlig"};
         gjentakelseFelt = new JComboBox<>(gjentakelseAlternativer);
-        JPanel gjentakelsesPanel = createInputPanel("Gjentakelse: ", gjentakelseFelt);
+        JPanel gjentakelsesPanel = GUIUtils.createInputPanel("Gjentakelse: ", gjentakelseFelt);
 
         sluttDatoFelt = new JTextField();
-        JPanel sluttDatoPanel = createInputPanel("Slutt dato (yyy-MM-dd)", sluttDatoFelt);
+        JPanel sluttDatoPanel = GUIUtils.createInputPanel("Slutt dato (yyy-MM-dd)", sluttDatoFelt);
 
         lagreKnapp = new JButton("Lagre");
         lagreKnapp.setPreferredSize(new Dimension(100, 30));
@@ -99,31 +100,11 @@ public class AvtalePage extends JFrame{
         avtaleListePanel = new JPanel();
         avtaleListePanel.setLayout(new BoxLayout(avtaleListePanel, BoxLayout.Y_AXIS));
 
-        JScrollPane avtaleScrollPane = new JScrollPane(avtaleListePanel);
-        avtaleScrollPane.setPreferredSize(new Dimension(400, 300));
-        avtaleScrollPane.setBorder(BorderFactory.createTitledBorder("Opprettede avtaler"));
-        add(avtaleScrollPane, BorderLayout.CENTER);
+        add(GUIUtils.createScrollPane(avtaleListePanel, new Dimension(400, 300),
+                "Opprettede avtaler"), BorderLayout.CENTER);
 
         visAvtaler();
         setVisible(true);
-    }
-
-
-    private JPanel createInputPanel(String labelText, JComponent inputField) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        JLabel label = new JLabel(labelText);
-        label.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        inputField.setPreferredSize(new Dimension(300, 30));
-        inputField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        inputField.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        panel.add(label);
-        panel.add(inputField);
-
-        return panel;
     }
 
     private void visAvtaler() {
@@ -133,41 +114,23 @@ public class AvtalePage extends JFrame{
         DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         for (Avtale avtale : avtaleListe) {
-            JPanel avtalePanel = new JPanel();
-            avtalePanel.setLayout(new BoxLayout(avtalePanel, BoxLayout.Y_AXIS));
-            avtalePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-            avtalePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
             String dato = avtale.getDatoOgTid().format(datoFormatter);
             String tid = avtale.getDatoOgTid().format(tidFormatter);
-
-            JLabel datoLabel = new JLabel("Dato: " + dato);
-            datoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            JLabel tidLabel = new JLabel("Klokkelsett: " + tid);
-            tidLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            JLabel beskrivelsesLabel = new JLabel("Beskrivelse: " + avtale.getBeskrivelse());
-            beskrivelsesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            avtalePanel.add(datoLabel);
-            avtalePanel.add(tidLabel);
-            avtalePanel.add(beskrivelsesLabel);
-
-            JPanel knapperPanel = new JPanel();
-            knapperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            String[] labels = {
+                    "Dato: " + dato,
+                    "Klokkeslett: " + tid,
+                    "Beskrivelse: " + avtale.getBeskrivelse()
+            };
 
             JButton slettKnapp = new JButton("Slett");
             slettKnapp.addActionListener(e -> slettAvtale(avtale));
-            knapperPanel.add(slettKnapp);
 
             JButton redigerKnapp = new JButton("Rediger");
             redigerKnapp.addActionListener(e -> redigerAvtale(avtale));
-            knapperPanel.add(redigerKnapp);
 
-            avtalePanel.add(knapperPanel);
-            avtaleListePanel.add(avtalePanel);
+            avtaleListePanel.add(GUIUtils.createItemPanel(labels, new JButton[]{slettKnapp, redigerKnapp}));
         }
+
         avtaleListePanel.revalidate();
         avtaleListePanel.repaint();
     }
