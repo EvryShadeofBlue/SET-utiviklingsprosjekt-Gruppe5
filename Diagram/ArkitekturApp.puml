@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+package "App" {
+
+  package "Core" {
+    package "Logikk" {
+        package "AvtaleLogikk"
+        package "BeskjedLogikk"
+      [LeggTilPleietrengendeLogikk]
+    }
+
+    package "Models" {
+      [Pårørende]
+      [Pleietrengende]
+      [Beskjed]
+      [Avtale]
+    }
+
+    package "Repositories" {
+      [AvtaleRepository]
+      [BeskjedRepository]
+      [PleietrengendeRepository]
+    }
+  }
+
+  package "GUI" {
+    [Pages]
+  }
+
+  package "Test" {
+    package "BeskjedTest" {
+    }
+
+    package "AvtaleTest" {
+    }
+  }
+
+  package "Database" {
+    [AvtaleDBImplementation]
+    [BeskjedDBImplementation]
+    [PagesDBCommunication]
+    [PleietrengendeDBImplementation]
+  }
+
+}
+@enduml
