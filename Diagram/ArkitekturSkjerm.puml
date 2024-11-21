@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+
+package "Skjerm" {
+
+  package "Core" {
+    package "models" {
+    }
+
+    package "resources/images" {
+    }
+
+  }
+
+  package "GUI" {
+
+  }
+
+  package "Database" {
+
+  }
+
+}
+@enduml
