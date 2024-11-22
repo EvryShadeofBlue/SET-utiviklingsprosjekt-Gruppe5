@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20502f01-5882-4a91-9cb0-6f37b4c7115a" name="Changes" comment="Method creation and refactoring">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/org/app/gui/pages/BeskjedPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/avtale/OpprettAvtaleLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/beskjed/OpprettBeskjedLogikk.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/org/app/core/logikk/beskjed/OpprettBeskjedLogikk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/java/org/app/database/BeskjedDBImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pleietrengende_id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../pleietrengende_id.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screen/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Screen/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +184,19 @@
       <option name="MAIN_CLASS_NAME" value="org.app.tests.usercases.avtaler.oppdaterAvtale.gjentakendeAvtale.GjentakelseUtenSluttdato" />
       <option name="METHOD_NAME" value="oppdaterAvtaleGjentakelseUtenSluttdato" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="tests" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="tests" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
