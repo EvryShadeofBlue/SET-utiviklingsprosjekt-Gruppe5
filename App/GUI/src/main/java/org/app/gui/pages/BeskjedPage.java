@@ -18,14 +18,14 @@ public class BeskjedPage extends JFrame {
     private JTextField klokkeslettFelt;
     private JButton lagreKnapp;
     private JPanel beskjedListePanel;
-    private BeskjedLogikk beskjedService;
+    private BeskjedLogikk beskjedLogikk;
     private Parorende parorende;
     private Pleietrengende pleietrengende;
     private org.app.gui.pages.MainPage mainPage;
     private JButton tilbakeKnapp;
 
     public BeskjedPage(BeskjedLogikk beskjedService, Parorende parorende, Pleietrengende pleietrengende, MainPage mainPage) {
-        this.beskjedService = beskjedService;
+        this.beskjedLogikk = beskjedService;
         this.parorende = parorende;
         this.pleietrengende = pleietrengende;
         this.mainPage = mainPage;
@@ -117,7 +117,7 @@ public class BeskjedPage extends JFrame {
 
     private void visBeskjeder() {
         beskjedListePanel.removeAll();
-        List<Beskjed> beskjedListe = beskjedService.hentBeskjedForParorende(parorende);
+        List<Beskjed> beskjedListe = beskjedLogikk.hentBeskjedForParorende(parorende);
         DateTimeFormatter datoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tidFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -161,7 +161,7 @@ public class BeskjedPage extends JFrame {
         beskjedListePanel.repaint();
     }
 
-    public void oppretteBeskjed() {
+    private void oppretteBeskjed() {
         try {
             String beskrivelse = beskrivelseFelt.getText();
             int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
@@ -171,7 +171,7 @@ public class BeskjedPage extends JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime datoOgTid = LocalDateTime.parse(datoStr + " " + klokkeslettStr, formatter);
 
-            beskjedService.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
+            beskjedLogikk.opprettBeskjed(datoOgTid, beskrivelse, synligTidsenhet, parorende, pleietrengende);
             JOptionPane.showMessageDialog(this, "Beskjed opprettet");
 
             beskrivelseFelt.setText("");
@@ -209,9 +209,9 @@ public class BeskjedPage extends JFrame {
                 int synligTidsenhet = (int) synligTidsenhetFelt.getSelectedItem();
                 LocalDateTime datoOgTid = LocalDateTime.parse(datoFelt.getText() + " " + klokkeslettFelt.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getPleietrengende(), beskjed.getParorende());
+                Beskjed nyBeskjed = new Beskjed(beskjed.getBeskjedId(), datoOgTid, beskrivelse, synligTidsenhet, beskjed.getParorende(), beskjed.getPleietrengende());
 
-                Beskjed oppdatertBeskjed = beskjedService.oppdaterBeskjed(nyBeskjed);
+                Beskjed oppdatertBeskjed = beskjedLogikk.oppdaterBeskjed(nyBeskjed);
                 if (oppdatertBeskjed != null) {
                     JOptionPane.showMessageDialog(redigeringsVindu, "Beskjed oppdatert");
                     visBeskjeder();
@@ -239,7 +239,7 @@ public class BeskjedPage extends JFrame {
         int svar = JOptionPane.showConfirmDialog(this, "Er du sikker på at du vil" +
                 " slette denne beskjeden?", "Bekreft sletting", JOptionPane.YES_NO_OPTION);
         if (svar == JOptionPane.YES_OPTION) {
-            beskjedService.slettBeskjed(beskjed.getBeskjedId());
+            beskjedLogikk.slettBeskjed(beskjed.getBeskjedId());
             JOptionPane.showMessageDialog(this, "Beskjed slettet");
             visBeskjeder();
         }

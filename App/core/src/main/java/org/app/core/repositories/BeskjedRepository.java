@@ -12,7 +12,6 @@ public interface BeskjedRepository {
     void oppdaterBeskjed(Beskjed beskjed);
 
     void slettBeskjed(int beskjedId);
-
     Beskjed hentBeskjed(int beskjedId);
     List<Beskjed> hentBeskjedForParorende(int parorendeId);
 

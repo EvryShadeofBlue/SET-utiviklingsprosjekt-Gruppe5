@@ -1,4 +1,4 @@
-package org.screen.core.models;
+package org.screen.core.files;
 
 import java.io.BufferedReader;
 import java.io.File;

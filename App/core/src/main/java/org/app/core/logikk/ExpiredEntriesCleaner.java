@@ -1,7 +1,8 @@
-package org.app.core.models;
+package org.app.core.logikk;
 
 import org.app.core.logikk.avtale.AvtaleLogikk;
 import org.app.core.logikk.beskjed.BeskjedLogikk;
+import org.app.core.models.Beskjed;
 
 import java.time.LocalDateTime;
 import java.util.List;
