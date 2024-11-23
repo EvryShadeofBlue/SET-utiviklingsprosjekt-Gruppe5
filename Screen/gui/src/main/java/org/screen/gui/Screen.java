@@ -121,5 +121,6 @@ public class Screen {
 
         TimerLogikk.startWeatherUpdateTimer(tempLabel, weatherLabel, iconLabel, weatherIcon);
         TimerLogikk.startClockUpdateTimer(timeLabel, clockLabel, tmrLabel);
+        TimerLogikk.startDataUpdateTimer(beskjedLabel, avtaleLabel, avtaleLabelTmr, dataLogikk, pleietrengende_id);
     }
 }
