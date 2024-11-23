@@ -7,9 +7,10 @@ import org.screen.core.models.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import org.screen.core.repositories.DataExportInterface;
 import org.screen.core.utils.UIUtils;
@@ -46,26 +47,30 @@ public class Screen {
             gridPanel.add(cell);
         }
 
-        Date date = new Date();
-        Date clock = new Date();
+        // Use LocalDate to get today and tomorrow
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tmr = calendar.getTime();
+        // Formatter for the date (dd.MM.yyyy)
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-        SimpleDateFormat day = new SimpleDateFormat("dd.MM.yyyy");
-        SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");      //dd=dag, MM=måned, HH=24timers, mm=minutt, ss=sekund
-        SimpleDateFormat tomorrow = new SimpleDateFormat("dd.MM.yyyy");
+        // Get the day names in Norwegian
+        String todayDayName = today.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("no"));
+        String tomorrowDayName = tomorrow.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("no"));
 
-        String currentDay = day.format(date);
-        String currentTime = time.format(clock);
-        String tmrDay = tomorrow.format(tmr);
+        // Combine the day names and dates
+        String currentDay = todayDayName + " " + today.format(dateFormatter);
+        String tmrDay = tomorrowDayName + " " + tomorrow.format(dateFormatter);
 
-        JLabel timeLabel = UIUtils.createStyledLabel("<html>I dag:<br>" + currentDay + "<html>",
+        // Get the current time
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String currentTime = java.time.LocalTime.now().format(timeFormatter);
+
+        // Update JLabels with formatted text
+        JLabel timeLabel = UIUtils.createStyledLabel("<html>I dag:<br>" + currentDay + "</html>",
                 "Day", Font.BOLD, 40, SwingConstants.CENTER);
         JLabel clockLabel = UIUtils.createStyledLabel(currentTime, "Clock", Font.BOLD, 60, SwingConstants.CENTER);
-        JLabel tmrLabel = UIUtils.createStyledLabel("<html>I Morgen:<br>" + tmrDay + "<html>",
+        JLabel tmrLabel = UIUtils.createStyledLabel("<html>I Morgen:<br>" + tmrDay + "</html>",
                 "Tomorrow", Font.BOLD, 40, SwingConstants.CENTER);
 
         String temp = Weather.getCurrentTemperature();
@@ -73,7 +78,7 @@ public class Screen {
         ImageIcon weatherIcon = Weather.getWeatherIcon(weather, 200, 200);
 
         JLabel tempLabel = new JLabel("<html>Temperatur inne: " + "" + "°C" + "<br>Temperatur ute: "
-                + temp + "<html>", SwingConstants.CENTER);
+                + temp + "</html>", SwingConstants.CENTER);
         tempLabel.setFont(new Font("Temp", Font.BOLD, 30));
         JLabel weatherLabel = new JLabel("Været i dag: " + weather, SwingConstants.CENTER);
         weatherLabel.setFont(new Font("Weather", Font.BOLD, 30));
@@ -99,7 +104,6 @@ public class Screen {
         ImageIcon shoppingIcon = UIUtils.createScaledImageIcon("/images/shopping.png", 350, 350);
         JLabel shoppingLabel = new JLabel(shoppingIcon, SwingConstants.CENTER);
 
-
         UIUtils.addToGrid(gridPanel, timeLabel, 0);
         UIUtils.addToGrid(gridPanel, clockLabel, 1);
         UIUtils.addToGrid(gridPanel, tmrLabel, 2);
@@ -109,7 +113,6 @@ public class Screen {
         UIUtils.addToGrid(gridPanel, tempLabel, 6);
         UIUtils.addToGrid(gridPanel, shoppingLabel, 7);
         UIUtils.addToGrid(gridPanel, centeredPanel, 8);
-
 
         jframe.add(gridPanel);
         jframe.setVisible(true);

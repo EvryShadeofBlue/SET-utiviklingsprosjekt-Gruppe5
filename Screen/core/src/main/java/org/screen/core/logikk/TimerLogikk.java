@@ -4,8 +4,13 @@ import org.screen.core.models.Weather;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class TimerLogikk {
 
@@ -21,31 +26,43 @@ public class TimerLogikk {
     }
 
     public static void startClockUpdateTimer(JLabel timeLabel, JLabel clockLabel, JLabel tmrLabel) {
-        SimpleDateFormat dayFormat = new SimpleDateFormat("dd.MM.yyyy");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat tomorrowFormat = new SimpleDateFormat("dd.MM.yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
         Timer clockTimer = new Timer(1000, e -> {
-            Date now = new Date();
+            LocalDateTime now = LocalDateTime.now();
 
-            String currentDay = dayFormat.format(now);
-            String currentTime = timeFormat.format(now);
+            // Henter dagens og morgendagens dato og dagnavn
+            LocalDate today = now.toLocalDate();
+            LocalDate tomorrow = today.plusDays(1);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(now);
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-            String tmrDay = tomorrowFormat.format(calendar.getTime());
+            String todayDayName = today.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("no"));
+            String tomorrowDayName = tomorrow.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("no"));
 
-            timeLabel.setText("<html>I dag:<br>" + currentDay + "<html>");
+            String currentDay = todayDayName + " " + today.format(dateFormatter);
+            String currentTime = now.format(timeFormatter);
+            String tmrDay = tomorrowDayName + " " + tomorrow.format(dateFormatter);
+
+            timeLabel.setText("<html>I dag:<br>" + currentDay + "</html>");
             clockLabel.setText(currentTime);
-            tmrLabel.setText("<html>I Morgen:<br>" + tmrDay + "<html>");
+            tmrLabel.setText("<html>I Morgen:<br>" + tmrDay + "</html>");
         });
         clockTimer.start();
     }
 
-    public static void startDataUpdateTimer(JLabel beskjedLabel, JLabel avtaleLabel, JLabel avtaleLabelTmr, Runnable updateTask) {
+    public static void startDataUpdateTimer(JLabel beskjedLabel, JLabel avtaleLabel, JLabel avtaleLabelTmr, DataLogikk dataLogikk, int pleietrengendeId) {
         Timer dataUpdateTimer = new Timer(10000, e -> {
-            updateTask.run();
+            try {
+                String beskjederHtml = dataLogikk.getBeskjederHtml(pleietrengendeId);
+                String avtalerTodayHtml = dataLogikk.getAvtalerHtml(pleietrengendeId, true);
+                String avtalerTomorrowHtml = dataLogikk.getAvtalerHtml(pleietrengendeId, false);
+
+                beskjedLabel.setText(beskjederHtml);
+                avtaleLabel.setText(avtalerTodayHtml);
+                avtaleLabelTmr.setText(avtalerTomorrowHtml);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
         dataUpdateTimer.start();
     }
