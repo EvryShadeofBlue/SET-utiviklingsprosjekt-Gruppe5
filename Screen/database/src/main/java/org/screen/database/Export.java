@@ -52,7 +52,7 @@ public class Export implements DataExportInterface {
     @Override
     public List<Avtale> exportAvtalerToday(int pleietrengende_id) {
         List<Avtale> avtaleList = new ArrayList<>();
-        String exportQuery = "SELECT beskrivelse, dato_og_tid " +
+        String exportQuery = "SELECT beskrivelse, TIME(dato_og_tid) AS tid " +
                 "FROM Avtaler " +
                 "WHERE DATE(dato_og_tid) = CURDATE() " +
                 "AND pleietrengende_id = " + pleietrengende_id + " " +
@@ -65,7 +65,7 @@ public class Export implements DataExportInterface {
 
             while (rs.next()) {
                 String description = rs.getString("beskrivelse");
-                String dateTime = rs.getString("dato_og_tid");
+                String dateTime = rs.getString("tid");
 
                 Avtale avtaler = new Avtale(description, dateTime);
                 avtaleList.add(avtaler);
@@ -86,9 +86,9 @@ public class Export implements DataExportInterface {
     @Override
     public List<Avtale> exportAvtalerTomorrow(int pleietrengende_id) {
         List<Avtale> avtaleList = new ArrayList<>();
-        String exportQuery = "SELECT beskrivelse, dato_og_tid " +
+        String exportQuery = "SELECT beskrivelse, TIME(dato_og_tid) AS tid " +
                 "FROM Avtaler " +
-                "WHERE DATE(dato_og_tid) = date_add(CURDATE(), interval 1 day) " +
+                "WHERE DATE(dato_og_tid) = DATE_ADD(CURDATE(), INTERVAL 1 DAY) " +
                 "AND pleietrengende_id = " + pleietrengende_id + " " +
                 "ORDER BY dato_og_tid ASC;";
 
@@ -99,7 +99,7 @@ public class Export implements DataExportInterface {
 
             while (rs.next()) {
                 String description = rs.getString("beskrivelse");
-                String dateTime = rs.getString("dato_og_tid");
+                String dateTime = rs.getString("tid");
 
                 Avtale avtaler = new Avtale(description, dateTime);
                 avtaleList.add(avtaler);
